@@ -103,7 +103,7 @@ function Hero() {
             href="#new-patients"
             className="px-8 py-4 bg-[var(--medium-blue)] hover:bg-[var(--sky-blue)] text-white hover:text-[var(--deep-navy)] rounded-full text-lg font-semibold transition-all duration-300"
           >
-            New Patient? Start Here
+            Get Relief Now
           </a>
           <a
             href="#understanding-tmd"

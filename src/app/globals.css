@@ -30,7 +30,7 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--deep-navy);
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
@@ -38,6 +38,7 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  background: var(--deep-navy);
 }
 
 /* Selection color */

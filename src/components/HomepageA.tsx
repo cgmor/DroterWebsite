@@ -159,6 +159,18 @@ const commonConditions = [
     title: "Acute Closed Lock",
     desc: "The disc displaces and the jaw cannot fully open — often sudden and alarming.",
   },
+  {
+    title: "Anterior Open Bite",
+    desc: "When the front teeth no longer come together, affecting chewing and speech.",
+  },
+  {
+    title: "Sleep Breathing Disorders",
+    desc: "Airway-related conditions including snoring and obstructive sleep apnea linked to jaw position.",
+  },
+  {
+    title: "Tight and Sore Neck Muscles",
+    desc: "Chronic neck tension and pain resulting from jaw dysfunction and postural compensation.",
+  },
 ];
 
 const approaches = [
@@ -484,6 +496,26 @@ const quizOptions = [
     desc: "Teeth don't come together like they used to",
     color: "from-sky-600 to-sky-800",
   },
+  {
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+      </svg>
+    ),
+    title: "Daily Fatigue",
+    desc: "Persistent tiredness linked to jaw tension and sleep disruption",
+    color: "from-blue-700 to-indigo-900",
+  },
+  {
+    icon: (
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+      </svg>
+    ),
+    title: "Neck Pain",
+    desc: "Chronic neck tension and soreness from jaw dysfunction",
+    color: "from-teal-600 to-teal-800",
+  },
 ];
 
 function NewPatients() {
@@ -528,7 +560,7 @@ function NewPatients() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {quizOptions.map((c, i) => (
             <motion.a

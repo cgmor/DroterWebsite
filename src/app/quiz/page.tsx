@@ -235,6 +235,7 @@ export default function QuizCollectorPage() {
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(true);
   const [backend, setBackend] = useState<string>("");
+  const [detected, setDetected] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
 
   const fetchCases = useCallback(async () => {
@@ -244,6 +245,7 @@ export default function QuizCollectorPage() {
       const data = await r.json();
       setCases(data.cases ?? []);
       setBackend(data.backend ?? "");
+      setDetected(Array.isArray(data.env) ? data.env : []);
     } catch {
       setCases([]);
     } finally {
@@ -540,8 +542,12 @@ export default function QuizCollectorPage() {
           </button>
         </div>
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <span style={{ fontSize: 11, color: "#a8a29e" }}>
+          <span
+            style={{ fontSize: 11, color: "#a8a29e" }}
+            title={detected.length ? `Detected env: ${detected.join(", ")}` : "No Upstash/KV env vars detected"}
+          >
             backend: <strong>{backend || "…"}</strong>
+            {backend === "file" && detected.length === 0 && " (no env)"}
           </span>
           <button style={S.btn()} onClick={exportCSV}>
             Export CSV

@@ -16,16 +16,26 @@ export interface QuizCase {
 const KEY = "tmd:cases";
 const FILE = path.join(process.cwd(), ".data", "tmd-cases.json");
 
-const hasUpstash = Boolean(
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-);
+// Vercel's Upstash integration sometimes uses UPSTASH_REDIS_REST_* and
+// sometimes KV_REST_API_* (legacy). Accept either.
+const REDIS_URL =
+  process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL ?? "";
+const REDIS_TOKEN =
+  process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN ?? "";
 
-const redis = hasUpstash
-  ? new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-    })
-  : null;
+const hasUpstash = Boolean(REDIS_URL && REDIS_TOKEN);
+
+const redis = hasUpstash ? new Redis({ url: REDIS_URL, token: REDIS_TOKEN }) : null;
+
+export function detectedEnv(): string[] {
+  const names = [
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN",
+    "KV_REST_API_URL",
+    "KV_REST_API_TOKEN",
+  ];
+  return names.filter((n) => Boolean(process.env[n]));
+}
 
 function ensureLocalFsAllowed() {
   if (process.env.VERCEL) {

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   addCase,
+  detectedEnv,
   listCases,
   storageBackend,
   type QuizCase,
@@ -9,12 +10,16 @@ import {
 export const dynamic = "force-dynamic";
 
 export async function GET() {
+  const env = detectedEnv();
   try {
     const cases = await listCases();
-    return NextResponse.json({ backend: storageBackend, cases });
+    return NextResponse.json({ backend: storageBackend, env, cases });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    return NextResponse.json({ error: message, backend: storageBackend }, { status: 500 });
+    return NextResponse.json(
+      { error: message, backend: storageBackend, env },
+      { status: 500 }
+    );
   }
 }
 

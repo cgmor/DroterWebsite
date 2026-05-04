@@ -27,7 +27,16 @@ const redis = hasUpstash
     })
   : null;
 
+function ensureLocalFsAllowed() {
+  if (process.env.VERCEL) {
+    throw new Error(
+      "Upstash Redis is not configured. On Vercel, connect a Redis store via the Marketplace (Storage → Create → Redis). Required env vars: UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN."
+    );
+  }
+}
+
 async function readFile(): Promise<QuizCase[]> {
+  ensureLocalFsAllowed();
   try {
     const raw = await fs.readFile(FILE, "utf8");
     return JSON.parse(raw) as QuizCase[];
@@ -38,6 +47,7 @@ async function readFile(): Promise<QuizCase[]> {
 }
 
 async function writeFile(cases: QuizCase[]): Promise<void> {
+  ensureLocalFsAllowed();
   await fs.mkdir(path.dirname(FILE), { recursive: true });
   await fs.writeFile(FILE, JSON.stringify(cases, null, 2), "utf8");
 }

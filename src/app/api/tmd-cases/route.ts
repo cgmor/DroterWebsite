@@ -9,8 +9,13 @@ import {
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const cases = await listCases();
-  return NextResponse.json({ backend: storageBackend, cases });
+  try {
+    const cases = await listCases();
+    return NextResponse.json({ backend: storageBackend, cases });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message, backend: storageBackend }, { status: 500 });
+  }
 }
 
 interface IncomingCase {
@@ -47,6 +52,11 @@ export async function POST(req: NextRequest) {
     notes: body.notes?.trim() || undefined,
   };
 
-  const entry = await addCase(payload);
-  return NextResponse.json({ case: entry }, { status: 201 });
+  try {
+    const entry = await addCase(payload);
+    return NextResponse.json({ case: entry }, { status: 201 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

@@ -42,11 +42,16 @@ export async function PUT(
     notes: body.notes?.trim() || undefined,
   };
 
-  const updated = await updateCase(id, payload);
-  if (!updated) {
-    return NextResponse.json({ error: "Case not found" }, { status: 404 });
+  try {
+    const updated = await updateCase(id, payload);
+    if (!updated) {
+      return NextResponse.json({ error: "Case not found" }, { status: 404 });
+    }
+    return NextResponse.json({ case: updated });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-  return NextResponse.json({ case: updated });
 }
 
 export async function DELETE(
@@ -54,9 +59,14 @@ export async function DELETE(
   ctx: RouteContext<"/api/tmd-cases/[id]">
 ) {
   const { id } = await ctx.params;
-  const removed = await deleteCase(id);
-  if (!removed) {
-    return NextResponse.json({ error: "Case not found" }, { status: 404 });
+  try {
+    const removed = await deleteCase(id);
+    if (!removed) {
+      return NextResponse.json({ error: "Case not found" }, { status: 404 });
+    }
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-  return NextResponse.json({ ok: true });
 }

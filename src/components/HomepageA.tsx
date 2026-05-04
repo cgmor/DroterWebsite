@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -135,42 +136,15 @@ function Hero() {
 
 /* ─── SECTION 1: UNDERSTANDING TMD ─── */
 const commonConditions = [
-  {
-    title: "Clenching",
-    desc: "Habitual daytime or nocturnal jaw clenching causing muscle fatigue and pain.",
-  },
-  {
-    title: "Sleep Grinding (Bruxism)",
-    desc: "Rhythmic grinding of teeth during sleep leading to wear, pain, and joint stress.",
-  },
-  {
-    title: "Occlusal Muscle Disharmony",
-    desc: "When the bite and jaw muscles are not working together, causing chronic strain.",
-  },
-  {
-    title: "Osteoarthritis of the TMJ",
-    desc: "Degenerative changes in the jaw joint causing pain, stiffness, and crepitus.",
-  },
-  {
-    title: "Sprain of the Discal Ligament",
-    desc: "Acute injury to the disc attachment causing sudden pain and clicking.",
-  },
-  {
-    title: "Acute Closed Lock",
-    desc: "The disc displaces and the jaw cannot fully open — often sudden and alarming.",
-  },
-  {
-    title: "Anterior Open Bite",
-    desc: "When the front teeth no longer come together, affecting chewing and speech.",
-  },
-  {
-    title: "Sleep Breathing Disorders",
-    desc: "Airway-related conditions including snoring and obstructive sleep apnea linked to jaw position.",
-  },
-  {
-    title: "Tight and Sore Neck Muscles",
-    desc: "Chronic neck tension and pain resulting from jaw dysfunction and postural compensation.",
-  },
+  { title: "Clenching", slug: "clenching", desc: "Habitual daytime or nocturnal jaw clenching causing muscle fatigue and pain." },
+  { title: "Sleep Grinding (Bruxism)", slug: "sleep-grinding", desc: "Rhythmic grinding of teeth during sleep leading to wear, pain, and joint stress." },
+  { title: "Occlusal Muscle Disharmony", slug: "occlusal-muscle-disharmony", desc: "When the bite and jaw muscles are not working together, causing chronic strain." },
+  { title: "Osteoarthritis of the TMJ", slug: "osteoarthritis", desc: "Degenerative changes in the jaw joint causing pain, stiffness, and crepitus." },
+  { title: "Sprain of the Discal Ligament", slug: "sprain-discal-ligament", desc: "Acute injury to the disc attachment causing sudden pain and clicking." },
+  { title: "Acute Closed Lock", slug: "acute-closed-lock", desc: "The disc displaces and the jaw cannot fully open — often sudden and alarming." },
+  { title: "Anterior Open Bite", slug: "anterior-open-bite", desc: "When the front teeth no longer come together, affecting chewing and speech." },
+  { title: "Sleep Breathing Disorders", slug: "sleep-breathing-disorders", desc: "Airway-related conditions including snoring and obstructive sleep apnea linked to jaw position." },
+  { title: "Tight and Sore Neck Muscles", slug: "neck-pain", desc: "Chronic neck tension and pain resulting from jaw dysfunction and postural compensation." },
 ];
 
 const approaches = [
@@ -293,14 +267,21 @@ function UnderstandingTMD() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i}
-                className="bg-white rounded-xl p-6 border border-gray-100 hover:border-[var(--medium-blue)] hover:shadow-lg transition-all duration-300"
               >
-                <h3 className="text-lg font-bold text-[var(--deep-navy)] mb-2">
-                  {c.title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                  {c.desc}
-                </p>
+                <Link
+                  href={`/conditions/${c.slug}`}
+                  className="group block bg-white rounded-xl p-6 border border-gray-100 hover:border-[var(--medium-blue)] hover:shadow-lg transition-all duration-300 h-full"
+                >
+                  <h3 className="text-lg font-bold text-[var(--deep-navy)] mb-2 group-hover:text-[var(--medium-blue)] transition-colors">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                    {c.desc}
+                  </p>
+                  <span className="mt-3 inline-block text-sm font-semibold text-[var(--medium-blue)] opacity-0 group-hover:opacity-100 transition-opacity">
+                    Learn more →
+                  </span>
+                </Link>
               </motion.div>
             ))}
           </div>

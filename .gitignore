@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local quiz data (file-based fallback when Upstash is not configured)
+.data/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

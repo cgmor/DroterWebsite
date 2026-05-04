@@ -1,0 +1,52 @@
+import { NextRequest, NextResponse } from "next/server";
+import {
+  addCase,
+  listCases,
+  storageBackend,
+  type QuizCase,
+} from "@/lib/cases-store";
+
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  const cases = await listCases();
+  return NextResponse.json({ backend: storageBackend, cases });
+}
+
+interface IncomingCase {
+  primary?: string;
+  primaryCustom?: string;
+  secondaries?: string[];
+  secondaryCustom?: string;
+  answers?: Record<string, string>;
+  notes?: string;
+}
+
+export async function POST(req: NextRequest) {
+  let body: IncomingCase;
+  try {
+    body = (await req.json()) as IncomingCase;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+  }
+
+  const primary = (body.primary ?? "").trim();
+  if (!primary) {
+    return NextResponse.json(
+      { error: "primary diagnosis is required" },
+      { status: 400 }
+    );
+  }
+
+  const payload: Omit<QuizCase, "id" | "timestamp"> = {
+    primary,
+    primaryCustom: body.primaryCustom?.trim() || undefined,
+    secondaries: Array.isArray(body.secondaries) ? body.secondaries : [],
+    secondaryCustom: body.secondaryCustom?.trim() || undefined,
+    answers: body.answers ?? {},
+    notes: body.notes?.trim() || undefined,
+  };
+
+  const entry = await addCase(payload);
+  return NextResponse.json({ case: entry }, { status: 201 });
+}

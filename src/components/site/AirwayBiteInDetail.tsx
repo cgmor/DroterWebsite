@@ -2,7 +2,7 @@ import { airwayBite, distributor } from "@/content/aps";
 import { ButtonLink } from "./Button";
 import ModelStage from "./ModelStage";
 import RangeScale from "./RangeScale";
-import { Section } from "./Section";
+import { Section, SectionHead } from "./Section";
 import SpecRows, { type SpecRow } from "./SpecRows";
 import { airwayNumbers } from "./specs";
 
@@ -37,13 +37,8 @@ type Props = {
 export default function AirwayBiteInDetail({ id = "in-detail", title = `${airwayBite.shortName}, in detail`, showOrder = true }: Props) {
   return (
     <Section tone="porcelain" id={id} labelledBy={`${id}-title`} className="detail">
+      <SectionHead id={`${id}-title`} title={title} lead={airwayBite.useWhen} layout="center" />
       <div className="detail-grid">
-        <header className="detail-head">
-          <h2 className="t-h2" id={`${id}-title`}>
-            {title}
-          </h2>
-          <p className="t-lead detail-lead">{airwayBite.useWhen}</p>
-        </header>
         <div className="detail-model">
           <ModelStage />
         </div>

@@ -67,7 +67,7 @@ export default function Library({
       <SectionHead
         id="lib-title"
         title={title}
-        layout="split"
+        layout="center"
         actions={
           <ButtonLink href={href(v, routes.library)} variant="quiet">
             The full library

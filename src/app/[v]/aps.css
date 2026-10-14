@@ -75,10 +75,12 @@
     --maxw: 1200px;
     --textw: 46rem;
     --col-gap: clamp(20px, 2.4vw, 40px);
-    --space-lg: clamp(80px, 8vw, 128px);
-    --space-md: clamp(56px, 6vw, 96px);
-    --space-sm: clamp(40px, 4vw, 64px);
-    --head-gap: clamp(32px, 4vw, 56px);
+    /* One calm cadence: a band's padding is about twice its head gap, and
+       two bands of the same tone never stack more than ~210px of air. */
+    --space-lg: clamp(72px, 7vw, 104px);
+    --space-md: clamp(56px, 5.5vw, 84px);
+    --space-sm: clamp(40px, 4vw, 56px);
+    --head-gap: clamp(28px, 3.4vw, 48px);
     --hd-h: 64px;
 
     /* Shape + depth */
@@ -378,11 +380,51 @@
     gap: 24px;
     justify-items: start;
   }
+  /* Split: the heading and its lead read as one block on the left; the
+     action sits at the right edge of the column, on the last line of that
+     block, so nothing floats in the middle of the row. */
   @media (min-width: 900px) {
     .aps .shead-split {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      align-items: start;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
     }
+    .aps .shead-split .shead-aside {
+      display: contents;
+    }
+    .aps .shead-split .shead-title,
+    .aps .shead-split .shead-lead {
+      grid-column: 1;
+    }
+    .aps .shead-split .shead-lead {
+      max-width: 60ch;
+    }
+    .aps .shead-split .actions {
+      grid-column: 2;
+      grid-row: 1;
+      justify-content: flex-end;
+    }
+    .aps .shead-split:has(.shead-lead) .actions {
+      grid-row: 1 / span 2;
+    }
+  }
+  /* Centred opening for a major section: title, then lead, then actions. */
+  .aps .shead-center {
+    justify-items: center;
+    text-align: center;
+  }
+  .aps .shead-center .shead-title {
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .aps .shead-center .shead-aside {
+    justify-items: center;
+  }
+  .aps .shead-center .shead-lead {
+    max-width: 52ch;
+    text-wrap: balance;
+  }
+  .aps .shead-center .actions {
+    justify-content: center;
   }
 
   /* ── Buttons + links ───────────────────────────────────────────────── */
@@ -837,9 +879,15 @@
     color: var(--slate);
   }
   @media (min-width: 900px) {
+    /* The order block sits at the column's right edge, on the tagline's last
+       line, instead of floating at the start of a wide right column. */
     .aps .ft-top {
-      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: end;
+    }
+    .aps .ft-order {
+      justify-items: end;
+      text-align: right;
     }
     .aps .ft-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -990,13 +1038,12 @@
 
   /* ── Airway Bite, in detail ────────────────────────────────────────── */
 
+  /* Centred opening (as every major section), then the model and its spec
+     sheet side by side, centred on each other. */
   .aps .detail-grid {
     display: grid;
     gap: 32px var(--col-gap);
     align-items: start;
-  }
-  .aps .detail-lead {
-    margin-top: 20px;
   }
   .aps .detail-actions {
     margin-top: 32px;
@@ -1004,22 +1051,7 @@
   @media (min-width: 1000px) {
     .aps .detail-grid {
       grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      grid-template-areas:
-        "model head"
-        "model body";
-      grid-template-rows: auto 1fr;
-      row-gap: 40px;
-    }
-    .aps .detail-head {
-      grid-area: head;
-      padding-top: 8px;
-    }
-    .aps .detail-body {
-      grid-area: body;
-    }
-    .aps .detail-model {
-      grid-area: model;
-      align-self: center;
+      align-items: center;
     }
   }
 

@@ -68,7 +68,7 @@ export function TutorialSection({ v, tone = "mist" }: { v: VersionId; tone?: Ton
       <SectionHead
         id="tut-title"
         title={tutorialTitle}
-        layout="split"
+        layout="center"
         actions={
           <ButtonLink href={href(v, `${routes.airwayBite}#steps`)} variant="quiet">
             Open the chairside steps
@@ -225,8 +225,8 @@ export function AppliancesBlock({ v, tone = "white" }: { v: VersionId; tone?: To
       <SectionHead
         id="ag-title"
         title={applianceGuide.title}
-        lead={applianceGuide.intro}
-        layout="split"
+        lead={applianceGuide.intro || undefined}
+        layout="center"
         actions={
           <ButtonLink href={href(v, routes.appliances)} variant="quiet">
             The APS appliances

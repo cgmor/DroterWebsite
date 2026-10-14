@@ -485,7 +485,7 @@ export const library = {
 
 /** Patient education — headings must avoid "treat". */
 export const education = {
-  conditionsHeading: "Common conditions we help you find a solution for",
+  conditionsHeading: "Common conditions",
   /** drdroter.com/jaw-joint-damage, verbatim ("will to lead" typo fixed). */
   conditionsIntro:
     "There are 190+ different causes of Temporomandibular Disorders/Facial Pain. The examination process, which needs to include muscle and joint palpation, will lead to a working diagnosis on which you will be treated. A specific treatment is needed for each specific diagnosis.",

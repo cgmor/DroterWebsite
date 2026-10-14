@@ -49,9 +49,9 @@ export function CountsPassage({ className }: { className?: string }) {
 }
 
 /** “Telling a patient that he or she has ‘TMJ’…”, attributed. */
-export function Thesis() {
+export function Thesis({ className }: { className?: string }) {
   return (
-    <figure className={s.thesis}>
+    <figure className={[s.thesis, className].filter(Boolean).join(" ")}>
       <blockquote>
         <p className={s.thesisLine}>{understanding.thesis.line}</p>
       </blockquote>
@@ -61,37 +61,39 @@ export function Thesis() {
 }
 
 /**
- * V1's turn from the device to the diagnosis: his heading "TMD and Facial
- * Pain" (drdroter.com/about-tmd), his thesis, then the counts beside his own
- * "190 diagnoses, 7 categories" slide.
+ * V1's turn from the device to the diagnosis. His heading "TMD and Facial
+ * Pain" (drdroter.com/about-tmd) and his thesis open the section as one
+ * centred unit; under them the counts sit beside his own "190 diagnoses,
+ * 7 categories" slide, centred on each other.
  */
 export function DiagnosisTurn({ v }: { v: VersionId }) {
   return (
-    <Section labelledBy="turn-title">
-      <div className={s.turnTop}>
-        <h2 id="turn-title" className={`t-h2 ${s.turnTitle}`}>
-          TMD and Facial Pain
+    <Section labelledBy="turn-title" id="tmd">
+      <header className={`shead shead-center ${s.turnHead}`}>
+        <h2 id="turn-title" className="t-h2 shead-title">
+          {understanding.title}
         </h2>
-        <Thesis />
-      </div>
+        <Thesis className={s.thesisCenter} />
+      </header>
       <div className={s.turnBody}>
-        <div>
+        <div className={s.turnFacts}>
           <CountsPassage />
           <div className={s.after}>
             <ButtonLink href={href(v, routes.understanding)} variant="quiet">
-              {understanding.title}
+              Understanding TMD
             </ButtonLink>
           </div>
         </div>
-        <Figure {...choicesSlide} caption="From Dr. Droter’s TMD lecture." />
+        <Figure {...choicesSlide} caption="Dr. Droter, TMD lecture" />
       </div>
     </Section>
   );
 }
 
 /**
- * V3's "TMD is not one disease": the definition, the counts, the seven
- * categories beside the 40-diseases slide, and the full version one expand away.
+ * V3's "TMD is not one disease": the definition beside the counts; the seven
+ * categories beside the 40-diseases slide, with the full version one expand
+ * away under the list (so nothing is left alone across the page).
  */
 export function NotOneDisease({ v }: { v: VersionId }) {
   return (
@@ -122,30 +124,29 @@ export function NotOneDisease({ v }: { v: VersionId }) {
               </li>
             ))}
           </ol>
-        </div>
-      </div>
-
-      <div className={s.nodMore}>
-        <Prose>
-          <Disclosure>
-            <p>{def.paragraphs[0]}</p>
-            <p>{def.adaCriteria.lead}</p>
-            <ul>
-              {def.adaCriteria.items.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
-            <ul>
-              {def.logic.map((l) => (
-                <li key={l}>{l}</li>
-              ))}
-            </ul>
-          </Disclosure>
-        </Prose>
-        <div className={s.after}>
-          <ButtonLink href={href(v, routes.understanding)} variant="quiet">
-            {understanding.title}
-          </ButtonLink>
+          <div className={s.nodMore}>
+            <Prose>
+              <Disclosure>
+                <p>{def.paragraphs[0]}</p>
+                <p>{def.adaCriteria.lead}</p>
+                <ul>
+                  {def.adaCriteria.items.map((i) => (
+                    <li key={i}>{i}</li>
+                  ))}
+                </ul>
+                <ul>
+                  {def.logic.map((l) => (
+                    <li key={l}>{l}</li>
+                  ))}
+                </ul>
+              </Disclosure>
+            </Prose>
+            <div className={s.after}>
+              <ButtonLink href={href(v, routes.understanding)} variant="quiet">
+                Understanding TMD
+              </ButtonLink>
+            </div>
+          </div>
         </div>
       </div>
     </Section>

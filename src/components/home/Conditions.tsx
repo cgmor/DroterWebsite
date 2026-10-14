@@ -1,8 +1,7 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { education } from "@/content/aps";
 import { conditionGuides, type ConditionGuide } from "@/content/tmd";
-import { ButtonLink } from "@/components/site/Button";
 import { ArrowRight } from "@/components/site/icons";
 import ImageCard from "@/components/site/ImageCard";
 import { href, routes, type VersionId } from "@/components/site/links";
@@ -10,110 +9,98 @@ import Reveal from "@/components/site/Reveal";
 import { Section, SectionHead, type Tone } from "@/components/site/Section";
 import s from "./home.module.css";
 
+/** The guides written in his own words (drdroter.com and his osteoarthritis document). */
+const ownWords = (g: ConditionGuide) => g.source !== "TMJ Brochure 2026";
+
+/** His conditions intro (drdroter.com/jaw-joint-damage), from its second sentence: why the conditions differ. */
+const conditionsLead = education.conditionsIntro.split(/(?<=\.)\s+/).slice(1).join(" ");
+
+/** Cells left in the last row of an n-item grid of `cols` columns (a full row when it divides evenly). */
+const rest = (n: number, cols: number) => cols - (n % cols);
+
 /**
- * The home pages list only the guides written in his own words (drdroter.com
- * and his osteoarthritis document). The five guides paraphrased from the 2026
- * brochure, pending his verbatim text, stay on /conditions.
+ * Every condition guide, in the order /conditions lists them, as plain cards
+ * on the band: his heading for the condition, his one-line summary, the whole
+ * card a link. The last cell links to the index and fills out the final row
+ * at every column count, so no row is left ragged.
  */
-export const homeGuides = conditionGuides.filter((g) => g.source !== "TMJ Brochure 2026");
-
-/** Plain name and clinical name on the left, the one-line summary on the right. The whole row links. */
-export function ConditionRows({ v, guides = homeGuides }: { v: VersionId; guides?: ConditionGuide[] }) {
+export function ConditionCards({ v, guides = conditionGuides }: { v: VersionId; guides?: ConditionGuide[] }) {
+  const n = guides.length;
+  const fill = { "--rest-2": rest(n, 2), "--rest-3": rest(n, 3) } as CSSProperties;
   return (
-    <ul className={s.rows}>
+    <ul className={s.cards} style={fill}>
       {guides.map((g) => (
-        <li key={g.slug} className={s.row}>
-          <span>
-            <Link href={href(v, routes.condition(g.slug))} className={`${s.rowLink} ${s.rowName}`}>
-              {g.plainName}
+        <li key={g.slug} className={s.card}>
+          <h3 className={s.cardTitle}>
+            <Link href={href(v, routes.condition(g.slug))} className={`${s.rowLink} ${s.cardLink}`}>
+              {g.title}
             </Link>
-            <span className={s.rowTitle}>{g.title}</span>
-          </span>
-          <span className={s.rowSummary}>{g.summary}</span>
-          <ArrowRight size={20} className={s.rowArrow} />
+          </h3>
+          <p className={s.cardLine}>{g.summary}</p>
+          <ArrowRight size={18} className={s.cardArrow} />
         </li>
       ))}
-    </ul>
-  );
-}
-
-/** V2: the conditions as the patient would say them, in two columns. */
-export function ConditionIndex({ v }: { v: VersionId }) {
-  return (
-    <ul className={s.index}>
-      {homeGuides.map((g) => (
-        <li key={g.slug} className={s.indexItem}>
-          <Link href={href(v, routes.condition(g.slug))} className={`${s.rowLink} ${s.indexName}`}>
-            {g.plainName}
+      <li className={`${s.card} ${s.cardMore}`}>
+        <h3 className={s.cardTitle}>
+          <Link href={href(v, routes.conditions)} className={`${s.rowLink} ${s.cardLink}`}>
+            All conditions
+            <ArrowRight size={18} className={s.cardMoreArrow} />
           </Link>
-          <span className={s.rowTitle}>{g.title}</span>
-          <ArrowRight size={20} className={s.rowArrow} />
-        </li>
-      ))}
+        </h3>
+        <p className={s.cardMoreLine}>{education.patientsLine}</p>
+      </li>
     </ul>
   );
 }
 
-/** V3: the guides that carry one of his slides as image cards (two wide over three), any others as rows. */
+/**
+ * V3: the guides that carry one of his slides as image cards, then every
+ * other guide as a plain card. Two wide over three when there are five; the
+ * wide pair absorbs any remainder so each row is full.
+ */
 export function ConditionGallery({ v }: { v: VersionId }) {
-  const withSlide = homeGuides.filter((g) => g.hero);
-  const rest = homeGuides.filter((g) => !g.hero);
+  const withSlide = conditionGuides.filter((g) => g.hero && ownWords(g));
+  const others = conditionGuides.filter((g) => !withSlide.includes(g));
+  const m = withSlide.length % 3;
+  const wide = m === 2 ? 2 : m === 1 && withSlide.length >= 4 ? 4 : m === 1 ? 1 : 0;
   return (
     <>
       <ul className={s.gallery}>
-        {withSlide.map((g, i) => (
-          <li key={g.slug} className={i < 2 ? s.galleryWide : s.galleryItem}>
-            <ImageCard
-              href={href(v, routes.condition(g.slug))}
-              image={{ src: g.hero!.src, alt: g.hero!.alt }}
-              title={g.plainName}
-              line={g.title}
-              meta={g.category}
-              ratio="16/10"
-              fit="contain"
-              field="white"
-              sizes={i < 2 ? "(min-width: 1000px) 640px, (min-width: 640px) 50vw, 100vw" : "(min-width: 1000px) 420px, (min-width: 640px) 50vw, 100vw"}
-            />
-          </li>
-        ))}
+        {withSlide.map((g, i) => {
+          const isWide = i < wide;
+          const solo = isWide && wide === 1;
+          return (
+            <li key={g.slug} className={solo ? s.gallerySolo : isWide ? s.galleryWide : s.galleryItem}>
+              <ImageCard
+                href={href(v, routes.condition(g.slug))}
+                image={{ src: g.hero!.src, alt: g.hero!.alt }}
+                title={g.title}
+                line={g.summary}
+                ratio="16/10"
+                fit="contain"
+                field="white"
+                sizes={isWide ? "(min-width: 1000px) 640px, (min-width: 640px) 50vw, 100vw" : "(min-width: 1000px) 420px, (min-width: 640px) 50vw, 100vw"}
+              />
+            </li>
+          );
+        })}
       </ul>
-      {rest.length > 0 && (
-        <div className={s.galleryMore}>
-          <h3 className="t-h3">More guides</h3>
-          <ConditionRows v={v} guides={rest} />
-        </div>
-      )}
+      <div className={s.galleryMore}>
+        <ConditionCards v={v} guides={others} />
+      </div>
     </>
   );
 }
 
-/** The conditions section frame shared by all three homes; the list form varies by version. */
-export function ConditionsSection({
-  v,
-  tone = "mist",
-  children,
-  after,
-}: {
-  v: VersionId;
-  tone?: Tone;
-  children: ReactNode;
-  after?: ReactNode;
-}) {
+/**
+ * The conditions section frame shared by all three homes: a centred opening,
+ * then the cards (or V3's gallery). The last card links to the index.
+ */
+export function ConditionsSection({ tone = "mist", children }: { tone?: Tone; children: ReactNode }) {
   return (
     <Section tone={tone} labelledBy="cond-title" id="conditions">
-      <SectionHead
-        id="cond-title"
-        title={education.conditionsHeading}
-        lead={education.conditionsIntro}
-        layout="split"
-        actions={
-          <ButtonLink href={href(v, routes.conditions)} variant="quiet">
-            All conditions
-          </ButtonLink>
-        }
-      />
+      <SectionHead id="cond-title" title="Common conditions" lead={conditionsLead} layout="center" />
       <Reveal>{children}</Reveal>
-      {after}
     </Section>
   );
 }

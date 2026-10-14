@@ -191,32 +191,33 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
         </section>
 
         <section id="airway" aria-labelledby="airway-title" className={s.airway}>
-          <div className={s.airHead}>
-            <h2 className={`t-h2 ${s.airTitle}`} id="airway-title">
-              <i className="airway-line" aria-hidden="true" />
-              {airway.indication}
-            </h2>
-            <div className={s.airHeadBody}>
+          {/* Same composition as Grinding + Airway: the indication and its appliance
+              on the left, the still and his narration beside them. */}
+          <div className={s.gaGrid}>
+            <div className={s.gaCopy}>
+              <h2 className={`t-h2 ${s.airTitle}`} id="airway-title">
+                <i className="airway-line" aria-hidden="true" />
+                {airway.indication}
+              </h2>
               <Items items={airway.items} />
             </div>
+            <figure className={s.still}>
+              <div className={s.stillFrame}>
+                <Image
+                  src="/aps/stills/intro-airway-open-clean.webp"
+                  alt="The same cross-section with the lower jaw held forward: the tongue comes forward with it and the airway behind it is open."
+                  width={1920}
+                  height={816}
+                  sizes="(min-width: 900px) 680px, 100vw"
+                  quality={90}
+                  className={s.stillImg}
+                />
+              </div>
+              <figcaption className={s.stillCap}>
+                {narration(jawForward.body, jawForward.title, s.stillCapTitle)} {narration(howFar.body, howFar.title, s.stillCapTitle)}
+              </figcaption>
+            </figure>
           </div>
-
-          <figure className={`${s.still} ${s.stillWide}`}>
-            <div className={s.stillFrame}>
-              <Image
-                src="/aps/stills/intro-airway-open-clean.webp"
-                alt="The same cross-section with the lower jaw held forward: the tongue comes forward with it and the airway behind it is open."
-                width={1920}
-                height={816}
-                sizes="(min-width: 1000px) 960px, 100vw"
-                quality={90}
-                className={s.stillImg}
-              />
-            </div>
-            <figcaption className={s.stillCap}>
-              {narration(jawForward.body, jawForward.title, s.stillCapTitle)} {narration(howFar.body, howFar.title, s.stillCapTitle)}
-            </figcaption>
-          </figure>
 
           <div className={s.relation}>
             <h3 className={s.relTitle}>{airwayBite.summary}</h3>

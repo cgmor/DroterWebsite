@@ -50,8 +50,9 @@ type HeadProps = {
   as?: "h1" | "h2" | "h3";
   /** Visual size, independent of the element. Defaults: h1 → "h1", otherwise "h2". */
   size?: "display" | "h1" | "h2" | "h3";
-  /** `stack` = title, lead, actions in one column; `split` = title left, lead + actions right (desktop). */
-  layout?: "stack" | "split";
+  /** `stack` = title, lead, actions in one column; `split` = title left, lead + actions right (desktop);
+   *  `center` = title, lead and actions centred over the section (a major section's opening). */
+  layout?: "stack" | "split" | "center";
   className?: string;
 };
 

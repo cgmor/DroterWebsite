@@ -1,4 +1,3 @@
-import { education } from "@/content/aps";
 import AirwayBiteInDetail from "@/components/site/AirwayBiteInDetail";
 import HowFarForward from "@/components/site/HowFarForward";
 import type { VersionId } from "@/components/site/links";
@@ -7,13 +6,16 @@ import { Section } from "@/components/site/Section";
 import AboutDroter from "./AboutDroter";
 import { Advantages, AirwayBand, AirwayBridge, AppliancesBlock, TutorialSection, TutorialTeaser } from "./Airway";
 import Approach from "./Approach";
-import { ConditionGallery, ConditionIndex, ConditionRows, ConditionsSection } from "./Conditions";
+import { ConditionCards, ConditionGallery, ConditionsSection } from "./Conditions";
 import { DiagnosisTurn, NotOneDisease } from "./Education";
 import { DeviceHero, JointHero, PortraitHero } from "./Heroes";
 import Library from "./Library";
-import s from "./home.module.css";
+import Orientation, { founder } from "./Orientation";
 
-/** The light-touch Bowie panel that closes every home. `flush` when the section above is also white. */
+/**
+ * The light-touch Bowie panel that closes every home: a mist panel on a white
+ * band. `flush` when the band above is also white, so the two read as one.
+ */
 function PracticeClose({ flush }: { flush?: boolean }) {
   return (
     <Section space="md" flush={flush ? "top" : undefined}>
@@ -22,26 +24,37 @@ function PracticeClose({ flush }: { flush?: boolean }) {
   );
 }
 
+/*
+ * Band rhythm, the same on every home: the hero and the device "in detail"
+ * sit on porcelain (the animation's own grey); night appears once, for the
+ * airway; every other band alternates white and mist, ending on a white
+ * band whose mist practice panel hands over to the mist footer.
+ */
+
 /**
- * V1, Airway Bite first. The device at product scale, the airway story, the
- * device in detail, the kit and his advantages, the tutorial. Then a decisive
- * turn to the diagnosis ("TMD and Facial Pain"): the thesis and the counts,
- * the conditions, the appliance guide, the man, his library, his practice.
+ * V1, Airway Bite first. One story: the device; what ArrowPath Sleep is and
+ * who it is for; the Airway Bite (how far forward, in detail, the kit, the
+ * tutorial); then the diagnosis behind it (TMD, the conditions, the right
+ * night guard); the man, his literature, his practice.
+ *
+ *   porcelain · white · night · porcelain · white · mist · white · mist ·
+ *   white · mist · white (+ practice) · footer mist
  */
 export function HomeV1({ v }: { v: VersionId }) {
   return (
     <>
       <DeviceHero />
+      <Orientation v={v} />
       <HowFarForward />
       <AirwayBiteInDetail />
       <Advantages v={v} />
       <TutorialSection v={v} />
       <DiagnosisTurn v={v} />
-      <ConditionsSection v={v}>
-        <ConditionRows v={v} />
+      <ConditionsSection>
+        <ConditionCards v={v} />
       </ConditionsSection>
       <AppliancesBlock v={v} />
-      <AboutDroter v={v} />
+      <AboutDroter v={v} story={founder.slice(1, -1).join(" ")} />
       <Library v={v} />
       <PracticeClose flush />
     </>
@@ -51,8 +64,11 @@ export function HomeV1({ v }: { v: VersionId }) {
 /**
  * V2, Dr. Droter first. The man and his thesis, with the Airway Bite in the
  * same view; his diagnostic approach (three types of pain, palpation, the
- * numbers); then the device as his technique, his lectures, the conditions,
- * the appliance guide, his practice.
+ * numbers); then the device as his technique, the tutorial, the conditions,
+ * his lectures, the appliance guide, his practice.
+ *
+ *   porcelain · white · mist · white · night · porcelain · white · mist ·
+ *   white · mist · white (+ practice) · footer mist
  */
 export function HomeV2({ v }: { v: VersionId }) {
   return (
@@ -62,10 +78,10 @@ export function HomeV2({ v }: { v: VersionId }) {
       <AirwayBridge v={v} />
       <AirwayBiteInDetail />
       <TutorialTeaser v={v} />
-      <Library v={v} tone="mist" featured />
-      <ConditionsSection v={v} tone="white">
-        <ConditionIndex v={v} />
+      <ConditionsSection>
+        <ConditionCards v={v} />
       </ConditionsSection>
+      <Library v={v} featured />
       <AppliancesBlock v={v} tone="mist" />
       <PracticeClose />
     </>
@@ -79,6 +95,9 @@ export function HomeV2({ v }: { v: VersionId }) {
  * condition guides with his slides, the device in detail, the library, the
  * man, the practice. (The signs checklist is not his wording yet, so it lives
  * on /understanding-tmd only.)
+ *
+ *   porcelain · night · white · mist · porcelain · white · mist ·
+ *   white (+ practice) · footer mist
  */
 export function HomeV3({ v }: { v: VersionId }) {
   return (
@@ -86,7 +105,7 @@ export function HomeV3({ v }: { v: VersionId }) {
       <JointHero v={v} />
       <AirwayBand v={v} />
       <NotOneDisease v={v} />
-      <ConditionsSection v={v} after={<p className={s.patientsLine}>{education.patientsLine}</p>}>
+      <ConditionsSection>
         <ConditionGallery v={v} />
       </ConditionsSection>
       <AirwayBiteInDetail />

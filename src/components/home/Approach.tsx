@@ -3,7 +3,7 @@ import { understanding } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
 import Figure from "@/components/site/Figure";
 import { href, routes, type VersionId } from "@/components/site/links";
-import { Section } from "@/components/site/Section";
+import { Section, SectionHead } from "@/components/site/Section";
 import { Figured } from "./Education";
 import s from "./home.module.css";
 
@@ -12,8 +12,9 @@ const evidence = understanding.evidence;
 
 /**
  * V2: his diagnostic approach in three movements. The three types of pain
- * beside his lecture slide; the palpation emphasis, large and quiet; then
- * what the numbers show: his sentences, each figure emphasised where it stands.
+ * beside his lecture slide; the palpation emphasis, attributed directly under
+ * the quote, with his paragraph beside it; then what the numbers show, under a
+ * centred heading: his sentences, each figure emphasised where it stands.
  */
 export default function Approach({ v }: { v: VersionId }) {
   return (
@@ -40,22 +41,20 @@ export default function Approach({ v }: { v: VersionId }) {
       </Section>
 
       <Section tone="mist" as="div">
-        <figure className={s.emph}>
-          <blockquote>
-            <p className={s.emphText}>{pain.beliefs.emphasis}</p>
-          </blockquote>
-          <div className={s.emphFoot}>
+        <div className={s.emph}>
+          <figure className={s.emphQuote}>
+            <blockquote>
+              <p className={s.emphText}>{pain.beliefs.emphasis}</p>
+            </blockquote>
             <figcaption className={s.emphCap}>{doctor.name}</figcaption>
-            <p className={s.emphBody}>{pain.beliefs.paragraphs[0]}</p>
-          </div>
-        </figure>
+          </figure>
+          <p className={s.emphBody}>{pain.beliefs.paragraphs[0]}</p>
+        </div>
       </Section>
 
       <Section labelledBy="ev-title">
         <div className={s.evGrid}>
-          <h2 id="ev-title" className="t-h2">
-            {evidence.heading}
-          </h2>
+          <SectionHead id="ev-title" title={evidence.heading} layout="center" className={s.evHead} />
           <div className={s.evPassage}>
             {evidence.items.map((it, i) => (
               <p key={i} className={s.evItem}>

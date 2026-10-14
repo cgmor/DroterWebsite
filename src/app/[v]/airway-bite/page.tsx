@@ -132,10 +132,13 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
 
       <AirwayBiteInDetail />
 
-      {/* Opens on his purpose line; the advantages are his own list. */}
+      {/* The kit's name from its label over his purpose line; the advantages are his own list. */}
       <Section as="div">
-        <section className={s.advGrid} aria-label="Advantages">
+        <section className={s.advGrid} aria-labelledby="adv-title">
           <header className={s.advHead}>
+            <h2 className="t-h2" id="adv-title">
+              {airwayBite.kitName}
+            </h2>
             <p className={`t-lead ${s.advLead}`}>{airwayBite.purpose}</p>
             <div className={s.advStill}>
               <Image

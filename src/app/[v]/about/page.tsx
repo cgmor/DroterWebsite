@@ -152,11 +152,13 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
               <figcaption className={s.ownWordsBy}>{doctor.name}</figcaption>
             </figure>
           </div>
+          {/* His slide, then his conclusion under it: the right column carries
+              the argument's end instead of standing empty beside the text. */}
           <div className={s.approachFig}>
             <Figure {...understanding.pain.figure} sizes="(min-width: 1000px) 46vw, 100vw" />
+            <p className={s.emphasis}>{beliefs.emphasis}</p>
           </div>
         </div>
-        <p className={s.emphasis}>{beliefs.emphasis}</p>
       </Section>
 
       <Section labelledBy="lit-title">

@@ -9,7 +9,7 @@
 .openGrid {
   display: grid;
   gap: 36px var(--col-gap);
-  align-items: end;
+  align-items: start;
   padding-top: clamp(24px, 4vw, 64px);
   padding-bottom: var(--space-md);
 }
@@ -58,23 +58,25 @@
     column-gap: clamp(40px, 5vw, 80px);
   }
   .openCopy {
-    padding-bottom: 8px;
+    padding-top: 12px;
   }
 }
 
-/* ── Pull quote ─────────────────────────────────────────────────────── */
+/* ── Pull quote: a centred interlude, never parked in a corner ─────── */
 
 .quoteSec {
-  padding-block: clamp(64px, 7vw, 112px);
+  padding-block: clamp(40px, 4.5vw, 72px);
 }
 .quote {
   margin: 0;
+  text-align: center;
 }
 .quote blockquote {
   margin: 0;
 }
 .quote p {
   max-width: 28ch;
+  margin-inline: auto;
   font-size: var(--fs-quote);
   font-weight: 300;
   line-height: 1.18;
@@ -82,15 +84,10 @@
   text-wrap: balance;
 }
 .hang {
-  margin-left: -0.37em;
-}
-@media (max-width: 639px) {
-  .hang {
-    margin-left: 0;
-  }
+  margin-left: 0;
 }
 .quoteBy {
-  margin-top: clamp(24px, 3vw, 40px);
+  margin-top: clamp(20px, 2.4vw, 28px);
   font-size: 1rem;
   color: var(--slate);
 }
@@ -120,7 +117,9 @@
 /* ── Facts, as one passage ──────────────────────────────────────────── */
 
 .facts {
-  max-width: 34ch;
+  max-width: 40ch;
+  margin-inline: auto;
+  text-align: center;
   font-size: var(--fs-passage);
   font-weight: 300;
   line-height: 1.3;
@@ -200,8 +199,8 @@
   color: var(--fg-2);
 }
 .emphasis {
-  max-width: 34ch;
-  margin-top: clamp(48px, 6vw, 88px);
+  max-width: 30ch;
+  margin-top: clamp(40px, 4.4vw, 64px);
   padding-top: clamp(24px, 3vw, 36px);
   border-top: 1px solid var(--line-strong);
   font-size: var(--fs-quote);
@@ -214,6 +213,8 @@
     grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
   }
   .approachFig {
+    position: sticky;
+    top: calc(var(--hd-h) + 32px);
     padding-top: 8px;
   }
 }

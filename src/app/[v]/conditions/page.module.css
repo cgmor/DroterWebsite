@@ -1,327 +1,185 @@
-/* /conditions: an atlas, not a card grid. The patient's words index the page;
-   below, each of Dr. Droter's categories holds its guides as ruled entries. */
+/* /conditions: one mist band that reads as a single unit (a centred opening,
+   then every guide as an even grid of plain white cards), then Dr. Droter's
+   categories as a compact ruled index, then the practice close. */
 
-/* ── Masthead ───────────────────────────────────────────────────────────── */
+/* ── Section openings ───────────────────────────────────────────────────── */
 
-.mast {
-  display: grid;
-  gap: clamp(40px, 5vw, 64px) var(--col-gap);
-  padding-top: clamp(40px, 5vw, 80px);
-  padding-bottom: clamp(48px, 6vw, 88px);
+.head {
+  margin-inline: auto;
 }
-@media (min-width: 1000px) {
-  .mast {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    align-items: start;
-  }
-}
-.mastCopy {
-  display: grid;
-  gap: 28px;
-  align-content: start;
-}
-.title {
-  max-width: 15ch;
-}
-.intro {
-  max-width: 44ch;
-  font-size: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
-  line-height: 1.55;
+.head :global(.shead-lead) {
+  max-width: 60ch;
   color: var(--ink-2);
 }
+/* On phones a long centred lead is hard to read: the opening sets flush left. */
+@media (max-width: 639.98px) {
+  .head:global(.shead-center) {
+    justify-items: start;
+    text-align: left;
+  }
+  .head:global(.shead-center) :global(.shead-aside) {
+    justify-items: start;
+  }
+}
 
-.finder {
-  padding: clamp(22px, 2.6vw, 32px) clamp(22px, 2.6vw, 32px) clamp(10px, 1.4vw, 16px);
+/* The closing tile: a way on for anyone who has not found their condition.
+   It fills the last row (2 columns wide in the 3-column grid). */
+.more {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(22px, 2.2vw, 28px);
   border-radius: var(--r-card);
-  background: var(--mist);
+  box-shadow: inset 0 0 0 1px var(--hair-strong);
 }
-.finderTitle {
-  margin-bottom: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: -0.006em;
+@media (min-width: 1000px) {
+  .more {
+    grid-column: span 2;
+  }
 }
-.finderList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.moreTitle {
+  font-size: 1.25rem;
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
-.finderList > li + li {
-  border-top: 1px solid var(--hair);
-}
-.finderLink {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 20px;
-  align-items: baseline;
-  gap: 2px 16px;
-  padding: 13px 0;
+.moreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   border-radius: 6px;
-}
-.finderWords {
-  font-size: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
-  line-height: 1.35;
-  letter-spacing: -0.008em;
-  color: var(--ink);
   transition: color var(--dur-1) var(--ease-out);
 }
-.finderClinical {
-  grid-column: 1;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--slate);
+.moreLink:hover {
+  color: var(--signal-ink);
 }
-.finderArrow {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: center;
+.moreArrow {
+  flex: none;
   color: var(--slate);
   transition:
     transform var(--dur-2) var(--ease-out),
     color var(--dur-1) var(--ease-out);
 }
-.finderLink:hover .finderWords {
+.moreLink:hover .moreArrow {
   color: var(--signal-ink);
+  transform: translateX(4px);
 }
-.finderLink:hover .finderArrow {
-  color: var(--signal-ink);
-  transform: translateX(3px);
+.moreBody {
+  max-width: 58ch;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
 }
-@media (min-width: 600px) {
-  .finderLink {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) 20px;
-  }
-  .finderClinical {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  .finderArrow {
-    grid-column: 3;
-  }
-}
-
-/* ── Atlas ──────────────────────────────────────────────────────────────── */
-
-.atlas {
-  display: grid;
-}
-.cat {
-  display: grid;
-  gap: 28px var(--col-gap);
-  padding-block: clamp(48px, 6vw, 88px);
-  border-top: 1px solid var(--ink);
-  scroll-margin-top: calc(var(--hd-h) + 16px);
-}
-@media (min-width: 1000px) {
-  .cat {
-    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-    align-items: start;
-  }
-  .catHead {
-    position: sticky;
-    top: calc(var(--hd-h) + 32px);
-  }
-}
-.catHead {
-  display: grid;
-  gap: 10px;
-}
-.catTitle {
-  max-width: 14ch;
-  font-size: var(--fs-h2);
-  font-weight: 350;
-  line-height: 1.06;
-  letter-spacing: -0.028em;
-}
-.catNote {
-  max-width: 30ch;
+.moreFoot {
+  padding-top: 6px;
   font-size: 0.9375rem;
   color: var(--slate);
 }
-
-.entries {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.entry {
-  position: relative;
-  display: grid;
-  gap: 22px var(--col-gap);
-  padding-block: 28px 32px;
-  border-top: 1px solid var(--hair-strong);
-}
-.entry:first-child {
-  padding-top: 4px;
-  border-top: 0;
-}
-@media (min-width: 1000px) {
-  .entry:first-child {
-    padding-top: 0;
-  }
-}
-@media (min-width: 700px) {
-  .entry[data-media] {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
-    align-items: start;
-  }
-}
-.entryText {
-  display: grid;
-  gap: 8px;
-  align-content: start;
-}
-.entryWords {
-  font-size: var(--fs-h3);
-  font-weight: 350;
-  line-height: 1.12;
-  letter-spacing: -0.024em;
-}
-.entryLink {
-  text-decoration: none;
-  outline: none;
-  transition: color var(--dur-1) var(--ease-out);
-}
-.entryLink::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  border-radius: 14px;
-}
-.entry:has(.entryLink:focus-visible) {
-  outline: 2px solid var(--signal);
-  outline-offset: 6px;
-  border-radius: 12px;
-}
-.entryClinical {
-  font-weight: 500;
+.inline {
   color: var(--ink);
-}
-.entrySummary {
-  max-width: 58ch;
-  margin-top: 4px;
-  line-height: 1.6;
-  color: var(--ink-2);
-}
-.entrySigns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 10px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.entrySigns > li {
-  padding: 4px 12px;
-  border-radius: var(--r-pill);
-  box-shadow: inset 0 0 0 1px var(--hair-strong);
-  font-size: 0.875rem;
-  line-height: 1.4;
-  color: var(--ink-2);
-}
-.entryGo {
-  display: inline-flex;
-  align-items: center;
-  justify-self: start;
-  gap: 8px;
-  margin-top: 12px;
-  font-size: 0.9375rem;
-  font-weight: 500;
   text-decoration: underline;
   text-decoration-color: var(--hair-strong);
-  text-underline-offset: 0.3em;
+  text-underline-offset: 0.28em;
+  border-radius: 4px;
   transition:
     color var(--dur-1) var(--ease-out),
     text-decoration-color var(--dur-1) var(--ease-out);
 }
-.entryArrow {
-  transition: transform var(--dur-2) var(--ease-out);
-}
-.entry:hover .entryLink,
-.entry:hover .entryGo {
+.inline:hover {
   color: var(--signal-ink);
-}
-.entry:hover .entryGo {
   text-decoration-color: currentColor;
 }
-.entry:hover .entryArrow {
-  transform: translateX(4px);
-}
 
-.entryMedia {
-  position: relative;
-  aspect-ratio: 2 / 1;
-  overflow: hidden;
-  border-radius: 14px;
-  isolation: isolate;
-}
-.entryMedia::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px var(--hair);
-  pointer-events: none;
-}
-.mediaSlide {
-  background: var(--mist);
-}
-.mediaSlide .entryImg {
-  object-fit: cover;
-}
-.mediaPlate {
-  background: var(--white);
-}
-.mediaPlate .entryImg {
-  object-fit: contain;
-  padding: 4%;
-}
-.entryImg {
-  transition: transform 0.9s var(--ease-out);
-}
-.entry:hover .entryImg {
-  transform: scale(1.03);
-}
+/* ── By category ────────────────────────────────────────────────────────── */
 
-/* ── Dentists ───────────────────────────────────────────────────────────── */
-
-.dentists {
-  display: grid;
-  gap: 12px var(--col-gap);
-  padding-block: clamp(32px, 4vw, 48px) clamp(56px, 7vw, 96px);
+.cats {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
   border-top: 1px solid var(--ink);
 }
-@media (min-width: 900px) {
-  .dentists {
-    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
-    align-items: center;
+.cat {
+  display: grid;
+  gap: 8px var(--col-gap);
+  padding-block: 18px 20px;
+  border-bottom: 1px solid var(--hair-strong);
+  scroll-margin-top: calc(var(--hd-h) + 24px);
+}
+@media (min-width: 760px) {
+  .cat {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: baseline;
   }
 }
-.dentistsLine {
-  max-width: 56ch;
-  font-size: 1.125rem;
-  line-height: 1.55;
-  color: var(--ink-2);
+/* Arriving from an anchor (e.g. /understanding-tmd), the row is marked. */
+.cat:target {
+  background: var(--signal-wash);
+  box-shadow: -12px 0 0 var(--signal-wash), 12px 0 0 var(--signal-wash);
 }
-.dentistsLinks {
+.catName {
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.catGuides {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 28px;
+  gap: 2px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-@media (min-width: 900px) {
-  .dentistsLinks {
-    justify-content: flex-end;
-  }
+.catLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  font-size: 1.0625rem;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 0.3em;
+  border-radius: 4px;
+  transition:
+    color var(--dur-1) var(--ease-out),
+    text-decoration-color var(--dur-1) var(--ease-out);
+}
+.catLink:hover {
+  color: var(--signal-ink);
+  text-decoration-color: currentColor;
+}
+.catArrow {
+  flex: none;
+  color: var(--slate);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.catLink:hover .catArrow {
+  color: currentColor;
+  transform: translateX(3px);
 }
 
 /* ── Close ──────────────────────────────────────────────────────────────── */
 
+/* His line, centred like the section openings above it, then the panel. */
 .patientsLine {
   max-width: 40ch;
-  margin-bottom: clamp(28px, 3.5vw, 44px);
+  margin: 0 auto clamp(28px, 3.5vw, 44px);
   font-size: var(--fs-passage);
   font-weight: 350;
   line-height: 1.3;
   letter-spacing: -0.02em;
+  text-align: center;
+  text-wrap: balance;
+}
+@media (max-width: 639.98px) {
+  .patientsLine {
+    margin-inline: 0;
+    text-align: left;
+  }
 }

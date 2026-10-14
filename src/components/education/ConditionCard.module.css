@@ -1,0 +1,112 @@
+/* Condition cards: plain white cards in an even grid on a mist band. */
+
+.grid {
+  display: grid;
+  gap: clamp(14px, 1.6vw, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(22px, 2.2vw, 28px);
+  border-radius: var(--r-card);
+  background: var(--white);
+  transition:
+    box-shadow var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.card:hover {
+  box-shadow: var(--shadow-1);
+  transform: translateY(-2px);
+}
+.card:has(.link:focus-visible) {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+.title {
+  font-size: 1.25rem;
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.link {
+  text-decoration: none;
+  outline: none;
+  transition: color var(--dur-1) var(--ease-out);
+}
+/* The whole card is the link. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+.card:hover .link {
+  color: var(--signal-ink);
+}
+.words {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  color: var(--slate);
+}
+.summary {
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.note {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--slate);
+}
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--hair);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--slate);
+}
+/* The foot sits on the card's last line; the auto margin above it absorbs
+   uneven summaries, and this keeps a minimum gap on the tallest card. */
+.summary,
+.note {
+  margin-bottom: 10px;
+}
+.summary:has(+ .note) {
+  margin-bottom: 0;
+}
+.arrow {
+  flex: none;
+  color: var(--slate);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.card:hover .arrow {
+  color: var(--signal-ink);
+  transform: translateX(4px);
+}

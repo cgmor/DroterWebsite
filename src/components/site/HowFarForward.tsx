@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useId, useState, type CSSProperties } from "react";
 import { airwayBite } from "@/content/aps";
-import { Section, type Tone } from "./Section";
+import { Section, SectionHead, type Tone } from "./Section";
 import h from "./howfar.module.css";
 
 /*
@@ -70,12 +70,7 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
 
   return (
     <Section tone={tone} id={id} labelledBy={`${id}-title`}>
-      <header className={h.head}>
-        <h2 className="t-h2" id={`${id}-title`}>
-          {heading}
-        </h2>
-        <p className={`t-lead ${h.lead}`}>{airwayBite.purpose}</p>
-      </header>
+      <SectionHead id={`${id}-title`} title={heading} lead={airwayBite.purpose} layout="center" />
 
       <div className={h.grid} style={{ "--pos": pos } as CSSProperties} data-tone={current.tone}>
         <figure className={h.stage}>
@@ -86,7 +81,7 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
               alt={i === pos ? p.alt : ""}
               aria-hidden={i === pos ? undefined : true}
               fill
-              sizes="(min-width: 1100px) 700px, (min-width: 700px) 90vw, 100vw"
+              sizes="(min-width: 700px) 640px, 100vw"
               quality={90}
               className={h.frame}
               data-on={i === pos || undefined}
@@ -136,12 +131,26 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
           </ol>
         </div>
 
-        <blockquote className={h.narration} aria-live="polite">
-          <p key={current.id} className={h.line}>
-            {current.line}
-          </p>
-          <footer className={h.cite}>Dr. Droter, narrating the tutorial</footer>
-        </blockquote>
+        {/* Every line is laid, hidden, into the same cell, so the block holds the
+            height of the longest one and dragging never moves the page. The
+            credit stays under the current line; spare height falls below it. */}
+        <figure className={h.narration}>
+          <div className={h.lines}>
+            {POSITIONS.map((p) => (
+              <p key={`sizer-${p.id}`} className={`${h.line} ${h.sizer}`} aria-hidden="true">
+                {p.line}
+              </p>
+            ))}
+            <div className={h.entry}>
+              <blockquote className={h.quote} aria-live="polite">
+                <p key={current.id} className={`${h.line} ${h.live}`}>
+                  {current.line}
+                </p>
+              </blockquote>
+              <figcaption className={h.cite}>Dr. Droter, narrating the tutorial</figcaption>
+            </div>
+          </div>
+        </figure>
       </div>
     </Section>
   );

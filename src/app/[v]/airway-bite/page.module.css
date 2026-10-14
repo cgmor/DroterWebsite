@@ -72,24 +72,19 @@
 
 /* ── Before you begin ───────────────────────────────────────────────── */
 
+/* The heading and his prerequisite read as one block. */
 .beforeHead {
   display: grid;
-  gap: 14px var(--col-gap);
-  margin-bottom: clamp(36px, 4.4vw, 64px);
+  gap: 14px;
+  margin-bottom: var(--head-gap);
 }
 .prereq {
-  max-width: 34ch;
-  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  max-width: 44ch;
+  font-size: var(--fs-lead);
   font-weight: 400;
-  line-height: 1.35;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-}
-@media (min-width: 900px) {
-  .beforeHead {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: end;
-  }
+  line-height: 1.45;
+  letter-spacing: -0.008em;
+  color: var(--ink-2);
 }
 
 .beforeGrid {
@@ -182,7 +177,7 @@
   gap: 40px var(--col-gap);
 }
 .advLead {
-  margin-top: 0;
+  margin-top: 16px;
 }
 .advStill {
   margin-top: 32px;

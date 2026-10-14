@@ -137,7 +137,7 @@
 .gaGrid {
   display: grid;
   gap: 36px var(--col-gap);
-  align-items: center;
+  align-items: start;
 }
 @media (min-width: 900px) {
   .gaGrid {
@@ -171,35 +171,10 @@
 }
 
 .airway {
-  margin-top: var(--space-lg);
-  padding-top: var(--space-sm);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
   border-top: 1px solid var(--line);
 }
-.airHead {
-  display: grid;
-  gap: 8px var(--col-gap);
-  margin-bottom: clamp(36px, 4.4vw, 64px);
-}
-.airHeadBody .items {
-  margin-top: 24px;
-}
-@media (min-width: 900px) {
-  .airHead {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: end;
-  }
-  .airHeadBody .items {
-    margin-top: 0;
-  }
-}
-/* The 1920px still stops at 960px, half its source width. */
-.stillWide {
-  max-width: 960px;
-}
-.stillWide .stillFrame {
-  border-radius: var(--r-card);
-}
-
 .relation {
   margin-top: var(--space-md);
 }
@@ -267,25 +242,21 @@
 
 /* ── Close ──────────────────────────────────────────────────────────── */
 
+/* A centred closing line: the distributor, then the two ways on. */
 .closeGrid {
   display: grid;
-  gap: 28px var(--col-gap);
-  align-items: end;
+  justify-items: center;
+  gap: 28px;
+  text-align: center;
 }
 .closeGrid h2 {
   max-width: 22ch;
+  text-wrap: balance;
 }
 .closeActions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 24px;
-}
-@media (min-width: 900px) {
-  .closeGrid {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  }
-  .closeActions {
-    justify-content: flex-end;
-  }
+  justify-content: center;
+  gap: 12px 28px;
 }

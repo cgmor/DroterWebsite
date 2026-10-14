@@ -12,6 +12,7 @@
  * language, never publish his questionnaires.
  */
 
+import { airwayBite, applianceGuide, doctor } from "./aps";
 
 export type Figure = {
   src: string;
@@ -44,10 +45,16 @@ export type ConditionGuide = {
   /** The complete version, revealed by "Expand the full version". */
   full: GuideSection[];
   hero?: Figure;
-  source: "drdroter.com" | "TMJ Brochure 2026" | "OA write-up";
+  /** "His sentences, assembled" = put together only from his own sentences on other topics, until he writes the page. */
+  source: "drdroter.com" | "TMJ Brochure 2026" | "OA write-up" | "His sentences, assembled";
   /** Which category of the 7 it belongs to. */
   category: string;
+  /** Requested by Dr. Droter (Apr 23); his full write-up is still to come. Pages show `pendingGuideNote`. */
+  pending?: boolean;
 };
+
+/** The one quiet line shown on guides that await his full write-up. */
+export const pendingGuideNote = "Dr. Droter’s full write-up for this condition is coming.";
 
 const fig = (src: string, alt: string, width: number, height: number, caption?: string): Figure => ({
   src: `/aps/edu/${src}`,
@@ -262,7 +269,361 @@ export const understanding = {
 
 /* ───────────────────────── Condition guides ───────────────────────── */
 
+/* Shared pieces of his own text, re-used verbatim by the guides below. */
+const airwayStory = airwayBite.airwayStory.map((s) => s.body);
+const sleepAndFatigue = understanding.approaches.groups.find((g) => g.name === "Sleep and fatigue")?.items ?? [];
+/** His products chart: the airway rows. */
+const airwayAppliances = applianceGuide.groups
+  .filter((g) => g.indication.includes("Airway"))
+  .map((g) => `${g.indication}: ${g.items.map((i) => (i.detail ? `${i.name} (${i.detail})` : i.name)).join(", ")}`);
+/** drdroter.com/new-patient-information: the goal of the first appointment, verbatim. */
+const firstVisitQuestions = [
+  "Is the TMJ damaged?",
+  "Is the neck damaged?",
+  "Does this damage contribute to the problems you are having?",
+  "What further tests or radiographs, if any, are needed for a definitive diagnosis?",
+];
+
+/**
+ * In the order of the earlier review site (which the client preferred), then
+ * Dr. Droter's requested additions, then his longer drdroter.com pages. The
+ * home page and /conditions both list them in this order.
+ */
 export const conditionGuides: ConditionGuide[] = [
+  /* The earlier review site's order: five guides from his TMJ Brochure 2026,
+     his osteoarthritis write-up and anterior open bite. Where his web pages
+     say the same thing, his own sentences replace the brochure notes. */
+  {
+    slug: "clenching",
+    title: "Clenching",
+    plainName: "I clench my teeth",
+    category: "Parafunction",
+    source: "TMJ Brochure 2026",
+    summary: "The patient is usually aware of clenching. The masseter muscles ache, and the joint may click in the morning.",
+    signs: ["Aware of clenching", "Masseter muscles ache", "Morning clicking"],
+    full: [
+      {
+        heading: "Pattern",
+        paragraphs: ["The patient is aware of clenching, the masseter muscles ache, and there may be clicking in the morning."],
+      },
+      {
+        heading: "Approach",
+        list: ["Occlusal adjustment", "D-PAS night guard", "Magnesium and vitamin C"],
+      },
+    ],
+  },
+
+  {
+    slug: "sleep-grinding",
+    title: "Sleep Grinding (Bruxism)",
+    plainName: "I grind my teeth at night",
+    category: "Parafunction",
+    source: "TMJ Brochure 2026",
+    summary: "Stress increases grinding, but it is usually not the primary cause. The clinical exam usually reveals it: an uneven bite or a damaged TMJ.",
+    signs: ["Worn teeth", "Chipping, cracking or loosening", "A partner hears grinding"],
+    full: [
+      {
+        heading: "Pattern",
+        paragraphs: ["Worn teeth are the defining sign. Excess force also shows as chipping, breaking, cracking, splitting, moving or loosening teeth."],
+      },
+      {
+        heading: "Causes",
+        paragraphs: ["Stress increases grinding but is usually not the primary cause. Common causes include an uneven bite or a damaged TMJ, and a clinical examination usually reveals which."],
+      },
+      {
+        heading: "Approach",
+        list: ["Protective night guard", "Airway night guard", "Occlusal adjustment where the bite is the cause"],
+      },
+    ],
+  },
+
+  {
+    slug: "occlusal-muscle-disharmony",
+    title: "Occlusal Muscle Disharmony",
+    plainName: "Headaches and sore chewing muscles",
+    category: "Muscles of the TMJ",
+    source: "TMJ Brochure 2026",
+    /** drdroter.com/uncomfortable-bite-occlusion, verbatim. */
+    summary: "An uneven bite causing muscle fatigue is called Occlusal Muscle Disharmony.",
+    signs: ["Sore muscles when chewing", "Headaches", "Slight soreness of the lateral pterygoid"],
+    full: [
+      {
+        heading: "Pattern",
+        paragraphs: [
+          "Teeth that touch imprecisely create muscle tension, which leads to headaches. Distinguishing features are slight soreness of the lateral pterygoid and sore muscles when chewing.",
+          "The critical question: is the primary soreness from the jaw muscles, the jaw joint or the neck muscles — and does the bite have anything to do with it? Half of headaches are not bite-related, so an accurate diagnosis is essential.",
+        ],
+      },
+      { heading: "Approach", paragraphs: ["Precision refinement of the bite — an occlusal adjustment — rather than muscle relief alone."] },
+    ],
+  },
+
+  /* His osteoarthritis document (OA for APS web) — verbatim; only typos fixed ("diagnose" → "diagnosis", "Bromlnj" → "Bromelain"). */
+  {
+    slug: "osteoarthritis",
+    title: "Osteoarthritis of the TMJ",
+    plainName: "Soreness of the joint itself",
+    category: "TMJ damage",
+    source: "OA write-up",
+    summary:
+      "There are 40 different diseases that affect joints whether it is the Temporomandibular Joint or your wrist. Osteoarthritis is the most common disease of these 40 diseases.",
+    signs: ["Soreness of the joint itself", "Ear pain", "Limited jaw opening", "Difficulty chewing", "Sore jaw muscles"],
+    hero: { src: "/conditions/osteoarthritis/TMJ-Arrow.png", alt: "Dr. Droter’s illustration locating the TMJ in front of the ear", width: 1448, height: 1086 },
+    full: [
+      {
+        heading: "Osteoarthritis",
+        paragraphs: [
+          "There are 40 different diseases that affect joints whether it is the Temporomandibular Joint or your wrist. Osteoarthritis is the most common disease of these 40 diseases. The most common symptom of Osteoarthritis of the TMJ will be soreness of the joint itself. Osteoarthritis of the TMJ can also present as ear pain since the ear and TMJ sit right next to each other. Other symptoms include limited jaw opening, difficulty chewing, and sore jaw muscles.",
+          "In some cases it can be difficult for a person to tell if their joint is sore, you have to rub in the correct spot.",
+          "If the TMJ is sore a CBCT (ConeBeam CT scan) of the joint is required to confirm the diagnosis of Osteoarthritis and determine the severity.",
+        ],
+      },
+      {
+        heading: "Damaged joints have friction",
+        paragraphs: [
+          "Osteoarthritis occurs when you have damaged the cartilage in a joint, most likely from past trauma. Damaged joints have friction, friction causes wear. A healthy joint has no friction and will not wear out. In theory you could move a healthy joint for a thousand years and there would be no wear. Once a joint is damaged it will have friction that leads to wear. Osteoarthritis is a progressive wearing out of the joint. As a joint wears out it will progress from early to Severe. A CBCT is the best way to determine where you are in the disease process.",
+        ],
+      },
+      {
+        heading: "Therapies",
+        paragraphs: [
+          "Treatments include minimizing sleep bruxing with a night guard and anti-inflammatory therapies (Ice, Topical CBD Balm, Jaw exercises, anti inflammatory medications, cold laser). Using an NSAID like meloxicam for 6 to 12 weeks is probably the simplest but there are risks. I have found cold laser therapy combined with topical CBD, Ice, jaw motion exercises, and Bromelain with green coffee extract to be very effective with less risks than standard NSAID medications.",
+        ],
+      },
+    ],
+  },
+
+  /* Brochure guide; summary and pattern are his sentences from drdroter.com/locked-jaw, verbatim. */
+  {
+    slug: "sprain-discal-ligament",
+    title: "Sprain of the Discal Ligament",
+    plainName: "My jaw suddenly hurts and won’t open",
+    category: "TMJ damage",
+    source: "TMJ Brochure 2026",
+    summary: "The TMJ can be sprained just like an ankle. A sprain is a stretching of a ligament. This can occur during sleep from parafunctional jaw movements.",
+    signs: ["Sudden onset", "Limited opening", "Soft end point on stretching"],
+    hero: fig("limited-184.jpg", "Dr. Droter’s lecture slide on the acute sprain", 2048, 1024),
+    full: [
+      {
+        heading: "Pattern",
+        paragraphs: [
+          "The most common cause that I see of a sore jaw joint limiting jaw opening is an acute sprain. The TMJ can be sprained just like an ankle. A sprain is a stretching of a ligament. This can occur during sleep from parafunctional jaw movements. Joint swelling can cause the back teeth to not touch on biting down. The posterior open bite will resolve once the joint swelling from the sprain resolves.",
+          "A defining feature of a sore jaw joint that is limiting jaw opening is what I call a soft endpoint. If the jaw is gently and slowly supported and stretched with a thumb on top tooth and index finger on bottom tooth, the jaw will gradually open wider.",
+        ],
+        figure: fig("limited-175.jpg", "Dr. Droter’s lecture slide on the soft and hard end point", 2048, 1024),
+      },
+      { heading: "Approach", list: ["Cold laser", "Rest and a soft diet", "An anti-inflammatory (NSAID)", "Anterior repositioning orthotic"] },
+    ],
+  },
+
+  /* Brochure guide; summary, pattern and approach are his sentences from drdroter.com/locked-jaw, verbatim. */
+  {
+    slug: "acute-closed-lock",
+    title: "Acute Closed Lock",
+    plainName: "My jaw is stuck",
+    category: "TMJ damage",
+    source: "TMJ Brochure 2026",
+    summary: "Those with a stuck disc will present with a hard end point in active stretching test and not be able to move their jaw fully side to side.",
+    signs: ["Limited opening", "Hard end point on stretching", "Can’t move fully side to side"],
+    hero: fig("limited-189.jpg", "Dr. Droter’s lecture slide on the acute closed lock", 2048, 1024),
+    full: [
+      {
+        heading: "Pattern",
+        paragraphs: [
+          "Most patients presenting to my practice with limited opening have been pre diagnosed with a non reducing TMJ disc, the disc is “stuck”. Less than 1/5 of patients have a stuck disc as the cause. The top 3 causes that I see are acute sprain, osteoarthritis, and Occlusal Muscle Disharmony.",
+          "Those with a stuck disc will present with a hard end point in active stretching test and not be able to move their jaw fully side to side.",
+        ],
+      },
+      {
+        heading: "Approach",
+        paragraphs: [
+          "Treatment includes 2-3 weeks of jaw movement exercises, Ice, and anti inflammatory like Advil or Aleve and Cold Laser. If limited opening does not resolve an arthrocentesis with PRP is indicated.",
+        ],
+      },
+    ],
+  },
+
+  /* drdroter.com/anterior-open-bite — verbatim. */
+  {
+    slug: "anterior-open-bite",
+    title: "Anterior Open Bite",
+    plainName: "Front teeth used to touch a year ago",
+    category: "Cranial alignment and occlusion",
+    source: "drdroter.com",
+    summary:
+      "Front teeth that used to touch and now are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation to correct this deformity, there are several non surgical options to fix anterior open bite.",
+    signs: ["Front teeth used to touch a year ago"],
+    hero: fig("aob-ant-open.jpg", "Dr. Droter’s lecture slide on anterior open bite", 2048, 1024),
+    full: [
+      {
+        heading: "Anterior Open Bite",
+        paragraphs: [
+          "Front teeth need to touch to allow proper speaking, eating and swallowing. Front teeth that used to touch and now are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation to correct this deformity, there are several non surgical options to fix anterior open bite.",
+        ],
+        figure: fig("aob-ms.jpg", "Dr. Droter’s lecture slide on anterior open bite", 2048, 1024),
+      },
+      {
+        heading: "Three main causes",
+        paragraphs: [
+          "There are three main causes of anterior open bite that occur after puberty: TMJ bone loss, tongue bracing a damaged neck, Iatrogenic (i.e Bad Night Guards).",
+          "As you can see the above anterior open bites all look very similar, yet have different etiologies (causes). Patients with anterior open bites need a CBCT to definitively determine the cause. The cause of the open bite must first be determined for treatment to be effective.",
+        ],
+        figure: fig("aob-causes.jpg", "Dr. Droter’s lecture slide: adult onset anterior open bite differential diagnosis", 2400, 1200),
+      },
+    ],
+  },
+
+  /* ── Requested by Dr. Droter (Apr 23): "Add Anterior open bite Sleep Breathing…",
+     "Add Neck Pain", "Add Daily Fatigue". Until he writes them, each is put
+     together ONLY from his own sentences elsewhere (tutorial narration,
+     drdroter.com, apsleep.com/about, his products chart), re-used verbatim
+     with typos fixed. Summary, signs and plain name are his phrases too. ── */
+  {
+    slug: "sleep-breathing-disorders",
+    title: "Sleep Breathing Disorders",
+    /** His narration. */
+    plainName: "Trouble getting air through",
+    category: "Whole body and systemic",
+    source: "His sentences, assembled",
+    pending: true,
+    summary: airwayStory[0],
+    /** His narration ("snoring", "obstructive sleep apnea") and drdroter.com/children. */
+    signs: ["Snoring", "Obstructive sleep apnea", "Upper airway resistance"],
+    hero: {
+      src: "/aps/stills/intro-airway-narrow-clean.webp",
+      alt: "Frame from Dr. Droter’s Airway Bite animation: the airway behind the tongue and lower jaw during sleep",
+      width: 1920,
+      height: 816,
+    },
+    full: [
+      {
+        /** His narration of the Airway Bite tutorial, verbatim. */
+        heading: "When you’re sleeping",
+        paragraphs: [`${airwayStory[0]} ${airwayStory[1]}`, airwayStory[2]],
+        figure: {
+          src: "/aps/stills/intro-airway-jaw-forward-clean.webp",
+          alt: "Frame from Dr. Droter’s Airway Bite animation: the lower jaw positioned forward and the airway more open",
+          width: 1920,
+          height: 816,
+        },
+      },
+      {
+        /** drdroter.com/children, verbatim (his "Airway" heading). */
+        heading: "Airway",
+        paragraphs: [
+          "Children who breathe through their mouth will lack having their tongue put pressure on the maxilla (upper jaw) during growth. The maxilla is dependent on the tongue to develop fully. Without the tongue putting pressure on the maxilla it will end up being narrow and will drift down. The maxilla is also the floor of the nose.",
+          "Signs and Symptoms in children include: Snoring, thumb sucking, enlarged tonsil and adenoids, lagging behind in growth, attention deficit disorder.",
+          "If this was not treated during childhood, as an adult you will see a narrow maxilla, high palate, narrow nasal passages, gummy smile, airway problems, upper airway resistance.",
+        ],
+      },
+      {
+        /** The "Sleep and fatigue" group of his approaches (TMJ Brochure 2026). */
+        heading: "Sleep and fatigue",
+        list: sleepAndFatigue,
+      },
+      {
+        /** His 2021 apsleep.com heading, his IFU line and his products chart. */
+        heading: applianceGuide.title,
+        paragraphs: [airwayBite.purpose],
+        list: airwayAppliances,
+      },
+    ],
+  },
+
+  {
+    slug: "neck-pain",
+    title: "Tight and Sore Neck Muscles",
+    /** His first-appointment question (drdroter.com/new-patient-information). */
+    plainName: "Is the neck damaged?",
+    category: "Cervical damage",
+    source: "His sentences, assembled",
+    pending: true,
+    /** drdroter.com/facial-pain, verbatim ("Alternately" dropped). */
+    summary: "Damage to the neck bones will cause muscle splinting in the neck that will affect the TMJ and its function.",
+    /** drdroter.com/uncomfortable-bite-occlusion, /facial-pain and /locked-jaw. */
+    signs: ["Neck muscle bracing", "Muscle splinting in the neck", "Facial pain and headaches"],
+    full: [
+      {
+        /** drdroter.com/about-tmd and /facial-pain, verbatim ("will involved" → "will involve"). */
+        heading: "Muscles of the neck",
+        paragraphs: [
+          "Many different diseases and dysfunctions can cause facial pain. The head and neck are composed of many nerves, blood vessels, muscles, bones, and connective tissues, all of which can be the primary source of pain. Pain can be originating from; muscles of the temporomandibular joint (TMJ), muscles of the neck, TMJ, teeth, sinus, ear, neuralgia, vascular, lesions of central nervous system, plus many others.",
+          "Muscle splinting to protect a damaged temporomandibular joint (TMJ) will involve neck muscle which will cause a dysfunction in the neck muscles. Alternately damage to the neck bones will cause muscle splinting in the neck that will affect the TMJ and its function.",
+        ],
+      },
+      {
+        /** drdroter.com/facial-pain and /locked-jaw, verbatim. */
+        heading: "Head and neck muscles",
+        paragraphs: [
+          "I find in my patients that sore muscles and joints in the head and neck are the source of the majority of facial pain (Nociceptive Pain). I find it invaluable to examine the muscles and joints by palpation (push on), find out what is sore, and then figure out why it is sore. Therapies are then based on removing the cause of the sore muscles and joints.",
+          "I utilize an anterior stop deprogramming test on almost all of my new patients regardless of the amount of jaw opening to quickly relax the head and neck muscles and determine how much of their facial pain and headaches are due to sore overworked muscles.",
+        ],
+      },
+      {
+        /** drdroter.com/uncomfortable-bite-occlusion and /anterior-open-bite, verbatim. */
+        heading: "The neck and the bite",
+        paragraphs: [
+          "If your teeth are hitting unevenly, (too heavy on front teeth, too heavy on right or left teeth, or too heavy on a single tooth) this can cause pain and dysfunction in the head and neck area.",
+          "There are three main causes of anterior open bite that occur after puberty: TMJ bone loss, tongue bracing a damaged neck, Iatrogenic (i.e Bad Night Guards).",
+        ],
+      },
+      {
+        /** drdroter.com/new-patient-information, verbatim. */
+        heading: "The first appointment",
+        paragraphs: ["The goal of the first appointment is to answer these questions:"],
+        list: firstVisitQuestions,
+      },
+      {
+        /** His Hot Cold Hot handout, verbatim. */
+        heading: "Hot, Cold, Hot Therapy",
+        paragraphs: [understanding.hotColdHot.purpose],
+        steps: understanding.hotColdHot.steps,
+      },
+    ],
+  },
+
+  {
+    slug: "daily-fatigue",
+    title: "Daily Fatigue",
+    /** apsleep.com/about (his, 2021). */
+    plainName: "Not waking rested",
+    category: "Whole body and systemic",
+    source: "His sentences, assembled",
+    pending: true,
+    /** apsleep.com/about (his, 2021), verbatim; "practiced" → "practice". */
+    summary:
+      "Common problems he observed were fatigue, not waking rested, clenching of teeth, and sleep grinding of teeth.",
+    signs: ["Not waking rested", "Clenching of teeth", "Sleep grinding of teeth"],
+    full: [
+      {
+        /** His 2021 apsleep.com caption, and his apsleep.com/about text. */
+        heading: "Causes of Fatigue and solutions",
+        paragraphs: [doctor.founderStory],
+      },
+      {
+        /** drdroter.com/uncomfortable-bite-occlusion, /locked-jaw and /new-patient-information, verbatim (typos fixed). */
+        heading: "Fatigued muscles",
+        paragraphs: [
+          "If your teeth touch unevenly, your jaw muscles have to position your lower jaw the best it can to try and get a reasonably even bite. Your jaw muscles are searching for something that does not exist: an even bite. This constant searching fatigues the muscles.",
+          "If a person is bracing the lower jaw to avoid uncomfortable tooth contacts, the muscles become fatigued and get sore.",
+          "ElectroMyoGraphy (EMG): Surface Electrodes (not the painful needle electrodes) are used to evaluate the health of the muscles. Many patients have jaw muscles that are exhausted. This measures how exhausted they are.",
+        ],
+      },
+      {
+        /** His narration of the Airway Bite tutorial, verbatim. */
+        heading: "When you’re sleeping",
+        paragraphs: [`${airwayStory[0]} ${airwayStory[1]}`],
+      },
+      {
+        /** The "Sleep and fatigue" group of his approaches (TMJ Brochure 2026). */
+        heading: "Sleep and fatigue",
+        list: sleepAndFatigue,
+      },
+    ],
+  },
+
+  /* ── His drdroter.com condition pages ── */
+
   /* drdroter.com/locked-jaw — verbatim; only typos fixed. plainName/summary/signs are his own phrases from the page. */
   {
     slug: "limited-jaw-opening",
@@ -377,41 +738,12 @@ export const conditionGuides: ConditionGuide[] = [
     ],
   },
 
-  /* drdroter.com/anterior-open-bite — verbatim. */
-  {
-    slug: "anterior-open-bite",
-    title: "Anterior Open Bite",
-    plainName: "Front teeth used to touch a year ago",
-    category: "Cranial alignment and occlusion",
-    source: "drdroter.com",
-    summary:
-      "Front teeth that used to touch and now are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation to correct this deformity, there are several non surgical options to fix anterior open bite.",
-    signs: ["Front teeth used to touch a year ago"],
-    hero: fig("aob-ant-open.jpg", "Dr. Droter’s lecture slide on anterior open bite", 2048, 1024),
-    full: [
-      {
-        heading: "Anterior Open Bite",
-        paragraphs: [
-          "Front teeth need to touch to allow proper speaking, eating and swallowing. Front teeth that used to touch and now are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation to correct this deformity, there are several non surgical options to fix anterior open bite.",
-        ],
-        figure: fig("aob-ms.jpg", "Dr. Droter’s lecture slide on anterior open bite", 2048, 1024),
-      },
-      {
-        heading: "Three main causes",
-        paragraphs: [
-          "There are three main causes of anterior open bite that occur after puberty: TMJ bone loss, tongue bracing a damaged neck, Iatrogenic (i.e Bad Night Guards).",
-          "As you can see the above anterior open bites all look very similar, yet have different etiologies (causes). Patients with anterior open bites need a CBCT to definitively determine the cause. The cause of the open bite must first be determined for treatment to be effective.",
-        ],
-        figure: fig("aob-causes.jpg", "Dr. Droter’s lecture slide: adult onset anterior open bite differential diagnosis", 2400, 1200),
-      },
-    ],
-  },
-
   /* drdroter.com/uncomfortable-bite-occlusion — verbatim. */
   {
     slug: "uncomfortable-bite",
     title: "Uncomfortable Bite (Occlusion)",
-    plainName: "Occlusal Muscle Disharmony",
+    /** His phrase (drdroter.com/uncomfortable-bite-occlusion). */
+    plainName: "Teeth are hitting unevenly",
     category: "Cranial alignment and occlusion",
     source: "drdroter.com",
     summary: "Greater than 30% of headache patients have an occlusal problem that can be fixed without medications.",
@@ -454,133 +786,6 @@ export const conditionGuides: ConditionGuide[] = [
         list: ["Muscles of the jaw are more relaxed.", "Muscle movements are coordinated and smooth.", "Less risk of splitting or breaking teeth.", "Teeth will not become loose, but will remain tight and firm.", "Helps to maintain the health of the temporomandibular joint.", "Helps to maintain the health of the periodontium.", "Front teeth that are adjusted in harmony look better."],
         figure: fig("occlusion-extract-001.jpg", "Dr. Droter’s lecture slide on occlusion", 2400, 1200),
       },
-    ],
-  },
-
-  /* His osteoarthritis document (OA for APS web) — verbatim; only typos fixed ("diagnose" → "diagnosis", "Bromlnj" → "Bromelain"). */
-  {
-    slug: "osteoarthritis",
-    title: "Osteoarthritis",
-    plainName: "Soreness of the joint itself",
-    category: "TMJ damage",
-    source: "OA write-up",
-    summary:
-      "There are 40 different diseases that affect joints whether it is the Temporomandibular Joint or your wrist. Osteoarthritis is the most common disease of these 40 diseases.",
-    signs: ["Soreness of the joint itself", "Ear pain", "Limited jaw opening", "Difficulty chewing", "Sore jaw muscles"],
-    hero: { src: "/conditions/osteoarthritis/TMJ-Arrow.png", alt: "Dr. Droter’s illustration locating the TMJ in front of the ear", width: 1448, height: 1086 },
-    full: [
-      {
-        heading: "Osteoarthritis",
-        paragraphs: [
-          "There are 40 different diseases that affect joints whether it is the Temporomandibular Joint or your wrist. Osteoarthritis is the most common disease of these 40 diseases. The most common symptom of Osteoarthritis of the TMJ will be soreness of the joint itself. Osteoarthritis of the TMJ can also present as ear pain since the ear and TMJ sit right next to each other. Other symptoms include limited jaw opening, difficulty chewing, and sore jaw muscles.",
-          "In some cases it can be difficult for a person to tell if their joint is sore, you have to rub in the correct spot.",
-          "If the TMJ is sore a CBCT (ConeBeam CT scan) of the joint is required to confirm the diagnosis of Osteoarthritis and determine the severity.",
-        ],
-      },
-      {
-        heading: "Damaged joints have friction",
-        paragraphs: [
-          "Osteoarthritis occurs when you have damaged the cartilage in a joint, most likely from past trauma. Damaged joints have friction, friction causes wear. A healthy joint has no friction and will not wear out. In theory you could move a healthy joint for a thousand years and there would be no wear. Once a joint is damaged it will have friction that leads to wear. Osteoarthritis is a progressive wearing out of the joint. As a joint wears out it will progress from early to Severe. A CBCT is the best way to determine where you are in the disease process.",
-        ],
-      },
-      {
-        heading: "Therapies",
-        paragraphs: [
-          "Treatments include minimizing sleep bruxing with a night guard and anti-inflammatory therapies (Ice, Topical CBD Balm, Jaw exercises, anti inflammatory medications, cold laser). Using an NSAID like meloxicam for 6 to 12 weeks is probably the simplest but there are risks. I have found cold laser therapy combined with topical CBD, Ice, jaw motion exercises, and Bromelain with green coffee extract to be very effective with less risks than standard NSAID medications.",
-        ],
-      },
-    ],
-  },
-
-  {
-    slug: "clenching",
-    title: "Clenching",
-    plainName: "I clench my teeth",
-    category: "Parafunction",
-    source: "TMJ Brochure 2026",
-    summary: "The patient is usually aware of clenching. The masseter muscles ache, and the joint may click in the morning.",
-    signs: ["Aware of clenching", "Masseter muscles ache", "Morning clicking"],
-    full: [
-      {
-        heading: "Pattern",
-        paragraphs: ["The patient is aware of clenching, the masseter muscles ache, and there may be clicking in the morning."],
-      },
-      {
-        heading: "Approach",
-        list: ["Occlusal adjustment", "D-PAS night guard", "Magnesium and vitamin C"],
-      },
-    ],
-  },
-
-  {
-    slug: "sleep-grinding",
-    title: "Sleep grinding",
-    plainName: "I grind my teeth at night",
-    category: "Parafunction",
-    source: "TMJ Brochure 2026",
-    summary: "Stress increases grinding, but it is usually not the primary cause. The clinical exam usually reveals it: an uneven bite or a damaged TMJ.",
-    signs: ["Worn teeth", "Chipping, cracking or loosening", "A partner hears grinding"],
-    full: [
-      {
-        heading: "Pattern",
-        paragraphs: ["Worn teeth are the defining sign. Excess force also shows as chipping, breaking, cracking, splitting, moving or loosening teeth."],
-      },
-      {
-        heading: "Causes",
-        paragraphs: ["Stress increases grinding but is usually not the primary cause. Common causes include an uneven bite or a damaged TMJ, and a clinical examination usually reveals which."],
-      },
-      {
-        heading: "Approach",
-        list: ["Protective night guard", "Airway night guard", "Occlusal adjustment where the bite is the cause"],
-      },
-    ],
-  },
-
-  {
-    slug: "occlusal-muscle-disharmony",
-    title: "Occlusal muscle disharmony",
-    plainName: "Headaches and sore chewing muscles",
-    category: "Muscles of the TMJ",
-    source: "TMJ Brochure 2026",
-    summary: "The most commonly missed diagnosis: teeth touching imprecisely make the muscles work to compensate, causing sore muscles and headaches.",
-    signs: ["Sore muscles when chewing", "Headaches", "Slight soreness of the lateral pterygoid"],
-    full: [
-      {
-        heading: "Pattern",
-        paragraphs: [
-          "Teeth that touch imprecisely create muscle tension, which leads to headaches. Distinguishing features are slight soreness of the lateral pterygoid and sore muscles when chewing.",
-          "The critical question: is the primary soreness from the jaw muscles, the jaw joint or the neck muscles — and does the bite have anything to do with it? Half of headaches are not bite-related, so an accurate diagnosis is essential.",
-        ],
-      },
-      { heading: "Approach", paragraphs: ["Precision refinement of the bite — an occlusal adjustment — rather than muscle relief alone."] },
-    ],
-  },
-
-  {
-    slug: "sprain-discal-ligament",
-    title: "Sprain of the discal ligament",
-    plainName: "My jaw suddenly hurts and won’t open",
-    category: "TMJ damage",
-    source: "TMJ Brochure 2026",
-    summary: "Sudden onset with limited opening and a soft end point on stretching — the TMJ sprained like an ankle.",
-    signs: ["Sudden onset", "Limited opening", "Soft end point on stretching"],
-    full: [
-      { heading: "Pattern", paragraphs: ["Sudden onset, limited opening, and a soft end point when the jaw is gently stretched."] },
-      { heading: "Approach", list: ["Cold laser", "Rest and a soft diet", "An anti-inflammatory (NSAID)", "Anterior repositioning orthotic"] },
-    ],
-  },
-
-  {
-    slug: "acute-closed-lock",
-    title: "Acute closed lock",
-    plainName: "My jaw is stuck",
-    category: "TMJ damage",
-    source: "TMJ Brochure 2026",
-    summary: "Limited opening with a hard end point: the disc is stuck out of position. Seek an examination promptly.",
-    signs: ["Limited opening", "Hard end point on stretching", "Can’t move fully side to side"],
-    full: [
-      { heading: "Pattern", paragraphs: ["Limited opening with a hard end point on the active stretching test. The jaw cannot move fully side to side."] },
-      { heading: "Approach", paragraphs: ["Two to three weeks of jaw movement exercises, ice, an anti-inflammatory and cold laser. If limited opening does not resolve, arthrocentesis with PRP is indicated."] },
     ],
   },
 ];
@@ -695,10 +900,5 @@ export const practice = {
   body: "Dr. Droter maintains a private practice diagnosing facial pain in the Washington DC, Baltimore and Annapolis area. After you call the office, you’ll receive an email with a link to the new patient forms.",
   phone: "301-805-9400",
   addressLines: ["4000 Mitchellville Road", "Bowie, MD 20716"],
-  firstVisit: [
-    "Is the TMJ damaged?",
-    "Is the neck damaged?",
-    "Does this damage contribute to the problems you are having?",
-    "What further tests or radiographs, if any, are needed for a definitive diagnosis?",
-  ],
+  firstVisit: firstVisitQuestions,
 };

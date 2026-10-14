@@ -41,6 +41,7 @@ function clearMarks() {
   });
   const hl = highlights();
   for (const c of CATEGORIES) hl?.delete(`prov-${c}`);
+  hl?.delete("prov-his-tint");
 }
 
 function describe(b: BlockResult, corpus: LoadedCorpus): string {
@@ -71,7 +72,23 @@ function applyMarks(blocks: BlockResult[], corpus: LoadedCorpus) {
     }
   }
   const hl = highlights();
-  if (hl) for (const c of CATEGORIES) hl.set(`prov-${c}`, new Highlight(...ranges[c]));
+  if (hl) {
+    for (const c of CATEGORIES) hl.set(`prov-${c}`, new Highlight(...ranges[c]));
+    syncTint();
+  }
+}
+
+/**
+ * The green tint on his own words is a separate highlight name, registered
+ * only while the tint is on. (A `html[data-prov-tint] ::highlight()` selector
+ * would be cleaner, but the CSS minifier drops the prefix in production.)
+ */
+function syncTint() {
+  const hl = highlights();
+  if (!hl) return;
+  const his = hl.get("prov-his");
+  if (his && document.documentElement.hasAttribute("data-prov-tint")) hl.set("prov-his-tint", his);
+  else hl.delete("prov-his-tint");
 }
 
 /** Mutations we cause ourselves (legend re-renders, the portal) are ignored. */
@@ -199,7 +216,11 @@ export default function AiHighlight() {
     if (!prefs.on || !prefs.tint) return;
     const root = document.documentElement;
     root.setAttribute("data-prov-tint", "");
-    return () => root.removeAttribute("data-prov-tint");
+    syncTint();
+    return () => {
+      root.removeAttribute("data-prov-tint");
+      syncTint();
+    };
   }, [prefs.on, prefs.tint]);
 
   return (

@@ -7,36 +7,11 @@ import ApsLogo from "@/components/shared/ApsLogo";
 import { contact, distributor } from "@/content/aps";
 import h from "./header.module.css";
 import { ArrowUpRight, Close, Menu } from "./icons";
-import { AUDIENCES, NAV, href, tel, type VersionId } from "./links";
-
-/** Which audience the current path belongs to, if any. */
-function audienceFor(rest: string) {
-  return AUDIENCES.find((a) => a.owns.some((p) => rest === p || rest.startsWith(`${p}/`)))?.id ?? null;
-}
-
-function AudienceSwitch({ v, rest, onNavigate, className }: { v: VersionId; rest: string; onNavigate?: () => void; className?: string }) {
-  const active = audienceFor(rest);
-  return (
-    <nav aria-label="Audience" className={["aud", className].filter(Boolean).join(" ")}>
-      {AUDIENCES.map((a) => (
-        <Link
-          key={a.id}
-          href={href(v, a.path)}
-          className="aud-opt"
-          data-on={active === a.id || undefined}
-          aria-current={rest === a.path ? "page" : undefined}
-          onClick={onNavigate}
-        >
-          {a.label}
-        </Link>
-      ))}
-    </nav>
-  );
-}
+import { NAV, href, tel, type VersionId } from "./links";
 
 /**
- * Sticky site header: lockup, primary nav, the Dentists | Patients switch and
- * the Order action. Below 1180px the nav and switch move into a sheet menu.
+ * Sticky site header: lockup, primary nav and the Order action. Below 1180px
+ * the nav moves into a sheet menu.
  */
 export default function Header({ v }: { v: VersionId }) {
   const pathname = usePathname() ?? `/${v}`;
@@ -78,7 +53,7 @@ export default function Header({ v }: { v: VersionId }) {
       </a>
       <div className="wrap hd-bar">
         <Link href={href(v)} className="hd-logo" aria-label="ArrowPath Sleep, home" onClick={close}>
-          <ApsLogo variant="lockup" className="hd-lockup" />
+          <ApsLogo variant="wordmark" className="hd-lockup" />
         </Link>
 
         <nav aria-label="Main" className="hd-nav">
@@ -94,7 +69,6 @@ export default function Header({ v }: { v: VersionId }) {
         </nav>
 
         <div className="hd-end">
-          <AudienceSwitch v={v} rest={rest} className={`hd-aud ${h.aud}`} />
           <a href={distributor.url} target="_blank" rel="noopener" className={`btn btn-primary btn-sm hd-order ${h.order}`}>
             <span className="btn-label">{distributor.cta}</span>
             <span className="sr-only"> (opens in a new tab)</span>
@@ -115,7 +89,6 @@ export default function Header({ v }: { v: VersionId }) {
 
       <div id="site-menu" className="hd-sheet">
         <div className="wrap hd-sheet-inner">
-          <AudienceSwitch v={v} rest={rest} onNavigate={close} className="aud-block" />
           <nav aria-label="Main, menu">
             <ul className="hd-sheet-list">
               {NAV.map((item, i) => (

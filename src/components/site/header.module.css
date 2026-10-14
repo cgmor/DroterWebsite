@@ -3,9 +3,6 @@
  * Lakes Dental"), which is much wider than a one-word "Order".
  *  - Phones: there is no room for it beside the logo and the menu toggle; the
  *    menu sheet carries the same button at full width.
- *  - From 1180px, until the column is wide enough for nav, switch and button
- *    together, the audience switch steps aside: its two destinations (Airway
- *    Bite, Conditions) are both in the nav.
  */
 @media (max-width: 459px) {
   .order {
@@ -13,8 +10,3 @@
   }
 }
 
-@media (min-width: 1180px) and (max-width: 1379px) {
-  .aud {
-    display: none;
-  }
-}

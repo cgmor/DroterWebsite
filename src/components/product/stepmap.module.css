@@ -1,0 +1,187 @@
+/* The protocol map (StepJump). Desktop: four phase groups under his phase
+   headings, a track of numbered stops, his step names beneath. Phones: a
+   compact numbered bar that sticks under the header. Nothing truncates:
+   headings and names wrap. */
+
+.map {
+  position: sticky;
+  top: var(--hd-h);
+  z-index: 30;
+  background: var(--white);
+  box-shadow: 0 1px 0 var(--hair);
+}
+.inner {
+  padding-block: 8px;
+}
+.phases {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.phase {
+  flex-basis: 0;
+  min-width: 0;
+}
+.phaseTitle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.steps {
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 2px;
+  list-style: none;
+  border-radius: 12px;
+  background: var(--mist);
+}
+.step {
+  flex: 1;
+  min-width: 0;
+}
+.stop {
+  display: grid;
+  place-items: center;
+  height: 42px;
+  border-radius: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    background-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    box-shadow var(--dur-1) var(--ease-out);
+}
+.node {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.name {
+  display: none;
+}
+.stop:hover {
+  background: var(--white);
+  box-shadow:
+    0 1px 2px rgb(11 21 38 / 0.08),
+    0 3px 10px -4px rgb(11 21 38 / 0.18);
+}
+
+@media (min-width: 1024px) {
+  .map {
+    position: static;
+    box-shadow: 0 1px 0 var(--hair);
+  }
+  .inner {
+    padding-block: 36px 40px;
+  }
+  .phases {
+    gap: clamp(20px, 2.4vw, 36px);
+  }
+  .phaseTitle {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: calc(2 * 1.35em);
+    margin: 0 0 16px;
+    overflow: visible;
+    clip-path: none;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    color: var(--slate);
+    text-wrap: balance;
+  }
+  .steps {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+  }
+  /* The track: one hairline from the first stop to the last in each phase. */
+  .steps::before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: 18px;
+    right: calc(100% / var(--n, 1) - 18px);
+    height: 1px;
+    background: var(--hair-strong);
+  }
+  .stop {
+    position: relative;
+    display: grid;
+    place-items: start;
+    gap: 14px;
+    height: auto;
+    padding: 0 14px 4px 0;
+    border-radius: 8px;
+    background: none;
+    box-shadow: none;
+  }
+  .stop:hover {
+    background: none;
+    box-shadow: none;
+  }
+  .node {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--hair-strong);
+    background: var(--white);
+    font-size: 0.9375rem;
+    transition:
+      background-color var(--dur-1) var(--ease-out),
+      border-color var(--dur-1) var(--ease-out),
+      color var(--dur-1) var(--ease-out);
+  }
+  .name {
+    display: block;
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    color: var(--ink-2);
+    text-wrap: pretty;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: color var(--dur-1) var(--ease-out), text-decoration-color var(--dur-1) var(--ease-out);
+  }
+  .stop:hover .node {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: #ffffff;
+  }
+  .stop:hover .name {
+    color: var(--ink);
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Narrow desktops: nine columns get tight, so the names step down a size and
+   may hyphenate rather than collide. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .stop {
+    padding-right: 10px;
+  }
+  .name {
+    font-size: 0.875rem;
+    hyphens: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stop,
+  .node,
+  .name {
+    transition: none;
+  }
+}

@@ -40,7 +40,7 @@ export default function Footer({ v }: { v: VersionId }) {
         <div className="ft-top">
           <div className="ft-brand">
             <Link href={href(v)} aria-label="ArrowPath Sleep, home" className="ft-logo">
-              <ApsLogo variant="lockup" className="ft-lockup" />
+              <ApsLogo variant="wordmark" className="ft-lockup" />
             </Link>
             <p className="ft-tagline">{brand.tagline}</p>
           </div>

@@ -18,9 +18,14 @@ export default function ReviewBar({ current }: { current: VersionId }) {
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-4 py-2.5 sm:px-6">
         <Link href="/" className="truncate hover:text-white">
-          <span className="text-white/45">Draft for review · </span>
+          <span className="text-white/45">
+            Draft<span className="hidden sm:inline"> for review</span> ·{" "}
+          </span>
           <span className="text-white">
-            Version {active.number} — {active.name}
+            <span className="sm:hidden">V{active.number}</span>
+            <span className="hidden sm:inline">
+              Version {active.number} — {active.name}
+            </span>
           </span>
         </Link>
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">

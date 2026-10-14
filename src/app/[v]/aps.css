@@ -381,7 +381,7 @@
   @media (min-width: 900px) {
     .aps .shead-split {
       grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-      align-items: end;
+      align-items: start;
     }
   }
 
@@ -561,10 +561,20 @@
     color: var(--ink);
     border-radius: 6px;
   }
+  /* Header lockup: the hex mark beside the name, set large enough to read
+     (the full APS lockup's sub-line is illegible at header height). */
   .aps .hd-lockup {
-    display: block;
-    width: auto;
-    height: 24px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.012em;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  @media (min-width: 1180px) {
+    .aps .hd-lockup {
+      font-size: 1.25rem;
+    }
   }
   .aps .hd-nav {
     display: none;
@@ -620,9 +630,6 @@
     gap: 10px;
     margin-left: auto;
   }
-  .aps .hd-end .hd-aud {
-    display: none;
-  }
   .aps .hd-toggle {
     display: inline-grid;
     place-items: center;
@@ -639,50 +646,6 @@
     background: var(--mist);
   }
 
-  /* Audience switch (Straumann-style) */
-  .aps .aud {
-    display: inline-flex;
-    padding: 3px;
-    border-radius: var(--r-pill);
-    background: var(--mist);
-    box-shadow: inset 0 0 0 1px var(--hair);
-  }
-  .aps .aud-opt {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 34px;
-    padding: 0 15px;
-    border-radius: var(--r-pill);
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--slate);
-    text-decoration: none;
-    white-space: nowrap;
-    transition:
-      background-color var(--dur-2) var(--ease-out),
-      color var(--dur-1) var(--ease-out),
-      box-shadow var(--dur-2) var(--ease-out);
-  }
-  .aps .aud-opt:hover {
-    color: var(--ink);
-  }
-  .aps .aud-opt[data-on] {
-    background: var(--white);
-    color: var(--ink);
-    box-shadow:
-      0 1px 2px rgb(11 21 38 / 0.08),
-      0 3px 10px -4px rgb(11 21 38 / 0.16);
-  }
-  .aps .aud-block {
-    display: flex;
-    width: 100%;
-  }
-  .aps .aud-block .aud-opt {
-    flex: 1;
-    height: 46px;
-    font-size: 1rem;
-  }
 
   @media (min-width: 1180px) {
     .aps .hd-lockup {
@@ -692,10 +655,7 @@
       display: block;
       margin-left: clamp(8px, 2.2vw, 40px);
     }
-    .aps .hd-end .hd-aud {
-      display: inline-flex;
-    }
-    .aps .hd-end {
+      .aps .hd-end {
       gap: 14px;
     }
     .aps .hd-toggle,
@@ -803,9 +763,12 @@
     border-radius: 6px;
   }
   .aps .ft-lockup {
-    display: block;
-    width: auto;
-    height: 36px;
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.012em;
+    white-space: nowrap;
+    color: var(--ink);
   }
   .aps .ft-tagline {
     margin-top: 28px;
@@ -1056,8 +1019,7 @@
     }
     .aps .detail-model {
       grid-area: model;
-      position: sticky;
-      top: calc(var(--hd-h) + 24px);
+      align-self: center;
     }
   }
 
@@ -1213,147 +1175,9 @@
 
   /* ── How far forward? ──────────────────────────────────────────────── */
 
-  .aps .hff-head {
-    display: grid;
-    gap: 20px var(--col-gap);
-    margin-bottom: var(--head-gap);
-  }
-  .aps .hff-lead {
-    max-width: 40ch;
-  }
-  .aps .hff-grid {
-    display: grid;
-    gap: 48px var(--col-gap);
-  }
-  .aps .hff-setup {
-    display: grid;
-    gap: 40px var(--col-gap);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .aps .hff-frame {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    margin-bottom: 20px;
-    overflow: hidden;
-    border-radius: var(--r-card);
-    background: #ecd9cf;
-  }
-  .aps .hff-img {
-    object-fit: cover;
-    object-position: 25% 50%;
-  }
-  .aps .hff-swap {
-    opacity: 0;
-    transition: opacity var(--dur-3) var(--ease-out);
-  }
-  .aps .hff-swap[data-on] {
-    opacity: 1;
-  }
-  .aps .hff-title {
-    margin-bottom: 6px;
-    font-size: 1.25rem;
-    font-weight: 450;
-    letter-spacing: -0.015em;
-  }
-  .aps .hff-body {
-    max-width: 42ch;
-    color: var(--fg-2);
-  }
-  .aps .hff-answer {
-    margin-top: 20px;
-    max-width: 52ch;
-    font-size: 1.1875rem;
-    line-height: 1.5;
-    color: var(--fg);
-  }
-  @media (min-width: 560px) {
-    .aps .hff-setup {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (min-width: 900px) {
-    .aps .hff-head {
-      grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-      align-items: end;
-    }
-  }
   /* The stills are 1920 × 816; cropped to 4:3 they are painted at about
      1.77 × the frame width, so the live frame stops at 560px to stay sharp. */
-  .aps .hff-frame-live {
-    max-width: 560px;
-  }
-  @media (min-width: 1000px) {
-    .aps .hff-grid {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      align-items: start;
-    }
-    .aps .hff-setup {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
 
-  .aps .gauge {
-    max-width: 460px;
-  }
-  .aps .gauge-track {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
-    align-items: center;
-    height: 20px;
-  }
-  .aps .gauge-seg {
-    height: 4px;
-    border-radius: 2px;
-    background: var(--line-strong);
-    transition: background-color var(--dur-2) var(--ease-out);
-  }
-  .aps .gauge-seg[data-on] {
-    background: var(--signal);
-  }
-  .aps .gauge-knob {
-    position: absolute;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--white);
-    box-shadow:
-      0 0 0 2px var(--signal),
-      0 2px 8px rgb(0 0 0 / 0.3);
-    transform: translate(-50%, -50%);
-    transition: left var(--dur-3) var(--ease-out);
-  }
-  .aps .gauge-opts {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
-    margin-top: 8px;
-  }
-  .aps .gauge-opt {
-    min-height: 44px;
-    padding: 0 6px;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    font: inherit;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: var(--fg-2);
-    transition:
-      color var(--dur-1) var(--ease-out),
-      background-color var(--dur-2) var(--ease-out);
-  }
-  .aps .gauge-opt:hover {
-    color: var(--fg);
-    background: var(--track);
-  }
-  .aps .gauge-opt[aria-checked="true"] {
-    color: var(--accent-text);
-  }
 
   /* ── Tutorial player ───────────────────────────────────────────────── */
 

@@ -1,131 +1,147 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useId, useState, type CSSProperties } from "react";
 import { airwayBite } from "@/content/aps";
 import { Section, type Tone } from "./Section";
+import h from "./howfar.module.css";
 
-const STATES = [
+/*
+ * One illustration, one control. Dragging the jaw forward walks the tutorial's
+ * own frames (cropped clear of the slider graphic drawn into the animation)
+ * from the narrow airway at rest, through "not enough", to "just right", and
+ * past it to "too far". Each position shows the matching line of Dr. Droter's
+ * narration, verbatim.
+ */
+
+const [rest, forward, howFar] = airwayBite.airwayStory;
+/** "…Forward too far, it’s uncomfortable, but not far enough, the airway does not open." */
+const tooFarLine = howFar.body.match(/Forward too far, it’s uncomfortable/)?.[0] ?? howFar.body;
+const notEnoughLine = howFar.body.match(/not far enough, the airway does not open/)?.[0] ?? howFar.body;
+
+const POSITIONS = [
+  {
+    id: "rest",
+    label: "At rest",
+    tone: "rest",
+    src: "/aps/stills/airway-rest.webp",
+    alt: "Cross-section of the head during sleep: the tongue sits back and the airway behind it is narrow.",
+    line: rest.body,
+  },
   {
     id: "not-enough",
     label: "Not enough",
-    src: "/aps/stills/intro-airway-not-enough-clean.webp",
-    alt: "Jaw not far enough forward: the airway stays narrow.",
+    tone: "short",
+    src: "/aps/stills/airway-not-enough.webp",
+    alt: "The lower jaw moved slightly forward: the airway is still narrow behind the tongue.",
+    line: `${notEnoughLine.charAt(0).toUpperCase()}${notEnoughLine.slice(1)}.`,
   },
   {
     id: "just-right",
     label: "Just right",
-    src: "/aps/stills/intro-airway-how-far-clean.webp",
-    alt: "Jaw forward to the position in between: the airway is open and the patient comfortable.",
+    tone: "right",
+    src: "/aps/stills/airway-just-right.webp",
+    alt: "The lower jaw further forward: the airway behind the tongue is open.",
+    line: forward.body,
   },
   {
     id: "too-far",
     label: "Too far",
-    src: "/aps/stills/intro-airway-too-far-clean.webp",
-    alt: "Jaw too far forward: uncomfortable for the patient.",
+    tone: "far",
+    src: "/aps/stills/airway-too-far.webp",
+    alt: "The lower jaw too far forward, highlighted: the airway is open but the position is uncomfortable.",
+    line: `${tooFarLine}.`,
   },
 ] as const;
 
-const FRAMES = [
-  { src: "/aps/stills/intro-airway-narrow-clean.webp", alt: "Cross-section of the airway during sleep, narrow behind the tongue." },
-  { src: "/aps/stills/intro-airway-jaw-forward-clean.webp", alt: "The same cross-section with the lower jaw moved forward and the airway more open." },
-];
-
 type Props = {
   id?: string;
-  /** Defaults to the tutorial's own question, "How far forward?". */
+  /** Defaults to his narration's question, "How far do you move it forward?". */
   title?: string;
   /** Night is the airway moment; mist works on lighter pages. */
   tone?: Extract<Tone, "night" | "mist" | "white">;
 };
 
-/**
- * "How far forward?": the airway story from the tutorial in three stills.
- * The third is live: Not enough / Just right / Too far swaps the frame.
- * Renders its own Section.
- */
 export default function HowFarForward({ id = "how-far", title, tone = "night" }: Props) {
-  const story = airwayBite.airwayStory;
-  const [index, setIndex] = useState(1);
-  const group = useRef<HTMLDivElement>(null);
-  const heading = title ?? story[2].title;
-
-  const select = (i: number, focus = false) => {
-    setIndex(i);
-    if (focus) (group.current?.children[i] as HTMLElement | undefined)?.focus();
-  };
+  const [pos, setPos] = useState(0);
+  const sliderId = useId();
+  const current = POSITIONS[pos];
+  const heading = title ?? howFar.title;
 
   return (
-    <Section tone={tone} id={id} labelledBy={`${id}-title`} className="hff">
-      <header className="hff-head">
+    <Section tone={tone} id={id} labelledBy={`${id}-title`}>
+      <header className={h.head}>
         <h2 className="t-h2" id={`${id}-title`}>
           {heading}
         </h2>
-        <p className="t-lead hff-lead">{airwayBite.purpose}</p>
+        <p className={`t-lead ${h.lead}`}>{airwayBite.purpose}</p>
       </header>
 
-      <div className="hff-grid">
-        <ol className="hff-setup">
-          {FRAMES.map((f, i) => (
-            <li key={f.src} className="hff-item">
-              <div className="hff-frame">
-                <Image src={f.src} alt={f.alt} fill sizes="(min-width: 1000px) 860px, (min-width: 560px) 90vw, 160vw" quality={90} className="hff-img" />
-              </div>
-              <h3 className="hff-title">{story[i].title}</h3>
-              <p className="hff-body">{story[i].body}</p>
-            </li>
+      <div className={h.grid} style={{ "--pos": pos } as CSSProperties} data-tone={current.tone}>
+        <figure className={h.stage}>
+          {POSITIONS.map((p, i) => (
+            <Image
+              key={p.id}
+              src={p.src}
+              alt={i === pos ? p.alt : ""}
+              aria-hidden={i === pos ? undefined : true}
+              fill
+              sizes="(min-width: 1100px) 700px, (min-width: 700px) 90vw, 100vw"
+              quality={90}
+              className={h.frame}
+              data-on={i === pos || undefined}
+            />
           ))}
-        </ol>
+        </figure>
 
-        <div className="hff-live">
-          <div className="hff-frame hff-frame-live">
-            {STATES.map((s, i) => (
-              <Image
-                key={s.id}
-                src={s.src}
-                alt={i === index ? s.alt : ""}
-                aria-hidden={i === index ? undefined : true}
-                fill
-                sizes="(min-width: 1000px) 990px, 160vw"
-                quality={90}
-                className="hff-img hff-swap"
-                data-on={i === index || undefined}
-              />
-            ))}
+        <div className={h.control}>
+          <label htmlFor={sliderId} className={h.readoutLabel}>
+            Drag to move the jaw forward
+          </label>
+
+          <div className={h.track}>
+            <span className={h.rail} aria-hidden="true">
+              <span className={h.zoneRest} />
+              <span className={h.zoneShort} />
+              <span className={h.zoneRight} />
+              <span className={h.zoneFar} />
+            </span>
+            <input
+              id={sliderId}
+              type="range"
+              min={0}
+              max={POSITIONS.length - 1}
+              step={1}
+              value={pos}
+              onChange={(e) => setPos(Number(e.target.value))}
+              aria-valuetext={current.label}
+              className={h.range}
+            />
           </div>
 
-          <div className="gauge">
-            <div className="gauge-track" aria-hidden="true">
-              {STATES.map((s, i) => (
-                <span key={s.id} className="gauge-seg" data-on={i === index || undefined} />
-              ))}
-              <span className="gauge-knob" style={{ left: `${(index * 2 + 1) * (100 / 6)}%` }} />
-            </div>
-            <div className="gauge-opts" role="radiogroup" aria-label="Jaw position" ref={group}>
-              {STATES.map((s, i) => (
+          <ol className={h.stops}>
+            {POSITIONS.map((p, i) => (
+              <li key={p.id}>
                 <button
-                  key={s.id}
                   type="button"
-                  role="radio"
-                  aria-checked={i === index}
-                  tabIndex={i === index ? 0 : -1}
-                  className="gauge-opt"
-                  onClick={() => select(i)}
-                  onKeyDown={(e) => {
-                    const step = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
-                    if (!step) return;
-                    e.preventDefault();
-                    select((index + step + STATES.length) % STATES.length, true);
-                  }}
+                  className={h.stop}
+                  data-tone={p.tone}
+                  aria-pressed={i === pos}
+                  onClick={() => setPos(i)}
                 >
-                  {s.label}
+                  {p.label}
                 </button>
-              ))}
-            </div>
-          </div>
-
-          <p className="hff-body hff-answer">{story[2].body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
+
+        <blockquote className={h.narration} aria-live="polite">
+          <p key={current.id} className={h.line}>
+            {current.line}
+          </p>
+          <footer className={h.cite}>Dr. Droter, narrating the tutorial</footer>
+        </blockquote>
       </div>
     </Section>
   );

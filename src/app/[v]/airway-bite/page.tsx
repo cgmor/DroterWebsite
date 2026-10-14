@@ -193,7 +193,8 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
         <div className={s.orderGrid}>
           <div>
             <h2 className={`t-h2 ${s.orderTitle}`} id="order-title">
-              {distributor.note}
+              {/* Keep the distributor's name on one line: "Order from: / Great Lakes Dental". */}
+              {distributor.note.replace(distributor.name, distributor.name.replace(/ /g, "\u00a0"))}
             </h2>
             <p className={`t-lead ${s.orderLead}`}>{airwayBite.kit.line}</p>
             <div className={`actions ${s.orderActions}`}>

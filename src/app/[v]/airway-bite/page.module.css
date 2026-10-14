@@ -255,7 +255,8 @@
   align-items: center;
 }
 .orderTitle {
-  max-width: 12ch;
+  max-width: 18ch;
+  text-wrap: balance;
 }
 .orderLead {
   margin-top: 24px;

@@ -600,16 +600,16 @@ export type Resource = {
 
 export const literature: Resource[] = [
   {
-    title: "John R Droter DDS Article",
-    description: "John R Droter DDS Article. Orthopedic Medicine",
+    title: "An Orthopaedic Approach to the Diagnosis and Treatment of Disorders of the Temporomandibular Joint",
+    description: "John R Droter DDS Article. Dentistry Today, November 2005.",
     kind: "Article",
     href: "https://drdroter.com/wp-content/uploads/2016/11/DroterOrthopedDx.pdf",
     meta: "Published article · PDF",
     audience: "dentists",
   },
   {
-    title: "Thomas Abrahamsen Article",
-    description: "Abrahamsen T C, The worn dentition – pathognomonic patterns of abrasion and erosion. Int Dent J 2005 55: 268-76.",
+    title: "The worn dentition – pathognomonic patterns of abrasion and erosion",
+    description: "Thomas Abrahamsen Article. Abrahamsen T C, Int Dent J 2005 55: 268-76.",
     kind: "Reference",
     href: "https://drdroter.com/wp-content/uploads/2016/11/AbrahamsenIDJ.pdf",
     meta: "International Dental Journal · PDF",
@@ -617,7 +617,7 @@ export const literature: Resource[] = [
   },
   {
     title: "Rath article on Toothpaste Relative Dentin Abrasiveness",
-    description: "Rath article on Toothpaste Relative Dentin Abrasiveness",
+    description: "",
     kind: "Reference",
     href: "https://drdroter.com/wp-content/uploads/2017/06/Rath-Toothpaste-Abrasiveness-2016.pdf",
     meta: "Article · PDF",

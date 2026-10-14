@@ -37,7 +37,7 @@ Import from `@/components/site` (barrel) or the file directly. Server components
 | `ModelStage`, `RangeScale` | — | The two halves of the detail section, if a page needs them alone. |
 
 ## Helpers (`links.ts`, `specs.ts`, `icons.tsx`, `motion.ts`)
-- `href(v, path)` → version-relative URL: `href("v2", routes.airwayBite + "#steps")` = `/v2/airway-bite#steps`. `routes`: `home, airwayBite, appliances, understanding, conditions, condition(slug), library, about`. Also `NAV`, `AUDIENCES`, `isVersion`, `tel(phone)`.
+- `href(v, path)` → version-relative URL: `href("v2", routes.airwayBite + "#steps")` = `/v2/airway-bite#steps`. `routes`: `home, airwayBite, appliances, understanding, conditions, condition(slug), library, about`. Also `NAV`, `isVersion`, `tel(phone)`.
 - `airwayNumbers` (`anteriorStop` 4 mm, `range` 10–12 mm, `target` ≈ 50%), `airwaySpecStrip`, `kitItems`: every number traced to his IFU. Do not invent others (the model's bounding box is not his number, so it is not printed). `airwaySpecStrip` is millimetres only (4 mm · 10–12 mm); the target goes in running text, in body type, never in a mono row.
 - `Icons.*`: ArrowRight, ArrowUpRight, ArrowDown, Play, Download, Plus, Minus, Menu, Close, Rotate, Phone, Expand, Check, Document (20-grid, 1.5 stroke).
 - `useReducedMotion()` (client only).

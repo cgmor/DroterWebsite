@@ -43,11 +43,7 @@ export const NAV = [
   { label: "About", path: routes.about },
 ] as const;
 
-/** Where each audience lands, and which sections belong to it (for the header switch). */
-export const AUDIENCES = [
-  { id: "dentists", label: "Dentists", path: routes.airwayBite, owns: [routes.airwayBite, routes.appliances, routes.library] },
-  { id: "patients", label: "Patients", path: routes.conditions, owns: [routes.conditions, routes.understanding] },
-] as const;
+
 
 /** `tel:` link for a printed phone number. */
 export const tel = (phone: string) => `tel:+1${phone.replace(/[^0-9]/g, "")}`;

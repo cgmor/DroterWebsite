@@ -1,0 +1,277 @@
+/* "How far do you move it forward?": one illustration, one jaw-position
+   slider, and his narration for the current position. Works on the night
+   tone (default) and on light tones through the section's --fg tokens. */
+
+.head {
+  display: grid;
+  gap: 16px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+.lead {
+  max-width: 46ch;
+  color: var(--fg-2);
+}
+@media (min-width: 1000px) {
+  .head {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--col-gap);
+    align-items: end;
+  }
+}
+
+.grid {
+  /* zone colours, from the animation's own Not enough / Just right / Too far */
+  --z-rest: var(--fg-2);
+  --z-short: #9aa3ae;
+  --z-right: var(--signal);
+  --z-far: #d6584b;
+  display: grid;
+  gap: 28px;
+}
+:global(.tone-night) .grid {
+  --z-right: #6f9ff0;
+  --z-far: #ea7a6e;
+}
+.grid[data-tone="rest"] {
+  --z-on: var(--z-rest);
+}
+.grid[data-tone="short"] {
+  --z-on: var(--z-short);
+}
+.grid[data-tone="right"] {
+  --z-on: var(--z-right);
+}
+.grid[data-tone="far"] {
+  --z-on: var(--z-far);
+}
+
+/* The illustration: four frames stacked, one visible. */
+.stage {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1290 / 816;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: #ecd9cf;
+  box-shadow: 0 30px 60px -40px rgb(0 0 0 / 0.55);
+}
+.frame {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 320ms var(--ease-out);
+}
+.frame[data-on] {
+  opacity: 1;
+}
+
+/* The control */
+.control {
+  display: grid;
+  gap: 14px;
+}
+.readoutLabel {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+
+/* Rail: four equal segments (at rest, then the three zones). The native range
+   input is inset so its four stops land on the segment centres (12.5%,
+   37.5%, 62.5%, 87.5%), directly above the stop labels; drag, keys and touch
+   all work. */
+.track {
+  position: relative;
+  height: 32px;
+}
+.rail {
+  position: absolute;
+  inset: 13px 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  height: 6px;
+}
+.rail > span {
+  border-radius: 3px;
+  opacity: 0.35;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.zoneRest {
+  background: var(--line-strong, var(--line));
+  opacity: 1 !important;
+}
+.zoneShort {
+  background: var(--z-short);
+}
+.zoneRight {
+  background: var(--z-right);
+}
+.zoneFar {
+  background: var(--z-far);
+}
+.grid[data-tone="short"] .zoneShort,
+.grid[data-tone="right"] .zoneRight,
+.grid[data-tone="far"] .zoneFar {
+  opacity: 1;
+}
+
+.range {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(12.5% - 14px);
+  width: calc(75% + 28px);
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: grab;
+}
+.range:active {
+  cursor: grabbing;
+}
+.range::-webkit-slider-runnable-track {
+  height: 32px;
+  background: transparent;
+}
+.range::-moz-range-track {
+  height: 32px;
+  background: transparent;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--z-on);
+  box-shadow: 0 4px 14px -4px rgb(0 0 0 / 0.45);
+  transition: border-color var(--dur-1) var(--ease-out), transform var(--dur-1) var(--ease-out);
+}
+.range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--z-on);
+  box-shadow: 0 4px 14px -4px rgb(0 0 0 / 0.45);
+}
+.range:hover::-webkit-slider-thumb {
+  transform: scale(1.08);
+}
+.range:focus-visible {
+  outline: none;
+}
+.range:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 4px var(--bg, var(--night)),
+    0 0 0 6px var(--focus, var(--signal));
+}
+.range:focus-visible::-moz-range-thumb {
+  box-shadow:
+    0 0 0 4px var(--bg, var(--night)),
+    0 0 0 6px var(--focus, var(--signal));
+}
+
+/* Stop labels, aligned under the four positions. */
+.stops {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.stops li {
+  display: flex;
+  justify-content: center;
+}
+.stop {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: none;
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--dur-1) var(--ease-out), background-color var(--dur-1) var(--ease-out);
+}
+.stop:hover {
+  color: var(--fg);
+}
+.stop[aria-pressed="true"] {
+  color: var(--fg);
+  font-weight: 500;
+}
+.stop[aria-pressed="true"][data-tone="short"] {
+  color: var(--z-short);
+}
+.stop[aria-pressed="true"][data-tone="right"] {
+  color: var(--z-right);
+}
+.stop[aria-pressed="true"][data-tone="far"] {
+  color: var(--z-far);
+}
+
+/* His narration for the current position */
+.narration {
+  margin: 0;
+  padding: 0;
+}
+.line {
+  margin: 0;
+  max-width: 30ch;
+  font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem);
+  font-weight: 350;
+  line-height: 1.28;
+  letter-spacing: -0.018em;
+  color: var(--fg);
+  text-wrap: pretty;
+  animation: line-in 360ms var(--ease-out) both;
+}
+.cite {
+  margin-top: 18px;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-areas:
+      "stage narration"
+      "control narration";
+    column-gap: var(--col-gap);
+    row-gap: 28px;
+  }
+  .stage {
+    grid-area: stage;
+  }
+  .control {
+    grid-area: control;
+  }
+  .narration {
+    grid-area: narration;
+    align-self: center;
+    padding-bottom: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame,
+  .rail > span {
+    transition: none;
+  }
+  .line {
+    animation: none;
+  }
+}

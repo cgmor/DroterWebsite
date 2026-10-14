@@ -36,7 +36,7 @@ html[data-prov-on] [data-prov]:focus-visible {
   text-underline-offset: 3px;
 }
 
-html[data-prov-tint] ::highlight(prov-his) {
+::highlight(prov-his-tint) {
   background-color: rgb(34 197 94 / 0.24);
 }
 

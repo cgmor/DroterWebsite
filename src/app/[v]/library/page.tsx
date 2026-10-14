@@ -58,11 +58,11 @@ function fromResource(r: Resource): LibraryEntry {
   };
 }
 
-/** Keep the first entry for each title (aps.ts first, since it carries format and status). */
+/** Keep the first entry for each document: the same link (or, with no link, the same title) is one entry. */
 function unique(entries: LibraryEntry[]) {
   const seen = new Set<string>();
   return entries.filter((e) => {
-    const k = e.title.toLowerCase();
+    const k = (e.href ?? e.title).toLowerCase();
     if (seen.has(k)) return false;
     seen.add(k);
     return true;

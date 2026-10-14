@@ -53,7 +53,7 @@ export default function ApsLogo({ variant = "lockup", className, title = "ArrowP
         <svg
           viewBox={MARK_VIEWBOX}
           fill="currentColor"
-          style={{ height: "1.5em", width: "auto", flexShrink: 0 }}
+          style={{ height: "1.7em", width: "auto", flexShrink: 0 }}
           aria-hidden="true"
         >
           <Paths paths={MARK} />

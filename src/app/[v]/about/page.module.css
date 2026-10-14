@@ -13,7 +13,10 @@
   padding-top: clamp(24px, 4vw, 64px);
   padding-bottom: var(--space-md);
 }
+/* A modest framed portrait: never wider than 380px. */
 .portrait {
+  width: 100%;
+  max-width: 300px;
   overflow: hidden;
   border-radius: var(--r-card);
   background: var(--porcelain);
@@ -25,20 +28,13 @@
   height: auto;
 }
 .name {
-  font-size: clamp(2.5rem, 1.1rem + 4.6vw, 5.25rem);
+  font-size: var(--fs-h1);
   font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.035em;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
   text-wrap: wrap;
 }
 .degree {
-  color: var(--slate);
-}
-.credit {
-  display: grid;
-  gap: 2px;
-  margin-top: clamp(20px, 2.4vw, 32px);
-  font-size: 1.0625rem;
   color: var(--slate);
 }
 .story {
@@ -46,20 +42,20 @@
   margin-top: clamp(32px, 4vw, 56px);
   padding-top: clamp(24px, 3vw, 36px);
   border-top: 1px solid var(--hair-strong);
-  font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem);
+  font-size: var(--fs-lead);
   line-height: 1.55;
   letter-spacing: -0.008em;
   color: var(--ink-2);
 }
-@media (min-width: 640px) and (max-width: 899px) {
+@media (min-width: 640px) {
   .portrait {
-    max-width: 440px;
+    max-width: 380px;
   }
 }
 @media (min-width: 900px) {
   .openGrid {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    column-gap: clamp(40px, 6vw, 112px);
+    column-gap: clamp(40px, 5vw, 80px);
   }
   .openCopy {
     padding-bottom: 8px;
@@ -69,7 +65,7 @@
 /* ── Pull quote ─────────────────────────────────────────────────────── */
 
 .quoteSec {
-  padding-block: clamp(72px, 9vw, 152px);
+  padding-block: clamp(64px, 7vw, 112px);
 }
 .quote {
   margin: 0;
@@ -78,11 +74,11 @@
   margin: 0;
 }
 .quote p {
-  max-width: 20ch;
-  font-size: clamp(2.125rem, 1.15rem + 3.4vw, 4.5rem);
+  max-width: 28ch;
+  font-size: var(--fs-quote);
   font-weight: 300;
-  line-height: 1.06;
-  letter-spacing: -0.032em;
+  line-height: 1.18;
+  letter-spacing: -0.024em;
   text-wrap: balance;
 }
 .hang {
@@ -124,10 +120,10 @@
 /* ── Facts, as one passage ──────────────────────────────────────────── */
 
 .facts {
-  max-width: 30ch;
-  font-size: clamp(1.75rem, 1.15rem + 2.1vw, 3.125rem);
+  max-width: 34ch;
+  font-size: var(--fs-passage);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.3;
   letter-spacing: -0.026em;
   color: var(--slate);
   text-wrap: pretty;
@@ -205,10 +201,10 @@
 }
 .emphasis {
   max-width: 34ch;
-  margin-top: clamp(56px, 7vw, 104px);
+  margin-top: clamp(48px, 6vw, 88px);
   padding-top: clamp(24px, 3vw, 36px);
   border-top: 1px solid var(--line-strong);
-  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.375rem);
+  font-size: var(--fs-quote);
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: -0.024em;

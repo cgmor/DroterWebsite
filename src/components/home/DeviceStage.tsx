@@ -6,11 +6,11 @@ import DeviceRender from "./DeviceRender";
 import s from "./home.module.css";
 
 /**
- * V1's one authored motion moment: the Airway Bite render at product scale,
- * cut to its silhouette (DeviceRender) so it can run large without widening
- * the page. On desktop it bleeds off the hero's right edge and bottom. It
- * settles in on load (already visible, exponential ease-out), then, as the
- * page scrolls, eases toward the viewer and lifts off its contact shadow.
+ * V1's one authored motion moment: the Airway Bite render, cut to its
+ * silhouette (DeviceRender) and contained in the hero's right column (at
+ * most 560px). It settles in on load (already visible, exponential
+ * ease-out), then, as the page scrolls, eases toward the viewer and lifts
+ * off its contact shadow.
  * The scroll value is smoothed (lerped) so the motion trails the wheel the way
  * a rendered product page does. Reduced motion keeps it still.
  */
@@ -55,7 +55,7 @@ export default function DeviceStage() {
           <DeviceRender
             view="three-quarter"
             alt={`The ${airwayBite.name}, three-quarter view: the 4 mm anterior stop rising from the base.`}
-            sizes="(min-width: 1000px) 96vw, 132vw"
+            sizes="(min-width: 1000px) 820px, (min-width: 640px) 700px, 130vw"
             eager
           />
         </div>

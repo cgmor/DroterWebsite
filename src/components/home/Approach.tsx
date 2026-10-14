@@ -4,6 +4,7 @@ import { ButtonLink } from "@/components/site/Button";
 import Figure from "@/components/site/Figure";
 import { href, routes, type VersionId } from "@/components/site/links";
 import { Section } from "@/components/site/Section";
+import { Figured } from "./Education";
 import s from "./home.module.css";
 
 const pain = understanding.pain;
@@ -12,7 +13,7 @@ const evidence = understanding.evidence;
 /**
  * V2: his diagnostic approach in three movements. The three types of pain
  * beside his lecture slide; the palpation emphasis, large and quiet; then
- * what the numbers show, typeset as a passage with hanging figures.
+ * what the numbers show: his sentences, each figure emphasised where it stands.
  */
 export default function Approach({ v }: { v: VersionId }) {
   return (
@@ -20,7 +21,7 @@ export default function Approach({ v }: { v: VersionId }) {
       <Section labelledBy="approach-title" id="approach">
         <div className={s.daGrid}>
           <div>
-            <h2 id="approach-title" className="t-h1">
+            <h2 id="approach-title" className="t-h2">
               {pain.heading}
             </h2>
             <p className={`t-lead ${s.daLead}`}>{pain.lead}</p>
@@ -58,8 +59,7 @@ export default function Approach({ v }: { v: VersionId }) {
           <div className={s.evPassage}>
             {evidence.items.map((it, i) => (
               <p key={i} className={s.evItem}>
-                <span className={`num ${s.evNum}`}>{it.value}</span>
-                <span>{it.label}</span>
+                <Figured value={it.value} label={it.label} className={`num ${s.evNum}`} />
               </p>
             ))}
             <p className={s.evCaveat}>{evidence.caveat}</p>

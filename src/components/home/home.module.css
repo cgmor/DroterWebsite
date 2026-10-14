@@ -42,23 +42,21 @@
 /* ══ V1 · Device hero ═══════════════════════════════════════════════════ */
 
 /*
- * Mobile and tablet: copy, then the device at the full column width, then the
- * millimetre row. Desktop (≥ 1000px): the device is taken out of flow and
- * sized against the hero itself (a container): about two thirds of its width,
- * starting just clear of the CTA row and bleeding off the right edge and the
- * bottom. The copy sits over the device's empty upper left; the millimetre
- * row runs along the bottom of the copy column.
+ * Mobile and tablet: copy, then the device, then the millimetre row.
+ * Desktop (≥ 1000px): copy and millimetre row on the left, the device
+ * contained in the right column (about 44% of the content width, at most
+ * 560px), centred on the porcelain. No bleed: the object is the hero by
+ * placement and light, not by size.
  */
 .dh {
   container-type: inline-size;
-  --hero-h: min(calc(100svh - var(--hd-h) - 36px), 1040px);
 }
 .dhGrid {
-  display: grid; /* not positioned: the desktop stage measures against the hero */
+  display: grid;
   flex: 1;
   grid-template-columns: minmax(0, 1fr);
   align-content: start;
-  padding-top: clamp(28px, 6svh, 80px);
+  padding-top: clamp(28px, 6svh, 72px);
 }
 .dhCopy {
   position: relative;
@@ -69,7 +67,7 @@
   max-width: 8ch;
 }
 .dhLead {
-  margin-top: 22px;
+  margin-top: 20px;
   max-width: 36ch;
 }
 .dhActions {
@@ -125,7 +123,7 @@
   --p: 0;
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 480px;
   margin-inline: auto;
 }
 .stageShadow {
@@ -142,25 +140,34 @@
 }
 .stageMove {
   position: relative;
-  transform: translate3d(0, calc(var(--p) * -7%), 0) scale(calc(1 + var(--p) * 0.14));
+  transform: translate3d(0, calc(var(--p) * -5%), 0) scale(calc(1 + var(--p) * 0.08));
   transform-origin: 54% 57%;
   will-change: transform;
 }
 
 @media (min-width: 1000px) {
   .dhGrid {
-    grid-template-rows: minmax(0, 1fr) auto;
-    padding-top: clamp(40px, 7svh, 88px);
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "copy media"
+      "strip media";
+    align-content: center;
+    column-gap: var(--col-gap);
+    padding-block: clamp(56px, 7svh, 88px) clamp(40px, 5svh, 64px);
   }
   .dhCopy {
+    grid-area: copy;
     max-width: 560px;
   }
   .dhMedia {
-    position: static;
+    grid-area: media;
+    align-self: center;
     margin: 0;
   }
   .dhStrip {
-    align-self: end;
+    grid-area: strip;
+    align-self: start;
     max-width: 528px;
     margin-top: 40px;
   }
@@ -168,18 +175,7 @@
     font-size: 1.25rem;
   }
   .stage {
-    /* Where the copy column (CTA row, millimetre row) ends. */
-    --copy-end: calc(max(var(--gutter), (100cqw - var(--maxw)) / 2) + 548px);
-    /* ≈ 2/3 of the hero's width; held to the hero's height on short screens
-       and kept clear of the copy on narrow ones. */
-    --dw: min(68cqw, var(--hero-h) * 1.24, (100cqw - var(--copy-end)) / 0.88);
-    position: absolute;
-    /* A confident bleed: about a tenth off the right edge and off the bottom. */
-    right: calc(var(--dw) * -0.12);
-    top: max(clamp(16px, 4svh, 40px), calc(var(--hero-h) - var(--dw) * 0.79));
-    width: var(--dw);
-    max-width: none;
-    margin: 0;
+    max-width: 560px;
   }
 }
 
@@ -211,11 +207,10 @@
   object-fit: cover;
   object-position: 44% 50%;
 }
-.advLead {
-  margin-top: 20px;
-}
 .advList {
-  margin-top: clamp(32px, 4vw, 48px);
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding: 0;
+  list-style: none;
   border-top: 1px solid var(--fg);
 }
 .advRow {
@@ -224,19 +219,22 @@
   padding: 17px 0 19px;
   border-bottom: 1px solid var(--line-strong);
 }
-.advRow dt {
+.advTitle {
   font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
-.advRow dd {
-  margin: 0;
+.advBody {
   color: var(--fg-2);
 }
 @media (min-width: 700px) {
   .advRow {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     align-items: baseline;
+  }
+  /* A row with no second line runs the full width. */
+  .advTitle:only-child {
+    grid-column: 1 / -1;
   }
 }
 @media (min-width: 1000px) {
@@ -247,9 +245,6 @@
   .advAside {
     position: sticky;
     top: calc(var(--hd-h) + 32px);
-  }
-  .advMedia {
-    aspect-ratio: 4 / 5;
   }
   .advCopy {
     padding-left: clamp(0px, 3vw, 48px);
@@ -263,14 +258,14 @@
   gap: 40px var(--col-gap);
 }
 .turnTitle {
-  max-width: 9ch;
+  max-width: 12ch;
 }
 .thesis blockquote {
   margin: 0;
 }
 .thesisLine {
   max-width: 30ch;
-  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+  font-size: var(--fs-quote);
   font-weight: 300;
   line-height: 1.28;
   letter-spacing: -0.02em;
@@ -302,9 +297,9 @@
 .counts {
   display: grid;
   gap: 0.5em;
-  font-size: clamp(1.5rem, 1.15rem + 1.2vw, 2.25rem);
+  font-size: var(--fs-passage);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.022em;
   color: var(--fg-2);
 }
@@ -330,7 +325,7 @@
   border-bottom: 1px solid var(--line-strong);
 }
 .rowName {
-  font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  font-size: var(--fs-h3);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -402,7 +397,7 @@
   border-bottom: 1px solid var(--line-strong);
 }
 .indexName {
-  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+  font-size: var(--fs-passage);
   font-weight: 300;
   line-height: 1.15;
   letter-spacing: -0.026em;
@@ -545,25 +540,30 @@
 
 .about {
   position: relative;
-  overflow: clip;
+}
+.aboutWrap {
+  display: grid;
+  gap: 36px var(--col-gap);
+  padding-block: var(--space-lg);
 }
 .aboutMedia {
   position: relative;
-  height: min(68svh, 560px);
-  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  width: min(62%, 240px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 1px 2px rgb(11 21 38 / 0.04),
+    0 22px 44px -32px rgb(11 21 38 / 0.4);
 }
 .aboutImg {
   object-fit: cover;
-  object-position: 50% 14%;
-}
-.aboutWrap {
-  position: relative;
-  padding-bottom: var(--space-lg);
+  object-position: 50% 30%;
 }
 .aboutCopy {
   max-width: 38rem;
-  margin-top: -40px;
 }
 .aboutCred {
   margin-top: 14px;
@@ -579,46 +579,29 @@
   border-top: 1px solid var(--line-strong);
 }
 .aboutQuote p {
-  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+  font-size: var(--fs-passage);
   font-weight: 300;
-  line-height: 1.28;
+  line-height: 1.3;
   letter-spacing: -0.02em;
 }
 .aboutActions {
   margin-top: 36px;
 }
 @media (min-width: 1000px) {
-  .about {
-    display: flex;
+  .aboutWrap {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     align-items: center;
-    min-height: min(94svh, 900px);
   }
   .aboutMedia {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 48%;
-    height: auto;
-    -webkit-mask-image: linear-gradient(to left, transparent 0%, rgb(0 0 0 / 0.4) 14%, #000 34%),
-      linear-gradient(to bottom, transparent 0%, #000 16%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to left, transparent 0%, rgb(0 0 0 / 0.4) 14%, #000 34%),
-      linear-gradient(to bottom, transparent 0%, #000 16%);
-    mask-composite: intersect;
-  }
-  .aboutWrap {
-    padding-block: var(--space-lg);
-  }
-  .aboutCopy {
-    margin-top: 0;
-    margin-left: 50%;
-    padding-left: var(--col-gap);
+    justify-self: start;
+    width: min(100%, 360px);
   }
 }
 
 /* ══ V2 · Portrait hero ═════════════════════════════════════════════════ */
 
+/* His thesis leads; the portrait is a modest framed photograph beside it
+   (at most 380px wide), never larger than life. */
 .ph {
   position: relative;
   overflow: clip;
@@ -629,24 +612,33 @@
 .phMedia {
   position: relative;
   order: -1;
-  height: min(62svh, 560px);
-  margin-inline: calc(-1 * var(--gutter));
-  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  width: min(56%, 220px);
+  aspect-ratio: 4 / 5;
+  margin-top: clamp(24px, 6vw, 40px);
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 1px 2px rgb(11 21 38 / 0.04),
+    0 22px 44px -32px rgb(11 21 38 / 0.4);
 }
 .phImg {
   object-fit: cover;
-  object-position: 50% 12%;
+  object-position: 50% 30%;
 }
 .phCopy {
   position: relative;
   display: grid;
   gap: 36px;
-  margin-top: -56px;
-  padding-bottom: clamp(32px, 6vw, 56px);
+  padding-block: clamp(28px, 6vw, 40px) clamp(32px, 6vw, 56px);
 }
+/* His thesis may run to a full sentence: held below the display cap, on a
+   wider measure, so it reads as a statement rather than a poster. */
 .phTitle {
-  max-width: 11ch;
+  max-width: 20ch;
+  font-size: clamp(2.125rem, 1.7rem + 1.6vw, 3.25rem);
+  line-height: 1.04;
 }
 .phName {
   font-size: 1.375rem;
@@ -660,36 +652,29 @@
 @media (min-width: 1000px) {
   .ph {
     display: flex;
-    min-height: min(calc(100svh - var(--hd-h) - 36px), 980px);
   }
   .ph > :global(.wrap) {
     display: flex;
   }
   .phGrid {
     flex: 1;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     column-gap: var(--col-gap);
+    align-items: start;
+    padding-block: clamp(56px, 5vw, 80px) clamp(48px, 4vw, 64px);
   }
+  /* Portrait top aligns with the headline; the copy, actions and the
+     Airway Bite card sit as one group beside it. */
   .phMedia {
     order: 0;
-    height: auto;
-    min-height: 600px;
-    margin-left: 0;
-    margin-right: calc(-1 * (max(0px, (100vw - var(--maxw) - 2 * var(--gutter)) / 2) + var(--gutter)));
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.12) 8%, rgb(0 0 0 / 0.42) 18%, rgb(0 0 0 / 0.78) 28%, #000 40%),
-      linear-gradient(to bottom, transparent 0%, #000 16%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.12) 8%, rgb(0 0 0 / 0.42) 18%, rgb(0 0 0 / 0.78) 28%, #000 40%),
-      linear-gradient(to bottom, transparent 0%, #000 16%);
-    mask-composite: intersect;
-  }
-  .phImg {
-    object-position: 50% 0%;
+    justify-self: end;
+    width: min(100%, 380px);
+    margin: 0;
   }
   .phCopy {
-    align-content: space-between;
-    margin-top: 0;
-    padding-block: clamp(40px, 5vw, 80px) clamp(28px, 3vw, 44px);
+    align-content: start;
+    gap: 32px;
+    padding-block: 0;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -821,11 +806,11 @@
   margin: 0;
 }
 .emphText {
-  max-width: 24ch;
-  font-size: clamp(2rem, 1.35rem + 2.4vw, 3.75rem);
+  max-width: 30ch;
+  font-size: var(--fs-quote);
   font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: -0.032em;
+  line-height: 1.18;
+  letter-spacing: -0.024em;
   text-wrap: balance;
 }
 .emphFoot {
@@ -856,8 +841,6 @@
   gap: 22px;
 }
 .evItem {
-  display: grid;
-  grid-template-columns: 3.3em minmax(0, 1fr);
   max-width: 44rem;
   font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.4375rem);
   line-height: 1.45;
@@ -898,7 +881,7 @@
 }
 .brQuote p {
   max-width: 34ch;
-  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+  font-size: var(--fs-passage);
   font-weight: 300;
   line-height: 1.3;
   letter-spacing: -0.016em;
@@ -910,6 +893,7 @@
 }
 .brMedia {
   position: relative;
+  max-width: 960px;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--r-card);
@@ -932,7 +916,7 @@
 }
 .brDevice {
   min-width: 0;
-  max-width: 680px;
+  max-width: 480px;
   margin: 8px auto 0;
   width: 100%;
 }
@@ -955,9 +939,8 @@
   .brDevice {
     grid-area: device;
     align-self: center;
-    width: auto;
-    max-width: none;
-    margin: 0 calc(-1 * var(--gutter)) 0 0;
+    justify-self: center;
+    margin: 0;
   }
 }
 
@@ -1014,9 +997,6 @@
 }
 .ttTime {
   color: var(--on-night-2);
-}
-.ttLead {
-  margin-top: 20px;
 }
 .phases {
   margin: 32px 0 0;
@@ -1132,8 +1112,12 @@
   gap: 32px;
 }
 
+/* His 1024px illustrations stop at 512px (half the source), plus the mat. */
 .jpMat {
-  padding: clamp(8px, 1.3vw, 16px);
+  --jp-pad: clamp(8px, 1.3vw, 16px);
+  width: 100%;
+  max-width: calc(512px + 2 * var(--jp-pad));
+  padding: var(--jp-pad);
   border-radius: var(--r-card);
   background: var(--white);
   box-shadow:
@@ -1200,7 +1184,7 @@
 .bandMedia {
   min-width: 0;
   width: 100%;
-  max-width: 640px;
+  max-width: 480px;
   margin-inline: auto;
 }
 .bandCopy {
@@ -1222,9 +1206,7 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 36rem);
   }
   .bandMedia {
-    width: auto;
-    max-width: none;
-    margin: -24px 0 -24px calc(-1 * var(--gutter));
+    margin: 0 auto;
   }
 }
 

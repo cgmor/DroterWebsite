@@ -38,6 +38,19 @@ function quoted(line: string, cls: string): ReactNode[] {
   );
 }
 
+/** His sentence with its figure set in place by weight (never repeated in front of it). */
+function figureInPlace(sentence: string, figure: string, cls: string): ReactNode {
+  const at = sentence.indexOf(figure);
+  if (at < 0) return sentence;
+  return (
+    <>
+      {sentence.slice(0, at)}
+      <span className={cls}>{figure}</span>
+      {sentence.slice(at + figure.length)}
+    </>
+  );
+}
+
 /** Set "may or may not" in the logic lines apart, by weight. */
 function mayOrMayNot(line: string, cls: string): ReactNode[] {
   return line.split(/(may or may not)/).map((part, i) =>
@@ -57,9 +70,8 @@ const CONTENTS = [
   { id: "not-one-disease", label: u.definition.heading },
   { id: "the-numbers", label: u.evidence.heading },
   { id: "types-of-pain", label: u.pain.heading },
-  { id: "a-system", label: u.system.heading },
   { id: "relief", label: u.approaches.heading },
-  { id: "hot-cold-hot", label: "Hot, cold, hot" },
+  { id: "hot-cold-hot", label: u.hotColdHot.heading },
   { id: "questions", label: "Common questions" },
   { id: "children", label: u.children.heading },
 ];
@@ -89,11 +101,8 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
             <p className={s.thesisLine}>{quoted(u.thesis.line, s.thesisEm)}</p>
           </blockquote>
           <figcaption className={s.thesisBy}>
-            <Image src={doctor.headshot} alt="" width={1400} height={1699} sizes="52px" className={s.thesisPortrait} />
-            <span className={s.thesisName}>
-              {u.thesis.attribution}
-              <span className={s.thesisRole}>{doctor.affiliation}</span>
-            </span>
+            <Image src={doctor.headshot} alt="" width={1991} height={2416} sizes="52px" quality={90} className={s.thesisPortrait} />
+            <span className={s.thesisName}>{u.thesis.attribution}</span>
           </figcaption>
         </figure>
       </div>
@@ -180,15 +189,15 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
 
             <Disclosure className={s.dsc}>
               <div className={`prose ${s.full}`}>
+                {/* His About TMD page, in his order. */}
                 <p>{d.paragraphs[0]}</p>
-                <h3>How the ADA defines TMD</h3>
                 <p>{d.adaCriteria.lead}</p>
                 <ul>
                   {d.adaCriteria.items.map((it) => (
                     <li key={it}>{it}</li>
                   ))}
                 </ul>
-                <h3>Facial pain, TMD and a damaged joint</h3>
+                <p>{d.paragraphs[2]}</p>
                 <ul className={s.logic}>
                   {d.logic.map((l) => (
                     <li key={l}>{mayOrMayNot(l, s.logicEm)}</li>
@@ -203,11 +212,11 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
             <h2 className={`t-h2 ${s.h2}`} id="the-numbers-title">
               {u.evidence.heading}
             </h2>
-            {/* Each line is one sentence led by its number, at the sentence's own size. */}
+            {/* Each line is his sentence, its number set by weight where it falls, at the sentence's own size. */}
             <ul className={s.ledger}>
               {u.evidence.items.map((it) => (
                 <li key={it.label} className={s.ledgerRow}>
-                  <span className={s.ledgerValue}>{it.value}</span> {it.label}
+                  {figureInPlace(it.label, it.value, s.ledgerValue)}
                 </li>
               ))}
             </ul>
@@ -247,22 +256,6 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
                 ))}
               </div>
             </Disclosure>
-          </section>
-
-          {/* The TMJ is part of a system */}
-          <section className={s.sec} id="a-system" aria-labelledby="a-system-title">
-            <h2 className={`t-h2 ${s.h2}`} id="a-system-title">
-              {u.system.heading}
-            </h2>
-            <p className={s.lede}>{u.system.body}</p>
-            <ol className={s.system} aria-label="The parts that work together">
-              {u.system.parts.map((part) => (
-                <li key={part} className={s.node}>
-                  <span className={s.nodeDot} aria-hidden="true" />
-                  <span className={s.nodeLabel}>{part}</span>
-                </li>
-              ))}
-            </ol>
           </section>
 
           {/* Approaches to relief */}
@@ -340,7 +333,7 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
                 <p>{u.children.paragraphs[1]}</p>
               </div>
               <div>
-                <h3 className={s.h3}>Signs in childhood</h3>
+                <h3 className={s.h3}>Signs and Symptoms in children</h3>
                 <ul className={s.ruled}>
                   {u.children.signs.map((sign) => (
                     <li key={sign}>{sign}</li>

@@ -24,7 +24,7 @@ export default function Loop({ name, alt, className, sizes = "100vw", preload }:
   const l = airwayBite.loops[name];
 
   if (reduced) {
-    return <Image src={l.poster} alt={alt} width={1920} height={816} className={className} sizes={sizes} preload={preload} />;
+    return <Image src={l.poster} alt={alt} width={1920} height={816} className={className} sizes={sizes} quality={90} preload={preload} />;
   }
 
   return (

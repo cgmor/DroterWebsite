@@ -11,14 +11,15 @@ import { isVersion, type VersionId } from "@/components/site/links";
  * The compositions live in src/components/home.
  */
 
+/** Descriptions are his own sentences (IFU slide 1 and his email; drdroter.com). */
 const META: Record<VersionId, Metadata> = {
   v1: {
     title: { absolute: `ArrowPath Sleep ${airwayBite.shortName} | APSleep.com` },
-    description: `${airwayBite.summary} ${airwayBite.advantages[0].title}, single patient use. With ${doctor.shortName}’s education on TMD and facial pain.`,
+    description: `${airwayBite.purpose} ${airwayBite.summary}`,
   },
   v2: {
     title: { absolute: `${doctor.name}, ArrowPath Sleep | APSleep.com` },
-    description: `${education.keyMessages[0]} ${doctor.name}, ${doctor.affiliation}: his diagnostic approach to facial pain, his lectures and literature, and the ${airwayBite.shortName}.`,
+    description: `${education.keyMessages[0]} ${doctor.pullQuote}`,
   },
   v3: {
     title: { absolute: `TMD, facial pain and the ${airwayBite.shortName} | ArrowPath Sleep (APSleep.com)` },

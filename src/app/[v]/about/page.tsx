@@ -14,20 +14,20 @@ import s from "./page.module.css";
 
 export const metadata: Metadata = {
   title: doctor.shortName,
-  description: `${doctor.name}, ${doctor.affiliation}. ${doctor.founderStory.split(". ")[0]}.`,
+  description: `${doctor.founderStory.split(". ")[0]}.`,
 };
 
 /** "John R. Droter, DDS": the name holds together; it may break only before the degree. */
 const [nameMain, degree] = doctor.name.split(", ");
 const nameNoBreak = nameMain.replace(/ /g, "\u00a0");
 
-/** The facts as one typeset passage: "Since 1996, a practice focused on facial pain. 3,000+ facial problem…" */
-const lower = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
-const facts = doctor.facts.map((f) =>
-  /^\d{4}$/.test(f.value)
-    ? { key: f.value, before: "Since ", value: f.value, after: `, a ${lower(f.label)}.` }
-    : { key: f.value, before: "", value: f.value, after: ` ${lower(f.label)}.` },
-);
+/** The facts as one typeset passage: each label is his whole sentence; its figure is set in place, by weight. */
+const facts = doctor.facts.map((f) => {
+  const at = f.label.indexOf(f.value);
+  return at < 0
+    ? { key: f.label, before: f.label, value: "", after: "" }
+    : { key: f.label, before: f.label.slice(0, at), value: f.value, after: f.label.slice(at + f.value.length) };
+});
 
 /** "Past staff, Anne Arundel Medical Center (Annapolis) — rounds with orthopedic surgeons" → main + detail. */
 const teaching = doctor.teaching.map((t) => {
@@ -49,9 +49,10 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
             <Image
               src={doctor.headshot}
               alt={doctor.headshotAlt}
-              width={1400}
-              height={1699}
-              sizes="(min-width: 900px) 40vw, 100vw"
+              width={1991}
+              height={2416}
+              sizes="(min-width: 640px) 380px, 300px"
+              quality={90}
               loading="eager"
               fetchPriority="high"
               className={s.portraitImg}
@@ -61,10 +62,6 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
             <h1 className={s.name} id="about-title">
               {nameNoBreak}, <span className={s.degree}>{degree}</span>
             </h1>
-            <p className={s.credit}>
-              <span>{doctor.title}</span>
-              <span>{doctor.affiliation}</span>
-            </p>
             <p className={s.story}>{doctor.founderStory}</p>
           </div>
         </div>
@@ -85,7 +82,7 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
       <Section labelledBy="bio-title" flush="top">
         <div className={s.bioGrid}>
           <h2 className={`t-h2 ${s.bioTitle}`} id="bio-title">
-            The quest for an understanding
+            About Dr. Droter
           </h2>
           <Prose className={s.bio}>
             {doctor.bio.map((p) => (
@@ -102,7 +99,7 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
             <Fragment key={f.key}>
               {i > 0 && " "}
               {f.before}
-              <span className={s.factVal}>{f.value}</span>
+              {f.value && <span className={s.factVal}>{f.value}</span>}
               {f.after}
             </Fragment>
           ))}
@@ -166,7 +163,6 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
         <SectionHead
           id="lit-title"
           title="Lectures and literature"
-          lead="His course slides from the L.D. Pankey Institute, his published article, and the medical literature he shares."
           layout="split"
           actions={
             <ButtonLink href={href(v, routes.library)} variant="quiet">
@@ -183,7 +179,7 @@ export default async function AboutPage({ params }: { params: Promise<{ v: strin
           </section>
           <section aria-labelledby="literature-title">
             <h3 className={s.litTitle} id="literature-title">
-              Literature
+              Medical Literature
             </h3>
             <ResourceList items={literature} />
           </section>

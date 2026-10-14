@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-14T15:33:07+00:00",
+  "generatedAt": "2026-10-14T18:43:24+00:00",
   "title": "Design System: APSleep",
   "extensions": {
     "colorMeta": {
@@ -305,47 +305,83 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Home hero headlines only, max ~13ch."
+        "purpose": "Home hero h1s only, 40–64px; 64px is the site's type ceiling."
       },
       "headline-lg": {
         "displayName": "Headline Large",
-        "purpose": "Inner-page h1s."
+        "purpose": "Inner-page h1s, 34–43px."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Section titles, max ~22ch."
+        "purpose": "Section h2s, 28–36px, max ~22ch."
+      },
+      "quote": {
+        "displayName": "Quote",
+        "purpose": "Pull quotes and his theses, 24–32px."
+      },
+      "headline-sm": {
+        "displayName": "Headline Small",
+        "purpose": "Prose h2s and table group titles, 24–30px."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Sub-sections and card groups."
+        "purpose": "Sub-sections and phase titles, 22–26px."
       },
-      "title-sm": {
-        "displayName": "Title Small",
-        "purpose": "List item titles, panel heads, library rows."
+      "passage": {
+        "displayName": "Passage",
+        "purpose": "Set passages, index names, footer tagline, phone number."
       },
       "lead": {
         "displayName": "Lead",
         "purpose": "Standfirst under a heading, slate, max ~42ch."
       },
-      "body": {
-        "displayName": "Body",
-        "purpose": "Default running text."
+      "row": {
+        "displayName": "Row",
+        "purpose": "Condition summaries, self-check text, set list rows."
+      },
+      "intro": {
+        "displayName": "Intro",
+        "purpose": "Opening paragraph of Read-mode pages, ~44ch."
+      },
+      "title-card": {
+        "displayName": "Title Card",
+        "purpose": "Image-card titles, How far forward? titles, checklist count."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "List item titles, step titles, panel heads, library rows."
       },
       "body-prose": {
         "displayName": "Body Prose",
         "purpose": "Read-mode columns, 68ch."
       },
-      "small": {
-        "displayName": "Small",
-        "purpose": "Meta, captions, spec labels, notes."
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text."
       },
       "label": {
         "displayName": "Label",
         "purpose": "Buttons and controls; sentence case, never uppercase."
       },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Meta, captions, spec labels, notes."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Audience switch, card meta, legends, footer base, table heads."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Chapter timecodes and step play pills only."
+      },
       "measure": {
         "displayName": "Measure (Geist Mono)",
         "purpose": "Millimetres, timecodes and spec values only."
+      },
+      "measure-lg": {
+        "displayName": "Measure Large (Geist Mono)",
+        "purpose": "The millimetre strip values."
       }
     },
     "shadows": [
@@ -463,12 +499,22 @@
       }
     ],
     "layout": {
-      "maxWidth": "1320px",
+      "maxWidth": "1200px",
       "textWidth": "46rem",
       "proseMeasure": "68ch",
       "headerHeight": "64px; 76px from 1180px",
-      "heroMinHeight": "min(100svh - header - 36px, 1040px)"
-    }
+      "heroMinHeight": "min(100svh - header - 36px, 780px)",
+      "sectionPaddingMax": "128px",
+      "portraitMax": "380px wide, framed, never full-height",
+      "deviceMax": "560px hero; 480px night renders; 3D stage 600px tall",
+      "imagery": "quality 90; never wider than half the source width (--fig-max)"
+    },
+    "excluded": [
+      {
+        "path": "src/components/review/**",
+        "note": "Review tooling (review bar and Highlight AI text layer). Not part of the brand system; its colours, sizes and radii are not tokens."
+      }
+    ]
   },
   "components": [
     {
@@ -554,7 +600,7 @@
   ],
   "narrative": {
     "northStar": "The Clinical Instrument on Porcelain",
-    "overview": "This is the category standard, played straight. It aims for the clinical authority of a premium implant maker and the rendered-product polish of a sleep-tech brand. The ground is white. The device and its animation stills sit on the animation's own porcelain grey, so renders and frames bleed edge to edge with no visible box. A cool mist band carries the quiet sections. One deep night-blue family holds the sleep and airway moments. Graphite ink and slate do the reading work. A single signal blue marks what you can press and draws the airway line.\n\nType is one family. Geist is large and light for display, with tight tracking, and the same family runs UI and body. Geist Mono shows up only where a number is a measurement, a timecode or a spec value. Structure comes from hairline rules and spec-sheet rows, not from boxes. Cards are image cards with 20px corners, and the whole card is the link. Dr. Droter's lecture slides appear as framed figure plates on a white mat, like specimens. His portrait dissolves into the porcelain field rather than sitting in a frame. Each page has one authored motion moment. Everything else settles in from an already-visible state on an exponential ease-out, and reduced motion is honoured throughout.\n\nThe system rejects the dental-supplier template (stock smiles, tooth icons, teal gradients, icon-card rows) and the AI-editorial look (a cream-and-serif journal with kicker labels over every heading).",
+    "overview": "This is the category standard, played straight. It aims for the clinical authority of a premium implant maker and the rendered-product polish of a sleep-tech brand. The ground is white. The device and its animation stills sit on the animation's own porcelain grey, so renders and frames bleed edge to edge with no visible box. A cool mist band carries the quiet sections. One deep night-blue family holds the sleep and airway moments. Graphite ink and slate do the reading work. A single signal blue marks what you can press and draws the airway line.\n\nType is one family. Geist is large and light for display, with tight tracking, and the same family runs UI and body. Geist Mono shows up only where a number is a measurement, a timecode or a spec value. Structure comes from hairline rules and spec-sheet rows, not from boxes. Cards are image cards with 20px corners, and the whole card is the link. Dr. Droter's lecture slides appear as framed figure plates on a white mat, like specimens. His portrait is a modest framed photograph (20px corners, never wider than 380px), never larger than life. Each page has one authored motion moment. Everything else settles in from an already-visible state on an exponential ease-out, and reduced motion is honoured throughout.\n\nThe system rejects the dental-supplier template (stock smiles, tooth icons, teal gradients, icon-card rows) and the AI-editorial look (a cream-and-serif journal with kicker labels over every heading). Scale is calm and clinical: headlines stop well below billboard size, and the man and the device are shown at a modest, legible size, never larger than life.\n\nThe review bar and its \"Highlight AI text\" layer (`src/components/review/**`) are review tooling, not part of this system. Their amber and green highlights, 11–13px labels and small radii must never be copied into a site surface.",
     "keyCharacteristics": [
       "White ground, porcelain media fields, mist bands, one night family.",
       "One accent, signal blue, used for interaction and the airway line.",
@@ -562,7 +608,8 @@
       "Hairline spec rows and ruled lists instead of boxed cards.",
       "20px image cards, 12px inner frames, pill controls.",
       "Lecture slides as matted figure plates; the device as transparent renders on porcelain.",
-      "One authored motion per page, expo ease-out, honest reduced-motion fallback."
+      "One authored motion per page, expo ease-out, honest reduced-motion fallback.",
+      "Calm clinical scale: display capped at 64px, content at 1200px, portrait at 380px."
     ],
     "rules": [
       {
@@ -596,15 +643,21 @@
         "section": "typography"
       },
       {
+        "name": "The Calm Clinical Scale Rule",
+        "body": "Nothing is oversized. Type caps at 64px (home h1), 43px (page h1), 36px (h2), 26px (h3) and 32px (quotes). Content caps at 1200px and section padding at 128px. Dr. Droter's portrait is a framed photograph no wider than 380px, never full-height and never dissolved into the field. The hero device is contained at 560px or less, night-band renders at 480px or less, and the 3D stage at 600px tall. No image is upscaled or shown past half its source width.",
+        "section": "layout"
+      },
+      {
         "name": "The Hairline Before Shadow Rule",
         "body": "Edges are drawn with 1px insets in the current line colour. A shadow is reserved for something that is genuinely on top: a plate, a floating card, a console or a selected thumb.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** put stills, renders and video on `porcelain` so the image edge disappears. Let the hero render bleed past the gutter.",
+      "**Do** put stills, renders and video on `porcelain` so the image edge disappears. Keep renders contained: the hero device at most 560px, night-band renders at most 480px, the 3D stage at most 600px tall.",
       "**Do** set tone per section and use the contextual roles (`--bg`, `--fg`, `--fg-2`, `--line`, `--accent-text`) in page CSS.",
-      "**Do** keep display type at 300–350 weight with −0.028 to −0.035em tracking.",
+      "**Do** keep display type at 300–350 weight with −0.024 to −0.035em tracking, and inside the caps of the Calm Clinical Scale Rule.",
+      "**Do** pick font sizes from the ramp above; a new size is a design-system change, not a local tweak.",
       "**Do** use Geist Mono for millimetres, timecodes and spec values only, with tabular numerals.",
       "**Do** draw structure with hairline rows (a 1px foreground rule on top, `line-strong` between rows) before reaching for a card.",
       "**Do** show Dr. Droter's slides as matted figure plates (white mat, 20px, Plate shadow, click to enlarge).",
@@ -619,7 +672,9 @@
       "**Don't** set approximate figures, counts or prose in Geist Mono.",
       "**Don't** use uppercase or tracked-out labels. All UI text is sentence case at negative or zero tracking.",
       "**Don't** write the mist hex directly. Use the token or `tone=\"mist\"`.",
-      "**Don't** invent claims, prices, stats or testimonials to fill a layout slot."
+      "**Don't** invent claims, prices, stats or testimonials to fill a layout slot.",
+      "**Don't** enlarge the portrait past 380px, run it full-height, or dissolve it into the field.",
+      "**Don't** borrow the review bar's highlight colours, sizes or radii for site UI."
     ]
   }
 }

@@ -10,8 +10,15 @@ import Reveal from "@/components/site/Reveal";
 import { Section, SectionHead, type Tone } from "@/components/site/Section";
 import s from "./home.module.css";
 
+/**
+ * The home pages list only the guides written in his own words (drdroter.com
+ * and his osteoarthritis document). The five guides paraphrased from the 2026
+ * brochure, pending his verbatim text, stay on /conditions.
+ */
+export const homeGuides = conditionGuides.filter((g) => g.source !== "TMJ Brochure 2026");
+
 /** Plain name and clinical name on the left, the one-line summary on the right. The whole row links. */
-export function ConditionRows({ v, guides = conditionGuides }: { v: VersionId; guides?: ConditionGuide[] }) {
+export function ConditionRows({ v, guides = homeGuides }: { v: VersionId; guides?: ConditionGuide[] }) {
   return (
     <ul className={s.rows}>
       {guides.map((g) => (
@@ -34,7 +41,7 @@ export function ConditionRows({ v, guides = conditionGuides }: { v: VersionId; g
 export function ConditionIndex({ v }: { v: VersionId }) {
   return (
     <ul className={s.index}>
-      {conditionGuides.map((g) => (
+      {homeGuides.map((g) => (
         <li key={g.slug} className={s.indexItem}>
           <Link href={href(v, routes.condition(g.slug))} className={`${s.rowLink} ${s.indexName}`}>
             {g.plainName}
@@ -47,10 +54,10 @@ export function ConditionIndex({ v }: { v: VersionId }) {
   );
 }
 
-/** V3: the guides that carry one of his slides as image cards (two wide over three), the rest as rows. */
+/** V3: the guides that carry one of his slides as image cards (two wide over three), any others as rows. */
 export function ConditionGallery({ v }: { v: VersionId }) {
-  const withSlide = conditionGuides.filter((g) => g.hero);
-  const rest = conditionGuides.filter((g) => !g.hero);
+  const withSlide = homeGuides.filter((g) => g.hero);
+  const rest = homeGuides.filter((g) => !g.hero);
   return (
     <>
       <ul className={s.gallery}>
@@ -70,10 +77,12 @@ export function ConditionGallery({ v }: { v: VersionId }) {
           </li>
         ))}
       </ul>
-      <div className={s.galleryMore}>
-        <h3 className="t-h3">More guides</h3>
-        <ConditionRows v={v} guides={rest} />
-      </div>
+      {rest.length > 0 && (
+        <div className={s.galleryMore}>
+          <h3 className="t-h3">More guides</h3>
+          <ConditionRows v={v} guides={rest} />
+        </div>
+      )}
     </>
   );
 }

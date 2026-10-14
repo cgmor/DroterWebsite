@@ -95,20 +95,17 @@ export default async function LibraryPage({ params }: { params: Promise<{ v: str
     {
       id: "lectures",
       title: "Lectures",
-      lead: `Course slides from Dr. Droter’s teaching at the L.D. Pankey Institute, with the ${airwayBite.shortName} instructions and its chairside tutorial.`,
-      aside: <Figure {...slideCauses} caption="From Dr. Droter’s TMD lecture." sizes="(min-width: 900px) 520px, 100vw" preload />,
+      aside: <Figure {...slideCauses} sizes="(min-width: 900px) 520px, 100vw" preload />,
       entries: lectureRows,
     },
     {
       id: "literature",
-      title: "Medical literature",
-      lead: "Dr. Droter’s published article on diagnosing the TMJ, and references on tooth wear and abrasion.",
+      title: "Medical Literature",
       entries: literatureRows,
     },
     {
       id: "patients",
-      title: "Patient resources",
-      lead: "Handouts to use at home, or to bring to your dentist.",
+      title: "Patient Downloads",
       entries: patientRows,
     },
   ];
@@ -116,8 +113,7 @@ export default async function LibraryPage({ params }: { params: Promise<{ v: str
   return (
     <>
       <div className={`wrap ${s.mast}`}>
-        <h1 className={`t-display ${s.title}`}>Library</h1>
-        <p className={s.intro}>Lectures, medical literature and patient resources from {doctor.name}.</p>
+        <h1 className={`t-h1 ${s.title}`}>Library</h1>
       </div>
 
       <div className={`wrap ${s.index}`}>
@@ -145,7 +141,8 @@ export default async function LibraryPage({ params }: { params: Promise<{ v: str
               alt={`The ${airwayBite.name}, three-quarter view`}
               width={2000}
               height={2000}
-              sizes="(min-width: 900px) 46vw, 90vw"
+              sizes="(min-width: 900px) 600px, 90vw"
+              quality={90}
               className={s.abImg}
             />
           </div>

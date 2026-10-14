@@ -58,7 +58,7 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
   return (
     <Section tone={tone} id={id} labelledBy={`${id}-title`} className="hff">
       <header className="hff-head">
-        <h2 className="t-h1" id={`${id}-title`}>
+        <h2 className="t-h2" id={`${id}-title`}>
           {heading}
         </h2>
         <p className="t-lead hff-lead">{airwayBite.purpose}</p>
@@ -69,7 +69,7 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
           {FRAMES.map((f, i) => (
             <li key={f.src} className="hff-item">
               <div className="hff-frame">
-                <Image src={f.src} alt={f.alt} fill sizes="(min-width: 1000px) 30vw, (min-width: 560px) 50vw, 100vw" className="hff-img" />
+                <Image src={f.src} alt={f.alt} fill sizes="(min-width: 1000px) 860px, (min-width: 560px) 90vw, 160vw" quality={90} className="hff-img" />
               </div>
               <h3 className="hff-title">{story[i].title}</h3>
               <p className="hff-body">{story[i].body}</p>
@@ -86,7 +86,8 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
                 alt={i === index ? s.alt : ""}
                 aria-hidden={i === index ? undefined : true}
                 fill
-                sizes="(min-width: 1000px) 62vw, 100vw"
+                sizes="(min-width: 1000px) 990px, 160vw"
+                quality={90}
                 className="hff-img hff-swap"
                 data-on={i === index || undefined}
               />

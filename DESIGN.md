@@ -27,79 +27,133 @@ colors:
 typography:
   display:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(3rem, 1.6rem + 4.6vw, 6rem)"
+    fontSize: "clamp(2.5rem, 1.75rem + 2.4vw, 4rem)"
     fontWeight: 300
-    lineHeight: 0.98
-    letterSpacing: "-0.035em"
+    lineHeight: 1
+    letterSpacing: "-0.032em"
   headline-lg:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 1.55rem + 3.3vw, 4.5rem)"
+    fontSize: "clamp(2.125rem, 1.75rem + 1.2vw, 2.6875rem)"
     fontWeight: 300
-    lineHeight: 1.02
-    letterSpacing: "-0.032em"
+    lineHeight: 1.04
+    letterSpacing: "-0.03em"
   headline:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2rem, 1.4rem + 2vw, 3.25rem)"
+    fontSize: "clamp(1.75rem, 1.45rem + 0.9vw, 2.25rem)"
     fontWeight: 350
-    lineHeight: 1.06
-    letterSpacing: "-0.028em"
+    lineHeight: 1.1
+    letterSpacing: "-0.024em"
+  quote:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.5rem, 1.3rem + 0.6vw, 2rem)"
+    fontWeight: 300
+    lineHeight: 1.22
+    letterSpacing: "-0.022em"
+  headline-sm:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.5rem, 1.3rem + 0.6vw, 1.875rem)"
+    fontWeight: 350
+    lineHeight: 1.16
+    letterSpacing: "-0.025em"
   title:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.375rem, 1.2rem + 0.55vw, 1.75rem)"
+    fontSize: "clamp(1.375rem, 1.25rem + 0.35vw, 1.625rem)"
     fontWeight: 450
     lineHeight: 1.2
     letterSpacing: "-0.018em"
-  title-sm:
+  passage:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1.1875rem"
-    fontWeight: 500
-    lineHeight: 1.3
-    letterSpacing: "-0.01em"
+    fontSize: "clamp(1.3125rem, 1.2rem + 0.4vw, 1.625rem)"
+    fontWeight: 300
+    lineHeight: 1.22
+    letterSpacing: "-0.024em"
   lead:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.1875rem, 1.1rem + 0.3vw, 1.375rem)"
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: "-0.006em"
-  body:
+  row:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1.0625rem"
+    fontSize: "clamp(1.125rem, 1.06rem + 0.28vw, 1.3125rem)"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.55
+  intro:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem)"
+    fontWeight: 400
+    lineHeight: 1.55
+  title-card:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 450
+    lineHeight: 1.25
+    letterSpacing: "-0.015em"
+  title-sm:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.1875rem"
+    fontWeight: 500
+    lineHeight: 1.3
+    letterSpacing: "-0.01em"
   body-prose:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.7
-  small:
+  body:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.9375rem"
+    fontSize: "1.0625rem"
     fontWeight: 400
-    lineHeight: 1.55
+    lineHeight: 1.6
   label:
     fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 500
     lineHeight: 1.2
     letterSpacing: "-0.006em"
+  small:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
+    lineHeight: 1.55
+  caption:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.875rem"
+    fontWeight: 400
+    lineHeight: 1.45
+  micro:
+    fontFamily: "Geist, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.4
   measure:
     fontFamily: "Geist Mono, ui-monospace, SF Mono, Menlo, monospace"
     fontSize: "1.0625rem"
     fontWeight: 400
     letterSpacing: "-0.01em"
     fontFeature: "tnum"
+  measure-lg:
+    fontFamily: "Geist Mono, ui-monospace, SF Mono, Menlo, monospace"
+    fontSize: "clamp(1.375rem, 1.1rem + 0.8vw, 1.875rem)"
+    fontWeight: 400
+    lineHeight: 1.15
+    letterSpacing: "-0.03em"
+    fontFeature: "tnum"
 rounded:
   soft: "6px"
+  box: "8px"
+  chip: "10px"
   inner: "12px"
+  note: "14px"
   card: "20px"
   pill: "999px"
 spacing:
   gutter: "clamp(20px, 4.2vw, 56px)"
   col-gap: "clamp(20px, 2.4vw, 40px)"
-  head-gap: "clamp(40px, 5vw, 72px)"
-  section-sm: "clamp(40px, 4.5vw, 72px)"
-  section-md: "clamp(64px, 7vw, 112px)"
-  section-lg: "clamp(88px, 10vw, 160px)"
+  head-gap: "clamp(32px, 4vw, 56px)"
+  section-sm: "clamp(40px, 4vw, 64px)"
+  section-md: "clamp(56px, 6vw, 96px)"
+  section-lg: "clamp(80px, 8vw, 128px)"
 components:
   button-primary:
     backgroundColor: "{colors.signal}"
@@ -183,9 +237,11 @@ components:
 
 This is the category standard, played straight. It aims for the clinical authority of a premium implant maker and the rendered-product polish of a sleep-tech brand. The ground is white. The device and its animation stills sit on the animation's own porcelain grey, so renders and frames bleed edge to edge with no visible box. A cool mist band carries the quiet sections. One deep night-blue family holds the sleep and airway moments. Graphite ink and slate do the reading work. A single signal blue marks what you can press and draws the airway line.
 
-Type is one family. Geist is large and light for display, with tight tracking, and the same family runs UI and body. Geist Mono shows up only where a number is a measurement, a timecode or a spec value. Structure comes from hairline rules and spec-sheet rows, not from boxes. Cards are image cards with 20px corners, and the whole card is the link. Dr. Droter's lecture slides appear as framed figure plates on a white mat, like specimens. His portrait dissolves into the porcelain field rather than sitting in a frame. Each page has one authored motion moment. Everything else settles in from an already-visible state on an exponential ease-out, and reduced motion is honoured throughout.
+Type is one family. Geist is large and light for display, with tight tracking, and the same family runs UI and body. Geist Mono shows up only where a number is a measurement, a timecode or a spec value. Structure comes from hairline rules and spec-sheet rows, not from boxes. Cards are image cards with 20px corners, and the whole card is the link. Dr. Droter's lecture slides appear as framed figure plates on a white mat, like specimens. His portrait is a modest framed photograph (20px corners, never wider than 380px), never larger than life. Each page has one authored motion moment. Everything else settles in from an already-visible state on an exponential ease-out, and reduced motion is honoured throughout.
 
-The system rejects the dental-supplier template (stock smiles, tooth icons, teal gradients, icon-card rows) and the AI-editorial look (a cream-and-serif journal with kicker labels over every heading).
+The system rejects the dental-supplier template (stock smiles, tooth icons, teal gradients, icon-card rows) and the AI-editorial look (a cream-and-serif journal with kicker labels over every heading). Scale is calm and clinical: headlines stop well below billboard size, and the man and the device are shown at a modest, legible size, never larger than life.
+
+The review bar and its "Highlight AI text" layer (`src/components/review/**`) are review tooling, not part of this system. Their amber and green highlights, 11–13px labels and small radii must never be copied into a site surface.
 
 **Key Characteristics:**
 - White ground, porcelain media fields, mist bands, one night family.
@@ -195,6 +251,7 @@ The system rejects the dental-supplier template (stock smiles, tooth icons, teal
 - 20px image cards, 12px inner frames, pill controls.
 - Lecture slides as matted figure plates; the device as transparent renders on porcelain.
 - One authored motion per page, expo ease-out, honest reduced-motion fallback.
+- Calm clinical scale: display capped at 64px, content at 1200px, portrait at 380px.
 
 ## Colors
 
@@ -230,19 +287,28 @@ A cool, near-neutral clinical palette in which one saturated blue does all the s
 **Character:** This is one grotesk at two temperatures. It is light and tightly tracked at display size, giving a quiet, expensive authority, and it is plain and steady at reading size. The mono is a measuring instrument, not a style.
 
 ### Hierarchy
-- **Display** (300, 48–96px, 0.98 line-height, −0.035em): home hero headlines only, kept to about 13ch.
-- **Headline Large** (300, 40–72px, 1.02): page h1s on inner pages.
-- **Headline** (350, 32–52px, 1.06): section titles, kept to about 22ch.
-- **Title** (450, 22–28px, 1.2): sub-sections and card groups. Image-card titles use 20px at 450.
-- **Title Small** (500, 19px, 1.3): list item titles, panel heads and library rows.
+The ramp lives as `--fs-*` tokens in aps.css for every fluid display step; the slopes flatten by about 1440px, so a 1900px screen gets wider margins, not bigger type. Every value below is in shipped use.
+- **Display** (300, 40–64px, 1.0, −0.032em): home hero h1s only, kept to about 13ch. 64px is the ceiling for any type on the site. V2 sets his full-sentence thesis in the display role held to 34–52px on a 20ch measure, so it reads as a statement, not a poster.
+- **Headline Large** (300, 34–43px, 1.04, −0.03em): page h1s on inner pages.
+- **Headline** (350, 28–36px, 1.1, −0.024em): every section h2, kept to about 22ch.
+- **Quote** (300, 24–32px, 1.18–1.28): pull quotes and his theses.
+- **Headline Small** (350, 24–30px, 1.16): prose h2s in Read-mode columns, group titles in the education and appliance tables.
+- **Title** (450, 22–26px, 1.2): sub-sections and the chairside phase titles (350 there). Prose h3s sit at a fixed 22px, 500.
+- **Passage** (300, 21–26px, 1.22): set passages, index names, the footer tagline and the practice phone number.
 - **Lead** (400, 19–22px, 1.5, slate): the standfirst under a heading, kept to about 42ch.
+- **Row** (400, 18–21px, 1.55): condition summaries, self-check text and set list rows. The home entry lists run the same role at 19–23px.
+- **Intro** (400, 18–20px, 1.55, ink-2): the opening paragraph of Read-mode pages, about 44ch.
+- **Title Card** (450, 20px, 1.25): image-card titles, the "How far forward?" titles and the checklist count.
+- **Title Small** (500, 19px, 1.3): list item titles, step titles, panel heads and library rows.
+- **Body Prose** (400, 18px, 1.7, 68ch): Read-mode columns.
 - **Body** (400, 17px, 1.6): the default.
-- **Body Prose** (400, 18px, 1.7, 68ch): Read-mode columns. Prose h2s are 350 weight and 28–38px.
-- **Small** (400, 15px, 1.55): meta, captions, spec labels and notes.
-- **Label** (500, 16px; 15px small): buttons, nav (15px, 400) and controls. It is sentence case, with no uppercase and no positive tracking.
-- **Measure** (Geist Mono 400, 17px in spec rows, tabular): millimetre values, timecodes and spec values only.
+- **Label** (500, 16px; 15px on small buttons and segmented options): buttons and controls. Nav is 15px at 400. Sentence case, no uppercase, no positive tracking.
+- **Small** (400, 15px, 1.55): meta, captions, spec labels and notes. The workhorse below body.
+- **Caption** (14px): the audience switch, card meta feet, legends, the footer base row, table heads and the tutorial "now playing" line.
+- **Micro** (13px): chapter timecodes and the step play pills only. Nothing smaller carries text except the 10px mono numerals inside the range-scale SVG.
+- **Measure** (Geist Mono 400, 17px in spec rows, tabular): millimetre values, timecodes and spec values only. **Measure Large** (22–30px, −0.03em) sets the millimetre strip.
 
-Headings default to 400 weight, −0.015em tracking and balanced wrapping. Paragraphs use pretty wrapping.
+Headings default to 400 weight, −0.015em tracking and balanced wrapping. Paragraphs use pretty wrapping. Weight 600 appears only for `strong` in prose and appliance names in the guide table.
 
 ### Named Rules
 **The Mono Is a Ruler Rule.** Geist Mono sets measurements (4 mm, 10–12 mm, 14.6 × 22.0 × 13.8 mm), timecodes and spec values, and nothing else. Approximate figures (≈ 50%, ≈ 5 min) and counts stay in body type.
@@ -253,16 +319,19 @@ Headings default to 400 weight, −0.015em tracking and balanced wrapping. Parag
 
 ## Layout
 
-Content sits in a 1320px column with a fluid gutter (20–56px). Read-mode text sits in a 46rem column, and prose is capped at 68ch. Column gaps run 20–40px. Section padding comes in three steps: `section-lg` is the default rhythm, `section-md` is for panels and bands, and `section-sm` is for tight follow-ons. Sections can be flushed top or bottom when two of the same tone meet. A section head always has more space above it (the section padding) than below it (`head-gap`), and it can stack or split 7:5 with the lead and actions bottom-aligned on the right.
+Content stops at a 1200px column with a fluid gutter (20–56px); wide screens get margins, not a wider page. Read-mode text sits in a 46rem column, and prose is capped at 68ch. Column gaps run 20–40px. Section padding comes in three steps and never exceeds 128px: `section-lg` (80–128px) is the default rhythm, `section-md` (56–96px) is for panels and bands, and `section-sm` (40–64px) is for tight follow-ons. The footer runs 64–112px on top. Sections can be flushed top or bottom when two of the same tone meet. A section head always has more space above it (the section padding) than below it (`head-gap`), and it can stack or split 7:5 with the lead and actions bottom-aligned on the right.
 
 Asymmetric splits recur: 7:5 for the head, the "in detail" model and its spec sheet, and the footer top, plus 11:13 for the hero copy and media. In the "in detail" section, the model column sticks below the header while the spec column scrolls. Grids go from one column to two at 640px and to three at 1000px. The header is 64px tall, 76px from 1180px, and the full nav appears at 1180px. Below that a full-screen white sheet menu takes over, with large light links (26–36px, 300) staggered in.
 
-Breakpoints are 520, 560, 640, 900, 1000, 1024 and 1180px. Heroes are full-bleed on porcelain with a minimum height of `min(100svh − header − 36px, 1040px)`. Media bleeds past the gutter on the media side.
+Breakpoints are 520, 560, 640, 900, 1000, 1024 and 1180px. Hero fields are full-bleed porcelain with a minimum height of `min(100svh − header − 36px, 780px)`. The device inside is contained and centred, never bleeding off the edge. No raster is shown wider than half its source width (figure plates cap themselves via `--fig-max`, set to half the image's width), and photos, renders and slides are served at `quality={90}` with accurate `sizes`.
+
+### Named Rules
+**The Calm Clinical Scale Rule.** Nothing is oversized. Type caps at 64px (home h1), 43px (page h1), 36px (h2), 26px (h3) and 32px (quotes). Content caps at 1200px and section padding at 128px. Dr. Droter's portrait is a framed photograph no wider than 380px, never full-height and never dissolved into the field. The hero device is contained at 560px or less, night-band renders at 480px or less, and the 3D stage at 600px tall. No image is upscaled or shown past half its source width.
 
 ### The three home compositions
 There is one world, composed three ways. Every version keeps "Airway Bite, in detail", the full education depth and the practice panel close.
-- **V1, Airway Bite first:** the device hero on porcelain (the render bleeds roughly a tenth off the right and bottom, with the millimetre strip under the copy). Then the night "How far forward?", the porcelain detail, advantages, the tutorial, and a turn to diagnosis, the conditions as ruled rows, the appliance guide, the man, the library and the practice.
-- **V2, Dr. Droter first:** a full-height portrait on porcelain whose backdrop dissolves into the field through a gradient mask. His thesis is the h1, and a floating white Airway Bite card sits in the same viewport. Then his approach, an airway bridge on night, the detail, a tutorial teaser, his lectures on mist, and a condition index.
+- **V1, Airway Bite first:** the device hero on porcelain (contained in the right column, about 44% of the content width and at most 560px, with the millimetre strip under the copy). Then the night "How far forward?", the porcelain detail, advantages, the tutorial, and a turn to diagnosis, the conditions as ruled rows, the appliance guide, the man, the library and the practice.
+- **V2, Dr. Droter first:** a modest framed portrait (at most 380px wide, top-aligned with the headline) beside his thesis. His thesis is the h1, and a floating white Airway Bite card sits in the same viewport. Then his approach, an airway bridge on night, the detail, a tutorial teaser, his lectures on mist, and a condition index.
 - **V3, education first:** the healthy and damaged TMJ plates as the hero, with a wipe toggle and two ruled entry links ("For patients", "For dentists"). An airway band on night follows within the first scroll, then the signs checklist on mist, a condition gallery of image cards, the detail, the library and the man.
 
 ## Elevation & Depth
@@ -282,7 +351,7 @@ Depth here is mostly tonal. Grounds change instead of surfaces lifting. Shadows 
 
 ## Shapes
 
-The geometry is soft-cornered. Image cards, plates, panels and the tutorial console take 20px. Inner frames (the video inside its console, thumbnails) take 12px. Buttons, segmented controls, the audience switch, the disclosure toggle and the zoom and play buttons are pills. Focus outlines and slide images inside a plate take a 6px corner. Lines are 1px hairlines. The nav underline and the timeline segments are 1.5–2px bars with 1px rounding. Renders are transparent PNGs cut to the device silhouette, never boxed. The device's grounding is a soft elliptical contact shadow under the hero render.
+The geometry is soft-cornered. Image cards, plates, panels and the tutorial console take 20px. Inner frames (the video inside its console, thumbnails) take 12px. Buttons, segmented controls, the audience switch, the disclosure toggle and the zoom and play buttons are pills. Notes and callout panels take 14px. Jump-bar chips and step highlights take 10px. Checkboxes, the lightbox image and step buttons take 8px. Focus outlines and slide images inside a plate take a 6px corner. Lines are 1px hairlines. The nav underline and the timeline segments are 1.5–2px bars with 1px rounding. Renders are transparent PNGs cut to the device silhouette, never boxed. The device's grounding is a soft elliptical contact shadow under the hero render.
 
 ## Components
 
@@ -336,9 +405,10 @@ A night section with three airway stills on 20px porcelain media (4:3). The thir
 ## Do's and Don'ts
 
 ### Do:
-- **Do** put stills, renders and video on `porcelain` so the image edge disappears. Let the hero render bleed past the gutter.
+- **Do** put stills, renders and video on `porcelain` so the image edge disappears. Keep renders contained: the hero device at most 560px, night-band renders at most 480px, the 3D stage at most 600px tall.
 - **Do** set tone per section and use the contextual roles (`--bg`, `--fg`, `--fg-2`, `--line`, `--accent-text`) in page CSS.
-- **Do** keep display type at 300–350 weight with −0.028 to −0.035em tracking.
+- **Do** keep display type at 300–350 weight with −0.024 to −0.035em tracking, and inside the caps of the Calm Clinical Scale Rule.
+- **Do** pick font sizes from the ramp above; a new size is a design-system change, not a local tweak.
 - **Do** use Geist Mono for millimetres, timecodes and spec values only, with tabular numerals.
 - **Do** draw structure with hairline rows (a 1px foreground rule on top, `line-strong` between rows) before reaching for a card.
 - **Do** show Dr. Droter's slides as matted figure plates (white mat, 20px, Plate shadow, click to enlarge).
@@ -354,3 +424,5 @@ A night section with three airway stills on 20px porcelain media (4:3). The thir
 - **Don't** use uppercase or tracked-out labels. All UI text is sentence case at negative or zero tracking.
 - **Don't** write the mist hex directly. Use the token or `tone="mist"`.
 - **Don't** invent claims, prices, stats or testimonials to fill a layout slot.
+- **Don't** enlarge the portrait past 380px, run it full-height, or dissolve it into the field.
+- **Don't** borrow the review bar's highlight colours, sizes or radii for site UI.

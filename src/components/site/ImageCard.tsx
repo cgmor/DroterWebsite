@@ -51,7 +51,7 @@ export default function ImageCard({
   return (
     <article className={["ic", className].filter(Boolean).join(" ")}>
       <div className={`ic-media field-${field} fit-${fit}`} style={{ aspectRatio: ratio.replace("/", " / ") }}>
-        <Image src={image.src} alt={image.alt} fill sizes={sizes} className="ic-img" />
+        <Image src={image.src} alt={image.alt} fill sizes={sizes} quality={90} className="ic-img" />
       </div>
       <div className="ic-body">
         <H className="ic-title">

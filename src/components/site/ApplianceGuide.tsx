@@ -10,9 +10,10 @@ type Props = {
 };
 
 /**
- * "Choosing the correct night guard": indication → APS appliance → description
- * → note, as a hairline matrix (stacks on phones). Airway rows carry the
- * airway line; the MAD row links to the Airway Bite. Place inside a Section.
+ * "Are you wearing the correct night guard?": indication → APS appliance →
+ * description → note, as a hairline matrix (stacks on phones). Airway rows
+ * carry the airway line; the MAD row's note is a plain link to the Airway
+ * Bite. Place inside a Section.
  */
 export default function ApplianceGuide({ v, showOrder = true }: Props) {
   return (
@@ -52,7 +53,7 @@ export default function ApplianceGuide({ v, showOrder = true }: Props) {
                     {i === 0 && "note" in g && g.note}
                     {i === 0 && isMad && (
                       <Link href={href(v, routes.airwayBite)} className="lnk">
-                        Record it with the {airwayBite.shortName}
+                        {airwayBite.shortName}
                         <ArrowRight size={16} className="lnk-icon" />
                       </Link>
                     )}

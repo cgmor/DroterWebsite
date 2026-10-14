@@ -4,26 +4,19 @@ import ModelStage from "./ModelStage";
 import RangeScale from "./RangeScale";
 import { Section } from "./Section";
 import SpecRows, { type SpecRow } from "./SpecRows";
-import { airwayNumbers, kitItems } from "./specs";
+import { airwayNumbers } from "./specs";
 
 const [singleUse, madeIn] = airwayBite.kit.notes;
-const capture = airwayBite.advantages.find((a) => a.title === "Digital or silicone")!;
-const locks = airwayBite.advantages.find((a) => a.title === "Locks with composite")!;
 
 const ROWS: SpecRow[] = [
-  { label: "In the kit", value: kitItems.join(", ") },
+  /* The kit label, as printed: "(1) APS Airway Bite (1) Ruler (1) Pencil". */
+  { label: "In the kit", value: airwayBite.kit.contents.join(", ") },
   { label: "Anterior stop", value: airwayNumbers.anteriorStop, mono: true },
-  {
-    label: "Range of movement",
-    value: airwayNumbers.range,
-    mono: true,
-    note: "Typical, fully retruded to fully protruded",
-    extra: <RangeScale />,
-  },
-  { label: "Holds with", value: locks.body },
-  { label: "Capture", value: capture.body },
-  { label: "Overall size", value: airwayNumbers.envelope, mono: true },
-  { label: "Use", value: singleUse.replace("Single Patient Use Only", "Single patient use only") },
+  { label: "Range of movement", value: airwayNumbers.range, mono: true, extra: <RangeScale /> },
+  /* Dr. Droter's own words (IFU and IFU slides). */
+  { label: "Holds with", value: "Flowable composite. Jaw is now held stable in forward position." },
+  { label: "Capture", value: "Digital scan bite. Can also be used to take silicone bite registration." },
+  { label: "Use", value: singleUse },
   { label: "Made in", value: madeIn.replace("Made in ", "") },
 ];
 

@@ -121,7 +121,7 @@ function Row({ e }: { e: LibraryEntry }) {
       <span className={s.rowKind}>{e.kind}</span>
       <div className={s.rowMain}>
         <h3 className={s.rowTitle}>{title}</h3>
-        <p className={s.rowDesc}>{e.description}</p>
+        {e.description && <p className={s.rowDesc}>{e.description}</p>}
         {state && (
           <p className={s.rowState}>
             <state.Icon size={16} />

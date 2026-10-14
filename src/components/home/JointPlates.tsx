@@ -35,7 +35,8 @@ export default function JointPlates({ children }: { children?: ReactNode }) {
             fill
             loading="eager"
             fetchPriority="high"
-            sizes="(min-width: 1000px) 56vw, 100vw"
+            sizes="(min-width: 1000px) 512px, 100vw"
+            quality={90}
             className={s.jpImg}
           />
           <Image
@@ -44,7 +45,8 @@ export default function JointPlates({ children }: { children?: ReactNode }) {
             aria-hidden={state === "damaged" ? undefined : true}
             fill
             loading="eager"
-            sizes="(min-width: 1000px) 56vw, 100vw"
+            sizes="(min-width: 1000px) 512px, 100vw"
+            quality={90}
             className={`${s.jpImg} ${s.jpTop}`}
           />
         </div>

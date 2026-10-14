@@ -105,7 +105,8 @@ export default function AnteriorStopModel({ name }: { name: string }) {
             alt={x.id === variant && !loaded ? `${name}, ${x.label.toLowerCase()} version: studio render` : ""}
             aria-hidden={x.id !== variant || loaded || undefined}
             fill
-            sizes="(min-width: 900px) 46vw, 100vw"
+            sizes="(min-width: 1000px) 680px, 100vw"
+            quality={90}
             className={s.modelPoster}
             data-active={x.id === variant || undefined}
           />

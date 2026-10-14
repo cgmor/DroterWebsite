@@ -9,7 +9,7 @@ import { href, isVersion, routes } from "@/components/site/links";
 import PracticePanel from "@/components/site/PracticePanel";
 import { Section } from "@/components/site/Section";
 import { airwayBite, education } from "@/content/aps";
-import { conditionCategories, conditionGuides, understanding, type ConditionGuide } from "@/content/tmd";
+import { conditionGuides, understanding, type ConditionGuide } from "@/content/tmd";
 import type { VersionId } from "@/content/versions";
 import s from "./page.module.css";
 
@@ -63,14 +63,6 @@ export default async function ConditionsPage({ params }: { params: Promise<{ v: 
                 <h2 className={s.catTitle} id={`${id}-title`}>
                   {c.name}
                 </h2>
-                <p className={s.catMeta}>
-                  <span className="num">
-                    {c.index + 1} of {conditionCategories.length}
-                  </span>{" "}
-                  categories
-                  <span aria-hidden="true"> · </span>
-                  <span className="num">{c.guides.length}</span> {c.guides.length === 1 ? "guide" : "guides"}
-                </p>
                 {note && <p className={s.catNote}>{note}</p>}
               </header>
               <ol className={s.entries}>
@@ -86,10 +78,7 @@ export default async function ConditionsPage({ params }: { params: Promise<{ v: 
       {/* ── For dentists ──────────────────────────────────────────────────── */}
       <div className="wrap">
         <div className={s.dentists}>
-          <p className={s.dentistsLine}>
-            Dentists: Dr. Droter’s lectures and the medical literature are in the Library, and the {airwayBite.shortName}{" "}
-            protocol has its own chairside page.
-          </p>
+          <p className={s.dentistsLine}>Dentists</p>
           <div className={s.dentistsLinks}>
             <ButtonLink href={href(v, routes.library)} variant="quiet">
               Library
@@ -136,7 +125,7 @@ function Entry({ g, v }: { g: ConditionGuide; v: VersionId }) {
       </div>
       {g.hero && (
         <div className={`${s.entryMedia} ${wide ? s.mediaSlide : s.mediaPlate}`}>
-          <Image src={g.hero.src} alt={g.hero.alt} fill sizes="(min-width: 900px) 360px, 100vw" className={s.entryImg} />
+          <Image src={g.hero.src} alt={g.hero.alt} fill sizes="(min-width: 700px) 340px, 100vw" quality={90} className={s.entryImg} />
         </div>
       )}
     </li>

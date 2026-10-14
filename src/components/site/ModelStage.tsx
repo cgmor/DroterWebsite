@@ -75,7 +75,8 @@ export default function ModelStage({ poster = "/aps/renders/device-airway-bite-t
           alt=""
           aria-hidden="true"
           fill
-          sizes="(min-width: 1000px) 56vw, 100vw"
+          sizes="(min-width: 1000px) 700px, 100vw"
+          quality={90}
           className="ms-poster"
         />
         {ready && (

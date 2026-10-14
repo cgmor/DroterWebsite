@@ -6,7 +6,7 @@ type SectionProps = {
   children: ReactNode;
   /** Ground. `porcelain` matches the animation stills; `night` is for sleep and airway moments. */
   tone?: Tone;
-  /** `wide` = 1320px content column, `text` = reading column (~46rem), `full` = edge to edge (no column). */
+  /** `wide` = 1200px content column, `text` = reading column (~46rem), `full` = edge to edge (no column). */
   width?: "wide" | "text" | "full";
   /** Vertical rhythm. `lg` is the page default; `none` lets media bleed to the edges. */
   space?: "lg" | "md" | "sm" | "none";

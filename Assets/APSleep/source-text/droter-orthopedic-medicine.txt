@@ -1,0 +1,583 @@
+Loading “Print Article”                                                                                                                6/29/08 7:34 AM
+
+
+
+
+     Issue Date: November 2005, Posted On: 12/1/2005
+
+     An Orthopaedic Approach to the Diagnosis and Treatment of Disorders of the
+     Temporomandibular Joint
+     John R. Droter, DDS
+
+
+                          Problems involving the temporomandi-bular joint (TMJ) have been termed temporomandibular disorders (TMD).
+                          Patients with many different disorders are included under the umbrella designation of TMD. It is important to emphasize
+                          that TMD is not one disease with one treatment. A lack of a more definitive diagnostic scheme, especially in published
+                          research, has led to confusion in terms of therapeutic approach.1 Patients who have TMD may or may not have
+                          damage to joint structures. Clarification of this issue—healthy joint or damaged joint—will be a major step forward in
+                          clarifying the clinical management of TMJ problems.
+
+                     If after evaluating a patient with a painful knee the physician offers the working diagnosis of “knee disorder,” one would
+                     question the sensitivity of the diagnostic approach. In dentistry, patients routinely present with a previous diagnosis of
+     “TMJ” or “TMD.” Telling a patient that he or she has “TMD” is equivalent to a physician telling a patient he or she has “knee disorder.”
+     TMJ and TMD are not accurate orthopaedic diagnoses, and clinicians should not use them.
+
+     This article will discuss approaches to development of a more specific diagnostic scheme for TMJ disorders.
+
+     BASIC ORTHOPAEDIC PRINCIPLES
+
+     A joint is 2 bones joined together to allow movement between those bones. Joints are classified as being of 5 types:2
+
+     (1) syndesmosis: a joint in which 2 bones are bound together by fibrous tissue only.
+
+     (2) synchrondosis: a joint in which 2 bones are joined together by cartilage.
+
+     (3) synostosis: a joint that has become obliterated by bony union.
+
+     (4) symphysis: a joint in which the 2 opposing surfaces are covered by hyaline cartilage and joined by fibrocartilage and strong fibrous
+     tissue.
+
+     (5) synovial: a joint in which the 2 opposing surfaces are covered by cartilage (hyaline or fibrocartilage) and joined peripherally by a
+     fibrous tissue capsule enclosing the joint cavity, which contains synovial fluid. Synovial joints allow a greater degree of movement than
+     the other joints but at the expense of providing less stability. Synovial joints have a specialized tissue, the synovium, that produces
+     synovial fluid, which provides lubrication and nutrition to the inner joint tissues.
+
+     The TMJ is a synovial joint and is susceptible to the same disease processes as any other synovial joint in the human body. The current
+     standard in orthopaedic medicine is to determine if damage exists to a joint before treatment is rendered.2 If damage to a joint is
+     suspected, the next step is to determine the nature and extent of the injury. The hard tissues are evaluated by radiographic imaging,
+     observing the joint in more than one direction; 3 or more radiographic views are preferred. Two radiographic views offset at 90º are the
+     minimum standard for any joint.2-4 The plane of the views varies by joint.
+
+     Therefore, utilizing only panoramic and transcranial radiographs for evaluation of the TMJ is below the medical standard, since these
+     films provide only one plane of view.
+
+     Radiographic techniques to view a damaged TMJ include plain radiography, panoramic radiography, computerized tomography (CT),
+     tomography, fluoroscopy, and magnetic resonance imaging (MRI). CT with reconstruction in multiple planes is currently the best
+     technique for viewing the bones of the TMJ. If CT is not available, tomograms or conventional radiographs in 3 views are adequate
+     (submentovertex, corrected sagittal, and corrected coronal), but much detail is lost. The soft tissues are best evaluated with MRI. The
+     medical standard is to utilize MRI if meniscal damage is suspected.3 A useful MRI protocol for diagnosing TMJ damage would include
+     T1 open and closed corrected sagittal views, T2 and proton density closed corrected sagittal views, and T1 corrected coronal views.5
+     MRI scans basically show water and fat in tissue. A T1 image shows more fat than water, whereas a T2 image shows more water than
+     fat. A T2 is useful in identifying inflammation and edema. A proton density image is between a T1 and a T2 and is useful in visualizing
+     the disc of the TMJ. The results of the CT and MRI, in addition to the history and clinical findings, will allow the clinician to develop a
+     specific diagnosis for the damaged joint.
+
+     CT and MRI scans are needed to determine the nature and extent of the damage. There are 6 anatomical structures to evaluate for
+     damage: ligaments, disc, articular cartilage, synovium, cortical bone, and cancellous bone/marrow. For example, damage to the
+     synovium and cartilage in a joint is known as osteoarthritis (OA) in orthopaedic medicine. Damage to the bone marrow by compromised
+     condylar blood perfusion resulting in marrow necrosis is known as avascular necrosis (AVN). Both OA and AVN will eventually lead to
+     damage to the cortical bone but are very different disease processes. Determining health, or damage to specific structures, will allow
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C              Page 1 of 9
+Loading “Print Article”                                                                                                                   6/29/08 7:34 AM
+
+
+     one to be more specific as to the disease process. This will allow for specificity of treatment.
+
+     ANATOMY AND PATHOLOGY OF THE TMJ: ARRIVING AT A SPECIFIC DIAGNOSIS
+
+     Following is a description of the anatomical components of the TMJ.
+
+     Ligaments
+
+     Ligaments are bundles of connective tissue that join the 2 bones of the joint. They are composed of collagen and elastin in a 4:1 ratio.4
+     When damaged, ligaments can be stretched, partially torn, or completely torn. In health they serve to hold the joint together when it is
+     not loaded and to define the end points of movement. The TMJ is the only joint in the body in which one of its end points of movement
+     (closing) is solid (teeth). When a joint is loaded, the ligaments play a secondary role in joint stability. Of greater importance to joint
+     stability when the joint is loaded is the shape of the joint surfaces, the shape of the disc, and the position of the muscles.4 In synovial
+     joints with discs, ligaments join the disc to the bones and help hold the disc in position when it is not loaded. Under loading, it is the disc
+     shape that stabilizes the disc. A patient cannot have a displaced disc without damage to the discal ligaments. On MRI scans disc
+     position is used to gauge the amount of damage to ligaments. A partially displaced disc will have less damage to the discal ligaments
+     than a fully displaced disc.
+
+     Disc
+
+     The disc of the TMJ consists of fibrocartilage.4,6 The TMJ is the only joint in the body that rotates, slides, and pivots.7 Fibrocartilage is
+     more flexible than cartilage, allowing it to conform to both the condyle and eminence during these 3 condylar movements.6 When
+     damaged, the disc can be displaced, adhesed, atrophied, or perforated. Displacement can occur in any direction, including toward the
+     anterior, anterior medial, anterior lateral, direct medial, and direct lateral. Posterior dislocations are rare but have been reported.8 Discs
+     may become damaged from chronic or acute trauma.9 Discs may be either partially or fully displaced and may or may not recapture
+     upon opening. A nonreducing displaced disc over time will atrophy and become deformed. A large nonreducing displaced disc is
+     indicative of a more recent injury versus a small atrophic disc.
+
+     A classification scheme for displacement of the disc as seen on MRI has been developed by Piper.10 Piper’s disc classification scheme
+     is a modification of a classification scheme by Tasaki and Westesson.8 Both are based on MRI interpretation, both identify disc
+     displacements as partial or complete, and both identify in which direction the disc is displaced. While Tasaki and Westesson have 9
+     categories based on direction of disc displacement, Piper has 5 categories, with several subcategories, based on severity of disc and
+     ligament damage. A Piper Class I has no damage to the disc or discal ligaments while a Piper Class V will have the most. What is not
+     addressed by Tasaki and Westesson, but is by Piper, is whether or not the disc reduces. Also addressed in the Piper classification
+     scheme are joints in which there is bone-to-bone contact (Table).
+
+     A Piper I classification indicates that the disc is normal and the ligaments are attached and do not display pathology. Piper II indicates
+     that the disc is in a normal position, but the ligaments are stretched or torn. Piper III indicates that the disc is partially displaced off the
+     condyle; the direction of the displacement is added. Piper IV indicates that the disc is completely displaced with retrodiscal tissue
+     interposed between the condyle and the eminence; the direction of the displacement is indicated. Piper V indicates that there is no
+     longer any tissue between the condyle and the eminence. In Piper III and IV, subclass “a” indicates that the disc recaptures; “b”
+     indicates that it does not. In Piper V, subclass “a” indicates that the bone is in active osteoarthritic breakdown; “b” indicates that the bone
+     has become eburnated (end-stage osteo-arthritis).
+
+
+
+
+                                  Figure 1. MRI T1 corrected sagittal         Figure 2. Same joint, more medial view
+                                  closed, lateral pole, Piper IVa- anterior   than Figure 1. MRI T1 corrected sagittal
+                                  lateral. Notice how the majority of the     closed, medial pole, Piper IVa—anterior
+                                  disc is seen in this view indicating an     lateral.
+                                  anterior lateral displacement.
+
+
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C                 Page 2 of 9
+Loading “Print Article”                                                                                                                   6/29/08 7:34 AM
+
+
+
+
+                                                        Figure 3. Same joint as Figures 1 and 2
+                                                        —open view. MRI T1 corrected sagittal
+                                                        open, midcondyle, Piper IVa- anterior
+                                                        lateral.
+
+     As examples, a Piper IIIb-anterior medial indicates a partially displaced disc off the lateral pole of the condyle. The disc is displaced in
+     an anteriormedial direction. The medial portion of the condyle is still covered by the disc. Upon opening, the disc does not recapture on
+     the lateral pole. A Piper IVa anterior lateral indicates the disc is completely off both the lateral and medial poles and sits anterior lateral
+     to the condyle. Upon opening the disc is recaptured (Figures 1 to 3).
+
+     Articular Cartilage
+
+
+
+
+                                  Figure 4. CT corrected sagittal        Figure 5. CT corrected sagittal
+                                  reconstruction. Good size and shape of reconstruction. Moderate OA with cyst
+                                  condyle. MRI indicated Piper I.        on superior aspect. MRI indicated Piper
+                                                                         V.
+
+
+
+
+                                                        Figure 6. MRI T2 corrected sagittal
+                                                        closed, Piper IVa. Note effusion (white
+                                                        area) in anterior supeior joint space.
+
+     Fibrocartilage covers the articular surface of the condyle and the articular surface of the eminence. The disc is composed of this
+     fibrocartilage.4 Being resilient, it will act as a shock absorber for longitudinal force. It consists of living chondrocytes, collagen,
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C                  Page 3 of 9
+Loading “Print Article”                                                                                                                   6/29/08 7:34 AM
+
+
+     proteoglycans, and water. The chondrocytes produce the collagen and proteoglycans. Collagen is the major structural protein of
+     cartilage. The proteoglycans attract and hold the aqueous component, which is 80% by weight. Covering the cartilage is a layer of
+     surface-active phospholipids (SAPL).9 The interaction of the SAPL and lubricin, a glycoprotein added to synovial fluid by synovial cells,
+     keeps the 2 joint surfaces from actually contacting during normal loading by maintaining a fluid layer between the surfaces. This results
+     in a very low coefficient of friction. A healthy joint’s coefficient of friction is one fifth that of ice sliding against ice.2 Cartilage can be
+     damaged by compression or tearing, and the result can be fibrillation, necrosis, proliferation, or adhesion.2 Once cartilage is damaged,
+     there will be an increase in friction and an increase in wear of the joint. Cartilage covering the bone is not easily seen with either MRI or
+     CT scans. It is not until the damage has progressed to the subchondral bone that it is radiographically evident (Figures 4 and 5). On
+     MRI T2 images, inflammation to the synovial tissue or joint effusions are clues that the cartilage is breaking down (Figure 6).
+
+     Synovium
+
+     There are no blood vessels in a healthy joint. The synovium is the tissue that provides nutrition and lubrication to the internal aspect of
+     the joint. Synovial tissue lines the inner walls of the joint and produces a filtrate of blood. Synovial cells in the synovial tissue then
+     contribute to the plasma by adding lubricin and hyalu-ronic acid and removing fibrinogen.2 Movement of the joint distributes the synovial
+     fluid, which is critical to health of the cartilage. A significant decrease in synovial fluid flow into the joint or a decrease in the movement
+     of the joint will lead to cartilage damage.
+
+     When damaged, the synovium can be inflamed or fibrosed and display proliferation or adhesions. When a disc is displaced, the condyle
+     will rest on the retrodiscal tissue and a portion of the synovium, preventing it from functioning. The synovium and retrodiscal tissue
+     usually will become fibrosed and form what has been termed a pseudo disc.2 A significant percentage of synovium is lost when a disc is
+     displaced, thereby compromising the health of the cartilage. If a disc is displaced and the condyle is sitting on the synovium, it can be
+     inferred that the synovium is damaged.
+
+     Cortical Bone
+
+
+
+
+                                 Figure 7. CT coronal view, normal size Figure 8. CT corrected sagittal
+                                 and shape. Note intact cortical bone     reconstruction. Good size and shape of
+                                 shell around the cancellous bone. Slight condyle. Condylar position in fossa
+                                 hypercalcification is seen superiorly.   indicates disc is displaced. There is no
+                                                                          room for a disc. MRI indicated Piper
+                                                                          IVa.
+
+
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C                  Page 4 of 9
+Loading “Print Article”                                                                                                               6/29/08 7:34 AM
+
+
+
+
+                                                      Figure 9. MRI T2 corrected sagittal
+                                                      closed, Piper IVb. Marrow edema is
+                                                      seen in the condyle. Compare this to
+                                                      the marrow in Figure 6. The
+                                                      unevenness of the marrow signal
+                                                      indicates that the superior portion of
+                                                      the marrow has necrosed. The cortex
+                                                      eventually collapsed post surgery
+                                                      (discectomy).
+
+     Bone is a calcified living matrix that is composed of 70% inorganic material (mineral), 25% organic matrix and cells, and 5% water. The
+     cells are osteocytes, osteoblasts, and osteoclasts. The organic matrix is primarily composed of collagen, and the mineral component is
+     primarily hydroxyapatite. Blood vessels and nerves are also present. Cortical bone, the dense outer shell, covers the inner
+     multichanneled cancellous bone (Figure 7). When damaged, bone can experience osteolysis, necrosis, hypercalcification, adaptation
+     (modified shape), atrophy, and hypertrophy.2,4 The blood supply to the cortical bone is derived from the periosteum on the outside of
+     the bone and from the marrow on the inside. Periosteum terminates at the periphery of a joint and does not continue into the joint to
+     cover the subchondral bone. This means that cortical bone underneath cartilage (subchondral bone) has a limited blood supply
+     dependent on the marrow. CT scans are best for determining the health of the cortical bone. A normal condyle should have a
+     noncongruent oval shape with respect to the fossa with no flattening or lipping. Flattening, lipping, and cysts are signs of OA. On a
+     corrected sagittal view, midcondyle should be approximately 70% of the size of the fossa. The cortex should be intact with no cyst and
+     no hypercalcification present. The condyle should be centered in the fossa anterior-posteriorly with room for the disc noted on the CT
+     (Figure 4). If there is no room for a disc, it is likely displaced and can be verified on the MRI scan (Figure 8).
+
+     Cancellous Bone/Marrow
+
+     Cancellous bone is inside the outer shell of cortical bone. It consists of thin trabeculae of bone with bone marrow filling the
+     multichannelled spaces. Bone marrow consists of blood vessels, nerve fibers, fat cells, and hemopoietic tissue. Hemopoietic cells
+     (mainly in the spine, shoulder, and pelvis of adults) produce red blood cells, white blood cells, and platelets.2
+
+     The vascular supply of the mandibular bone is derived from the inferior alveolar artery centrally and from penetration of arteries and
+     veins through the periosteum peripherally. Since periosteum does not continue into a joint, the superior portion of the condylar head
+     does not have this collateral vascularity into its marrow. The penetrating vessels into the marrow end at the joint periphery. Vessels at
+     the level of the joint periphery (the last opportunity to enter the marrow) come from the anterior medial, posterior medial,
+
+     and posterior lateral directions.11,12 A disruption of this vascularity will lead to a decrease in condylar marrow blood perfusion.
+     Decreased blood perfusion into the marrow will lead to hypoxia, edema, and/or necrosis. An anteriorly displaced disc that results in a
+     distalization of the condyle in the fossa will exert pressure in the areas of the blood supply to the condylar head. It can be suggested
+     that AVN, which occurs in the TMJ condyle, is a result of both pressure on the anterior tissues by the disc and pressure on the posterior
+     tissues by the distalization of the condyle.13 The resultant compromised condylar perfusion is what may lead to hypoxia, edema, and
+     necrosis. The T2 images of the MRI scan are used to detect marrow edema and marrow necrosis. Healthy marrow will produce a low-
+     intensity signal on the T2 image, inflamed marrow will produce a high-intensity signal, and necrotic bone will produce no signal (Figure
+     9).
+
+     A PROPOSED ORTHOPAEDIC DIAGNOSIS OF TMJ DISORDERS
+
+     A proposed approach to orthopaedic diagnosis of disorders of the TMJ consists of 3 phases:
+
+     Phase 1
+
+     (1) History of the problem.
+
+     (2) Physical examination:
+
+     •joint palpation
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C              Page 5 of 9
+Loading “Print Article”                                                                                                             6/29/08 7:34 AM
+
+
+     •muscle palpation
+
+     •movement analysis of joint under both unloaded and loaded conditions
+
+     •analysis of muscle coordination of joint movement
+
+     •auscultation
+
+     •Doppler auscultation14
+
+     •joint vibration analysis (Bioresearch).15
+
+     (3) Develop differential diagnosis.
+
+     The TMJ is suspected of being either healthy or damaged. If damaged, then go to phase 2.
+
+     Phase 2
+
+     (4) Radiological imaging:
+
+     •CT scans with axial and coronal views of the TMJ. (If CT scans are not available, plain radiographs should be taken [at least 2 views
+     90º to each other, 3 views are preferred].)
+
+     •Multiplanar reconstruction of the sagittal view, MRI: (a) T1 open and closed corrected sagittal views, T1 corrected coronal views; (b) T2
+     and proton density corrected sagittal views.
+
+     (5) Radiographic interpretation:
+
+     •What is damaged—ligaments, disc, articular cartilage, synovium, cortical bone, and/or cancellous bone/marrow.
+
+     (6) Refine differential diagnosis.
+
+     Phase 3
+
+     (7) More detailed history:
+
+     •Collect and evaluate previous records.
+
+     (8) Repeat physical evaluation of the TMJ (see phase 1):
+
+     •Correlate with MRI and CT scans.
+
+     (9) Comprehensive dental exam:
+
+     •teeth—full-mouth radiographs
+
+     •periodontal examination
+
+     •occlusal analysis: mounted study models.
+
+     (10) Photographs.
+
+     (11) Diagnostic tests:
+
+     •diagnostic blocks
+
+     •blood tests.
+
+     (12) Analysis of above data to develop a working diagnosis.
+
+     If a joint is damaged, adequate radiographic imaging (at least 2 views 90º to each other) is required. After the clinician has determined
+     that specific anatomic structures may be damaged (in the first phase of the diagnostic work-up), CT and/or MRI scans should be ordered
+     if the clinician has access to such imaging. Obtaining CT or MRI scans early in the diagnostic process will provide valuable information.
+     CT and MRI allow assessment of the health of each of the 6 anatomic components. The clinician is seeking to determine not only what
+     structure(s) is (are) damaged, but also the type and extent of damage and whether the pathologic process is still ongoing. Phase 3 of
+     the exam process can then confirm clinically what was found radiographically.
+
+                          Table. Diagnostic Summation for Temporomandibular Disorders.
+
+                          Disc/Ligaments
+                          Piper I Normal disc and ligaments
+                          Piper II Normal disc position; ligaments torn or stretched
+                          Piper IIIa Partial displacement of the disc, reduces on opening; ligaments torn or stretched
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C            Page 6 of 9
+Loading “Print Article”                                                                                                            6/29/08 7:34 AM
+
+
+                          Piper IIIb Partial displacement of the disc, nonreducing on opening; ligaments torn or stretched
+                          Piper IVa Full dispacement of disc, reduces on opening; ligaments torn or stretched
+                          Piper IVb Full displacement of disc, nonreducing on opening; ligaments torn or stretched
+                          Piper Va Bone-to-bone contact; active degeneration
+                          Piper Vb Bone-to-bone contact; bone has become eburnated
+
+                          Synovial Damage
+                          1 Healthy synovium
+                          2 Reversible damage (inflammation)
+                          3 Mild irreversible damage
+                          4 Moderate irreversible damage–cartilage cells will die
+                          5 Severe damage–all cartilage cells will die
+
+                          Cartilage Damage
+                          1 Healthy cartilage
+                          2 Reversible damage to cartilage
+                          3 Mild irreversible damage–flattening of condyle is seen
+                          4 Moderate flatting and lipping–cysts may be present
+                          5 End-stage osteoarthritis
+
+                          Cortical Bone (Condyle)
+                          1 Cortex intact–good condylar size and shape
+                          2 Reversible early changes to cortical bone
+                          3 Mild irreversible damage–changes to the shape of the condyle are seen
+                          4 Moderate irreversible damage–bone loss is evident, altered size and shape
+                          5 Severe damage to the cortical bone–altered size and shape
+
+                          Bone Marrow
+                          1 Healthy marrow
+                          2 Reversible damage–blood perfusion is compromised, but not to the point of necrosis
+                          3 Early necrosis present–may or may not lead to collapse of condylar cortex
+                          4 Moderate damage–marrow necrosis present, collapse of the cortex highly likely
+                          5 Severe damage–marrow necrosis present, collapse of the cortex imminent or has occurred
+
+                          Mechanical Stability
+                          1 Normal–shape and position of condyle/disc/fossa provide stability under load
+                          2 Reversible damage–slight joint flexure under load
+                          3 Mild irreversible changes to the shape of the condyle/disc/fossa–will subluxate under load
+                          4 Moderate irreversible changes to the shape of the condyle/disc/fossa–will subluxate under load
+                          5 Severe irreversible changes to the shape of the condyle/disc/fossa–will not tolerate load
+
+                          Structural Stability (Condyle/Fossa)
+                          1 Excellent prognosis–condylar/fossa bone is stable, occlusion will be stable
+                          2 Good prognosis–there is a slight risk of future bone loss
+                          3 Fair prognosis–bone loss has already occurred, slight risk of ongoing bone loss
+                          4 Guarded prognosis–bone loss has already occurred, moderate risk of ongoing bone loss
+                          5 Poor prognosis–bone loss of condyle/fossa will continue with changes in occlusion
+
+                          Muscle/CNS Function
+                          1 Smooth, harmonious muscle function
+                          2 Slight tremors, hesitation in muscle movement
+                          3 Mild muscle splinting and slight disharmonious muscle movements
+                          4 Moderate muscle splinting and disharmonious muscle movements
+                          5 Severe muscle splinting and disharmonious muscle movements
+
+                          Occlusion (Teeth)
+                          1 Normal healthy occlusion–centric relation is equal to maximal intercuspation
+                          2 Slight malocclusion, nonpathologic–centric relation is not equal to maximal intercuspation
+                          3 Mild pathological malocclusion–damage to teeth, periodontium, TMJ structure and/or muscle
+                          occurs as a result of the occlusion
+                          4 Moderate pathological malocclusion
+                          5 Severe pathological malocclusion
+
+     After all 3 phases of the diagnostic process, each area can be rated on a scale of 1 to 5, with 1 being healthy and 5 being the most
+     damaged (Table). Also included in this rating is an estimate of joint structural and mechanical stability, the condition of muscles of
+     mastication, and the status of the occlusion. From this information, a working diagnosis is made. The more common ortho-paedic
+     diagnoses associated with the TMJ are as follows: physical damage to ligaments, disc subluxation, osteoarthritis, hypercalcification of
+     bone, adaptive remodeling of bone, synovitis, joint effusion, marrow edema, avascular necrosis, joint adhesions, and fibrous ankylosis.
+     Certain orthopaedic textbooks2,4 are excellent references. The TMJ will undergo the same disease processes as other synovial joints.
+
+     Example: A single patient with a clicking joint may present with the following:
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C           Page 7 of 9
+Loading “Print Article”                                                                                                             6/29/08 7:34 AM
+
+
+
+     (1) right TMJ disc subluxation—Piper 4a, anterior lateral, large disc (size, mass)
+
+     (2) synovitis
+
+     (3) joint effusion
+
+     (4) partial loss of synovial tissue secondary to disc subluxation
+
+     (5) early OA (active), secondary to synovial damage and load changes to the TMJ
+
+     (6) slight malocclusion secondary to change in condylar position from disc subluxation.
+
+     Treatments can be customized for the specific problems uncovered in the diagnostic process.
+
+     Conclusion
+
+     Not all patients labeled with TMD will have clearly identified damage to the structures of the TMJ. If a joint is damaged, the clinician
+     should determine which structures are damaged (ligaments, disc, articular cartilage, synovium, cortical bone, and cancellous
+     bone/marrow). To obtain a diagnosis 2 radiographic views of a damaged joint, 90º to each other, are the minimal medical standard of
+     care. If meniscal damage is suspected, a MRI scan is required. CT scans combined with MRI scans are ideal to fully evaluate the
+     condition of the TMJ. The clinician should determine not only what is damaged, but also the type and extent of damage. By utilizing the
+     information provided by the CT and MRI scans, a more accurate diagnosis can be obtained. Specific orthopaedic diagnoses for
+     damaged joints will help clinicians who treat these patients provide specific treatments and there-by improve prognosis and treatment
+     outcomes.
+
+
+     References
+
+     1. National Institutes of Health Technology Assessment Conference on Management of Temporomandibular Disorders. Bethesda,
+     Maryland, April 29-May 1, 1996. Proceedings. Oral Surg Oral Med Oral Pathol Oral Radiol Endod. 1997:83:49-183.
+
+     2. Salter RB. Textbook of Disorders and Injuries of the Musculoskeletal System. 3rd ed. Baltimore, Md: Lippincott Williams & Wilkins;
+     1999: 17-18,61,72,19,35-37,22-23,39,31-35,14.
+
+     3. American Academy of Orthopaedic Surgeons. Essentials of Musculoskeletal Imaging. Rosemont, Ill: American Academy of
+     Orthopaedic Surgeons; 2003: 5,15.
+
+     4. Ruddy S, Harris ED Jr, Sledge CB. Kelly’s Textbook of Rheumatology. 6th ed. Philadelphia, Pa: WB Saunders; 2001:622,8,13,1653.
+
+     5. Gibbs SJ, Simmons HC 3rd. A protocol for magnetic resonance imaging of the temporomandibular joints. Cranio. 1998;16:236-241.
+
+     6. Mahan PE, Alling CC. Facial Pain. 3rd ed. Philadelphia, Pa: Lea & Febiger; 1991:198.
+
+     7. Okeson JP. Management of Temporomandibular Disorders and Occlusion. 3rd ed. St Louis, Mo: CV Mosby; 1993;4:91-108.
+
+     8. Tasaki MM, Westesson PL, Isberg AM, et al. Classification and prevalence of temporomandibular joint disk displacement in patients
+     and symptom-free volunteers. Am J Orthod Dentofacial Orthop. 1996;109:249-262.
+
+     9. Nitzan DW. The process of lubrication impairment and its involvement in temporomandibular joint disc displacement: a theoretical
+     concept. J Oral Maxillofac Surg. 2001;59:36-45.
+
+     10. Piper MA. Piper classification of TMJ disorders. TMJ Surgery.com Web site. Available at: http://www.piperclinic.com/ classifi.htm.
+     Accessed October 1, 2005.
+
+     11. Merida Velasco JR. Vascular canals. A model for the mandibular condyle growth [in Spanish]. An R Acad Nac Med (Madr).
+     2002;119(1):41-50.
+
+     12. Standring S, ed. Gray’s Anatomy. 39th ed. New York, NY: Elsevier Churchill Livingstone; 2005:97-100.
+
+     13. Larheim TA, Westesson PL, Hicks DG, et al. Osteonecrosis of the temporomandibular joint: correlation of magnetic resonance
+     imaging and histology. J Oral Maxillofac Surg. 1999:57;888-898.
+
+     14. Davidson SL. Doppler auscultation: an aid in temporomandibular joint diagnosis. J Craniomandib Disord. 1988;2:128-132.
+
+     15. Ishigaki S, Bessette RW, Maruyama T. Diagnostic accuracy of TMJ vibration analysis for internal derangement and/or degenerative
+     joint disease. Cranio. 1994;12:241-245.
+
+
+
+     Dr. Droter maintains a private practice in Bowie, Md, with an emphasis on treating patients with disorders of the temporomandibular
+     joint and restoring severely damaged dentition. He is a visiting faculty member at Children’s Hospital in Washington, DC, teaching
+     temporomandibular disorders to the orthodontic residents. He can be reached at jrdroter@mac.com or by visiting jrdroter.com.
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C             Page 8 of 9
+Loading “Print Article”                                                                                                               6/29/08 7:34 AM
+
+
+
+
+                                   To comment on this article, visit the discussion board at dentistrytoday.com.
+
+                                                              Continuing Education Test No. 71.2
+
+
+
+     After reading this article, the individual will learn:
+
+     • the anatomical structures of the temporomandibular joint that are subject to damage, and
+     • an orthopaedic approach to diagnosing temporomandibular disorders.
+
+
+
+     1. The TMJ is what type of joint?
+     a. synchrondosis
+     b. syndesmosis
+     c. synovial
+     d. synostosis
+
+     2. Soft tissues of the TMJ are best evaluated using ______.
+     a. plain radiographs
+     b. panoramic radiographs
+     c. CT scans
+     d. MRI
+
+     3. The TMJ is the only joint in the body that ______.
+     a. rotates
+     b. slides
+     c. pivots
+     d. all of the above
+
+     4. The tissue that provides nutrition and lubrication to the internal aspect of the TMJ is ______.
+     a. cartilage
+     b. fibrocartilage
+     c. synovium
+     d. lubricin
+
+     5. The minimum standard for radiographically evaluating any joint is ______.
+     a. panoramic radiograph
+     b. 2 radiographic views offset at 90°
+     c. CT scans
+     d. cephalometric radiograph
+
+     6. On a T2 image of an MRI scan, a low- intensity signal indicates ______.
+     a. healthy bone marrow
+     b. necrotic bone
+     c. inflamed bone marrow
+     d. thin cortical bone
+
+     7. The blood supply to the cortical bone is derived from ______.
+     a. periosteum on the outside of the bone
+     b. marrow on the inside of the bone
+     c. both a and b
+     d. none of the above
+
+     8. The following statement is FALSE:
+     a. Periosteum does not continue into a joint.
+     b. The penetrating blood vessels into the marrow end at the joint periphery.
+     c. CT scans are best for determining the health of cortical bone.
+     d. Cartilage covering bone is best seen with either MRI or CT scans.
+
+
+     To submit Continuing Education answers, download the answer sheet in PDF format (click Download Now button below). Print the
+     answer sheet, identify the article (this one is Test 71.2), place an X in the box corresponding to the answer you believe is correct, and
+     mail to Dentistry Today Department of Continuing Education (complete address is on the answer sheet).
+
+
+
+
+http://dentistrytoday.com/ME2/Segments/Publications/Print.asp?Module=Publications::Article&id=0394C8842E1744D681E036C599243D0C              Page 9 of 9
+

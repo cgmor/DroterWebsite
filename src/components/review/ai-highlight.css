@@ -1,0 +1,405 @@
+/*
+ * "Highlight AI text" review overlay (src/components/review/AiHighlight.tsx).
+ * Every rule here is inert until the overlay is on: page marks key off
+ * html[data-prov-on] and data-prov attributes / named highlights that only
+ * exist while it is on. Marks are outlines, text backgrounds and underlines,
+ * so they never change text or layout.
+ */
+
+/* ── Block outlines ─────────────────────────────────────────────── */
+
+html[data-prov-on] [data-prov="ai"]:not([data-prov-outer]) {
+  outline: 1.5px solid rgb(217 119 6 / 0.85);
+  outline-offset: 2px;
+}
+
+html[data-prov-on] [data-prov="label"]:not([data-prov-outer]) {
+  outline: 1px dotted rgb(217 119 6 / 0.6);
+  outline-offset: 1px;
+}
+
+html[data-prov-on] [data-prov]:focus-visible {
+  outline: 2px solid #2a6fdb;
+  outline-offset: 2px;
+}
+
+/* ── Text marks: the CSS Custom Highlight API paints only each block's own
+      text nodes, so a sentence of his inside an AI-written card stays clean. ── */
+
+::highlight(prov-ai) {
+  background-color: rgb(255 176 0 / 0.34);
+}
+
+::highlight(prov-edited) {
+  text-decoration: underline dotted rgb(22 163 74);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+html[data-prov-tint] ::highlight(prov-his) {
+  background-color: rgb(34 197 94 / 0.24);
+}
+
+/* Fallback for browsers without CSS.highlights: mark the whole block. */
+html[data-prov-on]:not([data-prov-hl]) [data-prov="ai"]:not([data-prov-outer]) {
+  box-shadow: inset 0 0 0 100vmax rgb(255 176 0 / 0.24);
+}
+
+html[data-prov-on]:not([data-prov-hl]) [data-prov="edited"] {
+  text-decoration: underline dotted rgb(22 163 74);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+html[data-prov-tint]:not([data-prov-hl]) [data-prov="his"]:not([data-prov-outer]) {
+  box-shadow: inset 0 0 0 100vmax rgb(34 197 94 / 0.18);
+}
+
+/* ── The switch in the review bar ───────────────────────────────── */
+
+.provx-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: -4px 0;
+  padding: 4px 9px 4px 5px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.provx-switch:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+
+.provx-switch:focus-visible {
+  outline: 2px solid #8fb2f2;
+  outline-offset: 2px;
+}
+
+.provx-track {
+  position: relative;
+  flex: none;
+  width: 26px;
+  height: 15px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.24);
+}
+
+.provx-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+[aria-checked="true"] > .provx-track {
+  background: #f59e0b;
+}
+
+[aria-checked="true"] > .provx-track > .provx-thumb {
+  transform: translateX(11px);
+}
+
+.provx-switch[aria-checked="true"] {
+  color: #fff;
+}
+
+/* ── Legend panel ───────────────────────────────────────────────── */
+
+.provx-legend {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483000;
+  width: 328px;
+  max-width: calc(100vw - 32px);
+  box-sizing: border-box;
+  padding: 14px 16px 12px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 14px;
+  background: #111418;
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 0.25),
+    0 22px 52px -18px rgb(0 0 0 / 0.6);
+  color: rgb(255 255 255 / 0.72);
+  font: 12px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+
+.provx-legend *,
+.provx-legend *::before,
+.provx-legend *::after {
+  box-sizing: border-box;
+}
+
+.provx-legend[data-collapsed] {
+  width: auto;
+  padding: 0;
+  border-radius: 999px;
+}
+
+.provx-legend button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.provx-legend button:focus-visible {
+  outline: 2px solid #8fb2f2;
+  outline-offset: 2px;
+}
+
+.provx-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+}
+
+.provx-title {
+  margin: 0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.provx-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: -4px -6px -4px 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.provx-icon:hover {
+  background: rgb(255 255 255 / 0.08);
+  color: #fff;
+}
+
+.provx-bar {
+  display: flex;
+  height: 8px;
+  margin: 0 0 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+}
+
+.provx-bar > span {
+  display: block;
+  height: 100%;
+}
+
+.provx-bar-his {
+  background: #22c55e;
+}
+
+.provx-bar-edited {
+  background: #86efac;
+}
+
+.provx-bar-ai {
+  background: #f59e0b;
+}
+
+.provx-bar-label {
+  background: repeating-linear-gradient(135deg, #f59e0b 0 2px, rgb(245 158 11 / 0.35) 2px 4px);
+}
+
+.provx-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.provx-table th,
+.provx-table td {
+  padding: 4px 0;
+  font-weight: 400;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.provx-table th[scope="row"] {
+  width: 100%;
+  text-align: left;
+  white-space: normal;
+}
+
+.provx-table td {
+  padding-left: 10px;
+}
+
+.provx-table .provx-share {
+  color: #fff;
+  font-weight: 600;
+}
+
+.provx-cat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.provx-sw {
+  display: inline-block;
+  flex: none;
+  width: 18px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.provx-sw-his {
+  border: 1px solid rgb(255 255 255 / 0.35);
+}
+
+.provx-sw-his[data-on] {
+  border-color: rgb(34 197 94 / 0.8);
+  background: rgb(34 197 94 / 0.45);
+}
+
+.provx-sw-edited {
+  height: auto;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+  text-align: center;
+  text-decoration: underline dotted #22c55e;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.provx-sw-ai {
+  outline: 1.5px solid rgb(245 158 11 / 0.95);
+  outline-offset: 1px;
+  background: rgb(255 176 0 / 0.55);
+}
+
+.provx-sw-label {
+  outline: 1px dotted rgb(245 158 11 / 0.9);
+  outline-offset: 1px;
+}
+
+.provx-note {
+  color: rgb(255 255 255 / 0.45);
+}
+
+.provx-cat .provx-note {
+  display: block;
+  font-size: 11px;
+}
+
+.provx-total {
+  margin: 6px 0 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  color: rgb(255 255 255 / 0.55);
+}
+
+.provx-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.provx-actions .provx-switch {
+  margin: 0 0 0 -5px;
+}
+
+.provx-btn {
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #111418 !important;
+  font-weight: 600 !important;
+}
+
+.provx-btn:hover {
+  background: #e7ebf0;
+}
+
+.provx-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.provx-status {
+  min-height: 1.45em;
+  margin: 8px 0 0;
+  color: #fbbf24;
+}
+
+.provx-foot {
+  margin: 2px 0 0;
+  color: rgb(255 255 255 / 0.4);
+  font-size: 11px;
+}
+
+.provx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px 9px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.provx-pill strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.provx-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .provx-thumb {
+    transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .provx-track {
+    transition: background-color 160ms ease;
+  }
+}
+
+@media (forced-colors: active) {
+  .provx-track,
+  .provx-thumb,
+  .provx-sw {
+    border: 1px solid CanvasText;
+  }
+
+  [aria-checked="true"] > .provx-track > .provx-thumb {
+    background: Highlight;
+  }
+}

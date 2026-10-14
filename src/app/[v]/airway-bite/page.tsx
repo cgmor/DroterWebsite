@@ -16,17 +16,14 @@ import { airwayBite, applianceGuide, brand, distributor } from "@/content/aps";
 import s from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: `${airwayBite.shortName}: the chairside protocol`,
-  description: `${airwayBite.summary} The nine steps, synced to the narrated tutorial, with the one-page instructions and ordering through ${distributor.name}.`,
+  title: airwayBite.name,
+  description: `${airwayBite.purpose} ${airwayBite.summary}`,
 };
-
-/** "Before you begin — take a digital scan…" → "Take a digital scan…" (the section heading carries the first half). */
-const prereq = airwayBite.prerequisite.replace(/^Before you begin\s*[—–-]\s*/, "");
-const prereqLine = prereq.charAt(0).toUpperCase() + prereq.slice(1);
 
 const kitNotes = airwayBite.kit.notes.map((n) => n.replace("Single Patient Use Only", "Single patient use only"));
 const mad = applianceGuide.groups.find((g) => g.indication === "Airway")!.items[0];
-const stepRange = (ph: (typeof airwayBite.phases)[number]) => `${ph.steps[0].n}–${ph.steps[ph.steps.length - 1].n}`;
+/** His slide heading over the Class 2 / Class 3 rows ("To Accommodate Different Occlusions"). */
+const fit = airwayBite.phases.find((ph) => ph.id === "fit")!;
 
 export default async function AirwayBitePage({ params }: { params: Promise<{ v: string }> }) {
   const { v } = await params;
@@ -62,7 +59,8 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
                 height={2000}
                 loading="eager"
                 fetchPriority="high"
-                sizes="(min-width: 760px) 400px, 1px"
+                sizes="(min-width: 760px) 520px, 1px"
+                quality={90}
                 className={s.topRender}
               />
             </div>
@@ -76,7 +74,7 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
             <h2 className="t-h2" id="before-title">
               Before you begin
             </h2>
-            <p className={s.prereq}>{prereqLine}</p>
+            <p className={s.prereq}>{airwayBite.prerequisite}</p>
           </div>
 
           <div className={s.beforeGrid}>
@@ -90,7 +88,8 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
                     src="/aps/stills/kit-clean.webp"
                     alt={`The ${airwayBite.kitName} laid out: a pencil, the Airway Bite and the APS card ruler.`}
                     fill
-                    sizes="(min-width: 900px) 30vw, 40vw"
+                    sizes="(min-width: 900px) 560px, 70vw"
+                    quality={90}
                     className={s.kitImg}
                   />
                 </div>
@@ -118,7 +117,7 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
 
             <section aria-labelledby="occ-title">
               <h3 className={s.colTitle} id="occ-title">
-                Different occlusions
+                {fit.title}
               </h3>
               <SpecRows className={s.occ} rows={airwayBite.occlusion.map((o) => ({ label: o.label, value: o.body }))} />
             </section>
@@ -127,24 +126,16 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
       </div>
 
       <Section id="protocol" labelledBy="protocol-title" className={s.protocol}>
-        <SectionHead
-          id="protocol-title"
-          title="Fit, map, lock, capture"
-          lead="Four phases, nine steps. Choose a step and the tutorial plays from it; the step on screen highlights as the video runs."
-          layout="split"
-          className={s.protocolHead}
-        />
+        <SectionHead id="protocol-title" title="Instructions for use" layout="split" className={s.protocolHead} />
         <TutorialPlayer withSteps />
       </Section>
 
       <AirwayBiteInDetail />
 
-      <Section labelledBy="adv-title">
-        <div className={s.advGrid}>
+      {/* Opens on his purpose line; the advantages are his own list. */}
+      <Section as="div">
+        <section className={s.advGrid} aria-label="Advantages">
           <header className={s.advHead}>
-            <h2 className="t-h2" id="adv-title">
-              Quicker than a bite gauge, and nothing to sterilize
-            </h2>
             <p className={`t-lead ${s.advLead}`}>{airwayBite.purpose}</p>
             <div className={s.advStill}>
               <Image
@@ -152,27 +143,28 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
                 alt="Front view of the Airway Bite in place between the upper and lower front teeth."
                 width={1920}
                 height={816}
-                sizes="(min-width: 1000px) 40vw, 100vw"
+                sizes="(min-width: 1000px) 560px, 100vw"
+                quality={90}
                 className={s.advImg}
               />
             </div>
           </header>
-          <dl className={s.advList}>
+          {/* Each row is his sentence; a second line only where he gave one. */}
+          <ul className={s.advList}>
             {airwayBite.advantages.map((a) => (
-              <div className={s.advRow} key={a.title}>
-                <dt>{a.title}</dt>
-                <dd>{a.body}</dd>
-              </div>
+              <li className={s.advRow} key={a.title}>
+                <p className={s.advTitle}>{a.title}</p>
+                {a.body && <p className={s.advBody}>{a.body}</p>}
+              </li>
             ))}
-          </dl>
-        </div>
+          </ul>
+        </section>
       </Section>
 
       <Section tone="mist" labelledBy="ifu-title">
         <SectionHead
           id="ifu-title"
-          title="From the instructions for use"
-          lead={airwayBite.pdf.note}
+          title={airwayBite.pdf.label}
           layout="split"
           actions={
             <ButtonLink href={airwayBite.pdf.href} variant="secondary" icon="download" target="_blank" rel="noopener">
@@ -189,7 +181,7 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
                 alt={ph.imageAlt}
                 width={1600}
                 height={800}
-                caption={`${ph.title}, steps ${stepRange(ph)}`}
+                caption={ph.title}
                 sizes="(min-width: 640px) 50vw, 100vw"
               />
             </li>
@@ -200,11 +192,10 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
       <Section tone="night" labelledBy="order-title" className={s.order}>
         <div className={s.orderGrid}>
           <div>
-            <h2 className={`t-h1 ${s.orderTitle}`} id="order-title">
-              Order the {airwayBite.kitName}
+            <h2 className={`t-h2 ${s.orderTitle}`} id="order-title">
+              {distributor.note}
             </h2>
             <p className={`t-lead ${s.orderLead}`}>{airwayBite.kit.line}</p>
-            <p className={s.orderNote}>{distributor.note}</p>
             <div className={`actions ${s.orderActions}`}>
               <ButtonLink href={distributor.url}>{distributor.cta}</ButtonLink>
             </div>
@@ -215,7 +206,8 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
               alt={`The ${airwayBite.name}, side view`}
               width={2000}
               height={2000}
-              sizes="(min-width: 900px) 40vw, 90vw"
+              sizes="(min-width: 900px) 620px, 120vw"
+              quality={90}
               className={s.orderRender}
             />
           </div>
@@ -232,7 +224,7 @@ export default async function AirwayBitePage({ params }: { params: Promise<{ v: 
           <div className={s.nextBody}>
             <p>{airwayBite.summaryLong[1]}</p>
             <Link href={href(v, routes.appliances)} className="lnk">
-              Choose an appliance by indication
+              {applianceGuide.title}
               <ArrowRight size={16} className="lnk-icon" />
             </Link>
           </div>

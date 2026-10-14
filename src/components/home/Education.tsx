@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { understanding } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
 import Disclosure from "@/components/site/Disclosure";
@@ -10,13 +11,37 @@ const def = understanding.definition;
 /** "TMDs: what are the choices? (190 diagnoses, 7 categories)", from his lecture. */
 const choicesSlide = understanding.approaches.figures[0];
 
+/**
+ * A figure and its sentence. When the sentence already contains the figure
+ * (his whole sentence, e.g. "The majority of patients (70%) …"), the figure is
+ * emphasised where it stands and never printed twice; otherwise it leads.
+ */
+export function Figured({ value, label, className }: { value: string; label: string; className: string }): ReactNode {
+  const at = label.indexOf(value);
+  if (at >= 0) {
+    return (
+      <>
+        {label.slice(0, at)}
+        <span className={className}>{value}</span>
+        {label.slice(at + value.length)}
+      </>
+    );
+  }
+  return (
+    <>
+      <span className={className}>{value}</span> {label}
+      {/[.!?]$/.test(label) ? "" : "."}
+    </>
+  );
+}
+
 /** 40 / 190+ / 7, set as three lines of a passage rather than stat tiles. */
 export function CountsPassage({ className }: { className?: string }) {
   return (
     <div className={[s.counts, className].filter(Boolean).join(" ")}>
       {def.counts.map((c) => (
         <p key={c.value}>
-          <span className={`num ${s.countNum}`}>{c.value}</span> {c.label}.
+          <Figured value={c.value} label={c.label} className={`num ${s.countNum}`} />
         </p>
       ))}
     </div>
@@ -36,15 +61,16 @@ export function Thesis() {
 }
 
 /**
- * V1's turn from the device to the diagnosis: a display heading, his thesis,
- * then the counts beside his own "190 diagnoses, 7 categories" slide.
+ * V1's turn from the device to the diagnosis: his heading "TMD and Facial
+ * Pain" (drdroter.com/about-tmd), his thesis, then the counts beside his own
+ * "190 diagnoses, 7 categories" slide.
  */
 export function DiagnosisTurn({ v }: { v: VersionId }) {
   return (
     <Section labelledBy="turn-title">
       <div className={s.turnTop}>
-        <h2 id="turn-title" className={`t-display ${s.turnTitle}`}>
-          Diagnosis before device.
+        <h2 id="turn-title" className={`t-h2 ${s.turnTitle}`}>
+          TMD and Facial Pain
         </h2>
         <Thesis />
       </div>
@@ -57,7 +83,7 @@ export function DiagnosisTurn({ v }: { v: VersionId }) {
             </ButtonLink>
           </div>
         </div>
-        <Figure {...choicesSlide} caption="From Dr. Droter’s TMD lecture: 190 diagnoses in 7 categories." />
+        <Figure {...choicesSlide} caption="From Dr. Droter’s TMD lecture." />
       </div>
     </Section>
   );
@@ -72,7 +98,7 @@ export function NotOneDisease({ v }: { v: VersionId }) {
     <Section labelledBy="nod-title">
       <div className={s.nodTop}>
         <div>
-          <h2 id="nod-title" className="t-h1">
+          <h2 id="nod-title" className="t-h2">
             {def.heading}
           </h2>
           <p className={`t-lead ${s.nodLead}`}>{def.paragraphs[1]}</p>

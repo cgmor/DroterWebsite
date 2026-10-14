@@ -15,7 +15,7 @@ export default function ResourceList({ items, className }: { items: Resource[]; 
             <a href={r.href} target="_blank" rel="noopener" className={s.resLink}>
               <span className={s.resMain}>
                 <span className={s.resTitle}>{r.title}</span>
-                <span className={s.resDesc}>{r.description}</span>
+                {r.description && <span className={s.resDesc}>{r.description}</span>}
               </span>
               {r.meta && <span className={s.resMeta}>{r.meta}</span>}
               <ArrowUpRight size={20} className={s.resArrow} />
@@ -25,7 +25,7 @@ export default function ResourceList({ items, className }: { items: Resource[]; 
             <div className={s.resLink}>
               <span className={s.resMain}>
                 <span className={s.resTitle}>{r.title}</span>
-                <span className={s.resDesc}>{r.description}</span>
+                {r.description && <span className={s.resDesc}>{r.description}</span>}
               </span>
               {r.meta && <span className={s.resMeta}>{r.meta}</span>}
             </div>

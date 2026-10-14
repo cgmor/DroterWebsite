@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ApsLogo from "@/components/shared/ApsLogo";
 import { contact, distributor } from "@/content/aps";
+import h from "./header.module.css";
 import { ArrowUpRight, Close, Menu } from "./icons";
 import { AUDIENCES, NAV, href, tel, type VersionId } from "./links";
 
@@ -93,11 +94,10 @@ export default function Header({ v }: { v: VersionId }) {
         </nav>
 
         <div className="hd-end">
-          <AudienceSwitch v={v} rest={rest} className="hd-aud" />
-          <a href={distributor.url} target="_blank" rel="noopener" className="btn btn-primary btn-sm hd-order">
-            <span className="btn-label">
-              Order<span className="sr-only"> through {distributor.name} (opens in a new tab)</span>
-            </span>
+          <AudienceSwitch v={v} rest={rest} className={`hd-aud ${h.aud}`} />
+          <a href={distributor.url} target="_blank" rel="noopener" className={`btn btn-primary btn-sm hd-order ${h.order}`}>
+            <span className="btn-label">{distributor.cta}</span>
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
           <button
             ref={toggleRef}

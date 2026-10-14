@@ -21,7 +21,7 @@ export default function PracticePanel({ surface = "mist", portrait = true, id = 
       <div className="pp-main">
         {portrait && (
           <div className="pp-portrait">
-            <Image src={doctor.headshot} alt={doctor.headshotAlt} width={1400} height={1699} sizes="120px" className="pp-img" />
+            <Image src={doctor.headshot} alt={doctor.headshotAlt} width={1991} height={2416} sizes="120px" quality={90} className="pp-img" />
           </div>
         )}
         <div className="pp-copy">

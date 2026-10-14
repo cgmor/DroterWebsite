@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { Close, Expand } from "./icons";
 
 type Props = {
@@ -24,6 +24,10 @@ type Props = {
  * Dr. Droter's lecture slides and clinical illustrations as figure plates.
  * Click (or Enter) to enlarge in a modal lightbox; Escape or the backdrop closes it.
  * Spread a tmd.ts `Figure` straight in: <Figure {...fig} />.
+ *
+ * In the page, a figure is never shown wider than half its source width
+ * (`--fig-max`), so every pixel on a 2× screen is a real one: a 1200px slide
+ * stops at 600px, a 1024px illustration at 512px. The lightbox shows it larger.
  */
 export default function Figure({
   src,
@@ -39,12 +43,13 @@ export default function Figure({
   const dialog = useRef<HTMLDialogElement>(null);
   const open = () => dialog.current?.showModal();
   const close = () => dialog.current?.close();
+  const maxStyle = { "--fig-max": `${Math.round(width / 2)}px` } as CSSProperties;
 
   return (
-    <figure className={["fig", `fig-${variant}`, className].filter(Boolean).join(" ")}>
+    <figure className={["fig", `fig-${variant}`, className].filter(Boolean).join(" ")} style={maxStyle}>
       <button type="button" className="fig-trigger" onClick={open} aria-haspopup="dialog">
         <span className="fig-mat">
-          <Image src={src} alt={alt} width={width} height={height} sizes={sizes} preload={preload} className="fig-img" />
+          <Image src={src} alt={alt} width={width} height={height} sizes={sizes} quality={90} preload={preload} className="fig-img" />
         </span>
         <span className="fig-zoom" aria-hidden="true">
           <Expand size={16} />
@@ -62,7 +67,7 @@ export default function Figure({
         }}
       >
         <div className="lb-body">
-          <Image src={src} alt={alt} width={width} height={height} sizes="100vw" className="lb-img" />
+          <Image src={src} alt={alt} width={width} height={height} sizes="100vw" quality={90} className="lb-img" />
           {caption && <p className="lb-cap">{caption}</p>}
         </div>
         <button type="button" className="lb-close" onClick={close} aria-label="Close" autoFocus>

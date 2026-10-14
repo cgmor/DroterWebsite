@@ -22,10 +22,7 @@ export default function SignsChecklist({ showHeading = true, id = "signs" }: Pro
   const count = checked.filter(Boolean).length;
   const total = s.items.length;
 
-  const line =
-    count === 0
-      ? "Nothing checked yet."
-      : `${count} of ${total} checked. Worth mentioning to your dentist.`;
+  const line = count === 0 ? "Nothing checked yet." : `${count} of ${total} checked.`;
 
   return (
     <div className="sc" id={id}>

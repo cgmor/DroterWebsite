@@ -45,3 +45,6 @@ next-env.d.ts
 
 # impeccable review captures (large, regenerable)
 /.impeccable/review/
+
+# original PDFs used only to extract Dr. Droter's text (the .txt extracts in source-text/ are kept)
+/Assets/APSleep/source-pdf/

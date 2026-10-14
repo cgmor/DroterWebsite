@@ -32,7 +32,8 @@ export const metadata: Metadata = {
     default: `${brand.name}: the ${airwayBite.shortName} and ${doctor.shortName}’s TMD education`,
     template: `%s | ${brand.name}`,
   },
-  description: `${airwayBite.summary} With ${doctor.name}’s education on TMD and facial pain, for dentists and patients.`,
+  /* His own words: the 2021 apsleep.com line and his advantages email. */
+  description: `${brand.tagline} ${airwayBite.summary}`,
   applicationName: brand.name,
 };
 

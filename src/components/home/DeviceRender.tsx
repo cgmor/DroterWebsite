@@ -66,6 +66,7 @@ export default function DeviceRender({ view = "three-quarter", alt, sizes, eager
           alt={alt}
           fill
           sizes={sizes}
+          quality={90}
           loading={eager ? "eager" : undefined}
           fetchPriority={eager ? "high" : undefined}
           className={s.renderImg}

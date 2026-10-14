@@ -13,7 +13,7 @@ type Props = {
   below?: ReactNode;
   tone?: Tone;
   mediaSide?: "right" | "left";
-  /** `display` (64–96px) for home heroes, `h1` for inner pages. */
+  /** `display` (40–64px) for home heroes, `h1` for inner pages. */
   size?: "display" | "h1";
   /** Fill the first viewport (minus the header). */
   tall?: boolean;

@@ -93,14 +93,6 @@ export default function Footer({ v }: { v: VersionId }) {
 
         <div className="ft-base">
           <p>© 2026 {brand.legalName}</p>
-          <p>
-            {doctor.name} · {doctor.affiliation}
-          </p>
-          <a href={distributor.url} target="_blank" rel="noopener" className="ft-link">
-            Ordering: {distributor.name}
-            <ArrowUpRight size={14} className="ft-ext" />
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
         </div>
       </div>
     </footer>

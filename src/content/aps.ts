@@ -32,15 +32,17 @@ export const brand = {
 export const distributor = {
   name: "Great Lakes Dental",
   url: "https://greatlakesdentaltech.com/",
-  cta: "Order through Great Lakes Dental",
-  note: "ArrowPath Sleep appliances are available from Great Lakes Dental.",
+  /** His IFU: "Order from: Great Lakes Dental". */
+  cta: "Order from Great Lakes Dental",
+  note: "Order from: Great Lakes Dental",
 };
 
 export const contact = {
   officePhone: "301-805-9400",
   company: {
     name: "ArrowPath Sleep LLC",
-    lines: ["8230 Leesburg Pike, Suite 660", "Vienna, VA 22182"],
+    /** As printed on his kit label. */
+    lines: ["8230 Leesburg Pike Ste 660", "Vienna, VA 22182"],
   },
   practice: {
     name: "John R. Droter, DDS",
@@ -73,184 +75,173 @@ export const airwayBite = {
   kitName: "APS Airway Bite Kit",
   category: "Bite registration",
 
-  /** His own framing (Aug 14 marketing email / IFU). */
+  /*
+   * Everything below is Dr. Droter's own wording unless marked. Sources:
+   *  - IFU = his one-page instructions PDF (APS Airway Bite Instructions 26.8, author JRDroter)
+   *  - IFU slides = the four instruction slides he made (text transcribed verbatim)
+   *  - Email = his Aug 14 2026 "Marketing" email
+   *  - Narration = his voiceover on the tutorial animation
+   *  - Label = the kit label he approved
+   * Only obvious typos are corrected ("loose" → "lose", "rest on hold" → "rest and hold").
+   */
+
+  /** Email + IFU slide 1. */
   purpose:
-    "To make an airway device you need to record the best jaw position for the airway and relate that position to the lab.",
+    "To make airway devices you need to record the best jaw position for the airway and relate this to the lab.",
 
-  /** Products page, verbatim. */
-  summary:
-    "The Airway Bite records the protrusive bite registration that a mandibular advancement device is built around.",
+  /** Email (his advantages list). */
+  summary: "Easier and quicker to use. Disposable. No need to sterilize parts.",
 
+  /** IFU slides 2 and 4. */
   summaryLong: [
-    "The device is tried in the mouth and relined with silicone, then used to map the patient’s full range of jaw movement — typically 10–12 mm from fully retruded to fully protruded.",
-    "Once the target forward position is identified and held with flowable composite, the bite is captured by digital scan and sent to the lab to fabricate the appliance. A silicone bite registration can be taken instead if no scanner is available.",
+    "Measure and mark the amount of protrusive you want to build into the Mandibular Advancement Device. 50% is typically a good place to start.",
+    "Take digital scan bite with anterior stop in place and jaw positioned forward. Send to lab digitally. Can also be used to take silicone bite registration.",
   ],
 
-  useWhen: "Use it when fabricating a MAD for the Airway indication.",
+  /** IFU slide 2. */
+  useWhen: "Measure and mark the amount of protrusive you want to build into the Mandibular Advancement Device.",
 
-  /** The airway story, from the voiceover of the tutorial (Dr. Droter). */
+  /** Narration (titles are fragments of the same narration). */
   airwayStory: [
     {
-      title: "While you sleep",
-      body: "The airway can become very narrow, and it is hard to get air through.",
+      title: "When you’re sleeping",
+      body: "When you’re sleeping, your airway in patients can be very narrow and you have trouble getting air through.",
     },
     {
-      title: "Move the jaw forward",
-      body: "With the jaw further forward, the airway is more open.",
+      title: "Position the jaw further forward",
+      body: "But if you move the jaw, position the jaw further forward, the airway is more open. It gets rid of snoring, can get rid of obstructive sleep apnea.",
     },
     {
-      title: "How far forward?",
-      body: "Too far is uncomfortable. Not far enough, and the airway does not open. The Airway Bite finds the position in between — and records it for the lab.",
+      title: "How far do you move it forward?",
+      body: "The question is, how far do you move it forward? Forward too far, it’s uncomfortable, but not far enough, the airway does not open.",
     },
   ],
 
-  /** Dr. Droter's advantages list (Aug 14 — Marketing), lightly copy-edited. */
+  /** Email (his advantages list), IFU slides and the meeting transcript. Title = his sentence. */
   advantages: [
-    {
-      title: "About five minutes, chairside",
-      body: "Easier and quicker to use than a traditional bite gauge.",
-    },
-    {
-      title: "Disposable",
-      body: "Single patient use. Nothing to sterilize.",
-    },
-    {
-      title: "No parts to lose",
-      body: "No parts to lose or keep track of.",
-    },
-    {
-      title: "Muscles relaxed first",
-      body: "Patient tapping on the device relaxes the muscles before the airway bite is taken.",
-    },
-    {
-      title: "Digital or silicone",
-      body: "Capture the bite with an intraoral scan, or take a silicone bite registration.",
-    },
-    {
-      title: "Locks with composite",
-      body: "Flowable, light-cured composite holds the jaw in the forward position. Vertical is easy to change.",
-    },
+    { title: "Easier and quicker to use.", body: "Within five minutes I had the bite done." },
+    { title: "Disposable.", body: "No need to sterilize parts." },
+    { title: "No parts to lose or keep track of.", body: "" },
+    { title: "Patients tapping on device relaxes the muscles before taking the airway bite.", body: "" },
+    { title: "Send to lab digitally.", body: "Can also be used to take silicone bite registration." },
+    { title: "Jaw is now held stable in forward position.", body: "" },
   ],
 
+  /** Label. */
   kit: {
     contents: ["(1) APS Airway Bite", "(1) Ruler", "(1) Pencil"],
     notes: ["Single Patient Use Only", "Made in USA"],
-    line: "One single-use packet: the airway bite, a pencil and a card ruler. Nothing to sterilize.",
+    line: "APS Airway Bite Kit. Includes: (1) APS Airway Bite, (1) Ruler, (1) Pencil. Single Patient Use Only.",
     labelImage: "/aps/airway-bite/kit-label.jpg",
   },
 
-  /** What the clinic supplies. */
+  /** Materials named in his IFU, in his words. */
   youWillNeed: [
-    "Parkell Blu-Mousse Super Fast (or similar fast-set silicone)",
-    "Bonding agent and flowable composite",
-    "Curing light",
-    "Intraoral scanner — or bite registration silicone",
+    "Parkell Blu-Mousse Super Fast",
+    "Flowable composite",
+    "Digital scanner",
+    "Silicone, if not using a digital scanner",
   ],
 
-  prerequisite: "Before you begin — take a digital scan of the upper and lower jaws without a bite.",
+  /** IFU. */
+  prerequisite: "Prior to taking an airway bite take a Digital scan of the upper and lower jaws without a bite.",
 
+  /** IFU slide 1. */
   occlusion: [
-    {
-      label: "Class II",
-      body: "Device shifted back so it sits flush with the buccal surface of the front teeth.",
-    },
-    {
-      label: "Class III",
-      body: "Device shifted forward so the lingual surface of the front teeth touches the device.",
-    },
+    { label: "Class 2", body: "Device shifted back so flush with buccal surface of front teeth." },
+    { label: "Class 3", body: "Device shifted forward so lingual surface of front teeth touch device." },
   ],
 
-  /** Live apsleep.com/airway-bite copy, verbatim (Aug 2026). */
+  /** Phase titles and captions: IFU slides. Steps: IFU, verbatim. */
   phases: [
     {
       id: "fit",
-      eyebrow: "Phase one",
-      title: "Fit the device",
-      caption:
-        "APS Airway Bite with 4 mm anterior stop. Reline with Parkell Blu-Mousse Super Fast; a second reline can be done over the first if needed.",
+      eyebrow: "Steps 1–2",
+      title: "To Accommodate Different Occlusions",
+      caption: "APS Airway Bite Anterior Stop 4mm. Reline with Parkell Blu-Mousse Super Fast. Can do 2nd reline over the first if needed.",
       image: "/aps/airway-bite/ifu-1-occlusion-and-anterior-stop.jpg",
       imageAlt:
-        "ArrowPath Sleep Airway Bite positioned for Class II and Class III occlusions, alongside the 4 mm anterior stop seated on the upper front teeth.",
+        "Dr. Droter’s instruction slide: the Airway Bite shifted for Class 2 and Class 3 occlusions, and the 4 mm anterior stop.",
       steps: [
         {
           n: 1,
-          title: "Trial and positioning",
+          title: "Trial and Positioning",
           body: "Try the device in the mouth. Adjust forward for a Class III bite or backward for a Class II bite. Once positioned, note the orientation.",
         },
         {
           n: 2,
-          title: "Silicone application",
-          body: "Fill the device with Parkell Blu-Mousse Super Fast silicone. A second reline can be performed over the first if needed.",
+          title: "Silicone Application",
+          body: "Fill the device with Parkell Blu-Mousse super fast silicone. A second reline can be performed if needed.",
         },
       ],
     },
     {
       id: "map",
-      eyebrow: "Phase two",
-      title: "Map the range of movement",
+      eyebrow: "Steps 3–5",
+      title: "Mark furthest forward and back jaw position",
       caption:
-        "Mark the furthest forward and back jaw positions and the midline with a disposable pencil, then measure the protrusive amount to build into the mandibular advancement device.",
+        "Mark furthest forward and back jaw position and midline with disposable pencil. Measure and mark the amount of protrusive you want to build into the Mandibular Advancement Device. 50% is typically a good place to start.",
       image: "/aps/airway-bite/ifu-2-marking-and-measurement.jpg",
       imageAlt:
-        "Marking the furthest forward and back jaw positions and the midline with a disposable pencil, measuring protrusive movement on an MIO scale, and placing bonding agent on the device.",
+        "Dr. Droter’s instruction slide: marking the forward and back jaw positions with a pencil, measuring on the scale, and placing bonding agent.",
       steps: [
         {
           n: 3,
-          title: "Jaw movement assessment",
-          body: "With the device affixed to the upper teeth, have the patient move their jaw as far back as possible. Mark the position of the lower incisor and the midline with a disposable pencil. Repeat with the jaw moved as far forward as possible.",
+          title: "Jaw Movement Assessment",
+          body: "With the device affixed to the upper teeth, have the patient move their jaw as far back as possible. Mark the position of the lower incisor and the midline with a pencil. Repeat with the jaw moved as far forward as possible.",
         },
         {
           n: 4,
           title: "Measurement",
-          body: "Remove the device from the mouth and measure the total anterior–posterior movement. Typically this is around 10–12 mm.",
+          body: "Remove the device from the mouth and measure the total anterior-posterior movement. Typically, this is around 10-12 mm.",
         },
         {
           n: 5,
-          title: "Target position marking",
-          body: "Mark a point halfway between the most retruded and most protruded positions. This is the target position for jaw posture — roughly 50% of total movement is typically a good place to start.",
+          title: "Target Position Marking",
+          body: "Mark a point halfway between the most retruded and most protruded positions. This is the target position for jaw posture. Typically around 50% of the total movement is a good place to start.",
         },
       ],
     },
     {
       id: "lock",
-      eyebrow: "Phase three",
-      title: "Lock in the position",
+      eyebrow: "Steps 6–7",
+      title: "Move jaw into position",
       caption:
-        "Move the jaw into position, verify with tap-tap, then flow composite in front of the lower incisors and at the edge of the anterior stop, and cure. The jaw is now held stable in the forward position.",
+        "Move jaw into position, verify with tap tap, then flow flowable composite in front of lower incisors, cure. At edge of anterior stop flow some composite behind teeth and cure. Jaw is now held stable in forward position.",
       image: "/aps/airway-bite/ifu-3-tapping-and-composite.jpg",
       imageAlt:
-        "Flowing composite in front of and behind the lower incisors with the jaw tapped into the forward position, then curing to hold the jaw stable.",
+        "Dr. Droter’s instruction slide: tapping the jaw into position and flowing composite in front of and behind the lower incisors.",
       steps: [
         {
           n: 6,
-          title: "Patient tapping",
+          title: "Patient Tapping",
           body: "Instruct the patient to repeatedly tap their teeth on the airway bite, guiding them to tap at the midway forward mark.",
         },
         {
           n: 7,
-          title: "Flowable composite application",
-          body: "Once you are satisfied with the forward arcing position of the lower jaw, have the patient rest and hold there. Verify it is in the area you marked with the pencil. Apply flowable composite to the airway bite in front of and behind the lower incisors, then cure. This holds the jaw in the desired forward position.",
+          title: "Flowable Composite Application",
+          body: "Once you are satisfied with the forward arcing position of the lower jaw, have the patient rest and hold there. Verify it is in the area you marked with the pencil. Apply flowable composite to the airway bite in front of and behind the lower incisors. Cure the composite. This will hold the jaw in the desired forward position.",
         },
       ],
     },
     {
       id: "capture",
-      eyebrow: "Phase four",
-      title: "Capture and send to the lab",
+      eyebrow: "Steps 8–9",
+      title: "Send to lab digitally",
       caption:
-        "Take the digital scan bite with the anterior stop in place and the jaw positioned forward, then send to the lab digitally. The device can also be used to take a silicone bite registration.",
+        "Take digital scan bite with anterior stop in place and jaw positioned forward. Send to lab digitally. Can also be used to take silicone bite registration.",
       image: "/aps/airway-bite/ifu-4-digital-scan-and-final-device.jpg",
       imageAlt:
-        "Jaw held stable in the forward position, digital scan of the bite sent to the lab, and the resulting final mandibular advancement device.",
+        "Dr. Droter’s instruction slide: the digital scan bite, the final mandibular advancement device, and silicone bite registrations.",
       steps: [
         {
           n: 8,
-          title: "Digital scan",
-          body: "With the jaw held in the forward position, perform a digital scan of the bite. This aligns the upper and lower arch models so the dental lab can fabricate the sleep device.",
+          title: "Digital Scan",
+          body: "With the jaw held in the forward position, perform a digital scan of the bite. This will align the upper and lower arch models for the dental lab to fabricate the sleep device.",
         },
         {
           n: 9,
-          title: "Alternative: silicone bite",
+          title: "Alternative: Silicone Bite",
           body: "If not using a digital scanner, a silicone bite can be created by squirting silicone into the back of the device.",
         },
       ],
@@ -310,36 +301,38 @@ export const airwayBite = {
 
 /* ───────────────────────── Appliances ───────────────────────── */
 
+/**
+ * Indications and appliances: his product chart (apsleep.com/products) and his 2023
+ * "APS products" slide. Details are his slide wording; the Temp Anterior Stop line is
+ * from his Oct 2025 email; the title is his 2021 apsleep.com heading.
+ */
 export const applianceGuide = {
-  intro:
-    "APS devices are selected by clinical indication — what the patient is doing at night, and whether the airway is involved.",
-  title: "Choosing the correct night guard",
-  subtitle: "Four presentations, and the APS appliance indicated for each.",
+  intro: "",
+  title: "Are you wearing the correct night guard?",
+  subtitle: "",
   groups: [
     {
       indication: "Clenching",
       items: [
-        { name: "APS D-PAS", detail: "Diagnostic palatal anterior stop" },
-        { name: "APS Temp Anterior Stop", detail: "Heat-moldable, hard anterior stop" },
+        { name: "APS D-PAS", detail: "Diagnostic- Palatal Anterior Stop" },
+        { name: "APS Temp Anterior Stop", detail: "Heat moldable yet hard" },
       ],
       note: "Patient must have muscle inhibition.",
     },
     {
       indication: "Grinding",
       items: [
-        { name: "APS Brux-PAS", detail: "Palatal anterior stop with lower Essix" },
-        { name: "Lower Hard CR Orthotic", detail: "Hard lower full-coverage centric relation orthotic" },
+        { name: "APS Brux-PAS", detail: "with lower Essix" },
+        { name: "Lower Hard CR Orthotic", detail: "Hard Lower Full Coverage Centric Relation Orthotic" },
       ],
     },
     {
       indication: "Grinding + Airway",
-      items: [{ name: "APS Lat-Brux", detail: "For sleep grinding with airway involvement" }],
+      items: [{ name: "APS Lat-Brux", detail: "" }],
     },
     {
       indication: "Airway",
-      items: [
-        { name: "MAD", detail: "Mandibular advancement device — built from the Airway Bite registration" },
-      ],
+      items: [{ name: "MAD", detail: "Final Mandibular Advancement Device" }],
     },
   ],
 };
@@ -354,41 +347,43 @@ export const doctor = {
   headshot: "/aps/about/droter-headshot.jpg",
   headshotAlt: "Portrait of Dr. John R. Droter",
 
-  /** apsleep.com/about, lightly copy-edited for grammar. */
+  /** apsleep.com/about (his words, 2021). Typos fixed: "practiced" → "practice", "access what" → "access to what". */
   founderStory:
-    "In 1996, John R. Droter, DDS, created a practice focused on diagnosing facial pain. Common problems he observed were fatigue, not waking rested, clenching of teeth, and sleep grinding of teeth. Over the years he customized diagnostic tools and approaches to help his patients. In 2021 he formed ArrowPath Sleep so patients and dentists could have access to what he has found to be so effective.",
+    "John R Droter, DDS, in 1996 created a practice focused on diagnosing and treating facial pain. Common problems he observed were fatigue, not waking rested, clenching of teeth, and sleep grinding of teeth. Over the years he customized diagnostic tools and treatments to help his patients. In 2021 he formed ArrowPath Sleep so patients and dentists could have access to what he has found to be so effective.",
 
-  /** drdroter.com/about-dr-droter, lightly copy-edited for grammar. */
+  /** drdroter.com/about-dr-droter, verbatim. Typos fixed: "theSpear" → "the Spear", "Dentistry’s Todays" → "Dentistry Today’s". */
   bio: [
-    "Dr. Droter graduated magna cum laude from the University of Maryland Dental School with a huge void in understanding TMJ problems. His quest for an understanding has led him to study most notably at the L.D. Pankey Institute; The Center for Advanced Dental Study with Dr. Peter Dawson and Dr. Mark Piper; the University of Florida’s Facial Pain Center with Dr. Parker Mahan, Dr. Henry Gremillion and Dr. Frank Dolwick; the University of California, San Diego with Dr. Terry Tanaka; and with Dr. Guy Haddix in Statesville, NC.",
-    "Dr. Droter maintains a private practice diagnosing facial pain in the Washington DC, Baltimore and Annapolis area. When TMJ damage is suspected in causing a patient’s problem, he utilizes state-of-the-art imaging (CT and MRI scans) along with computerized measurement and analysis of joint and muscle function. He has a network of excellent physicians and therapists when problems other than the TMJ are the cause. An accurate diagnosis is the key and first step to any effective therapy.",
-    "He is a visiting faculty member at the L.D. Pankey Institute in Florida. Past positions include visiting faculty member at the Spear Education Center in Arizona, visiting faculty member at The Washington Hospital Center in Washington, DC teaching temporomandibular disorders to the orthodontic residents, and on staff at Anne Arundel Medical Center in Annapolis, where he did rounds with orthopedic surgeons learning the medical approach to damaged joints. He lectures nationally and is honored to be included in Dentistry Today’s Top Clinicians in Dental Continuing Education. His writings include published articles on the TMJ, and a TMJ manual written for patients.",
+    "Dr. Droter graduated magna cum laude from the University of Maryland Dental School with a huge void in understanding TMJ problems. His quest for an understanding has led him to study most notably at the L.D. Pankey Institute, The Center for Advanced Dental Study with Dr. Peter Dawson and Dr. Mark Piper, The University of Florida’s Facial Pain Center with Dr. Parker Mahan, Dr. Henry Gremillion, and Dr. Frank Dolwick, The University of California, San Diego with Dr. Terry Tanaka and with Dr. Guy Haddix in Statesville, NC.",
+    "Dr. Droter maintains a private practice diagnosing facial pain in the Washington DC, Baltimore, Annapolis area. When TMJ damage is suspected in causing a patient’s problem, he utilizes state of the art imaging (CT and MRI scans) along with computerized measurement and analysis of joint and muscle function. He provides nonsurgical TMJ rehabilitation for those patients with damaged joints. He has a network of excellent physicians and therapist when problems other than the TMJ are the cause. An accurate diagnosis is the key and first step to any effective therapy.",
+    "He is a visiting faculty member at the LD Pankey Institute in Florida. Past positions include visiting faculty member at the Spear Educational Center in Arizona, visiting faculty member at The Washington Hospital Center in Washington, DC teaching temporomandibular disorders to the orthodontic residents and on staff at Anne Arundel Medical Center in Annapolis where he did rounds with orthopedic surgeons learning the medical approach to damaged joints. He lectures nationally and is honored to be included in the Dentistry Today’s Top Clinicians in Dental Continuing Education. His writings include published articles on the TMJ, and a TMJ Manual written for patients.",
   ],
 
   pullQuote: "An accurate diagnosis is the key and first step to any effective therapy.",
 
+  /** Each label completes his own sentence (apsleep.com/about, his email, drdroter.com/facial-pain). */
   facts: [
-    { value: "1996", label: "Practice focused on facial pain" },
-    { value: "3,000+", label: "Facial problem questionnaires completed by his patients" },
-    { value: "190+", label: "Causes of facial pain he screens for" },
-    { value: "70+", label: "Therapies used in his practice" },
+    { value: "3,000+", label: "I have 3,000+ patients with a facial problem Questionnaires filled out." },
+    { value: "190+", label: "There are 190+ different causes of Temporomandibular Disorders/Facial Pain." },
+    { value: "70+", label: "I utilize 70+ different therapies in my practice." },
   ],
 
+  /** Fragments of his bio (drdroter.com/about-dr-droter), verbatim. */
   training: [
-    { place: "University of Maryland Dental School", detail: "DDS, magna cum laude" },
-    { place: "L.D. Pankey Institute", detail: "Advanced study; now visiting faculty" },
+    { place: "University of Maryland Dental School", detail: "Graduated magna cum laude" },
+    { place: "L.D. Pankey Institute", detail: "Now visiting faculty" },
     { place: "The Center for Advanced Dental Study", detail: "With Dr. Peter Dawson and Dr. Mark Piper" },
-    { place: "University of Florida Facial Pain Center", detail: "With Drs. Parker Mahan, Henry Gremillion and Frank Dolwick" },
-    { place: "University of California, San Diego", detail: "With Dr. Terry Tanaka" },
+    { place: "The University of Florida’s Facial Pain Center", detail: "With Dr. Parker Mahan, Dr. Henry Gremillion, and Dr. Frank Dolwick" },
+    { place: "The University of California, San Diego", detail: "With Dr. Terry Tanaka" },
     { place: "Statesville, NC", detail: "With Dr. Guy Haddix" },
   ],
 
+  /** Sentences of his bio, verbatim. */
   teaching: [
-    "Visiting faculty, L.D. Pankey Institute (Florida)",
-    "Past visiting faculty, Spear Education Center (Arizona)",
-    "Past visiting faculty, The Washington Hospital Center — temporomandibular disorders for orthodontic residents",
-    "Past staff, Anne Arundel Medical Center (Annapolis) — rounds with orthopedic surgeons",
-    "Named among Dentistry Today’s Top Clinicians in Dental Continuing Education",
+    "Visiting Faculty, L.D. Pankey Institute",
+    "Visiting faculty member at the Spear Educational Center in Arizona",
+    "Visiting faculty member at The Washington Hospital Center in Washington, DC teaching temporomandibular disorders to the orthodontic residents",
+    "On staff at Anne Arundel Medical Center in Annapolis where he did rounds with orthopedic surgeons learning the medical approach to damaged joints",
+    "He lectures nationally and is honored to be included in the Dentistry Today’s Top Clinicians in Dental Continuing Education.",
   ],
 };
 
@@ -408,7 +403,7 @@ export const library = {
   dentists: [
     {
       title: "Airway Bite — Instructions for Use",
-      description: "The one-page chairside protocol: fit, map, lock, capture.",
+      description: "ArrowPath Sleep Airway Bite. Prior to taking an airway bite take a Digital scan of the upper and lower jaws without a bite.",
       kind: "Instructions",
       format: "PDF",
       href: "/aps/airway-bite/APS_Airway_Bite_Instructions.pdf",
@@ -417,7 +412,7 @@ export const library = {
     },
     {
       title: "Airway Bite — Chairside tutorial",
-      description: "Animated walkthrough of every step, from try-in to bite scan.",
+      description: "Narrated by Dr. Droter.",
       kind: "Video",
       format: "Video",
       href: "/aps/video/airway-bite-explainer-1080.mp4",
@@ -426,7 +421,7 @@ export const library = {
     },
     {
       title: "Pankey TMD 2026",
-      description: "Lecture slides from Dr. Droter’s TMD course at the L.D. Pankey Institute (Day 4 version).",
+      description: "Day 4 Version",
       kind: "Lecture",
       format: "PDF",
       href: "https://drdroter.com/wp-content/uploads/2026/06/Pankey-TMD-2026v2.key-sm.pdf",
@@ -435,7 +430,7 @@ export const library = {
     },
     {
       title: "Gill Ortho Ceph Analysis — Extract",
-      description: "Cephalometric analysis extract used alongside the Pankey TMD course.",
+      description: "Gill Ortho Ceph Analysis Extract",
       kind: "Lecture",
       format: "PDF",
       href: "https://drdroter.com/wp-content/uploads/2026/06/Gill-Ortho-Ceph-Analysis-Extract.key.pdf",
@@ -443,8 +438,8 @@ export const library = {
       status: "available",
     },
     {
-      title: "Orthopedic Medicine",
-      description: "Article by John R. Droter, DDS on the orthopedic approach to diagnosing the TMJ.",
+      title: "An Orthopaedic Approach to the Diagnosis and Treatment of Disorders of the Temporomandibular Joint",
+      description: "John R. Droter, DDS. Dentistry Today, November 2005.",
       kind: "Article",
       format: "PDF",
       href: "https://drdroter.com/wp-content/uploads/2016/11/DroterOrthopedDx.pdf",
@@ -453,7 +448,7 @@ export const library = {
     },
     {
       title: "The worn dentition — pathognomonic patterns of abrasion and erosion",
-      description: "Abrahamsen T C. Int Dent J 2005; 55: 268–76.",
+      description: "Abrahamsen T C, The worn dentition – pathognomonic patterns of abrasion and erosion. Int Dent J 2005 55: 268-76.",
       kind: "Reference",
       format: "PDF",
       href: "https://drdroter.com/wp-content/uploads/2016/11/AbrahamsenIDJ.pdf",
@@ -462,14 +457,14 @@ export const library = {
     },
     {
       title: "Six common TMDs — diagnosis, pattern and approach",
-      description: "A one-page clinical reference for the six disorders seen most often.",
+      description: "",
       kind: "Reference",
       format: "PDF",
       status: "coming-soon",
     },
     {
       title: "Facial pain diagnosis — clinical protocols",
-      description: "Diagnostic frameworks, screening questions and decision trees for dental professionals.",
+      description: "",
       kind: "Lecture",
       format: "Library",
       status: "dentists-only",
@@ -479,7 +474,7 @@ export const library = {
   patients: [
     {
       title: "Do you have a TMJ problem?",
-      description: "Dr. Droter’s patient brochure: signs, the joint, and why diagnosis comes first.",
+      description: "",
       kind: "Brochure",
       format: "PDF",
       meta: "2026 edition",
@@ -491,16 +486,17 @@ export const library = {
 /** Patient education — headings must avoid "treat". */
 export const education = {
   conditionsHeading: "Common conditions we help you find a solution for",
+  /** drdroter.com/jaw-joint-damage, verbatim ("will to lead" typo fixed). */
   conditionsIntro:
-    "Facial pain has more than 190 possible causes. These short guides explain the ones Dr. Droter sees most often — read the summary, or expand for the full version.",
+    "There are 190+ different causes of Temporomandibular Disorders/Facial Pain. The examination process, which needs to include muscle and joint palpation, will lead to a working diagnosis on which you will be treated. A specific treatment is needed for each specific diagnosis.",
   /** Shown on condition content in place of a "Treatment" heading. */
   approachHeading: "Paths to relief",
-  patientsLine:
-    "ArrowPath Sleep appliances are prescribed and fitted by dentists. Learn what may be behind your symptoms, then talk with your dentist.",
+  /** drdroter.com/new-patient-information, verbatim. */
+  patientsLine: "Hopefully your path to finding the solution to your problem begins here.",
   keyMessages: [
-    "TMJ is not a diagnosis — it’s a joint.",
-    "There are 190+ different causes of temporomandibular disorders and facial pain.",
-    "85% of people with jaw joint damage do not need any treatment whatsoever.",
+    "Telling a patient that he or she has “TMJ” is equivalent to a physician telling a patient he or she has “knee.”",
+    "There are 190+ different causes of Temporomandibular Disorders/Facial Pain.",
+    "85% of people with jaw joint damage do not need any treatment what so ever!!!",
     "An accurate diagnosis is the key and first step to any effective therapy.",
   ],
 };

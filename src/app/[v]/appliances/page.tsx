@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 import AnteriorStopModel from "@/components/product/AnteriorStopModel";
 import ApplianceGuide from "@/components/site/ApplianceGuide";
 import { ButtonLink } from "@/components/site/Button";
@@ -15,7 +16,7 @@ import s from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Appliances, by indication",
-  description: `${applianceGuide.intro} ${applianceGuide.subtitle}`,
+  description: [applianceGuide.intro, applianceGuide.subtitle].filter(Boolean).join(" ") || undefined,
 };
 
 const group = (indication: string) => applianceGuide.groups.find((g) => g.indication === indication)!;
@@ -32,6 +33,22 @@ const tempStop = clenching.items.find((i) => i.name === "APS Temp Anterior Stop"
 const capture = airwayBite.phases.find((p) => p.id === "capture")!;
 const [whileYouSleep, jawForward, howFar] = airwayBite.airwayStory;
 
+/**
+ * His narration, with its own key phrase (the story title, which is a fragment
+ * of the same sentence) set by weight in place rather than repeated in front.
+ */
+function narration(body: string, phrase: string, cls: string): ReactNode {
+  const at = body.toLowerCase().indexOf(phrase.toLowerCase());
+  if (at < 0) return body;
+  return (
+    <>
+      {body.slice(0, at)}
+      <span className={cls}>{body.slice(at, at + phrase.length)}</span>
+      {body.slice(at + phrase.length)}
+    </>
+  );
+}
+
 const INDEX = [
   { id: "clenching", label: clenching.indication },
   { id: "grinding", label: grinding.indication },
@@ -46,7 +63,7 @@ function Items({ items }: { items: { name: string; detail: string }[] }) {
       {items.map((i) => (
         <li key={i.name}>
           <span className={s.itemName}>{i.name}</span>
-          <span className={s.itemDetail}>{i.detail}</span>
+          {i.detail && <span className={s.itemDetail}>{i.detail}</span>}
         </li>
       ))}
     </ul>
@@ -73,7 +90,7 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
           }
         />
         <div className={s.matrixHead}>
-          <p className={s.subtitle}>{applianceGuide.subtitle}</p>
+          {applianceGuide.subtitle && <p className={s.subtitle}>{applianceGuide.subtitle}</p>}
           <nav aria-label="Indications on this page" className={s.index}>
             <ul>
               {INDEX.map((x) => (
@@ -96,15 +113,14 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
             <AnteriorStopModel name={tempStop.name} />
           </div>
           <div className={s.clenchCopy}>
-            <h2 className="t-h1" id="clenching-title">
+            <h2 className="t-h2" id="clenching-title">
               {clenching.indication}
             </h2>
             {clenchGuide?.full[0]?.paragraphs?.[0] && <p className={`t-lead ${s.pattern}`}>{clenchGuide.full[0].paragraphs[0]}</p>}
             <Items items={clenching.items} />
-            {clenching.note && <p className={`note ${s.indNote}`}>{clenching.note}</p>}
             {clenchGuide && (
               <Link href={href(v, routes.condition(clenchGuide.slug))} className={`lnk ${s.guideLink}`}>
-                The patient guide: {clenchGuide.title.toLowerCase()}
+                Patient guide: {clenchGuide.title.toLowerCase()}
                 <ArrowRight size={16} className="lnk-icon" />
               </Link>
             )}
@@ -116,7 +132,7 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
       <Section id="grinding" labelledBy="grinding-title">
         <div className={s.grindGrid}>
           <header>
-            <h2 className="t-h1" id="grinding-title">
+            <h2 className="t-h2" id="grinding-title">
               {grinding.indication}
             </h2>
             {grindGuide?.full[0]?.paragraphs?.[0] && <p className={`t-lead ${s.pattern}`}>{grindGuide.full[0].paragraphs[0]}</p>}
@@ -132,14 +148,14 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
             <div className={s.grindLinks}>
               {wornDentition?.href && (
                 <a href={wornDentition.href} target="_blank" rel="noopener" className="lnk">
-                  Reading: {wornDentition.title.split(" — ")[0]}
+                  Thomas Abrahamsen Article
                   <ArrowUpRight size={16} className="lnk-icon" />
                   <span className="sr-only"> (PDF, opens in a new tab)</span>
                 </a>
               )}
               {grindGuide && (
                 <Link href={href(v, routes.condition(grindGuide.slug))} className="lnk">
-                  The patient guide: {grindGuide.title.toLowerCase()}
+                  Patient guide: {grindGuide.title.toLowerCase()}
                   <ArrowRight size={16} className="lnk-icon" />
                 </Link>
               )}
@@ -152,7 +168,7 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
       <Section tone="night" as="div" className={s.night}>
         <section id="grinding-airway" aria-labelledby="ga-title" className={s.gaGrid}>
           <div className={s.gaCopy}>
-            <h2 className={`t-h1 ${s.airTitle}`} id="ga-title">
+            <h2 className={`t-h2 ${s.airTitle}`} id="ga-title">
               <i className="airway-line" aria-hidden="true" />
               {grindingAirway.indication}
             </h2>
@@ -165,19 +181,18 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
                 alt="Cross-section of the head during sleep: the tongue and lower jaw sit back and the airway behind them is narrow."
                 width={1920}
                 height={816}
-                sizes="(min-width: 900px) 50vw, 100vw"
+                sizes="(min-width: 900px) 680px, 100vw"
+                quality={90}
                 className={s.stillImg}
               />
             </div>
-            <figcaption className={s.stillCap}>
-              <span className={s.stillCapTitle}>{whileYouSleep.title}.</span> {whileYouSleep.body}
-            </figcaption>
+            <figcaption className={s.stillCap}>{narration(whileYouSleep.body, whileYouSleep.title, s.stillCapTitle)}</figcaption>
           </figure>
         </section>
 
         <section id="airway" aria-labelledby="airway-title" className={s.airway}>
           <div className={s.airHead}>
-            <h2 className={`t-h1 ${s.airTitle}`} id="airway-title">
+            <h2 className={`t-h2 ${s.airTitle}`} id="airway-title">
               <i className="airway-line" aria-hidden="true" />
               {airway.indication}
             </h2>
@@ -193,13 +208,13 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
                 alt="The same cross-section with the lower jaw held forward: the tongue comes forward with it and the airway behind it is open."
                 width={1920}
                 height={816}
-                sizes="(min-width: 1320px) 1320px, 100vw"
+                sizes="(min-width: 1000px) 960px, 100vw"
+                quality={90}
                 className={s.stillImg}
               />
             </div>
             <figcaption className={s.stillCap}>
-              <span className={s.stillCapTitle}>{jawForward.title}.</span> {jawForward.body} <span className={s.stillCapTitle}>{howFar.title}</span>{" "}
-              {howFar.body}
+              {narration(jawForward.body, jawForward.title, s.stillCapTitle)} {narration(howFar.body, howFar.title, s.stillCapTitle)}
             </figcaption>
           </figure>
 
@@ -213,18 +228,19 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
                     alt={`The ${airwayBite.name}, three-quarter view`}
                     width={2000}
                     height={2000}
-                    sizes="(min-width: 900px) 34vw, 90vw"
+                    sizes="(min-width: 900px) 420px, 80vw"
+                    quality={90}
                     className={s.relRender}
                   />
                 </div>
-                <figcaption className={s.stillCap}>The {airwayBite.shortName}: the registration, taken chairside.</figcaption>
+                <figcaption className={s.stillCap}>{airwayBite.name}</figcaption>
               </figure>
               <Figure
                 src={capture.image}
                 alt={capture.imageAlt}
                 width={1600}
                 height={800}
-                caption={`From the instructions for use: ${capture.title.toLowerCase()}.`}
+                caption={capture.title}
                 sizes="(min-width: 900px) 56vw, 100vw"
                 className={s.relFig}
               />

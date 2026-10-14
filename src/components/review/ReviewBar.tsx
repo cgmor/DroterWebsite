@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { versions, type VersionId } from "@/content/versions";
+import AiHighlight from "./AiHighlight";
 
 /**
  * Slim bar pinned above every design version so Dr. Droter can tell which
- * version he is looking at and jump between them. Removed at launch.
+ * version he is looking at and jump between them. Also carries the
+ * "Highlight AI text" switch (see AiHighlight). Removed at launch.
  */
 export default function ReviewBar({ current }: { current: VersionId }) {
   const active = versions.find((v) => v.id === current)!;
 
   return (
     <div
+      data-provenance-skip=""
       className="relative z-[60] w-full bg-[#111418] text-[12px] leading-none text-white/70"
       style={{ fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif" }}
     >
@@ -20,25 +23,28 @@ export default function ReviewBar({ current }: { current: VersionId }) {
             Version {active.number} — {active.name}
           </span>
         </Link>
-        <nav aria-label="Design versions" className="flex shrink-0 items-center gap-1">
-          {versions.map((v) => (
-            <Link
-              key={v.id}
-              href={`/${v.id}`}
-              aria-current={v.id === current ? "page" : undefined}
-              className={
-                v.id === current
-                  ? "rounded-full bg-white px-2.5 py-1 font-medium text-[#111418]"
-                  : "rounded-full px-2.5 py-1 hover:bg-white/10 hover:text-white"
-              }
-            >
-              <span className="sm:hidden">{v.number}</span>
-              <span className="hidden sm:inline">
-                {v.number} · {v.name}
-              </span>
-            </Link>
-          ))}
-        </nav>
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <AiHighlight />
+          <nav aria-label="Design versions" className="flex shrink-0 items-center gap-1">
+            {versions.map((v) => (
+              <Link
+                key={v.id}
+                href={`/${v.id}`}
+                aria-current={v.id === current ? "page" : undefined}
+                className={
+                  v.id === current
+                    ? "rounded-full bg-white px-2.5 py-1 font-medium text-[#111418]"
+                    : "rounded-full px-2.5 py-1 hover:bg-white/10 hover:text-white"
+                }
+              >
+                <span className="sm:hidden">{v.number}</span>
+                <span className="hidden sm:inline">
+                  {v.number} · {v.name}
+                </span>
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </div>
   );

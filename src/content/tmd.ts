@@ -12,7 +12,6 @@
  * language, never publish his questionnaires.
  */
 
-import { conditions as legacyConditions } from "@/data/conditions";
 
 export type Figure = {
   src: string;
@@ -61,9 +60,11 @@ const fig = (src: string, alt: string, width: number, height: number, caption?: 
 /* ───────────────────────── Understanding TMD ───────────────────────── */
 
 export const understanding = {
-  title: "Understanding TMD and facial pain",
+  /** His heading on drdroter.com/about-tmd. */
+  title: "TMD and Facial Pain",
+  /** drdroter.com/about-tmd, verbatim ("patients" → "patient’s"). */
   intro:
-    "TMJ is not a diagnosis — it’s a joint. There are 40 different diseases that can affect it, and more than 190 disorders that cause pain in the head and neck. Different diseases need different approaches, which is why an accurate diagnosis comes first.",
+    "Understanding all the different diseases and dysfunctions that can cause facial pain is the first step in developing a list of the possible causes of a specific patient’s pain.",
 
   thesis: {
     line: "Telling a patient that he or she has “TMJ” is equivalent to a physician telling a patient he or she has “knee.”",
@@ -72,21 +73,22 @@ export const understanding = {
 
   joint: {
     heading: "What is the TMJ?",
+    /** His 2005 Dentistry Today article and drdroter.com/locked-jaw, verbatim. */
     paragraphs: [
-      "The temporomandibular joint connects the temporal bone of the skull to the mandible, the lower jaw, just in front of the ears. It is actually two joints, left and right, that must work in harmony.",
-      "It is the only joint in the body that rotates, slides and pivots. It is made of soft tissue — the disc, ligaments, capsule and retrodiscal tissue — and bone: the condyle and the eminence. Together they let the jaw open and close, move left and right and forward and back, for chewing, speaking and swallowing.",
+      "A joint is 2 bones joined together to allow movement between those bones. The TMJ is a synovial joint and is susceptible to the same disease processes as any other synovial joint in the human body.",
+      "As your jaw opens and closes the condyle (ball) moves in and out of the fossa (socket). Ideally you should be able to open your jaw pain-free to 40-55 mm, which is about 3 vertical finger widths.",
     ],
     selfCheck:
       "Place your fingers in front of your ears and open and close. You can feel the TMJ and the condyle moving. Any discomfort — even slight — indicates something is wrong.",
     figures: [
-      fig("tmj-healthy.jpg", "Illustration of a healthy temporomandibular joint with the disc seated on the condyle", 1024, 768, "A healthy TMJ: the disc sits between the condyle and the socket."),
-      fig("tmj-damaged.jpg", "Illustration of a damaged temporomandibular joint with the disc dislocated forward of the condyle", 1024, 768, "A damaged TMJ: the disc is dislocated forward, and the joint clicks on movement."),
+      fig("tmj-healthy.jpg", "Illustration of a healthy temporomandibular joint with the disc seated on the condyle", 1024, 768),
+      fig("tmj-damaged.jpg", "Illustration of a damaged temporomandibular joint with the disc dislocated forward of the condyle", 1024, 768),
     ],
   },
 
   signs: {
     heading: "Signs and symptoms",
-    intro: "Check the ones you recognise. These are educational, not a diagnosis.",
+    intro: "",
     items: [
       "Headaches, especially around the temples and behind the eyes",
       "Grinding or clenching teeth, especially at night",
@@ -101,20 +103,22 @@ export const understanding = {
       "A change in the bite — teeth don’t feel like they fit together",
     ],
     note: "Pain is not a reliable indicator of severity. A joint with minor damage may hurt worse than one with significant damage.",
-    headacheStat: "Up to 50% of headaches may be TMJ-related.",
+    /** drdroter.com/uncomfortable-bite-occlusion, verbatim. */
+    headacheStat: "Greater than 30% of headache patients have an occlusal problem that can be fixed without medications.",
   },
 
   definition: {
     heading: "TMD is not one disease",
     paragraphs: [
-      "Many different diseases and dysfunctions can cause facial pain. The head and neck are made of many nerves, blood vessels, muscles, bones and connective tissues, all of which can be the primary source of pain. Pain can originate from the muscles of the TMJ, the muscles of the neck, the TMJ itself, teeth, sinus, ear, neuralgia, vascular causes and lesions of the central nervous system, among many others.",
+      "Many different diseases and dysfunctions can cause facial pain. The head and neck are composed of many nerves, blood vessels, muscles, bones, and connective tissues, all of which can be the primary source of pain. Pain can be originating from; muscles of the temporomandibular joint (TMJ), muscles of the neck, TMJ, teeth, sinus, ear, neuralgia, vascular, lesions of central nervous system, plus many others.",
       "Temporomandibular disorders (TMD) are a group of diseases and dysfunctions that cause facial pain. TMD is not one disease, but many different diseases grouped into one classification.",
+      "Problems involving the TMJ are but one of many types of TMD. It is important to emphasize that TMD is not one disease with one treatment. Patients routinely present with a previous diagnosis of “TMJ” or “TMD.” Telling a patient that he or she has “TMJ” is equivalent to a physician telling a patient he or she has “knee.” TMJ and TMD are not accurate orthopaedic diagnoses, and clinicians should not use them as a diagnosis.",
     ],
     adaCriteria: {
       lead: "The American Dental Association’s President’s Conference on Temporomandibular Disorders defined TMD as a group of orofacial disorders characterized by:",
       items: [
-        "Pain in the preauricular area (in front of the ear), the TMJ, or the muscles of mastication",
-        "Limitations or deviations in the mandibular range of motion",
+        "Pain in the preauricular area (in front of the ear), TMJ, or muscles of mastication",
+        "Limitations/deviations in mandibular range of motion",
         "TMJ sounds during jaw function",
       ],
     },
@@ -129,44 +133,47 @@ export const understanding = {
       { value: "7", label: "categories those disorders fall into" },
     ],
     categories: [
-      { name: "TMJ damage", note: "40 conditions of the joint itself" },
+      { name: "TMJ damage" },
       { name: "Muscles of the TMJ" },
       { name: "Cranial alignment and occlusion" },
       { name: "Cervical damage" },
       { name: "Parafunction" },
       { name: "Whole body and systemic" },
       { name: "Other" },
-    ],
-    figure: fig("tmj-forty-diseases.jpg", "Dr. Droter’s lecture slide listing the 40 diseases of the TMJ", 1200, 600, "Category 1 of 7, TMJ damage: the 40 diseases of the joint itself."),
+    ] as { name: string; note?: string }[],
+    figure: fig("tmj-forty-diseases.jpg", "Dr. Droter’s lecture slide listing the 40 diseases of the TMJ", 1200, 600, "1. TMJ Damage and Diseases"),
   },
 
   evidence: {
     heading: "What the numbers show",
     items: [
-      { value: "70%", label: "of patients with TMD facial pain have myalgia — soreness — of the TMJ muscles." },
-      { value: "86%", label: "of patients with TMD facial pain have a damaged TMJ, compared with 34% of non-TMD patients." },
-      { value: "70%", label: "of damaged joints adapt favourably over time without any therapy. 30% do not, and a few (3%) have serious problems including chronic pain and facial deformity." },
+      /** drdroter.com/about-tmd, verbatim. `label` is his whole sentence; `value` is the figure inside it. */
+      { value: "70%", label: "The majority of patients (70%) with TMD facial pain have myalgia (soreness) of the TMJ muscles." },
+      { value: "86%", label: "Significantly more patients with TMD facial pain have a damaged TMJ (86%) as compared to non-TMD patients (34%)." },
+      { value: "70%", label: "You can have a damaged TMJ and not have pain. In fact, a majority (70%) of damaged joints adapt favorably over time without any therapy. However 30% of damaged TMJ do not adapt favorably, and a few (3%) will have serious problems including chronic pain and facial deformity." },
     ],
     caveat:
-      "Any therapy that makes muscles feel better will help — but it may only be masking the cause. While the patient may feel better, therapy is continually needed to maintain comfort because the cause has not been identified and resolved.",
+      "Any therapy that makes muscles feel better will help. These therapies however may only be masking the cause of the problem. While the patient may feel better, therapy is continually needed to maintain a degree of comfort as the cause of the problem has not been identified and resolved. Muscle relaxants are a good example of a treatment that makes the muscles feel better, but is not a long term solution.",
   },
 
   pain: {
     heading: "Three types of facial pain",
     lead: "All pain in the human body is one of three types:",
     types: [
-      { name: "Nociceptive pain", body: "Pain from tissue." },
-      { name: "Neuropathic pain", body: "Pain caused by nerves not functioning properly." },
-      { name: "Centrally mediated pain", body: "Pain from the brain not functioning properly." },
+      { name: "Nociceptive Pain", body: "Pain from tissue" },
+      { name: "Neuropathic Pain", body: "Pain caused from nerves not functioning properly" },
+      { name: "Centrally Mediated Pain", body: "Pain from the brain not functioning properly" },
     ],
     overlay:
-      "Over all three types of pain is how the brain interprets pain. This is affected by stress and emotion. It is not the source of the pain, but it affects the pain experience.",
+      "Overtop of all three types of pain is how the brain interprets pain. This is affected by stress and emotion. This is not the source of the pain, but affects the pain experience.",
     figure: fig("three-types-of-pain.jpg", "Dr. Droter’s lecture slide showing the three types of facial pain", 1200, 600, "From Dr. Droter’s TMD lecture."),
     beliefs: {
-      heading: "Different beliefs, different approaches",
+      /** His heading is "Different Beliefs: Different Treatments"; the second half is dropped (no "treat" in headings). */
+      heading: "Different Beliefs",
       paragraphs: [
-        "There is not a consensus among professionals on which types of pain are the most prevalent. I find in my patients that sore muscles and joints in the head and neck are the source of the majority of facial pain (nociceptive pain). I find it invaluable to examine the muscles and joints by palpation, find out what is sore, and then figure out why it is sore. Therapies are then based on removing the cause of the sore muscles and joints.",
-        "You can tell a doctor’s beliefs about the main causes of facial pain by which therapies they administer the most. While I agree that the brain’s interpretation of pain is a factor, I do not feel it is the cause of the pain. I have found that if you remove the source of the pain, the pain goes away.",
+        "There is not a consensus among professionals on which types of pain are the most prevalent. I find in my patients that sore muscles and joints in the head and neck are the source of the majority of facial pain (Nociceptive Pain). I find it invaluable to examine the muscles and joints by palpation (push on), find out what is sore, and then figure out why it is sore. Therapies are then based on removing the cause of the sore muscles and joints. I do have patients who do have neuropathic pain and centrally mediated pain, but these are not the majority.",
+        "You can tell a doctor’s beliefs on the main causes of facial pain by which therapies they administer the most. I treat the physical causes of pain with an occasional treatment for the other types. A doctor who believes neuropathic pain is the most prevalent, most likely will not palpate muscles and joints, but will write prescriptions for drugs like gabapentin, neurontin, and anti depressants. A doctor who believes most facial pain is caused by Psychosocial will recommend stress counseling, relaxation techniques, and anti-anxiety medication. They may recommend physical therapy for sore muscles, but believe the muscles are sore from emotional stress. While I agree that the brain’s interpretation of pain is a factor, I do not feel it is the cause of the pain. I have found if you remove the source of the pain, the pain goes away and most patients are no longer depressed.",
+        "I firmly believe the majority of headaches and facial pain is from sore muscles and joints. If your doctor does not thoroughly palpate the muscles and is quick to write you a prescription you may want a second opinion.",
       ],
       emphasis:
         "Palpating muscles and joints and identifying which ones are sore must be part of any examination for facial pain, including headaches.",
@@ -181,7 +188,8 @@ export const understanding = {
 
   approaches: {
     heading: "Approaches to relief",
-    lead: "Dr. Droter utilizes more than 70 different therapies. Most are not difficult to do — the trick is applying the correct therapy for the specific disease.",
+    /** drdroter.com/facial-pain, verbatim ("will to lead" typo fixed). The groups below are from the 2026 brochure (pending his verbatim text). */
+    lead: "There are 190+ different causes of Temporomandibular Disorders/Facial Pain. The examination process, which needs to include muscle and joint palpation, will lead to a working diagnosis on which you will be treated. A specific treatment is needed for each specific diagnosis. I utilize 70+ different therapies in my practice.",
     groups: [
       { name: "Physical", items: ["Ice", "Hot, cold, hot", "Cold laser", "TENS", "Range-of-motion exercises", "Stretching", "Referral to physical therapy, chiropractic or osteopathic care"] },
       { name: "Medicinal", items: ["Anti-inflammatories and NSAIDs", "Topical CBD", "Glucosamine and chondroitin", "Vitamins C, D and B12", "Minerals: magnesium, iron", "Botox injections"] },
@@ -199,16 +207,18 @@ export const understanding = {
   },
 
   hotColdHot: {
-    heading: "Hot, cold, hot: a home therapy for sore muscles",
-    purpose: "Open the blood vessels, close them, then reopen them — flushing toxins from the muscles.",
+    /** His Hot Cold Hot handout (drdroter.com/patient-downloads), verbatim. */
+    heading: "Hot, Cold, Hot Therapy",
+    purpose: "The purpose of Hot, Cold, Hot Therapy is open the blood vessels, close the blood vessels, then open the blood vessels, allowing a rush of blood to flush out toxins in the muscles.",
     steps: [
-      "Microwave a moist hand towel for 1–2 minutes. Test it on your hand first.",
-      "Apply it to the neck, jaw and face for 3 minutes.",
-      "Apply cold — a wrapped gel pack or frozen peas in a paper towel — for 3 minutes.",
-      "Reheat the towel in 30-second intervals and reapply for 3 minutes.",
-      "Repeat as desired.",
+      "Microwave a moist hand towel for 1-2 minutes on high, or until towel is very hot.",
+      "Touch towel with hand to make sure it is not too hot to apply to face.",
+      "Apply hand towel to neck, jaw and face area for 3 minutes (using a timer is very helpful.)",
+      "Next, apply cold to the same area for 3 minutes. Using a bag of frozen peas is best.",
+      "Reheat towel in microwave on high for 30 second intervals until hot again and apply to face, jaw and neck area for 3 minutes.",
+      "You can repeat the above steps as often as you desire.",
     ],
-    pdf: { href: "https://drdroter.com/wp-content/uploads/2016/06/hotcoldhot2.pdf", label: "Download the Hot Cold Hot handout" },
+    pdf: { href: "https://drdroter.com/wp-content/uploads/2016/06/hotcoldhot2.pdf", label: "HotColdHot Download" },
   },
 
   faq: [
@@ -239,206 +249,246 @@ export const understanding = {
   ],
 
   children: {
-    heading: "Children and facial development",
+    /** drdroter.com/children, verbatim (typos fixed: "Futrue", "interferer", "breath"). */
+    heading: "Helping the Young Avoid Becoming a Future TMD Patient",
     paragraphs: [
-      "Many of my temporomandibular disorder patients’ current problems can be traced back to childhood. For an adult to function fully, they need to have a fully developed face.",
-      "Children who breathe through their mouth lack the pressure of the tongue on the maxilla (the upper jaw) during growth. The maxilla depends on the tongue to develop fully; without it, it ends up narrow and drifts down. The maxilla is also the floor of the nose.",
+      "Many of my Temporomandibular Disorder patient’s current problems can be traced back to childhood. For an adult to function fully, they need to have a fully developed face. Many things at different phases of childhood development can interfere with reaching full genetic potential.",
+      "Children who breathe through their mouth will lack having their tongue put pressure on the maxilla (upper jaw) during growth. The maxilla is dependent on the tongue to develop fully. Without the tongue putting pressure on the maxilla it will end up being narrow and will drift down. The maxilla is also the floor of the nose.",
     ],
-    signs: ["Snoring", "Thumb sucking", "Enlarged tonsils and adenoids", "Lagging behind in growth", "Attention deficit disorder"],
-    adult: "Untreated in childhood, adults show a narrow maxilla, high palate, narrow nasal passages, a gummy smile, airway problems and upper airway resistance.",
+    signs: ["Snoring", "thumb sucking", "enlarged tonsil and adenoids", "lagging behind in growth", "attention deficit disorder"],
+    adult: "If this was not treated during childhood, as an adult you will see a narrow maxilla, high palate, narrow nasal passages, gummy smile, airway problems, upper airway resistance.",
   },
 };
 
 /* ───────────────────────── Condition guides ───────────────────────── */
 
-const oa = legacyConditions["osteoarthritis"];
-
 export const conditionGuides: ConditionGuide[] = [
+  /* drdroter.com/locked-jaw — verbatim; only typos fixed. plainName/summary/signs are his own phrases from the page. */
   {
     slug: "limited-jaw-opening",
-    title: "Limited jaw opening",
-    plainName: "I can’t open wide",
+    title: "Limited Jaw Opening",
+    plainName: "Not able to open wide",
     category: "TMJ damage",
     source: "drdroter.com",
     summary:
-      "Not being able to open more than 35 mm — about two finger widths. There are seven distinctly different causes, each needing a different approach.",
-    signs: ["Opening less than two finger widths", "Onset usually sudden", "Jaw may need to be wiggled to open", "Pain on opening wide"],
-    hero: fig("limited-169.jpg", "Lecture slide introducing limited jaw opening", 2048, 1024),
+      "Limited opening presents as not being able to open more than 35 mm (2 vertical finger widths). There are 7 distinctly different causes of limited opening, each requiring different treatments.",
+    signs: ["Not able to open wide", "The onset of limited opening can be gradual but is usually sudden"],
+    hero: fig("limited-169.jpg", "Dr. Droter’s lecture slide on limited jaw opening", 2048, 1024),
     full: [
       {
         heading: "Not able to open wide",
         paragraphs: [
-          "A very common reason patients are referred to my practice is limited jaw opening. Limited opening presents as not being able to open more than 35 mm (two vertical finger widths). The onset can be gradual but is usually sudden. Ideally you should be able to open your jaw pain-free to 40–55 mm, about three vertical finger widths. As your jaw opens and closes, the condyle (ball) moves in and out of the fossa (socket).",
-          "There are seven distinctly different causes of limited opening, each requiring different care.",
+          "A very common problem that patients are referred to me in my practice is for limited jaw opening. Limited opening presents as not being able to open more than 35 mm (2 vertical finger widths). The onset of limited opening can be gradual but is usually sudden. Ideally you should be able to open your jaw pain-free to 40-55 mm, which is about 3 vertical finger widths. As your jaw opens and closes the condyle (ball) moves in and out of the fossa (socket). There are 7 distinctly different causes of limited opening, each requiring different treatments.",
         ],
-        figure: fig("limited-170.jpg", "Lecture slide on normal jaw opening and condyle movement", 2048, 1024),
+        figure: fig("limited-170.jpg", "Dr. Droter’s lecture slide on jaw opening and the condyle", 2048, 1024),
       },
       {
-        heading: "Different causes of limited jaw opening",
-        list: ["Pain avoidance — sore joint", "Pain avoidance — sore muscle", "Muscle spasm", "Masseteric space infection", "Nonreducing disc (4b, 3b acute)", "Joint fibrosis", "Muscle fibrosis", "Other"],
-        paragraphs: ["To determine the specific cause, diagnostic tests need to be run. It must be determined whether the cause is the joint, the muscles, or both."],
-        figure: fig("limited-171.jpg", "Lecture slide listing the causes of limited opening", 2048, 1024),
+        heading: "Different Causes of Limited Jaw Opening",
+        list: ["Pain Avoidance Sore Joint", "Pain Avoidance Sore Muscle", "Muscle Spasm", "Masseteric Space Infection", "Nonreducing Disc (4b, 3b Acute)", "Joint Fibrosis", "Muscle Fibrosis", "Other"],
+        paragraphs: ["To determine the specific cause diagnostic tests need to be run. It needs to be determined whether the cause is the joint or the muscles or both."],
+        figure: fig("limited-171.jpg", "Dr. Droter’s lecture slide listing the causes of limited opening", 2048, 1024),
       },
       {
-        heading: "Diagnostic tests needed",
-        list: ["History: how long limited opening has existed", "Body temperature", "Caries exam and periodontal exam", "Range of motion: open, side to side", "Gentle active stretch: point to the area of pain", "Anterior stop test", "If needed, CBCT and MRI"],
-        paragraphs: [
-          "Using these results and Dr. Droter’s flow chart, a likely cause can be determined.",
-        ],
+        heading: "Diagnostic Tests Needed",
+        list: ["History: How long limited opening has existed", "Body Temperature", "Caries Exam, Perio exam", "Range of Motion: open, side to side", "Gentle Active stretch: Point to area of pain", "Anterior Stop Test", "If needed CBCT, MRI"],
+        paragraphs: ["Using the above tests results and using Dr Droter’s flow chart a likely cause can be determined and effective treatments rendered."],
         callout:
-          "If you suspect a masseteric space infection — swelling behind the angle of the mandible, difficulty swallowing and/or a sore throat — see a doctor immediately.",
-        figure: fig("limited-algorithm.png", "Dr. Droter’s flow chart for diagnosing limited opening and arthralgia", 1224, 1584, "Dr. Droter’s limited-opening flow chart."),
+          "If you suspect a masseteric space infection, which presents as swelling behind the angle of mandible, difficulty swallowing and or throat soreness, see a doctor immediately.",
+        figure: fig("limited-algorithm.png", "Dr. Droter’s flow chart for limited opening and arthralgia", 1224, 1584, "Dr. Droter’s limited-opening flow chart."),
       },
       {
-        heading: "TMJ arthralgia: the sore joint",
+        heading: "TMJ Arthralgia (Sore Joint)",
         paragraphs: [
-          "The most common cause of limited opening I see is a sore temporomandibular joint limiting jaw movement. The brain tries to avoid pain, so it limits the jaw’s movements.",
-          "A defining feature of a sore joint that is limiting opening is what I call a soft end point. If the jaw is gently and slowly supported and stretched, it will gradually open wider — the jaw can move, but the brain is telling the muscles not to. A hard end point, where the jaw cannot be gently stretched wider, indicates an anteriorly displaced disc that is not reducing.",
+          "The most common cause of limited opening I see is a sore Temporomandibular Joint limiting jaw movement. The brain tries to avoid pain so it limits the jaw movements. A defining feature of a sore jaw joint that is limiting jaw opening is what I call a soft endpoint. If the jaw is gently and slowly supported and stretched with a thumb on top tooth and index finger on bottom tooth, the jaw will gradually open wider. This identifies that the jaw can move but is being limited by the brain telling the muscles not to move. A hard end point is when the jaw can not be gently stretched to a wider opening. A hard end point is an indication of an anteriorly displaced disc that is not reducing.",
+          "If a sore jaw joint is identified as the cause of the limited opening, one needs to figure out what is causing the jaw joint to be sore.",
+          "Sore TMJ Differential Diagnosis: Acute Sprain, Chronic Sprain, Osteoarthritis, Osteolysis, Perforation of Pseudodisc, Discal perforation, Retrodiscal tissue impingement, Acute 4a, other.",
         ],
-        figure: fig("limited-175.jpg", "Lecture slide comparing a soft and a hard end point on stretching", 2048, 1024),
+        figure: fig("limited-175.jpg", "Dr. Droter’s lecture slide on the soft and hard end point", 2048, 1024),
       },
       {
-        heading: "The most common cause: a sprained jaw joint",
+        heading: "The Most Common Cause of Limited Opening",
         paragraphs: [
-          "The TMJ can be sprained just like an ankle. A sprain is a stretching of a ligament, and it can happen during sleep from parafunctional jaw movements. Joint swelling can stop the back teeth touching on biting down; that posterior open bite resolves once the swelling does.",
-          "If the jaw is still sore after a week, the most common cause is osteoarthritis, which is easily identified on a CBCT. If soreness and limited opening persist, an MRI is needed, and persistent soreness may require an arthrocentesis with platelet-rich plasma to resolve the inflammation.",
+          "Sprained ligaments of the Jaw Joint",
+          "The most common cause that I see of a sore jaw joint limiting jaw opening is an acute sprain. The TMJ can be sprained just like an ankle. A sprain is a stretching of a ligament. This can occur during sleep from parafunctional jaw movements. Joint swelling can cause the back teeth to not touch on biting down. The posterior open bite will resolve once the joint swelling from the sprain resolves. A CBCT would be helpful to rule out the other causes of a sore TMJ, but one can treat the sore joint as if it is a sprain without imaging.",
         ],
-        figure: fig("limited-184.jpg", "Lecture slide on the acute sprain of the jaw joint", 2048, 1024),
+        list: ["Soft chew diet", "Ice over the TMJ for 15 minutes 3-5 times a day for 3-5 days", "CBD Balm 3-5 a day", "NSAID for 5-7 days: Advil Liquid Gel Caps 200mg, 3 caps 3x a day, or Aleve Liquid Gel Caps 220mg, 1 cap 2x a day, or Green Coffee extract 400mg 3x a day", "Temporary upper Anterior Stop for sleep", "MLS Cold Laser (808/905nm): 700 hz then 10 hz", "If still sore in 1 week will need TMJ imaging: CBCT"],
+        figure: fig("limited-184.jpg", "Dr. Droter’s lecture slide on the acute sprain", 2048, 1024),
       },
       {
-        heading: "Sore muscles causing limited opening",
+        heading: "If still sore",
         paragraphs: [
-          "Limited opening caused by sore muscles is common, but not easily diagnosed by most clinicians. If a person is bracing the lower jaw to avoid uncomfortable tooth contacts, the muscles become fatigued and sore. An anterior stop test to deprogram the muscles lets them temporarily relax and restores full opening in about three minutes.",
-          "If an anterior stop provides relief, palliative therapies that make muscles feel better will help — while corrective therapies aimed at a harmonious bite resolve the issue without continuous palliative care.",
+          "If the jaw is still sore in 1 week the most common cause is Osteoarthritis. This is easily identified on a CBCT.",
+          "If the jaw joint is still sore and limiting opening still persists an MRI scan is needed. Persistent joint soreness may require an arthrocentesis with platelet rich plasma to resolve the inflammation.",
         ],
-        figure: fig("limited-187.jpg", "Lecture slide on the anterior stop deprogramming test", 2048, 1024),
       },
       {
-        heading: "Acute closed lock: a stuck disc",
+        heading: "Sore Muscles causing Limited Opening",
         paragraphs: [
-          "Most patients who come to my practice with limited opening have been pre-diagnosed with a non-reducing (“stuck”) disc. Fewer than one in five actually have a stuck disc as the cause. The top three causes I see are acute sprain, osteoarthritis and occlusal muscle disharmony.",
-          "Those with a stuck disc present with a hard end point on the active stretching test and cannot move the jaw fully side to side.",
+          "Limited opening caused by sore muscles is common but not easily diagnosed by most clinicians. Most medical doctors and dentists are not well trained in muscle palpation. If a person is bracing the lower jaw to avoid uncomfortable tooth contacts, the muscles become fatigued and get sore. If fatigued muscles are the cause, an anterior stop test to deprogram the muscles will allow them to temporarily relax and will restore full opening in about 3 minutes. If an anterior stop provides relief many palliative therapies that make muscles feel better will help, while corrective therapies aimed at creating a harmonious bite will resolve the issue without the need for continuous palliative therapy.",
+          "I utilize an anterior stop deprogramming test on almost all of my new patients regardless of the amount of jaw opening to quickly relax the head and neck muscles and determine how much of their facial pain and headaches are due to sore overworked muscles.",
         ],
-        figure: fig("limited-189.jpg", "Lecture slide on the acute closed lock", 2048, 1024),
+        list: ["Hot Cold Hot- 3 min each", "CBD Balm 3-5 a day", "Temporary upper Anterior Stop for sleep", "MLS Cold Laser (808/905nm): 700 hz then 10 hz", "Electrolytes if muscle spasm"],
+        figure: fig("limited-187.jpg", "Dr. Droter’s lecture slide on the anterior stop test", 2048, 1024),
+      },
+      {
+        heading: "Muscle spasm",
+        paragraphs: [
+          "A muscle spasm will present as more painful than overworked bracing muscles and have a firmer end point on active stretching with muscle discomfort. In the past I used TENS therapy to break the spasm. I now use the MLS M-Hi cold laser spasm setting for about 2 minutes. Cold laser takes less time than TENS and is more effective since it has lasting healing properties. Electrolyte imbalance in overworked muscles is also likely a factor so increasing electrolytes will help. Be sure and test for Occlusal Muscle Disharmony as that is usually the main underlying cause.",
+        ],
+        figure: fig("limited-186.jpg", "Dr. Droter’s lecture slide on muscle spasm", 2048, 1024),
+      },
+      {
+        heading: "Acute Closed Lock: Stuck Disc",
+        paragraphs: [
+          "Most patients presenting to my practice with limited opening have been pre diagnosed with a non reducing TMJ disc, the disc is “stuck”. Less than 1/5 of patients have a stuck disc as the cause. The top 3 causes that I see are acute sprain, osteoarthritis, and Occlusal Muscle Disharmony.",
+          "Those with a stuck disc will present with a hard end point in active stretching test and not be able to move their jaw fully side to side.",
+          "Treatments includes 2-3 weeks of jaw movement exercises, Ice, and anti inflammatory like Advil or Aleve and Cold Laser. If limited opening does not resolve an arthrocentesis with PRP is indicated.",
+        ],
+        figure: fig("limited-189.jpg", "Dr. Droter’s lecture slide on the acute closed lock", 2048, 1024),
       },
     ],
   },
 
+  /* drdroter.com/jaw-joint-damage — verbatim. */
   {
     slug: "clicking-jaw",
-    title: "Jaw joint damage: the clicking jaw",
-    plainName: "My jaw clicks",
+    title: "Jaw Joint Damage",
+    plainName: "The Clicking Jaw",
     category: "TMJ damage",
     source: "drdroter.com",
-    summary:
-      "About 35% of people have damaged their TMJs. Most damaged joints adapt well — 85% of people with jaw joint damage do not need any treatment whatsoever.",
-    signs: ["Clicking on opening or chewing", "Usually pain-free", "Sometimes jaw dysfunction or pain"],
-    hero: fig("tmj-damaged.jpg", "Illustration of a TMJ with the disc dislocated forward", 1024, 768),
+    summary: "85% of people with jaw joint damage do not need any treatment what so ever!!!",
+    signs: ["The joint makes a clicking sound on movement"],
+    hero: fig("tmj-damaged.jpg", "Dr. Droter’s illustration of a damaged TMJ", 1024, 768),
     full: [
       {
-        heading: "Why joints click",
+        heading: "The Clicking Jaw",
         paragraphs: [
-          "Many people have damaged their TMJs — about 35% of the population. The disc is dislocated anteriorly, and the joint makes a clicking sound on movement.",
-          "Most damaged joints adapt favourably and allow good jaw function: opening and closing, chewing and eating pain-free. As long as the clicking isn’t too annoying, these joints can be well tolerated.",
-          "A few people do have jaw dysfunction and pain from a damaged joint that did not adapt favourably. For them, there is care to help the TMJ readapt in a more favourable manner.",
+          "Many people have damaged their TMJs (35% of the population), the disc is dislocated anteriorly, and the joint makes a clicking sound on movement. Most damaged joints adapt favorably and allow good jaw function (opening and closing), chewing, and eating pain free. As long as the clicking sound is not too annoying, these damaged joints can be well tolerated. A few people do however have jaw dysfunction and pain from a damaged joint that will need treatment. The TMJs did not adapt favorably to the damage. For them, there is treatment to help the TMJ damage readapt in a more favorable manner.",
         ],
-        figure: fig("tmj-healthy.jpg", "Illustration of a healthy TMJ", 1024, 768, "Healthy joint: the disc sits on the condyle."),
+        figure: fig("tmj-healthy.jpg", "Dr. Droter’s illustration of a healthy TMJ", 1024, 768),
       },
       {
-        heading: "Forty diseases of the joint itself",
+        heading: "The Many Causes of Facial Pain",
         paragraphs: [
-          "Clicking is one sign of TMJ damage, the first of the seven categories of TMD — and there are 40 different diseases of the joint itself. Across all seven categories there are 190+ causes of temporomandibular disorders and facial pain. The examination, which needs to include muscle and joint palpation, leads to a working diagnosis, and a specific approach is needed for each specific diagnosis.",
+          "There are 190+ different causes of Temporomandibular Disorders/Facial Pain. The examination process, which needs to include muscle and joint palpation, will lead to a working diagnosis on which you will be treated. A specific treatment is needed for each specific diagnosis. I utilize 70+ different therapies in my practice.",
         ],
-        figure: fig("tmj-forty-diseases.jpg", "Dr. Droter’s lecture slide listing the 40 diseases of the TMJ", 1200, 600, "Category 1 of 7: TMJ damage and diseases, from Dr. Droter’s lecture."),
+        figure: fig("tmj-forty-diseases.jpg", "Dr. Droter’s lecture slide: TMJ damage and diseases", 1200, 600),
       },
     ],
   },
 
+  /* drdroter.com/anterior-open-bite — verbatim. */
   {
     slug: "anterior-open-bite",
-    title: "Anterior open bite",
-    plainName: "My front teeth no longer touch",
+    title: "Anterior Open Bite",
+    plainName: "Front teeth used to touch a year ago",
     category: "Cranial alignment and occlusion",
     source: "drdroter.com",
     summary:
-      "Front teeth that used to touch and now don’t is a serious condition that can be progressive. There are several non-surgical options — once the cause is known.",
-    signs: ["Front teeth no longer meet", "Changes in speaking, eating or swallowing", "Bite feels different than it used to"],
-    hero: fig("aob-ant-open.jpg", "Lecture slide showing an anterior open bite", 2048, 1024),
+      "Front teeth that used to touch and now are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation to correct this deformity, there are several non surgical options to fix anterior open bite.",
+    signs: ["Front teeth used to touch a year ago"],
+    hero: fig("aob-ant-open.jpg", "Dr. Droter’s lecture slide on anterior open bite", 2048, 1024),
     full: [
       {
-        heading: "Why it matters",
+        heading: "Anterior Open Bite",
         paragraphs: [
-          "Front teeth need to touch to allow proper speaking, eating and swallowing. Front teeth that used to touch and are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation, there are several non-surgical options to correct anterior open bite.",
+          "Front teeth need to touch to allow proper speaking, eating and swallowing. Front teeth that used to touch and now are no longer in contact is a serious condition that can be progressive. While surgery is the most common recommendation to correct this deformity, there are several non surgical options to fix anterior open bite.",
         ],
-        figure: fig("aob-ms.jpg", "Lecture slide on anterior open bite", 2048, 1024),
+        figure: fig("aob-ms.jpg", "Dr. Droter’s lecture slide on anterior open bite", 2048, 1024),
       },
       {
-        heading: "Three main causes after puberty",
-        list: ["TMJ bone loss", "Tongue bracing a damaged neck", "Iatrogenic — for example, a bad night guard"],
+        heading: "Three main causes",
         paragraphs: [
-          "Anterior open bites can look very similar yet have different causes. Patients with an anterior open bite need a CBCT to definitively determine the cause, and the cause must be determined first for care to be effective.",
+          "There are three main causes of anterior open bite that occur after puberty: TMJ bone loss, tongue bracing a damaged neck, Iatrogenic (i.e Bad Night Guards).",
+          "As you can see the above anterior open bites all look very similar, yet have different etiologies (causes). Patients with anterior open bites need a CBCT to definitively determine the cause. The cause of the open bite must first be determined for treatment to be effective.",
         ],
-        figure: fig("aob-causes.jpg", "Lecture slide comparing anterior open bites with different causes", 2400, 1200, "Similar bites, different causes."),
+        figure: fig("aob-causes.jpg", "Dr. Droter’s lecture slide: adult onset anterior open bite differential diagnosis", 2400, 1200),
       },
     ],
   },
 
+  /* drdroter.com/uncomfortable-bite-occlusion — verbatim. */
   {
     slug: "uncomfortable-bite",
-    title: "Uncomfortable bite: occlusal muscle disharmony",
-    plainName: "My bite feels wrong",
+    title: "Uncomfortable Bite (Occlusion)",
+    plainName: "Occlusal Muscle Disharmony",
     category: "Cranial alignment and occlusion",
     source: "drdroter.com",
-    summary:
-      "When teeth hit unevenly, the jaw muscles keep searching for an even bite that doesn’t exist — and fatigue. More than 30% of headache patients have an occlusal problem that can be fixed without medications.",
-    signs: ["Muscles tire chewing harder foods", "Deep facial ache", "Headaches"],
-    hero: fig("occlusion-extract-002.jpg", "Lecture slide on occlusal adjustment", 2400, 1200),
+    summary: "Greater than 30% of headache patients have an occlusal problem that can be fixed without medications.",
+    signs: ["Fatigued muscles on chewing harder foods", "Deep Facial Ache", "Headaches"],
+    hero: fig("occlusion-extract-002.jpg", "Dr. Droter’s lecture slide: occlusal sculpting", 2400, 1200),
     full: [
       {
-        heading: "What occlusion is",
+        heading: "Uncomfortable Bite (Occlusion)",
         paragraphs: [
-          "Occlusion is how your teeth come into contact with each other. If your teeth are hitting unevenly — too heavy on the front teeth, on the right or left, or on a single tooth — it can cause pain and dysfunction in the head and neck.",
-          "Ideally, with the jaw joint fully seated in its socket, all your teeth touch evenly. If they touch unevenly, your jaw muscles position the lower jaw the best they can to get a reasonably even bite. They are searching for something that does not exist, and this constant searching fatigues them.",
-          "If you have a recent change in how your teeth come together, you need a dentist who will take a CBCT scan of your jaw joint to rule out pathology, and analyze your bite with mounted study models and/or a TekScan.",
+          "Occlusion is how your teeth come in contact with each other. If your teeth are hitting unevenly, (too heavy on front teeth, too heavy on right or left teeth, or too heavy on a single tooth) this can cause pain and dysfunction in the head and neck area. Ideally, with the jaw joint fully seated in its socket, all your teeth should touch evenly. If your teeth touch unevenly, your jaw muscles have to position your lower jaw the best it can to try and get a reasonably even bite. Your jaw muscles are searching for something that does not exist: an even bite. This constant searching fatigues the muscles.",
+          "If you have a recent change in how your teeth come together, you need to have a dentist who will take a CBCT scan of your jaw joint to rule out possible pathologies and analyze your bite with mounted study models and or a Tek Scan.",
         ],
-        figure: fig("occlusion-dawson.jpg", "Diagram of a tooth interference activating muscles to move the lower jaw", 1702, 1556, "Teeth in the way on closing activate muscles to move the lower jaw. From Functional Occlusion, Peter Dawson."),
+        figure: fig("occlusion-dawson.jpg", "Diagram: teeth in the way on closing activate muscles to move the lower jaw", 1702, 1556, "Teeth that are in the way on closing activates muscles to move the lower jaw to avoid contact with the offending tooth. (From Textbook Functional Occlusion, Peter Dawson)"),
+      },
+      {
+        heading: "Occlusal Muscle Disharmony",
+        paragraphs: ["An uneven bite causing muscle fatigue is called Occlusal Muscle Disharmony."],
+        list: ["Fatigued muscles on chewing harder foods", "Deep Facial Ache", "Headaches"],
+        figure: fig("occlusion-post-openbite.jpg", "Photo: hitting too heavy on front teeth", 2048, 1375, "Hitting too heavy on front teeth causes clenching of teeth to try and get back teeth to touch."),
       },
       {
         heading: "Three types of uneven bite",
-        steps: ["Posterior occlusal interference — too heavy on a back tooth", "Posterior open bite — too heavy on the front teeth", "Too heavy on one side, the right or the left"],
-        figure: fig("occlusion-post-openbite.jpg", "Photo illustrating a posterior open bite", 2048, 1375, "Hitting too heavy on the front teeth causes clenching to get the back teeth to touch."),
+        steps: ["Posterior Occlusal interference. Too heavy on a back tooth.", "Posterior open bite. Too heavy on front teeth.", "Too heavy on one side: the right or the left."],
       },
       {
         heading: "Causes of an uneven bite",
-        list: ["A damaged jaw joint", "Osteoarthritis", "Multiple restorations done at different times by different dentists", "Unfinished orthodontics", "Inappropriate orthodontic retainers", "Poorly fitting night guards", "Neck damage causing neck-muscle bracing"],
+        list: ["A damaged jaw joint", "Osteoarthritis", "Multiple dental restoration done at different times by different dentist", "Unfinished orthodontics.", "Inappropriate Orthodontic Retainers", "Poorly fitting night guards.", "Neck damage causing neck muscle bracing."],
       },
       {
-        heading: "Paths to relief",
+        heading: "Occlusal Adjustment (“Sculpting” the occlusion)",
         paragraphs: [
-          "The approach depends on the severity. Most uneven bites can be corrected with an occlusal adjustment: a light reshaping of the teeth. If the bite is further off than an adjustment can correct, other options include orthodontics, restorative dentistry, occlusal onlays and condylar distraction.",
-          "Enamel is about 2–3 mm thick in healthy teeth, stone-like, with no nerves, and adjusting removes very little of it. Afterward the bite feels more solid; many people notice improved comfort right away, while others take a week or two to adapt.",
+          "Treatments for an uneven bite depends on the severity of the malocclusion. Most uneven bites can be fixed with an occlusion adjustment: a light reshaping of teeth. If the bite is further off than what can be corrected with an occlusal adjustment, other options include orthodontics, restorative dentistry, occlusal onlays, and condylar distraction.",
+          "With a proper, harmonious occlusion all teeth have an equal amount of force when the TMJ is in its fully seated position. No single tooth has to endure an excessive load. The forces through the TMJ is reparative and regenerative, not destructive.",
+          "Enamel can be contoured with a dental diamond or added to with composite. Enamel is about 2-3mm thick in healthy teeth. It is stone like with no nerves. Adjusting removes very little enamel. Adjusting the teeth is usually very comfortable. If a tooth is loose or has an old filling, it can be sensitive on adjusting. If enamel is already worn from grinding your teeth, dentin may be exposed on adjusting. If this happens a small white composite filling can be placed over the exposed dentin. Afterward your bite will feel more solid. Many people notice improved comfort right away, while others take a week or two to adapt.",
         ],
-        list: ["Jaw muscles are more relaxed", "Muscle movements are coordinated and smooth", "Less risk of splitting or breaking teeth", "Teeth stay tight and firm", "Helps maintain the health of the TMJ and the periodontium"],
-        figure: fig("occlusion-extract-001.jpg", "Lecture slide on the benefits of a harmonious occlusion", 2400, 1200),
+        figure: fig("occlusion-extract-002.jpg", "Dr. Droter’s lecture slide: occlusal sculpting", 2400, 1200),
+      },
+      {
+        heading: "Benefits of having a proper, ideal occlusion",
+        list: ["Muscles of the jaw are more relaxed.", "Muscle movements are coordinated and smooth.", "Less risk of splitting or breaking teeth.", "Teeth will not become loose, but will remain tight and firm.", "Helps to maintain the health of the temporomandibular joint.", "Helps to maintain the health of the periodontium.", "Front teeth that are adjusted in harmony look better."],
+        figure: fig("occlusion-extract-001.jpg", "Dr. Droter’s lecture slide on occlusion", 2400, 1200),
       },
     ],
   },
 
+  /* His osteoarthritis document (OA for APS web) — verbatim; only typos fixed ("diagnose" → "diagnosis", "Bromlnj" → "Bromelain"). */
   {
     slug: "osteoarthritis",
-    title: oa.title,
-    plainName: "My jaw joint aches",
+    title: "Osteoarthritis",
+    plainName: "Soreness of the joint itself",
     category: "TMJ damage",
     source: "OA write-up",
-    summary: oa.heroDescription,
-    signs: oa.symptoms.primary.slice(0, 4),
-    hero: { src: "/conditions/osteoarthritis/TMJ-Arrow.png", alt: "Illustration locating the TMJ in front of the ear", width: 1448, height: 1086 },
+    summary:
+      "There are 40 different diseases that affect joints whether it is the Temporomandibular Joint or your wrist. Osteoarthritis is the most common disease of these 40 diseases.",
+    signs: ["Soreness of the joint itself", "Ear pain", "Limited jaw opening", "Difficulty chewing", "Sore jaw muscles"],
+    hero: { src: "/conditions/osteoarthritis/TMJ-Arrow.png", alt: "Dr. Droter’s illustration locating the TMJ in front of the ear", width: 1448, height: 1086 },
     full: [
-      { heading: "Overview", paragraphs: oa.overview },
-      { heading: "Symptoms", list: [...oa.symptoms.primary, ...(oa.symptoms.secondary ?? [])] },
-      { heading: "Diagnosis", paragraphs: oa.diagnosis ?? [] },
-      ...oa.treatments.map((t) => ({ heading: t.category, list: t.items })),
-      { heading: "Important notes", list: oa.importantNotes ?? [] },
+      {
+        heading: "Osteoarthritis",
+        paragraphs: [
+          "There are 40 different diseases that affect joints whether it is the Temporomandibular Joint or your wrist. Osteoarthritis is the most common disease of these 40 diseases. The most common symptom of Osteoarthritis of the TMJ will be soreness of the joint itself. Osteoarthritis of the TMJ can also present as ear pain since the ear and TMJ sit right next to each other. Other symptoms include limited jaw opening, difficulty chewing, and sore jaw muscles.",
+          "In some cases it can be difficult for a person to tell if their joint is sore, you have to rub in the correct spot.",
+          "If the TMJ is sore a CBCT (ConeBeam CT scan) of the joint is required to confirm the diagnosis of Osteoarthritis and determine the severity.",
+        ],
+      },
+      {
+        heading: "Damaged joints have friction",
+        paragraphs: [
+          "Osteoarthritis occurs when you have damaged the cartilage in a joint, most likely from past trauma. Damaged joints have friction, friction causes wear. A healthy joint has no friction and will not wear out. In theory you could move a healthy joint for a thousand years and there would be no wear. Once a joint is damaged it will have friction that leads to wear. Osteoarthritis is a progressive wearing out of the joint. As a joint wears out it will progress from early to Severe. A CBCT is the best way to determine where you are in the disease process.",
+        ],
+      },
+      {
+        heading: "Therapies",
+        paragraphs: [
+          "Treatments include minimizing sleep bruxing with a night guard and anti-inflammatory therapies (Ice, Topical CBD Balm, Jaw exercises, anti inflammatory medications, cold laser). Using an NSAID like meloxicam for 6 to 12 weeks is probably the simplest but there are risks. I have found cold laser therapy combined with topical CBD, Ice, jaw motion exercises, and Bromelain with green coffee extract to be very effective with less risks than standard NSAID medications.",
+        ],
+      },
     ],
   },
 
@@ -550,24 +600,24 @@ export type Resource = {
 
 export const literature: Resource[] = [
   {
-    title: "Orthopedic Medicine",
-    description: "John R. Droter, DDS, on the orthopedic approach to diagnosing the TMJ.",
+    title: "John R Droter DDS Article",
+    description: "John R Droter DDS Article. Orthopedic Medicine",
     kind: "Article",
     href: "https://drdroter.com/wp-content/uploads/2016/11/DroterOrthopedDx.pdf",
     meta: "Published article · PDF",
     audience: "dentists",
   },
   {
-    title: "The worn dentition — pathognomonic patterns of abrasion and erosion",
-    description: "Abrahamsen T C. Int Dent J 2005; 55: 268–76.",
+    title: "Thomas Abrahamsen Article",
+    description: "Abrahamsen T C, The worn dentition – pathognomonic patterns of abrasion and erosion. Int Dent J 2005 55: 268-76.",
     kind: "Reference",
     href: "https://drdroter.com/wp-content/uploads/2016/11/AbrahamsenIDJ.pdf",
     meta: "International Dental Journal · PDF",
     audience: "both",
   },
   {
-    title: "Toothpaste relative dentin abrasiveness",
-    description: "Rath, 2016 — comparing the abrasiveness of common toothpastes.",
+    title: "Rath article on Toothpaste Relative Dentin Abrasiveness",
+    description: "Rath article on Toothpaste Relative Dentin Abrasiveness",
     kind: "Reference",
     href: "https://drdroter.com/wp-content/uploads/2017/06/Rath-Toothpaste-Abrasiveness-2016.pdf",
     meta: "Article · PDF",
@@ -578,7 +628,7 @@ export const literature: Resource[] = [
 export const lectures: Resource[] = [
   {
     title: "Pankey TMD 2026",
-    description: "Slides from Dr. Droter’s TMD course at the L.D. Pankey Institute (Day 4 version).",
+    description: "Day 4 Version",
     kind: "Lecture",
     href: "https://drdroter.com/wp-content/uploads/2026/06/Pankey-TMD-2026v2.key-sm.pdf",
     meta: "L.D. Pankey Institute · 2026 · PDF",
@@ -586,7 +636,7 @@ export const lectures: Resource[] = [
   },
   {
     title: "Gill Ortho Ceph Analysis — Extract",
-    description: "Cephalometric analysis extract used alongside the Pankey TMD course.",
+    description: "Gill Ortho Ceph Analysis Extract",
     kind: "Lecture",
     href: "https://drdroter.com/wp-content/uploads/2026/06/Gill-Ortho-Ceph-Analysis-Extract.key.pdf",
     meta: "L.D. Pankey Institute · 2026 · PDF",
@@ -596,8 +646,8 @@ export const lectures: Resource[] = [
 
 export const patientResources: Resource[] = [
   {
-    title: "Hot Cold Hot",
-    description: "Home therapy for sore muscles with trigger points.",
+    title: "HotColdHot Download",
+    description: "Home therapy for sore muscles with triggerpoints",
     kind: "Handout",
     href: "https://drdroter.com/wp-content/uploads/2016/06/hotcoldhot2.pdf",
     meta: "Handout · PDF",
@@ -605,31 +655,31 @@ export const patientResources: Resource[] = [
   },
   {
     title: "Photos: The Big 12",
-    description: "Photos your dentist can take to help monitor your progress.",
+    description: "Photos your Dentist can take to help us monitor your progress",
     kind: "Handout",
     href: "https://drdroter.com/wp-content/uploads/2017/01/Photo-Guidelines17.1.Big12.pdf",
     meta: "Guide · PDF",
     audience: "both",
   },
   {
-    title: "Supplement recommendations",
-    description: "Dr. Droter’s vitamin and supplement recommendations.",
+    title: "Supplement Recommendations",
+    description: "Vitamin Supplements",
     kind: "Handout",
     href: "https://drdroter.com/wp-content/uploads/2026/08/Vitamin-Recommendation-26.8.pdf",
     meta: "Aug 2026 · PDF",
     audience: "patients",
   },
   {
-    title: "Toothpaste recommendations",
-    description: "Which toothpastes are gentlest on worn enamel.",
+    title: "Toothpaste Recommendations 2018.5",
+    description: "Oral Hygiene Recommendations",
     kind: "Handout",
     href: "https://drdroter.com/wp-content/uploads/2018/05/Toothpaste-Recommendations-2018.5.pdf",
     meta: "2018 · PDF",
     audience: "patients",
   },
   {
-    title: "Toothpaste abrasiveness chart",
-    description: "Relative dentin abrasiveness of common toothpastes.",
+    title: "Toothpaste Abrasivenss Chart 2016 17.9 article",
+    description: "Toothpaste Abrasivenss Chart 2016 17.9 article",
     kind: "Reference",
     href: "https://drdroter.com/wp-content/uploads/2018/01/Toothpaste-Abrasivenss-Chart-2016-17.9-article.pdf",
     meta: "Chart · PDF",
@@ -640,7 +690,8 @@ export const patientResources: Resource[] = [
 /* ───────────────────────── Practice (light touch) ───────────────────────── */
 
 export const practice = {
-  heading: "See Dr. Droter in Bowie, Maryland",
+  /** His page title on drdroter.com. */
+  heading: "New Patient Information",
   body: "Dr. Droter maintains a private practice diagnosing facial pain in the Washington DC, Baltimore and Annapolis area. After you call the office, you’ll receive an email with a link to the new patient forms.",
   phone: "301-805-9400",
   addressLines: ["4000 Mitchellville Road", "Bowie, MD 20716"],

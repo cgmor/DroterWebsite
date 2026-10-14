@@ -12,12 +12,16 @@ import TutorialPlayer from "@/components/site/TutorialPlayer";
 import DeviceRender from "./DeviceRender";
 import s from "./home.module.css";
 
-const tutorialTitle = "Every step, from try-in to bite scan";
-const narrated = `Narrated by ${doctor.shortName}, ${airwayBite.video.durationLabel}.`;
+/** A plain label: the video is his narration; the chapters and steps carry the rest. */
+const tutorialTitle = "Tutorial";
 /** "2 min 15 s" → "02:15", for the play chip. */
 const runtime = airwayBite.video.durationLabel.replace(/^(\d+) min (\d+) s$/, (_, m: string, sec: string) => `${m.padStart(2, "0")}:${sec.padStart(2, "0")}`);
 
-/** V1: the advantages as a hairline sheet beside the device in use (step 6, tapping into position). */
+/**
+ * V1: his advantages list as a hairline sheet beside the device in use (step 6,
+ * tapping into position), under the kit's name from its label. A row's second
+ * line renders only when the content has one.
+ */
 export function Advantages({ v }: { v: VersionId }) {
   return (
     <Section labelledBy="adv-title">
@@ -28,26 +32,24 @@ export function Advantages({ v }: { v: VersionId }) {
               src="/aps/stills/step-06-tap-into-position-clean.webp"
               alt="The Airway Bite seated on the upper front teeth while the patient taps the lower teeth into the forward position."
               fill
-              sizes="(min-width: 1000px) 40vw, 100vw"
+              sizes="(min-width: 1000px) 860px, 160vw"
+              quality={90}
               className={s.advImg}
             />
           </div>
         </div>
         <div className={s.advCopy}>
-          <h2 id="adv-title" className="t-h1">
-            Made for the chair.
+          <h2 id="adv-title" className="t-h2">
+            {airwayBite.kitName}
           </h2>
-          <p className={`t-lead ${s.advLead}`}>
-            {airwayBite.kit.line}
-          </p>
-          <dl className={s.advList}>
+          <ul className={s.advList}>
             {airwayBite.advantages.map((a) => (
-              <div key={a.title} className={s.advRow}>
-                <dt>{a.title}</dt>
-                <dd>{a.body}</dd>
-              </div>
+              <li key={a.title} className={s.advRow}>
+                <p className={s.advTitle}>{a.title}</p>
+                {a.body && <p className={s.advBody}>{a.body}</p>}
+              </li>
             ))}
-          </dl>
+          </ul>
           <div className={s.after}>
             <ButtonLink href={href(v, `${routes.airwayBite}#steps`)} variant="quiet">
               The nine chairside steps
@@ -66,7 +68,6 @@ export function TutorialSection({ v, tone = "mist" }: { v: VersionId; tone?: Ton
       <SectionHead
         id="tut-title"
         title={tutorialTitle}
-        lead={`${narrated} Choose a chapter to jump straight to it.`}
         layout="split"
         actions={
           <ButtonLink href={href(v, `${routes.airwayBite}#steps`)} variant="quiet">
@@ -89,7 +90,8 @@ export function TutorialTeaser({ v, tone = "white" }: { v: VersionId; tone?: Ton
             src={airwayBite.video.poster}
             alt=""
             fill
-            sizes="(min-width: 1000px) 58vw, 100vw"
+            sizes="(min-width: 1000px) 680px, 100vw"
+            quality={90}
             className={s.ttImg}
           />
           <span className={s.ttPlay} aria-hidden="true">
@@ -102,7 +104,6 @@ export function TutorialTeaser({ v, tone = "white" }: { v: VersionId; tone?: Ton
           <h2 id="tt-title" className="t-h2">
             {tutorialTitle}
           </h2>
-          <p className={`t-lead ${s.ttLead}`}>{narrated} The protocol runs in four phases.</p>
           <ol className={s.phases}>
             {airwayBite.phases.map((p, i) => {
               const first = p.steps[0].n;
@@ -143,7 +144,7 @@ export function AirwayBridge({ v }: { v: VersionId }) {
     <Section tone="night" labelledBy="br-title">
       <div className={s.brHead}>
         <div className={s.brCopy}>
-          <h2 id="br-title" className="t-h1">
+          <h2 id="br-title" className="t-h2">
             {airwayBite.name}
           </h2>
           <p className={`t-lead ${s.brLead}`}>{airwayBite.summary}</p>
@@ -152,7 +153,7 @@ export function AirwayBridge({ v }: { v: VersionId }) {
           <DeviceRender
             view="side"
             alt={`The ${airwayBite.name} in profile: the anterior stop rising from the base.`}
-            sizes="(min-width: 1000px) 76vw, 122vw"
+            sizes="(min-width: 1000px) 640px, 130vw"
             className={s.nightRender}
           />
         </div>
@@ -168,7 +169,7 @@ export function AirwayBridge({ v }: { v: VersionId }) {
           name="airwayOpening"
           alt="Animation from the tutorial: a cross-section of the airway opening as the lower jaw moves forward."
           className={s.brLoop}
-          sizes="(min-width: 1400px) 1320px, 100vw"
+          sizes="(min-width: 1000px) 960px, (min-width: 760px) 100vw, 160vw"
         />
       </div>
       <div className={`actions ${s.brActions}`}>
@@ -184,7 +185,8 @@ export function AirwayBridge({ v }: { v: VersionId }) {
 /**
  * V3: the Airway Bite band that starts within the first scroll, on night: the
  * device at product scale (the three-quarter render, grounded by a shadow
- * taken from its silhouette), then the order route.
+ * taken from its silhouette), his framing of the job and his advantages
+ * (IFU slide 1 and his email), then the order route.
  */
 export function AirwayBand({ v }: { v: VersionId }) {
   return (
@@ -194,18 +196,16 @@ export function AirwayBand({ v }: { v: VersionId }) {
           <DeviceRender
             view="three-quarter"
             alt={`The ${airwayBite.name}, three-quarter view: the anterior stop rising from the base.`}
-            sizes="(min-width: 1000px) 82vw, 132vw"
+            sizes="(min-width: 1000px) 700px, 130vw"
             className={s.nightRender}
           />
         </div>
         <div className={s.bandCopy}>
-          <h2 id="band-title" className="t-h1">
-            The {airwayBite.shortName}, for dentists
+          <h2 id="band-title" className="t-h2">
+            {airwayBite.name}
           </h2>
-          <p className={`t-lead ${s.bandLead}`}>{airwayBite.summary}</p>
-          <p className={s.bandUse}>
-            {airwayBite.advantages[0].title}. {airwayBite.advantages[1].body}
-          </p>
+          <p className={`t-lead ${s.bandLead}`}>{airwayBite.purpose}</p>
+          <p className={s.bandUse}>{airwayBite.summary}</p>
           <div className={`actions ${s.bandActions}`}>
             <ButtonLink href={distributor.url}>{distributor.cta}</ButtonLink>
             <ButtonLink href={href(v, routes.airwayBite)} variant="secondary">

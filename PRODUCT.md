@@ -54,6 +54,7 @@ Success means Dr. Droter, a demanding client who said "I do not have a professio
 - **Tone:** authoritative and clinical, but plain-spoken. It's his own voice, a teacher's voice.
 - **Rejected (do not use):** the "hims/hers" / MEDVi consumer-telehealth style, and the cartoon illustration of Dr. Droter. His only written style note asks for a "more prestigious looking font."
 - **Strong preference (Cole):** v1 "Precision" is the best of the first round, especially its graphics. Every version must keep the rotating 3D "Airway Bite, in detail" section.
+- **Scale (Cole, 2026-10-14):** calm and clinical, never oversized. Dr. Droter's portrait stays modest (no larger-than-life face; he called the big one "creepy"). Headlines are capped well below billboard size, and images are never shown blurry or upscaled. This overrides the earlier "Eight Sleep scale" push.
 - **Standing direction (Cole, 2026-10-14):** the category standard played straight, a premium clinical-device site with no novelty world. The quality bar is a combination of **straumann.com** (clinical authority, restraint, an education hub for clinicians) and **eightsleep.com** (rendered product, polish, motion). All three versions share one world and differ only in emphasis: V1 leads with the Airway Bite, V2 with Dr. Droter and his expertise, V3 with TMD education.
 
 ## Evidence on Hand
@@ -76,6 +77,7 @@ Success means Dr. Droter, a demanding client who said "I do not have a professio
 3. **Teach in layers.** Give a short summary first, with the complete version one expand away.
 4. **Chairside-fast.** Anything a dentist needs mid-procedure (the steps, the video chapters, the PDF) must be reachable in one tap on a phone.
 5. **Only what's true.** Use his words and his numbers. Leave empty slots out rather than filling them with invention.
+6. **His words, not ours (Cole, 2026-10-14).** As much of the writing as possible comes verbatim from Dr. Droter: drdroter.com, his brochure, his IFU, his article, his documents and emails. Correct only obvious typos. AI-written copy is kept to the minimum the interface needs: navigation, buttons and labels. The review bar's "Highlight AI text" view (corpus in `public/aps/provenance/`, sources in `Assets/APSleep/source-text/`) measures this on every page.
 
 ## Accessibility & Inclusion
 

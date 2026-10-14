@@ -137,9 +137,7 @@ function NowLine({ p }: { p: Player }) {
             </span>
             {current.label}
           </>
-        ) : (
-          `${CHAPTERS.length} chapters · ${airwayBite.video.durationLabel}`
-        )}
+        ) : null}
       </span>
       <span className="mono">
         {timecode(p.time)} / {timecode(p.duration)}
@@ -300,7 +298,7 @@ function Chairside({ p, id, preload }: { p: Player; id: string; preload: "none" 
               </div>
               {still && (
                 <div className="ph-still">
-                  <Image src={still} alt="" width={1920} height={816} sizes="(min-width: 1024px) 40vw, 100vw" className="ph-img" />
+                  <Image src={still} alt="" width={1920} height={816} sizes="(min-width: 1024px) 480px, 100vw" quality={90} className="ph-img" />
                 </div>
               )}
               <p className="ph-caption">{ph.caption}</p>
@@ -343,7 +341,6 @@ function Chairside({ p, id, preload }: { p: Player; id: string; preload: "none" 
                 width={1600}
                 height={800}
                 variant="inline"
-                caption={`Instructions for use: ${ph.title.toLowerCase()}`}
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="ph-ifu"
               />

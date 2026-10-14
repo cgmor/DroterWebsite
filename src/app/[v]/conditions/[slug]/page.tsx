@@ -12,7 +12,7 @@ import { href, isVersion, routes } from "@/components/site/links";
 import PracticePanel from "@/components/site/PracticePanel";
 import { Section } from "@/components/site/Section";
 import { doctor, education } from "@/content/aps";
-import { conditionCategories, conditionGuides } from "@/content/tmd";
+import { conditionGuides } from "@/content/tmd";
 import s from "./page.module.css";
 
 type Params = Promise<{ v: string; slug: string }>;
@@ -36,8 +36,6 @@ export default async function ConditionPage({ params }: { params: Params }) {
 
   const sameCategory = conditionGuides.filter((x) => x.category === g.category && x.slug !== g.slug);
   const related = sameCategory.length ? sameCategory : conditionGuides.filter((x) => x.slug !== g.slug).slice(0, 4);
-  const catIndex = conditionCategories.indexOf(g.category);
-  const figures = g.full.filter((sec) => sec.figure).length;
 
   const signs = (
     <section className={g.hero ? s.signs : s.signsAside} aria-labelledby="signs-title">
@@ -67,20 +65,16 @@ export default async function ConditionPage({ params }: { params: Params }) {
             <p className={s.words}>“{g.plainName}”</p>
             <p className={s.summary}>{g.summary}</p>
             <div className={s.byline}>
-              <Image src={doctor.headshot} alt="" width={1400} height={1699} sizes="44px" className={s.bylinePortrait} />
-              <p className={s.bylineText}>
+              <Image src={doctor.headshot} alt="" width={1991} height={2416} sizes="44px" quality={90} className={s.bylinePortrait} />
+              {/* Two items, not a sentence: his name, and the category as a link back to it. */}
+              <div className={s.bylineText}>
                 <span className={s.bylineName}>{doctor.name}</span>
                 <span className={s.bylineMeta}>
                   <Link href={href(v, `${routes.conditions}#${categoryId(g.category)}`)} className={s.bylineCat}>
                     {g.category}
                   </Link>
-                  {catIndex >= 0 && (
-                    <>
-                      , category <span className="num">{catIndex + 1}</span> of <span className="num">{conditionCategories.length}</span>
-                    </>
-                  )}
                 </span>
-              </p>
+              </div>
             </div>
           </div>
           {g.hero ? (
@@ -105,16 +99,6 @@ export default async function ConditionPage({ params }: { params: Params }) {
                 The complete version
               </h2>
               <div className={s.fullAside}>
-                <p className={s.fullNote}>
-                  The full write-up has <span className="num">{g.full.length}</span> {g.full.length === 1 ? "section" : "sections"}
-                  {figures > 0 && (
-                    <>
-                      {" "}
-                      and <span className="num">{figures}</span> {figures === 1 ? "figure" : "figures"}
-                    </>
-                  )}
-                  .
-                </p>
                 <ol className={s.fullIndex}>
                   {g.full.map((sec) => (
                     <li key={sec.heading}>{sec.heading}</li>
@@ -132,7 +116,7 @@ export default async function ConditionPage({ params }: { params: Params }) {
       <Section space="md" labelledBy="related-title" className={s.related}>
         <div className={s.relatedGrid}>
           <h2 className={s.relatedTitle} id="related-title">
-            {sameCategory.length ? `More in ${g.category}` : "Other common conditions"}
+            {sameCategory.length ? g.category : "Other common conditions"}
           </h2>
           <GuideList guides={related} hrefFor={(sl) => href(v, routes.condition(sl))} />
         </div>

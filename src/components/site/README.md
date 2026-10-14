@@ -38,18 +38,18 @@ Import from `@/components/site` (barrel) or the file directly. Server components
 
 ## Helpers (`links.ts`, `specs.ts`, `icons.tsx`, `motion.ts`)
 - `href(v, path)` → version-relative URL: `href("v2", routes.airwayBite + "#steps")` = `/v2/airway-bite#steps`. `routes`: `home, airwayBite, appliances, understanding, conditions, condition(slug), library, about`. Also `NAV`, `AUDIENCES`, `isVersion`, `tel(phone)`.
-- `airwayNumbers` (`anteriorStop` 4 mm, `range` 10–12 mm, `target` ≈ 50%, `chairside` ≈ 5 min, `envelope`), `airwaySpecStrip`, `kitItems`: every number traced to its source. Do not invent others. `airwaySpecStrip` is millimetres only (4 mm · 10–12 mm · 14.6 × 22.0 × 13.8 mm); the target and the chairside time go in running text, in body type, never in a mono row.
+- `airwayNumbers` (`anteriorStop` 4 mm, `range` 10–12 mm, `target` ≈ 50%), `airwaySpecStrip`, `kitItems`: every number traced to his IFU. Do not invent others (the model's bounding box is not his number, so it is not printed). `airwaySpecStrip` is millimetres only (4 mm · 10–12 mm); the target goes in running text, in body type, never in a mono row.
 - `Icons.*`: ArrowRight, ArrowUpRight, ArrowDown, Play, Download, Plus, Minus, Menu, Close, Rotate, Phone, Expand, Check, Document (20-grid, 1.5 stroke).
 - `useReducedMotion()` (client only).
 
 ## Classes
-`t-display` (48–96px, 300), `t-h1`, `t-h2`, `t-h3`, `t-h4`, `t-lead`, `t-small`, `t-quiet`, `mono` (Geist Mono, measurements only), `num` (tabular), `wrap`, `wrap-text`, `actions`, `grid-2`, `grid-3`, `lnk` + `lnk-icon` (inline link), `note` (soft panel), `seg` + `seg-opt[aria-pressed]` (segmented control), `airway-line`, `hero-render` (a render inside `Hero`), `sr-only`.
+`t-display` (40–64px, 300), `t-h1`, `t-h2`, `t-h3`, `t-h4`, `t-lead`, `t-small`, `t-quiet`, `mono` (Geist Mono, measurements only), `num` (tabular), `wrap`, `wrap-text`, `actions`, `grid-2`, `grid-3`, `lnk` + `lnk-icon` (inline link), `note` (soft panel), `seg` + `seg-opt[aria-pressed]` (segmented control), `airway-line`, `hero-render` (a render inside `Hero`), `sr-only`.
 
 ## Tokens (CSS custom properties on `.aps`)
 Grounds `--white #fff`, `--porcelain #dcdcdc` (stills/renders ground), `--mist #f2f3f5` (the secondary band field: tutorial, conditions, practice panel, footer; always `var(--mist)` / `tone="mist"`, never the hex), `--night #0b1526`, `--night-2 #13213a`, `--night-3 #1c2d4b`. Ink `--ink #15191e`, `--ink-2 #2b3139`, `--slate #56606b`, `--slate-porcelain #4a5460`, `--on-night #f2f5fa`, `--on-night-2 #a6b3c9`. Signal (interaction, active, airway line only) `--signal #2a6fdb`, `--signal-hover`/`--signal-ink #1f5cc0`, `--signal-night #8fb2f2`, `--signal-wash`. Lines `--hair`, `--hair-strong`, `--hair-night`, `--hair-night-strong`.
 Contextual (re-pointed by each `.tone-*`; use these in page CSS): `--bg`, `--fg`, `--fg-2`, `--line`, `--line-strong`, `--accent-text`, `--surface`, `--track`, `--control`.
-Type `--font-sans` (Geist), `--font-mono` (Geist Mono). Layout `--gutter`, `--maxw 1320px`, `--textw 46rem`, `--col-gap`, `--space-lg|md|sm`, `--hd-h`. Shape `--r-card 20px`, `--r-inner 12px`, `--r-pill`, `--shadow-1`, `--shadow-2`. Motion `--ease-out` (expo), `--dur-1|2|3` (160/320/640ms).
+Type `--font-sans` (Geist), `--font-mono` (Geist Mono). Layout `--gutter`, `--maxw 1200px`, `--fs-display|h1|h2|h3|quote|passage|lead` (type caps: 64/43/36/26/32/26/22px), `--textw 46rem`, `--col-gap`, `--space-lg|md|sm`, `--hd-h`. Shape `--r-card 20px`, `--r-inner 12px`, `--r-pill`, `--shadow-1`, `--shadow-2`. Motion `--ease-out` (expo), `--dur-1|2|3` (160/320/640ms).
 Tailwind v4 works alongside: `bg-(--porcelain)`, `text-(--fg-2)`, `rounded-(--r-card)`. Component styles sit in `@layer components`, so utilities override them.
 
 ## Images
-next/image allows quality 75 only. For the hero image use `loading="eager" fetchPriority="high"` (not `preload`). Stills are 1920×816 on #DCDCDC; renders are 2000×2000 transparent PNGs; IFU panels 1600×800.
+next/image allows quality 75 and 90 (next.config `images.qualities`); use `quality={90}` for photos, renders and slides, give every image an accurate `sizes` (the painted width, including object-fit crops), and never show a raster wider than half its source width. For the hero image use `loading="eager" fetchPriority="high"` (not `preload`). Stills are 1920×816 on #DCDCDC; renders are 2000×2000 transparent PNGs; IFU panels 1600×800.

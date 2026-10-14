@@ -1,0 +1,287 @@
+{
+ "source": "final_animation_only.mp4 (1920x1080, 24 fps, 135.29 s)",
+ "applies_to": [
+  "airway-bite-explainer-1080.mp4",
+  "airway-bite-explainer-720.mp4"
+ ],
+ "method": "Start times are caption-bar text changes detected per frame (24 fps) and confirmed by eye on extracted frames; scene transitions for title/clinical/end card. caption_text is verbatim (the bar's header line is caption_label; two spaces after the step number are as rendered).",
+ "chapters": [
+  {
+   "id": "intro",
+   "title": "While you sleep: the airway",
+   "caption_label": "WHILE YOU SLEEP",
+   "caption_text": "The airway can become very narrow, and it is hard to get air through. With the jaw further forward, the airway is more open. This can get rid of snoring and obstructive sleep apnea. So how far should the jaw be moved forward? Too far forward, and it’s uncomfortable. Not far enough, and the airway does not open. Open airway, still comfortable.",
+   "start_s": 0.0,
+   "end_s": 22.83,
+   "captions": [
+    {
+     "start_s": 0.0,
+     "label": "WHILE YOU SLEEP",
+     "text": "The airway can become very narrow, and it is hard to get air through."
+    },
+    {
+     "start_s": 6.83,
+     "label": "MOVE THE JAW FORWARD",
+     "text": "With the jaw further forward, the airway is more open."
+    },
+    {
+     "start_s": 11.31,
+     "label": "MOVE THE JAW FORWARD",
+     "text": "This can get rid of snoring and obstructive sleep apnea."
+    },
+    {
+     "start_s": 14.21,
+     "label": "HOW FAR FORWARD?",
+     "text": "So how far should the jaw be moved forward?"
+    },
+    {
+     "start_s": 17.26,
+     "label": "HOW FAR FORWARD?",
+     "text": "Too far forward, and it’s uncomfortable."
+    },
+    {
+     "start_s": 19.4,
+     "label": "HOW FAR FORWARD?",
+     "text": "Not far enough, and the airway does not open."
+    },
+    {
+     "start_s": 22.54,
+     "label": "JUST RIGHT",
+     "text": "Open airway, still comfortable."
+    }
+   ],
+   "still": "stills/intro-airway-narrow.webp",
+   "notes": "Sagittal illustration. Last caption (JUST RIGHT) is on screen only ~0.25 s before the dip to black."
+  },
+  {
+   "id": "title",
+   "title": "APS Airway Bite",
+   "caption_label": null,
+   "caption_text": "APS Airway Bite — Chairside workflow for a mandibular advancement bite",
+   "start_s": 22.83,
+   "end_s": 36.58,
+   "captions": [],
+   "still": "stills/title.webp",
+   "notes": "Title card text (no caption bar). Dip-to-black transition 22.83-23.33; clean from 23.33. Kit packet shown."
+  },
+  {
+   "id": "kit",
+   "title": "What's in the kit",
+   "caption_label": null,
+   "caption_text": "One single-use packet: the airway bite, a pencil and a card ruler. Nothing to sterilize. The bite seats over the upper central incisors. Its 4 mm stop sits under the incisal edges.",
+   "start_s": 36.58,
+   "end_s": 43.0,
+   "captions": [
+    {
+     "start_s": 36.58,
+     "label": null,
+     "text": "One single-use packet: the airway bite, a pencil and a card ruler. Nothing to sterilize."
+    },
+    {
+     "start_s": 41.75,
+     "label": null,
+     "text": "The bite seats over the upper central incisors. Its 4 mm stop sits under the incisal edges."
+    }
+   ],
+   "still": "stills/kit.webp",
+   "notes": "Caption bar has no header line in this section. Close-up of the device from ~42.6 s (stills/kit-device.webp)."
+  },
+  {
+   "id": "before-you-start",
+   "title": "Before you start",
+   "caption_label": "BEFORE YOU START",
+   "caption_text": "Before you start: digital scan of the upper and lower arches, without a bite.",
+   "start_s": 43.0,
+   "end_s": 47.92,
+   "captions": [
+    {
+     "start_s": 43.0,
+     "label": "BEFORE YOU START",
+     "text": "Before you start: digital scan of the upper and lower arches, without a bite."
+    }
+   ],
+   "still": "stills/before-you-start.webp"
+  },
+  {
+   "id": "step-01",
+   "title": "Try-in",
+   "caption_label": "STEP 1  TRY-IN",
+   "caption_text": "Seat the airway bite over the upper central incisors. Shift it back for a Class II bite, forward for a Class III bite. Note the orientation.",
+   "start_s": 47.92,
+   "end_s": 56.5,
+   "captions": [
+    {
+     "start_s": 47.92,
+     "label": "STEP 1  TRY-IN",
+     "text": "Seat the airway bite over the upper central incisors."
+    },
+    {
+     "start_s": 50.88,
+     "label": "STEP 1  TRY-IN",
+     "text": "Shift it back for a Class II bite, forward for a Class III bite. Note the orientation."
+    }
+   ],
+   "still": "stills/step-01-try-in.webp"
+  },
+  {
+   "id": "step-02",
+   "title": "Reline",
+   "caption_label": "STEP 2  RELINE",
+   "caption_text": "Fill with fast-set silicone (Parkell Blu-Mousse) and reseat. Reline again if needed.",
+   "start_s": 56.5,
+   "end_s": 63.58,
+   "captions": [
+    {
+     "start_s": 56.5,
+     "label": "STEP 2  RELINE",
+     "text": "Fill with fast-set silicone (Parkell Blu-Mousse) and reseat. Reline again if needed."
+    }
+   ],
+   "still": "stills/step-02-reline.webp"
+  },
+  {
+   "id": "step-03",
+   "title": "Mark the range",
+   "caption_label": "STEP 3  MARK THE RANGE",
+   "caption_text": "With the bite on the upper teeth, slide the jaw fully back. Pencil-mark the lower incisor edge. Now fully forward: mark again, and mark the midline on both lines.",
+   "start_s": 63.58,
+   "end_s": 77.17,
+   "captions": [
+    {
+     "start_s": 63.58,
+     "label": "STEP 3  MARK THE RANGE",
+     "text": "With the bite on the upper teeth, slide the jaw fully back. Pencil-mark the lower incisor edge."
+    },
+    {
+     "start_s": 70.58,
+     "label": "STEP 3  MARK THE RANGE",
+     "text": "Now fully forward: mark again, and mark the midline on both lines."
+    }
+   ],
+   "still": "stills/step-03-mark-the-range.webp"
+  },
+  {
+   "id": "step-04",
+   "title": "Measure",
+   "caption_label": "STEP 4  MEASURE",
+   "caption_text": "Remove the bite and measure the total front-to-back movement. Typically 10-12 mm.",
+   "start_s": 77.17,
+   "end_s": 83.54,
+   "captions": [
+    {
+     "start_s": 77.17,
+     "label": "STEP 4  MEASURE",
+     "text": "Remove the bite and measure the total front-to-back movement. Typically 10-12 mm."
+    }
+   ],
+   "still": "stills/step-04-measure.webp"
+  },
+  {
+   "id": "step-05",
+   "title": "Target",
+   "caption_label": "STEP 5  TARGET",
+   "caption_text": "Mark the target halfway between the two lines. 40-50% of the range is a common start.",
+   "start_s": 83.54,
+   "end_s": 89.33,
+   "captions": [
+    {
+     "start_s": 83.54,
+     "label": "STEP 5  TARGET",
+     "text": "Mark the target halfway between the two lines. 40-50% of the range is a common start."
+    }
+   ],
+   "still": "stills/step-05-target.webp"
+  },
+  {
+   "id": "step-06",
+   "title": "Tap into position",
+   "caption_label": "STEP 6  TAP INTO POSITION",
+   "caption_text": "Reseat the bite. Have the patient tap repeatedly while you guide the jaw to the target mark.",
+   "start_s": 89.33,
+   "end_s": 96.96,
+   "captions": [
+    {
+     "start_s": 89.33,
+     "label": "STEP 6  TAP INTO POSITION",
+     "text": "Reseat the bite. Have the patient tap repeatedly while you guide the jaw to the target mark."
+    }
+   ],
+   "still": "stills/step-06-tap-into-position.webp"
+  },
+  {
+   "id": "step-07",
+   "title": "Lock the position",
+   "caption_label": "STEP 7  LOCK THE POSITION",
+   "caption_text": "Flow composite on the bite in front of and behind the lower incisors. Light-cure. The jaw is now held steady in the forward position.",
+   "start_s": 96.96,
+   "end_s": 106.04,
+   "captions": [
+    {
+     "start_s": 96.96,
+     "label": "STEP 7  LOCK THE POSITION",
+     "text": "Flow composite on the bite in front of and behind the lower incisors."
+    },
+    {
+     "start_s": 102.54,
+     "label": "STEP 7  LOCK THE POSITION",
+     "text": "Light-cure. The jaw is now held steady in the forward position."
+    }
+   ],
+   "still": "stills/step-07-lock-the-position.webp"
+  },
+  {
+   "id": "step-08",
+   "title": "Bite scan",
+   "caption_label": "STEP 8  BITE SCAN",
+   "caption_text": "Scan the bite with the jaw held forward and send it to the lab.",
+   "start_s": 106.04,
+   "end_s": 112.21,
+   "captions": [
+    {
+     "start_s": 106.04,
+     "label": "STEP 8  BITE SCAN",
+     "text": "Scan the bite with the jaw held forward and send it to the lab."
+    }
+   ],
+   "still": "stills/step-08-bite-scan.webp"
+  },
+  {
+   "id": "done",
+   "title": "Done",
+   "caption_label": "DONE",
+   "caption_text": "One single-use packet. Nothing to sterilize.",
+   "start_s": 112.21,
+   "end_s": 116.54,
+   "captions": [
+    {
+     "start_s": 112.21,
+     "label": "DONE",
+     "text": "One single-use packet. Nothing to sterilize."
+    }
+   ],
+   "still": "stills/done.webp"
+  },
+  {
+   "id": "clinical",
+   "title": "Clinical footage",
+   "caption_label": null,
+   "caption_text": null,
+   "start_s": 116.54,
+   "end_s": 132.0,
+   "captions": [],
+   "still": "stills/clinical-kit-packet.webp",
+   "notes": "Real footage, no caption bar. Dip from black ~116.54-116.9. Kit packet + articulator (~116.9-118.9), chairside on a patient whose full face is visible (~119-129.8: pencil marking, light-cure, intraoral scan), then a 3Shape scan on a laptop (~129.8-132)."
+  },
+  {
+   "id": "end-card",
+   "title": "End card",
+   "caption_label": null,
+   "caption_text": "APS ArrowPath Sleep — APS Airway Bite — apsleep.com/airway-bite",
+   "start_s": 132.0,
+   "end_s": 135.29,
+   "captions": [],
+   "still": "stills/end-card.webp",
+   "notes": "Crossfade in 131.96-132.29; fade to black 134.58-135.29. Text is on-card, not a caption bar."
+  }
+ ]
+}

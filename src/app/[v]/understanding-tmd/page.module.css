@@ -1,0 +1,615 @@
+/* /understanding-tmd: a long Read-mode guide. The world owns the frame
+   (masthead, thesis, contents rail, section openers); the column stays calm. */
+
+/* ── Masthead + thesis ──────────────────────────────────────────────────── */
+
+.mast {
+  padding-top: clamp(48px, 7vw, 112px);
+}
+.mastGrid {
+  display: grid;
+  gap: 24px var(--col-gap);
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+@media (min-width: 900px) {
+  .mastGrid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+  }
+}
+.title {
+  max-width: 13ch;
+}
+.intro {
+  max-width: 44ch;
+  font-size: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.thesis {
+  padding-block: clamp(48px, 6.5vw, 104px) clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--hair-strong);
+  border-bottom: 1px solid var(--hair);
+}
+.thesisQuote {
+  margin: 0;
+}
+.thesisLine {
+  max-width: 24ch;
+  font-size: clamp(2.125rem, 1.1rem + 3.6vw, 4.75rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.034em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.thesisEm {
+  font-style: normal;
+  font-weight: 450;
+}
+.thesisBy {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+.thesisPortrait {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  object-fit: cover;
+  object-position: 50% 12%;
+  background: var(--porcelain);
+}
+.thesisName {
+  display: grid;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.thesisRole {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--slate);
+}
+
+/* ── Document grid: contents rail + body ────────────────────────────────── */
+
+.doc {
+  display: grid;
+}
+@media (min-width: 1100px) {
+  .doc {
+    grid-template-columns: 13rem minmax(0, 1fr);
+    column-gap: clamp(48px, 5.5vw, 104px);
+    padding-top: clamp(56px, 6vw, 88px);
+  }
+}
+.body {
+  min-width: 0;
+}
+
+.sec {
+  padding-block: clamp(56px, 6.5vw, 96px);
+  border-top: 1px solid var(--hair);
+  scroll-margin-top: calc(var(--hd-h) + 72px);
+}
+.sec:first-child {
+  border-top: 0;
+  padding-top: clamp(40px, 5vw, 56px);
+}
+@media (min-width: 1100px) {
+  .sec {
+    scroll-margin-top: calc(var(--hd-h) + 24px);
+  }
+  .sec:first-child {
+    padding-top: 0;
+  }
+}
+
+.h2 {
+  max-width: 20ch;
+  margin-bottom: clamp(24px, 3vw, 36px);
+  font-size: clamp(2rem, 1.45rem + 1.7vw, 3rem);
+}
+.h3 {
+  margin-bottom: 18px;
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Summary first: each section opens on one larger sentence. */
+.lede {
+  max-width: 46ch;
+  font-size: clamp(1.1875rem, 1.09rem + 0.38vw, 1.4375rem);
+  line-height: 1.5;
+  letter-spacing: -0.008em;
+  color: var(--ink-2);
+}
+.copy {
+  display: grid;
+  gap: 1.1em;
+  max-width: 64ch;
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.copy > p:not(.lede) {
+  color: var(--ink);
+}
+
+.split {
+  display: grid;
+  gap: 36px var(--col-gap);
+}
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+}
+
+.pair {
+  display: grid;
+  gap: 32px var(--col-gap);
+  margin-top: clamp(40px, 5vw, 64px);
+}
+@media (min-width: 700px) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* A key line: the sentence to take away, set large and quiet. */
+.keyLine {
+  max-width: 30ch;
+  margin-top: clamp(40px, 5vw, 64px);
+  padding-top: 28px;
+  border-top: 1px solid var(--hair-strong);
+  font-size: clamp(1.5rem, 1.2rem + 1.05vw, 2.25rem);
+  font-weight: 350;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+.dsc {
+  margin-top: clamp(36px, 4vw, 52px);
+}
+.full {
+  padding-top: 4px;
+}
+.full h3:first-child {
+  margin-top: 0;
+}
+
+/* ── What is the TMJ? ───────────────────────────────────────────────────── */
+
+.selfCheck {
+  padding: clamp(22px, 2.6vw, 32px);
+  border-radius: var(--r-card);
+  background: var(--mist);
+}
+.selfCheckText {
+  font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+  line-height: 1.5;
+  letter-spacing: -0.008em;
+  color: var(--ink);
+}
+
+/* ── Signs ──────────────────────────────────────────────────────────────── */
+
+.panel {
+  padding: clamp(24px, 4vw, 52px);
+  border-radius: var(--r-card);
+  background: var(--mist);
+}
+
+/* ── TMD is not one disease ─────────────────────────────────────────────── */
+
+/* The counts, as a short display passage (the home's "40 different
+   diseases…"): one sentence per line, the number inline at the line's own
+   size and set apart by weight and colour only. */
+.counts {
+  display: grid;
+  gap: 0.5em;
+  max-width: 32ch;
+  margin-top: clamp(36px, 4.5vw, 56px);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+  color: var(--slate);
+  text-wrap: pretty;
+}
+.countValue {
+  font-weight: 400;
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.catGrid {
+  display: grid;
+  gap: 40px var(--col-gap);
+  margin-top: clamp(48px, 6vw, 80px);
+}
+@media (min-width: 1000px) {
+  .catGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+.cats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hair-strong);
+}
+.cat {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 0 13px;
+  border-bottom: 1px solid var(--hair);
+}
+.catN {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--slate);
+}
+.catBody {
+  display: grid;
+  gap: 2px;
+}
+.catName {
+  color: var(--ink);
+}
+.catLink {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 8px;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 0.3em;
+  border-radius: 4px;
+  transition:
+    color var(--dur-1) var(--ease-out),
+    text-decoration-color var(--dur-1) var(--ease-out);
+}
+.catLink:hover {
+  color: var(--signal-ink);
+  text-decoration-color: currentColor;
+}
+.catArrow {
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.catLink:hover .catArrow {
+  transform: translateX(3px);
+}
+.catNote {
+  font-size: 0.9375rem;
+  color: var(--slate);
+}
+
+.logic {
+  margin-top: 1.4em;
+  border-top: 1px solid var(--hair-strong);
+}
+.logic.logic > li {
+  padding: 16px 0 17px;
+  border-bottom: 1px solid var(--hair);
+  font-size: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
+  line-height: 1.45;
+}
+.logic.logic > li::before {
+  content: none;
+}
+.logic.logic > li {
+  padding-left: 0;
+}
+.logicEm {
+  font-weight: 500;
+}
+
+/* ── What the numbers show ──────────────────────────────────────────────── */
+
+.ledger {
+  max-width: 44rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+/* A ledger of sentences: each row leads with its number, set inline at the
+   sentence's size, so it reads as a line of text rather than a stat tile. */
+.ledgerRow {
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--hair-strong);
+  font-size: clamp(1.25rem, 1.1rem + 0.55vw, 1.5625rem);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.014em;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+@media (min-width: 700px) {
+  .ledgerRow {
+    padding: 26px 0 28px;
+  }
+}
+.ledgerValue {
+  font-weight: 500;
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.caveat {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+/* ── Three types of pain ────────────────────────────────────────────────── */
+
+.painGrid {
+  display: grid;
+  gap: 40px var(--col-gap);
+}
+@media (min-width: 1000px) {
+  .painGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+  }
+}
+.types {
+  margin: 28px 0 0;
+  border-top: 1px solid var(--hair-strong);
+}
+.type {
+  display: grid;
+  gap: 2px;
+  padding: 14px 0 15px;
+  border-bottom: 1px solid var(--hair);
+}
+.typeName {
+  font-weight: 500;
+}
+.typeBody {
+  margin: 0;
+  color: var(--ink-2);
+}
+.overlay {
+  max-width: 52ch;
+  margin-top: 24px;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
+/* ── The TMJ is part of a system ────────────────────────────────────────── */
+
+.system {
+  display: grid;
+  margin: clamp(40px, 5vw, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 18px;
+  padding-bottom: 22px;
+}
+.node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 2px;
+  left: 6.5px;
+  width: 1px;
+  background: var(--hair-strong);
+}
+.nodeDot {
+  width: 14px;
+  height: 14px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: inset 0 0 0 1.5px var(--ink);
+}
+.node:nth-child(2) .nodeDot {
+  background: var(--ink);
+}
+.nodeLabel {
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+@media (min-width: 760px) {
+  .system {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .node {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 0 16px 0 0;
+  }
+  .node:not(:last-child)::after {
+    top: 6.5px;
+    bottom: auto;
+    left: 18px;
+    right: 4px;
+    width: auto;
+    height: 1px;
+  }
+  .nodeDot {
+    margin-top: 0;
+  }
+  .nodeLabel {
+    font-size: 1rem;
+    max-width: 14ch;
+  }
+}
+
+/* ── Approaches to relief ───────────────────────────────────────────────── */
+
+.reliefIntro {
+  display: grid;
+  gap: 32px var(--col-gap);
+}
+@media (min-width: 1000px) {
+  .reliefIntro {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+  }
+}
+.groups {
+  display: grid;
+  gap: 36px var(--col-gap);
+  margin-top: clamp(48px, 6vw, 80px);
+}
+@media (min-width: 600px) {
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1240px) {
+  .groups {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.group {
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
+}
+.groupName {
+  margin-bottom: 12px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.groupItems {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* ── Hot, cold, hot (the take-home sheet) ───────────────────────────────── */
+
+.handout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px var(--col-gap);
+  padding: clamp(28px, 4.4vw, 64px);
+  border-radius: var(--r-card);
+  background: var(--mist);
+}
+@media (min-width: 1000px) {
+  .handout {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: start;
+  }
+}
+.handoutHead {
+  display: grid;
+  gap: 22px;
+  justify-items: start;
+}
+.handoutTitle {
+  margin-bottom: 0;
+}
+.handoutPdf {
+  max-width: 100%;
+  white-space: normal;
+  text-align: left;
+  padding-block: 12px;
+}
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hair-strong);
+}
+.step {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  padding: 18px 0 19px;
+  border-bottom: 1px solid var(--hair-strong);
+}
+.stepN {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stepText {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+/* ── Questions ──────────────────────────────────────────────────────────── */
+
+.faqGrid {
+  display: grid;
+  gap: 8px var(--col-gap);
+}
+@media (min-width: 1000px) {
+  .faqGrid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+/* ── Children ───────────────────────────────────────────────────────────── */
+
+.ruled {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hair-strong);
+}
+.ruled > li {
+  padding: 12px 0 13px;
+  border-bottom: 1px solid var(--hair);
+}
+
+/* ── Close ──────────────────────────────────────────────────────────────── */
+
+.close {
+  border-top: 1px solid var(--hair);
+}
+
+.closeHead {
+  display: grid;
+  gap: 28px var(--col-gap);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+@media (min-width: 900px) {
+  .closeHead {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+  }
+}
+.closeTitle {
+  max-width: 18ch;
+}
+.closeAside {
+  display: grid;
+  gap: 24px;
+  justify-items: start;
+}
+.closeLine {
+  max-width: 44ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}

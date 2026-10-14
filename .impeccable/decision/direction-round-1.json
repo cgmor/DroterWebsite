@@ -1,0 +1,125 @@
+{
+  "title": "Choose the new visual worlds",
+  "question": "Version 1 stays Precision (your favourite), refined and expanded. Pick the world for Version 2; the other full card becomes Version 3. Or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Lab Prescription",
+      "kicker": "THE ROLL",
+      "lineage": "dental lab Rx slips, case pans and poured die-stone models",
+      "thesis": "The site is the hand-off the Airway Bite exists for: a lab prescription, filled in, bite recorded, models poured.",
+      "palette": ["#F4E3A1", "#D7B04A", "#6F8DB0", "#E7A3A0", "#FBFAF5", "#1F2B3B"],
+      "materials": ["carbonless triplicate form (white, canary, pink copies)", "poured die stone and baseplate wax", "case-pan labels and a rubber stamp"],
+      "viewport": "The first screen is a working lab prescription: fields for appliance, bite registration and protrusion carry the headline and facts, the 3D Airway Bite sits in the 'models enclosed' box, and the stamp is the Order through Great Lakes Dental action.",
+      "risk": "Turns into a paperwork costume if the form fields stop doing real jobs; the TMD education pages must read as content, not forms.",
+      "raised": [
+        {"from": "challenger-hoarding", "raise": "One calm white panel: the order panel is the only white copy on a field of canary stock and blue stone."},
+        {"from": "challenger-bbs", "raise": "The Rx form's ruled field grid is the only geometry; every section, including the education pages, snaps to its cells."},
+        {"from": "challenger-soundsystem", "raise": "Total palette commitment: canary carbonless stock owns whole regions, never a scattered accent."},
+        {"from": "challenger-splitflap", "raise": "Rows are live, columns never move: the chairside protocol is a fixed-column step table whose current row restyles in place."},
+        {"from": "challenger-papercut", "raise": "Depth only by overlapping flat planes (stone, wax, paper): no gradients, no drop shadows."},
+        {"from": "challenger-neon", "raise": "One continuous line, the traced airway, runs through the page as its spine."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "The Ceph Tracing",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "lateral cephalometric tracings on the orthodontic lightbox",
+      "thesis": "Every page is a tracing laid over the radiograph: landmarks, angles and the airway, the one place moving the jaw forward is visible.",
+      "palette": ["#EEF3F6", "#9DB2C1", "#3E5566", "#E2672B", "#2A2F33"],
+      "materials": ["matte acetate over film", "orange tracing pencil", "landmark dots and protractor arcs"],
+      "viewport": "The tutorial's airway film fills the screen under a live acetate tracing; dragging the jaw forward moves the traced mandible and widens the airway outline, with the headline and Order action set in the film's margin like tracing notes.",
+      "risk": "Radiographic blues are a familiar medical move; the tracing must measure real things (range, target, airway) or it becomes decoration."
+    },
+    {
+      "id": "challenger-splitflap",
+      "label": "Split-flap Concourse",
+      "verdict": "declined",
+      "lineage": "rail concourse departure boards",
+      "thesis": "The protocol as a departure board: steps as rows ranked by time.",
+      "palette": ["#111111", "#F2F2F2", "#E8A33A", "#9B2B24"],
+      "materials": ["matte black flaps", "brushed steel frame"],
+      "viewport": "Nine steps as board rows with chapter times, flipping as the video plays.",
+      "case": "Fuses well for the chairside page only; dentists and patients do not see themselves in a rail station, and the education pages lose it.",
+      "risk": "A novelty everywhere but the protocol table.",
+      "kept": "Live rows in fixed columns for the chairside protocol."
+    },
+    {
+      "id": "challenger-hoarding",
+      "label": "Fly-posted Hoarding",
+      "verdict": "declined",
+      "lineage": "screenprinted street-fair flyers",
+      "thesis": "Every inch occupied, one calm white panel.",
+      "palette": ["#F3EDE0", "#111111", "#FF6A00", "#7B57F0"],
+      "materials": ["riso grain", "torn deckle edges"],
+      "viewport": "A collage field with one white ticket panel.",
+      "case": "Loses both axes: festival energy contradicts a clinical device and a pain specialist.",
+      "risk": "Unserious for medicine.",
+      "kept": "One calm white panel on a committed field."
+    },
+    {
+      "id": "challenger-bbs",
+      "label": "ANSI Nightboard",
+      "verdict": "declined",
+      "lineage": "dial-up bulletin boards",
+      "thesis": "A neighbourhood made of text screens.",
+      "palette": ["#000000", "#00AAAA", "#AA00AA", "#FFFFFF"],
+      "materials": ["CP437 block glyphs", "80x25 cell grid"],
+      "viewport": "Title art over numbered menu lines.",
+      "case": "Loses both axes: no audience identification, and it hides the product.",
+      "risk": "Retro novelty.",
+      "kept": "One grid as the only geometry."
+    },
+    {
+      "id": "challenger-soundsystem",
+      "label": "Soundsystem Dance Poster",
+      "verdict": "declined",
+      "lineage": "Jamaican dance posters on fluorescent card",
+      "thesis": "Ranked block caps on warning-coloured card.",
+      "palette": ["#F5E400", "#FF3E9A", "#111111"],
+      "materials": ["fluorescent card", "heavy screen ink"],
+      "viewport": "Names ranked by size over a hand-ruled date grid.",
+      "case": "Loses both axes for a clinical audience.",
+      "risk": "Shouts where trust is needed.",
+      "kept": "Total commitment to one card colour."
+    },
+    {
+      "id": "challenger-papercut",
+      "label": "Łowicz Papercut",
+      "verdict": "declined",
+      "lineage": "layered Polish folk papercuts",
+      "thesis": "Depth from layered flat colour, never shading.",
+      "palette": ["#D7262F", "#1F7A3A", "#F2C230", "#1E3F99"],
+      "materials": ["glossy cut paper", "fold symmetry"],
+      "viewport": "A symmetrical roundel built from cut layers.",
+      "case": "Layered anatomy is tempting but folk ornament loses dentists and clarity.",
+      "risk": "Decorative, off-subject.",
+      "kept": "Depth only by overlapping flat planes."
+    },
+    {
+      "id": "challenger-neon",
+      "label": "Hand-bent Neon",
+      "verdict": "declined",
+      "lineage": "hand-bent neon signage",
+      "thesis": "One continuous glowing stroke.",
+      "palette": ["#0B0B10", "#2E5BFF", "#E2452B"],
+      "materials": ["glass tube", "gas glow"],
+      "viewport": "A dark room and one lit word.",
+      "case": "Loses both axes; dark neon is the near-black-plus-accent AI look.",
+      "risk": "Nightlife, not clinic.",
+      "kept": "One continuous line as the page's spine."
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A dental-device product site executed impeccably: white, clinical blue, product photography.",
+    "palette": ["#FFFFFF", "#0F1B2D", "#1F6FEB", "#EEF2F6"],
+    "materials": ["clean grid", "product photography"],
+    "viewport": "Product hero with the device, benefits row, protocol, ordering.",
+    "risk": "Indistinguishable from every dental supplier by design."
+  },
+  "steer": true
+}

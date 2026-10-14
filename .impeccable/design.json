@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T15:33:07+00:00",
+  "title": "Design System: APSleep",
+  "extensions": {
+    "colorMeta": {
+      "white": {
+        "role": "neutral",
+        "displayName": "White Ground",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "porcelain": {
+        "role": "neutral",
+        "displayName": "Animation Porcelain",
+        "canonical": "#dcdcdc",
+        "oklch": "oklch(89.4% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "mist": {
+        "role": "neutral",
+        "displayName": "Cool Mist",
+        "canonical": "#f2f3f5",
+        "oklch": "oklch(96.4% 0.003 264.5)",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#242526",
+          "#414243",
+          "#606163",
+          "#818284",
+          "#a4a5a7",
+          "#c8c9cb",
+          "#edeef0"
+        ]
+      },
+      "night": {
+        "role": "neutral",
+        "displayName": "Night Field",
+        "canonical": "#0b1526",
+        "oklch": "oklch(19.6% 0.038 260.5)",
+        "tonalRamp": [
+          "#030b1b",
+          "#1a2537",
+          "#374256",
+          "#556277",
+          "#768399",
+          "#98a6bd",
+          "#bbcae2",
+          "#e6efff"
+        ]
+      },
+      "night-2": {
+        "role": "neutral",
+        "displayName": "Night Raised",
+        "canonical": "#13213a",
+        "oklch": "oklch(24.9% 0.052 261.3)",
+        "tonalRamp": [
+          "#020a20",
+          "#16253e",
+          "#32425e",
+          "#51627f",
+          "#7183a2",
+          "#93a6c6",
+          "#b7caec",
+          "#e6efff"
+        ]
+      },
+      "night-3": {
+        "role": "neutral",
+        "displayName": "Night Hover",
+        "canonical": "#1c2d4b",
+        "oklch": "oklch(29.9% 0.059 261.1)",
+        "tonalRamp": [
+          "#010924",
+          "#142442",
+          "#304262",
+          "#4e6283",
+          "#6e83a6",
+          "#90a6cb",
+          "#b4caf1",
+          "#e6efff"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Graphite Ink",
+        "canonical": "#15191e",
+        "oklch": "oklch(21.1% 0.012 254.1)",
+        "tonalRamp": [
+          "#080b10",
+          "#21252b",
+          "#3e4248",
+          "#5d6268",
+          "#7e8389",
+          "#a0a6ac",
+          "#c4cad1",
+          "#e9eff6"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Graphite Ink 2",
+        "canonical": "#2b3139",
+        "oklch": "oklch(31.1% 0.017 255.6)",
+        "tonalRamp": [
+          "#070b12",
+          "#20262d",
+          "#3c434b",
+          "#5b626b",
+          "#7c838c",
+          "#9ea6b0",
+          "#c2cad4",
+          "#e7effa"
+        ]
+      },
+      "slate": {
+        "role": "neutral",
+        "displayName": "Slate",
+        "canonical": "#56606b",
+        "oklch": "oklch(48.4% 0.022 250.8)",
+        "tonalRamp": [
+          "#050c14",
+          "#1d262f",
+          "#3a434d",
+          "#58626d",
+          "#79848f",
+          "#9ba6b3",
+          "#bfcbd7",
+          "#e4f0fd"
+        ]
+      },
+      "slate-porcelain": {
+        "role": "neutral",
+        "displayName": "Slate on Porcelain",
+        "canonical": "#4a5460",
+        "oklch": "oklch(44.2% 0.024 253.1)",
+        "tonalRamp": [
+          "#050c15",
+          "#1d2630",
+          "#39434e",
+          "#58626f",
+          "#798390",
+          "#9ba6b4",
+          "#bfcad9",
+          "#e4f0fe"
+        ]
+      },
+      "on-night": {
+        "role": "neutral",
+        "displayName": "On Night",
+        "canonical": "#f2f5fa",
+        "oklch": "oklch(96.9% 0.007 260.7)",
+        "tonalRamp": [
+          "#090b0e",
+          "#232529",
+          "#404246",
+          "#5f6166",
+          "#808287",
+          "#a2a5aa",
+          "#c6c9ce",
+          "#eceff4"
+        ]
+      },
+      "on-night-2": {
+        "role": "neutral",
+        "displayName": "On Night Secondary",
+        "canonical": "#a6b3c9",
+        "oklch": "oklch(76.4% 0.035 261.0)",
+        "tonalRamp": [
+          "#040b1a",
+          "#1b2536",
+          "#384255",
+          "#566275",
+          "#778398",
+          "#99a6bb",
+          "#bdcae0",
+          "#e6effe"
+        ]
+      },
+      "signal": {
+        "role": "primary",
+        "displayName": "Signal Blue",
+        "canonical": "#2a6fdb",
+        "oklch": "oklch(55.9% 0.179 259.4)",
+        "tonalRamp": [
+          "#000924",
+          "#002156",
+          "#003b8f",
+          "#125ac4",
+          "#397eeb",
+          "#6da5fe",
+          "#aacbff",
+          "#e5efff"
+        ]
+      },
+      "signal-hover": {
+        "role": "primary",
+        "displayName": "Signal Deep (hover)",
+        "canonical": "#1f5cc0",
+        "oklch": "oklch(49.6% 0.169 260.1)",
+        "tonalRamp": [
+          "#000925",
+          "#002059",
+          "#003a92",
+          "#1e5bbf",
+          "#417fe6",
+          "#6fa4fe",
+          "#abcbff",
+          "#e6efff"
+        ]
+      },
+      "signal-ink": {
+        "role": "primary",
+        "displayName": "Signal Ink (small text)",
+        "canonical": "#1f5cc0",
+        "oklch": "oklch(49.6% 0.169 260.1)",
+        "tonalRamp": [
+          "#000925",
+          "#002059",
+          "#003a92",
+          "#1e5bbf",
+          "#417fe6",
+          "#6fa4fe",
+          "#abcbff",
+          "#e6efff"
+        ]
+      },
+      "signal-night": {
+        "role": "primary",
+        "displayName": "Signal on Night",
+        "canonical": "#8fb2f2",
+        "oklch": "oklch(76.2% 0.100 262.1)",
+        "tonalRamp": [
+          "#00072a",
+          "#072055",
+          "#234077",
+          "#41609a",
+          "#6182bf",
+          "#83a5e4",
+          "#adcafe",
+          "#e6effe"
+        ]
+      },
+      "signal-wash": {
+        "role": "primary",
+        "displayName": "Signal Wash",
+        "canonical": "rgb(42 111 219 / 0.07)"
+      },
+      "hair": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(21 25 30 / 0.12)"
+      },
+      "hair-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Strong",
+        "canonical": "rgb(21 25 30 / 0.24)"
+      },
+      "hair-night": {
+        "role": "neutral",
+        "displayName": "Night Hairline",
+        "canonical": "rgb(214 226 255 / 0.14)"
+      },
+      "hair-night-strong": {
+        "role": "neutral",
+        "displayName": "Night Hairline Strong",
+        "canonical": "rgb(214 226 255 / 0.28)"
+      },
+      "control": {
+        "role": "neutral",
+        "displayName": "Control Grey",
+        "canonical": "#7d858f",
+        "oklch": "oklch(61.3% 0.018 254.0)",
+        "tonalRamp": [
+          "#060c13",
+          "#1f262e",
+          "#3c434c",
+          "#5a626b",
+          "#7b838d",
+          "#9ea6b0",
+          "#c1cad5",
+          "#e7effb"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home hero headlines only, max ~13ch."
+      },
+      "headline-lg": {
+        "displayName": "Headline Large",
+        "purpose": "Inner-page h1s."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles, max ~22ch."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Sub-sections and card groups."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "List item titles, panel heads, library rows."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Standfirst under a heading, slate, max ~42ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default running text."
+      },
+      "body-prose": {
+        "displayName": "Body Prose",
+        "purpose": "Read-mode columns, 68ch."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Meta, captions, spec labels, notes."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons and controls; sentence case, never uppercase."
+      },
+      "measure": {
+        "displayName": "Measure (Geist Mono)",
+        "purpose": "Millimetres, timecodes and spec values only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-1",
+        "value": "0 1px 2px rgb(11 21 38 / 0.06), 0 6px 16px -8px rgb(11 21 38 / 0.18)",
+        "purpose": "Small floating things: zoom button, kit callout pins, the Airway Bite card over the portrait."
+      },
+      {
+        "name": "shadow-2",
+        "value": "0 2px 4px rgb(11 21 38 / 0.05), 0 28px 56px -28px rgb(11 21 38 / 0.38)",
+        "purpose": "The tutorial console on light grounds."
+      },
+      {
+        "name": "plate",
+        "value": "inset 0 0 0 1px rgb(21 25 30 / 0.12), 0 1px 2px rgb(11 21 38 / 0.04), 0 22px 44px -32px rgb(11 21 38 / 0.4)",
+        "purpose": "Figure plates and the joint-plate mat."
+      },
+      {
+        "name": "thumb",
+        "value": "0 1px 2px rgb(11 21 38 / 0.08), 0 3px 10px -4px rgb(11 21 38 / 0.18)",
+        "purpose": "Selected segmented/audience option; step chip hover."
+      },
+      {
+        "name": "primary-glow",
+        "value": "inset 0 1px 0 rgb(255 255 255 / 0.16), 0 1px 2px rgb(11 21 38 / 0.14), 0 8px 20px -12px rgb(42 111 219 / 0.7)",
+        "purpose": "Primary button only."
+      },
+      {
+        "name": "header-lift",
+        "value": "0 1px 0 rgb(21 25 30 / 0.12), 0 10px 30px -22px rgb(11 21 38 / 0.35)",
+        "purpose": "Header, scroll-linked over the first 120px; static hairline fallback."
+      },
+      {
+        "name": "hairline-inset",
+        "value": "inset 0 0 0 1px rgb(21 25 30 / 0.12)",
+        "purpose": "Edge of white/mist media fields, panels on white, inline figures."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Exponential ease-out; the only easing in the system."
+      },
+      {
+        "name": "dur-1",
+        "value": "160ms",
+        "purpose": "Colour and border changes."
+      },
+      {
+        "name": "dur-2",
+        "value": "320ms",
+        "purpose": "Icon nudges, thumb movement, opacity."
+      },
+      {
+        "name": "dur-3",
+        "value": "640ms",
+        "purpose": "Panel opening, cross-fades, poster to model."
+      },
+      {
+        "name": "reveal",
+        "value": "opacity 0.25 → 1 over 0.9s, translateY 16px → 0 over 1.1s",
+        "purpose": "Content settling in from an already-visible state."
+      },
+      {
+        "name": "card-zoom",
+        "value": "transform scale(1.035) 0.9s",
+        "purpose": "Image card hover."
+      },
+      {
+        "name": "hero-settle",
+        "value": "translate3d(0,5%,0) scale(0.93) → none, 1.9s",
+        "purpose": "Hero device entrance; scroll-linked progress drives V1's device thereafter."
+      },
+      {
+        "name": "plate-wipe",
+        "value": "clip-path inset 1.1s",
+        "purpose": "Healthy/damaged TMJ plate toggle."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all durations 1ms, no delays, header animation off",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "520px"
+      },
+      {
+        "name": "sm",
+        "value": "560px"
+      },
+      {
+        "name": "md",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "900px"
+      },
+      {
+        "name": "xl",
+        "value": "1000px"
+      },
+      {
+        "name": "xl-plus",
+        "value": "1024px"
+      },
+      {
+        "name": "nav",
+        "value": "1180px"
+      }
+    ],
+    "layout": {
+      "maxWidth": "1320px",
+      "textWidth": "46rem",
+      "proseMeasure": "68ch",
+      "headerHeight": "64px; 76px from 1180px",
+      "heroMinHeight": "min(100svh - header - 36px, 1040px)"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one main action of a view, e.g. Order through Great Lakes Dental.",
+      "html": "<button class=\"ds-btn ds-btn-primary\"><span>Order through Great Lakes Dental</span><span class=\"ds-ic\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 10h12M11 5l5 5-5 5\"/></svg></span></button>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 24px; border:1px solid transparent; border-radius:999px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size:1rem; font-weight:500; letter-spacing:-0.006em; cursor:pointer; transition: background-color 160ms cubic-bezier(0.16,1,0.3,1), border-color 160ms cubic-bezier(0.16,1,0.3,1), transform 160ms cubic-bezier(0.16,1,0.3,1); } .ds-btn .ds-ic { display:inline-flex; transition: transform 320ms cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover .ds-ic { transform: translateX(3px); } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; } .ds-btn-primary { background:#2a6fdb; color:#fff; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16), 0 1px 2px rgb(11 21 38 / 0.14), 0 8px 20px -12px rgb(42 111 219 / 0.7); } .ds-btn-primary:hover { background:#1f5cc0; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Outline pill for the second action, e.g. Watch the tutorial.",
+      "html": "<button class=\"ds-btn2\">Watch the tutorial</button>",
+      "css": ".ds-btn2 { display:inline-flex; align-items:center; min-height:52px; padding:0 24px; border:1px solid rgb(21 25 30 / 0.24); border-radius:999px; background:transparent; color:#15191e; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size:1rem; font-weight:500; letter-spacing:-0.006em; cursor:pointer; transition: border-color 160ms cubic-bezier(0.16,1,0.3,1), transform 160ms cubic-bezier(0.16,1,0.3,1); } .ds-btn2:hover { border-color:#15191e; } .ds-btn2:active { transform: translateY(1px); } .ds-btn2:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; }"
+    },
+    {
+      "name": "Quiet Link",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Underlined text action with a trailing arrow.",
+      "html": "<a class=\"ds-quiet\" href=\"#\"><span class=\"ds-quiet-l\">See all conditions</span><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 10h12M11 5l5 5-5 5\"/></svg></a>",
+      "css": ".ds-quiet { display:inline-flex; align-items:center; gap:8px; min-height:44px; color:#15191e; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size:1rem; font-weight:500; text-decoration:none; border-radius:6px; transition: color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-quiet-l { text-decoration:underline; text-decoration-color: rgb(21 25 30 / 0.24); text-decoration-thickness:1px; text-underline-offset:0.32em; } .ds-quiet svg { transition: transform 320ms cubic-bezier(0.16,1,0.3,1); } .ds-quiet:hover { color:#1f5cc0; } .ds-quiet:hover .ds-quiet-l { text-decoration-color: currentColor; } .ds-quiet:hover svg { transform: translateX(3px); } .ds-quiet:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; }"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "chip",
+      "refersTo": "segmented-option",
+      "description": "Pill track with a white selected thumb: model views, How far forward?, Dentists | Patients.",
+      "html": "<div class=\"ds-seg\" role=\"group\"><button class=\"ds-seg-o\" aria-pressed=\"true\">Orbit</button><button class=\"ds-seg-o\" aria-pressed=\"false\">Front</button><button class=\"ds-seg-o\" aria-pressed=\"false\">Side</button><button class=\"ds-seg-o\" aria-pressed=\"false\">Top</button></div>",
+      "css": ".ds-seg { display:inline-flex; padding:3px; border-radius:999px; background: rgb(21 25 30 / 0.08); } .ds-seg-o { min-height:38px; padding:0 16px; border:0; border-radius:999px; background:transparent; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size:0.9375rem; font-weight:500; color:#4a5460; cursor:pointer; transition: background-color 320ms cubic-bezier(0.16,1,0.3,1), color 160ms cubic-bezier(0.16,1,0.3,1), box-shadow 320ms cubic-bezier(0.16,1,0.3,1); } .ds-seg-o:hover { color:#15191e; } .ds-seg-o[aria-pressed=\"true\"] { background:#fff; color:#15191e; box-shadow: 0 1px 2px rgb(11 21 38 / 0.08), 0 3px 10px -4px rgb(11 21 38 / 0.18); } .ds-seg-o:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "White sticky header: lockup, nav with wipe underline (signal when current), audience switch, Order.",
+      "html": "<header class=\"ds-hd\"><span class=\"ds-logo\">APSleep</span><nav><a class=\"ds-nl\" aria-current=\"page\" href=\"#\">Airway Bite</a><a class=\"ds-nl\" href=\"#\">Appliances</a><a class=\"ds-nl\" href=\"#\">Understanding TMD</a><a class=\"ds-nl\" href=\"#\">Conditions</a><a class=\"ds-nl\" href=\"#\">Library</a><a class=\"ds-nl\" href=\"#\">About</a></nav><div class=\"ds-aud\"><a class=\"ds-aud-o\" data-on href=\"#\">Dentists</a><a class=\"ds-aud-o\" href=\"#\">Patients</a></div></header>",
+      "css": ".ds-hd { display:flex; align-items:center; gap:24px; height:76px; padding:0 24px; background:#fff; box-shadow:0 1px 0 rgb(21 25 30 / 0.12); font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-logo { font-weight:500; font-size:1.25rem; letter-spacing:-0.02em; color:#15191e; } .ds-hd nav { display:flex; gap:24px; } .ds-nl { position:relative; display:inline-flex; align-items:center; height:44px; font-size:0.9375rem; color:#2b3139; text-decoration:none; transition: color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-nl::after { content:''; position:absolute; left:0; right:0; bottom:7px; height:1.5px; border-radius:1px; background:#15191e; transform:scaleX(0); transform-origin:left; transition: transform 320ms cubic-bezier(0.16,1,0.3,1); } .ds-nl:hover { color:#15191e; } .ds-nl:hover::after { transform:scaleX(1); } .ds-nl[aria-current=page] { color:#15191e; } .ds-nl[aria-current=page]::after { transform:scaleX(1); background:#2a6fdb; } .ds-nl:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; border-radius:6px; } .ds-aud { display:inline-flex; margin-left:auto; padding:3px; border-radius:999px; background:#f2f3f5; box-shadow: inset 0 0 0 1px rgb(21 25 30 / 0.12); } .ds-aud-o { display:inline-flex; align-items:center; height:34px; padding:0 15px; border-radius:999px; font-size:0.875rem; font-weight:500; color:#56606b; text-decoration:none; } .ds-aud-o[data-on] { background:#fff; color:#15191e; box-shadow: 0 1px 2px rgb(11 21 38 / 0.08), 0 3px 10px -4px rgb(11 21 38 / 0.16); }"
+    },
+    {
+      "name": "Image Card",
+      "kind": "card",
+      "refersTo": "image-card-media",
+      "description": "20px porcelain media, body beneath; the whole card links.",
+      "html": "<a class=\"ds-ic\" href=\"#\"><div class=\"ds-ic-m\"><div class=\"ds-ic-img\"></div></div><div class=\"ds-ic-b\"><span class=\"ds-ic-t\">Disc displacement</span><span class=\"ds-ic-l\">When the joint’s disc slips forward</span><span class=\"ds-ic-a\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 10h12M11 5l5 5-5 5\"/></svg></span></div></a>",
+      "css": ".ds-ic { display:flex; flex-direction:column; width:300px; color:#15191e; text-decoration:none; font-family: Geist, ui-sans-serif, system-ui, sans-serif; border-radius:20px; } .ds-ic-m { position:relative; overflow:hidden; aspect-ratio:4/3; border-radius:20px; background:#dcdcdc; } .ds-ic-img { position:absolute; inset:18%; border-radius:50%; background: radial-gradient(circle at 40% 35%, #f4f4f4, #b9bec5); transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); } .ds-ic:hover .ds-ic-img { transform: scale(1.035); } .ds-ic-b { display:flex; flex-direction:column; gap:6px; padding-top:18px; } .ds-ic-t { font-size:1.25rem; font-weight:450; line-height:1.25; letter-spacing:-0.015em; } .ds-ic-l { color:#56606b; } .ds-ic-a { display:inline-flex; align-self:flex-end; transition: transform 320ms cubic-bezier(0.16,1,0.3,1), color 160ms; } .ds-ic:hover .ds-ic-a { color:#1f5cc0; transform: translateX(4px); } .ds-ic:focus-visible { outline:2px solid #2a6fdb; outline-offset:6px; }"
+    },
+    {
+      "name": "Spec Sheet",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Hairline spec rows; measurements in Geist Mono.",
+      "html": "<dl class=\"ds-spec\"><div class=\"ds-row\"><dt>Anterior stop</dt><dd><span class=\"ds-mono\">4 mm</span></dd></div><div class=\"ds-row\"><dt>Range</dt><dd><span class=\"ds-mono\">10–12 mm</span><span class=\"ds-note\">Typical full advancement</span></dd></div><div class=\"ds-row\"><dt>Envelope</dt><dd><span class=\"ds-mono\">14.6 × 22.0 × 13.8 mm</span></dd></div></dl>",
+      "css": ".ds-spec { margin:0; max-width:520px; border-top:1px solid #15191e; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color:#15191e; } .ds-row { display:grid; grid-template-columns: minmax(112px,34%) 1fr; gap:4px 32px; padding:15px 0 16px; border-bottom:1px solid rgb(21 25 30 / 0.24); } .ds-row dt { font-size:0.9375rem; color:#56606b; } .ds-row dd { margin:0; } .ds-mono { display:block; font-family: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace; font-size:1.0625rem; letter-spacing:-0.01em; font-variant-numeric: tabular-nums; } .ds-note { display:block; margin-top:2px; font-size:0.9375rem; color:#56606b; }"
+    },
+    {
+      "name": "Figure Plate",
+      "kind": "card",
+      "refersTo": "figure-plate",
+      "description": "A lecture slide on a white mat with the plate shadow; click to enlarge.",
+      "html": "<button class=\"ds-fig\"><span class=\"ds-fig-mat\"><span class=\"ds-fig-img\"></span></span></button>",
+      "css": ".ds-fig { display:block; width:360px; padding:0; border:0; background:none; border-radius:20px; cursor:zoom-in; } .ds-fig-mat { display:block; padding:16px; border-radius:20px; background:#fff; box-shadow: inset 0 0 0 1px rgb(21 25 30 / 0.12), 0 1px 2px rgb(11 21 38 / 0.04), 0 22px 44px -32px rgb(11 21 38 / 0.4); } .ds-fig-img { display:block; aspect-ratio:16/9; border-radius:6px; outline:1px solid rgb(21 25 30 / 0.12); outline-offset:-1px; background: linear-gradient(#f2f3f5, #f2f3f5) 12% 18% / 50% 8% no-repeat, linear-gradient(#dcdcdc, #dcdcdc) 12% 70% / 76% 40% no-repeat, #fff; } .ds-fig:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; }"
+    },
+    {
+      "name": "Disclosure",
+      "kind": "button",
+      "refersTo": "disclosure-button",
+      "description": "Expand the full version: pill with a filled plus/minus disc.",
+      "html": "<button class=\"ds-dsc\"><span class=\"ds-dsc-i\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"><path d=\"M4 10h12M10 4v12\"/></svg></span>Expand the full version</button>",
+      "css": ".ds-dsc { display:inline-flex; align-items:center; gap:12px; min-height:48px; padding:0 22px 0 7px; border:1px solid rgb(21 25 30 / 0.24); border-radius:999px; background:transparent; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size:1rem; font-weight:500; color:#15191e; cursor:pointer; transition: border-color 160ms cubic-bezier(0.16,1,0.3,1); } .ds-dsc:hover { border-color:#15191e; } .ds-dsc-i { display:grid; place-items:center; width:34px; height:34px; border-radius:999px; background:#15191e; color:#fff; } .ds-dsc-i svg { transition: transform 640ms cubic-bezier(0.16,1,0.3,1); } .ds-dsc:hover .ds-dsc-i svg { transform: rotate(90deg); } .ds-dsc:focus-visible { outline:2px solid #2a6fdb; outline-offset:3px; }"
+    },
+    {
+      "name": "Tutorial Console",
+      "kind": "custom",
+      "refersTo": "tutorial-console",
+      "description": "Night console framing the 16:9 video on porcelain, chapter timeline and mono timecodes.",
+      "html": "<div class=\"ds-tp\"><div class=\"ds-tp-f\"></div><div class=\"ds-tp-now\"><span>Fit the bite fork</span><span class=\"ds-tp-t\">01:42</span></div><div class=\"ds-tl\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"cur\"></i><i></i><i></i><i></i></div></div>",
+      "css": ".ds-tp { width:420px; padding:8px 8px 10px; border-radius:20px; background:#0b1526; color:#f2f5fa; font-family: Geist, ui-sans-serif, system-ui, sans-serif; box-shadow: 0 2px 4px rgb(11 21 38 / 0.05), 0 28px 56px -28px rgb(11 21 38 / 0.38); } .ds-tp-f { aspect-ratio:16/9; border-radius:12px; background:#dcdcdc; } .ds-tp-now { display:flex; justify-content:space-between; margin:10px 8px 4px; font-size:0.875rem; color:#a6b3c9; } .ds-tp-t { font-family:'Geist Mono', ui-monospace, Menlo, monospace; letter-spacing:-0.01em; font-variant-numeric: tabular-nums; } .ds-tl { display:flex; gap:3px; height:30px; margin:6px 8px 0; align-items:center; } .ds-tl i { flex:1; height:2px; border-radius:2px; background: rgb(214 226 255 / 0.28); transition: background-color 320ms cubic-bezier(0.16,1,0.3,1); } .ds-tl i.on { background:#f2f5fa; } .ds-tl i.cur { background:#8fb2f2; } .ds-tl i:hover { background:#f2f5fa; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Clinical Instrument on Porcelain",
+    "overview": "This is the category standard, played straight. It aims for the clinical authority of a premium implant maker and the rendered-product polish of a sleep-tech brand. The ground is white. The device and its animation stills sit on the animation's own porcelain grey, so renders and frames bleed edge to edge with no visible box. A cool mist band carries the quiet sections. One deep night-blue family holds the sleep and airway moments. Graphite ink and slate do the reading work. A single signal blue marks what you can press and draws the airway line.\n\nType is one family. Geist is large and light for display, with tight tracking, and the same family runs UI and body. Geist Mono shows up only where a number is a measurement, a timecode or a spec value. Structure comes from hairline rules and spec-sheet rows, not from boxes. Cards are image cards with 20px corners, and the whole card is the link. Dr. Droter's lecture slides appear as framed figure plates on a white mat, like specimens. His portrait dissolves into the porcelain field rather than sitting in a frame. Each page has one authored motion moment. Everything else settles in from an already-visible state on an exponential ease-out, and reduced motion is honoured throughout.\n\nThe system rejects the dental-supplier template (stock smiles, tooth icons, teal gradients, icon-card rows) and the AI-editorial look (a cream-and-serif journal with kicker labels over every heading).",
+    "keyCharacteristics": [
+      "White ground, porcelain media fields, mist bands, one night family.",
+      "One accent, signal blue, used for interaction and the airway line.",
+      "Geist light display (300–350) at tight tracking; Geist Mono only for measurements.",
+      "Hairline spec rows and ruled lists instead of boxed cards.",
+      "20px image cards, 12px inner frames, pill controls.",
+      "Lecture slides as matted figure plates; the device as transparent renders on porcelain.",
+      "One authored motion per page, expo ease-out, honest reduced-motion fallback."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Signal blue means \"interactive\" or \"airway.\" It never decorates a heading, a number, an icon tile or a background block.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contextual Ground Rule",
+        "body": "Sections set a tone (white, mist, porcelain, night), and the tone re-points the contextual roles: background, foreground, secondary foreground, line, strong line, accent text, surface, track and control. Page CSS uses those roles, never raw grounds, so components work on any field.",
+        "section": "colors"
+      },
+      {
+        "name": "The Porcelain Is the Animation Rule",
+        "body": "Every still, render and video frame is shown on porcelain (or the transparent render sits on it) so the image edge disappears. Don't place stills on white or mist.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Is a Ruler Rule",
+        "body": "Geist Mono sets measurements (4 mm, 10–12 mm, 14.6 × 22.0 × 13.8 mm), timecodes and spec values, and nothing else. Approximate figures (≈ 50%, ≈ 5 min) and counts stay in body type.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Eyebrow Rule",
+        "body": "No headline gets a label above it. Section heads are a title, optionally a lead, and optionally actions. Numerals appear only on real sequences, such as the four protocol phases, the nine IFU steps and Dr. Droter's ordered categories.",
+        "section": "typography"
+      },
+      {
+        "name": "The Light Display Rule",
+        "body": "Display and headline sizes stay at 300–350 weight. Weight rises as size falls (450–500 at title), never the reverse.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Before Shadow Rule",
+        "body": "Edges are drawn with 1px insets in the current line colour. A shadow is reserved for something that is genuinely on top: a plate, a floating card, a console or a selected thumb.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put stills, renders and video on `porcelain` so the image edge disappears. Let the hero render bleed past the gutter.",
+      "**Do** set tone per section and use the contextual roles (`--bg`, `--fg`, `--fg-2`, `--line`, `--accent-text`) in page CSS.",
+      "**Do** keep display type at 300–350 weight with −0.028 to −0.035em tracking.",
+      "**Do** use Geist Mono for millimetres, timecodes and spec values only, with tabular numerals.",
+      "**Do** draw structure with hairline rows (a 1px foreground rule on top, `line-strong` between rows) before reaching for a card.",
+      "**Do** show Dr. Droter's slides as matted figure plates (white mat, 20px, Plate shadow, click to enlarge).",
+      "**Do** give each page one authored motion moment. Otherwise content settles in from 25% opacity and 16px over 0.9–1.1s on `cubic-bezier(0.16, 1, 0.3, 1)`, and reduces to 1ms under reduced motion.",
+      "**Do** mark off-site links with ↗ and open them in a new tab."
+    ],
+    "donts": [
+      "**Don't** put eyebrow or kicker labels above headings, or number things that are not real sequences.",
+      "**Don't** build icon-tile card grids. Lists are ruled rows. Cards are image cards with real imagery.",
+      "**Don't** use gradient text, teal gradients, tooth icons or stock smiles.",
+      "**Don't** use signal blue for decoration, headings, figures or fills other than the primary button and selected and active states.",
+      "**Don't** set approximate figures, counts or prose in Geist Mono.",
+      "**Don't** use uppercase or tracked-out labels. All UI text is sentence case at negative or zero tracking.",
+      "**Don't** write the mist hex directly. Use the token or `tone=\"mist\"`.",
+      "**Don't** invent claims, prices, stats or testimonials to fill a layout slot."
+    ]
+  }
+}

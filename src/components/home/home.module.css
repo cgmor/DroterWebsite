@@ -1,0 +1,1291 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Home pages (/v1, /v2, /v3): page-scoped composition on top of aps.css.
+   Tokens (--porcelain, --fg, --line, --ease-out…) come from the .aps scope.
+   One authored motion moment per version:
+     V1  the device settles, then rises toward the viewer as you scroll
+     V2  the portrait settles into the porcelain field
+     V3  the healthy → damaged joint wipe
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ══ Shared moves ═══════════════════════════════════════════════════════ */
+
+.stack > * + * {
+  margin-top: 24px;
+}
+
+.cred {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+
+/* A short quiet link line under a block. */
+.after {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+/* ══ Device render, cut to its silhouette (DeviceRender) ═════════════════ */
+
+.render {
+  position: relative;
+  display: flow-root; /* keeps the frame's negative margins inside the box */
+  width: 100%;
+}
+.renderFrame {
+  position: relative;
+  width: 100%;
+}
+.renderImg {
+  display: block;
+}
+
+/* ══ V1 · Device hero ═══════════════════════════════════════════════════ */
+
+/*
+ * Mobile and tablet: copy, then the device at the full column width, then the
+ * millimetre row. Desktop (≥ 1000px): the device is taken out of flow and
+ * sized against the hero itself (a container): about two thirds of its width,
+ * starting just clear of the CTA row and bleeding off the right edge and the
+ * bottom. The copy sits over the device's empty upper left; the millimetre
+ * row runs along the bottom of the copy column.
+ */
+.dh {
+  container-type: inline-size;
+  --hero-h: min(calc(100svh - var(--hd-h) - 36px), 1040px);
+}
+.dhGrid {
+  display: grid; /* not positioned: the desktop stage measures against the hero */
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  padding-top: clamp(28px, 6svh, 80px);
+}
+.dhCopy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+.dhTitle {
+  max-width: 8ch;
+}
+.dhLead {
+  margin-top: 22px;
+  max-width: 36ch;
+}
+.dhActions {
+  margin-top: 32px;
+}
+.dhNote {
+  max-width: 40ch;
+  margin-top: 18px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--fg-2);
+}
+.dhMedia {
+  min-width: 0;
+  margin-top: clamp(28px, 7vw, 48px);
+}
+.dhStrip {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  margin-top: clamp(20px, 5vw, 36px);
+  margin-bottom: clamp(20px, 2.4vw, 36px);
+}
+.dhStrip > :last-child {
+  grid-column: 1 / -1;
+}
+.dhStrip :global(.strip-val) {
+  font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.375rem);
+  white-space: nowrap;
+}
+.dhStrip :global(.strip-label) {
+  text-wrap: balance;
+}
+.dhStrip > :first-child :global(.strip-label) {
+  white-space: nowrap;
+}
+@media (min-width: 640px) {
+  .dhStrip {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    column-gap: clamp(28px, 3vw, 44px);
+  }
+  .dhStrip > :last-child {
+    grid-column: auto;
+  }
+  .dhStrip :global(.strip-item) {
+    padding: 18px 0 4px;
+    border-bottom: 0;
+  }
+}
+
+.stage {
+  --p: 0;
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+}
+.stageShadow {
+  position: absolute;
+  left: 6%;
+  width: 90%;
+  top: 80%;
+  height: 19%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(11 21 38 / 0.26), rgb(11 21 38 / 0.08) 55%, rgb(11 21 38 / 0));
+  transform: rotate(-9deg) scale(calc(1 - var(--p) * 0.28));
+  opacity: calc(1 - var(--p) * 0.65);
+  pointer-events: none;
+}
+.stageMove {
+  position: relative;
+  transform: translate3d(0, calc(var(--p) * -7%), 0) scale(calc(1 + var(--p) * 0.14));
+  transform-origin: 54% 57%;
+  will-change: transform;
+}
+
+@media (min-width: 1000px) {
+  .dhGrid {
+    grid-template-rows: minmax(0, 1fr) auto;
+    padding-top: clamp(40px, 7svh, 88px);
+  }
+  .dhCopy {
+    max-width: 560px;
+  }
+  .dhMedia {
+    position: static;
+    margin: 0;
+  }
+  .dhStrip {
+    align-self: end;
+    max-width: 528px;
+    margin-top: 40px;
+  }
+  .dhStrip :global(.strip-val) {
+    font-size: 1.25rem;
+  }
+  .stage {
+    /* Where the copy column (CTA row, millimetre row) ends. */
+    --copy-end: calc(max(var(--gutter), (100cqw - var(--maxw)) / 2) + 548px);
+    /* ≈ 2/3 of the hero's width; held to the hero's height on short screens
+       and kept clear of the copy on narrow ones. */
+    --dw: min(68cqw, var(--hero-h) * 1.24, (100cqw - var(--copy-end)) / 0.88);
+    position: absolute;
+    /* A confident bleed: about a tenth off the right edge and off the bottom. */
+    right: calc(var(--dw) * -0.12);
+    top: max(clamp(16px, 4svh, 40px), calc(var(--hero-h) - var(--dw) * 0.79));
+    width: var(--dw);
+    max-width: none;
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stageSettle {
+    animation: settle 1.9s var(--ease-out) both;
+  }
+}
+@keyframes settle {
+  from {
+    transform: translate3d(0, 5%, 0) scale(0.93);
+  }
+}
+
+/* ══ V1 · Made for the chair (advantages) ═══════════════════════════════ */
+
+.advGrid {
+  display: grid;
+  gap: 40px var(--col-gap);
+}
+.advMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+}
+.advImg {
+  object-fit: cover;
+  object-position: 44% 50%;
+}
+.advLead {
+  margin-top: 20px;
+}
+.advList {
+  margin-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid var(--fg);
+}
+.advRow {
+  display: grid;
+  gap: 2px var(--col-gap);
+  padding: 17px 0 19px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.advRow dt {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.advRow dd {
+  margin: 0;
+  color: var(--fg-2);
+}
+@media (min-width: 700px) {
+  .advRow {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: baseline;
+  }
+}
+@media (min-width: 1000px) {
+  .advGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+  .advAside {
+    position: sticky;
+    top: calc(var(--hd-h) + 32px);
+  }
+  .advMedia {
+    aspect-ratio: 4 / 5;
+  }
+  .advCopy {
+    padding-left: clamp(0px, 3vw, 48px);
+  }
+}
+
+/* ══ V1 · Diagnosis before device (the turn) ════════════════════════════ */
+
+.turnTop {
+  display: grid;
+  gap: 40px var(--col-gap);
+}
+.turnTitle {
+  max-width: 9ch;
+}
+.thesis blockquote {
+  margin: 0;
+}
+.thesisLine {
+  max-width: 30ch;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+  font-weight: 300;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+}
+.thesisCap {
+  margin-top: 18px;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.turnBody {
+  display: grid;
+  gap: 48px var(--col-gap);
+  margin-top: clamp(64px, 8vw, 128px);
+  padding-top: clamp(40px, 4vw, 56px);
+  border-top: 1px solid var(--line-strong);
+}
+@media (min-width: 1000px) {
+  .turnTop {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    align-items: end;
+  }
+  .turnBody {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+/* The 40 / 190+ / 7 counts, set as a passage (not tiles). */
+.counts {
+  display: grid;
+  gap: 0.5em;
+  font-size: clamp(1.5rem, 1.15rem + 1.2vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--fg-2);
+}
+.countNum {
+  color: var(--fg);
+  font-weight: 400;
+}
+
+/* ══ Conditions ═════════════════════════════════════════════════════════ */
+
+/* Rows: plain name + clinical name | summary | arrow */
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fg);
+}
+.row {
+  position: relative;
+  display: grid;
+  gap: 8px var(--col-gap);
+  padding: 22px 40px 24px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.rowName {
+  font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  font-weight: 350;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.rowLink {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+.rowLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.row:has(.rowLink:focus-visible) {
+  border-radius: 6px;
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+.rowTitle {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+.rowSummary {
+  max-width: 58ch;
+  color: var(--fg-2);
+}
+.rowArrow {
+  position: absolute;
+  top: 28px;
+  right: 4px;
+  color: var(--fg);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.row:hover .rowName,
+.row:hover .rowArrow {
+  color: var(--accent-text);
+}
+.row:hover .rowArrow {
+  transform: translateX(4px);
+}
+@media (min-width: 900px) {
+  .row {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: baseline;
+    padding-right: 64px;
+  }
+  .rowSummary {
+    padding-top: 4px;
+  }
+}
+
+/* Index (V2): the patient's own words, in two columns. */
+.index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fg);
+}
+.indexItem {
+  position: relative;
+  padding: 20px 44px 22px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.indexName {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.026em;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.indexItem:hover .indexName,
+.indexItem:hover .rowArrow {
+  color: var(--accent-text);
+}
+.indexItem:hover .rowArrow {
+  transform: translateX(4px);
+}
+.indexItem:has(.rowLink:focus-visible) {
+  border-radius: 6px;
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+.indexItem .rowArrow {
+  top: 30px;
+}
+@media (min-width: 800px) {
+  .index {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+}
+
+/* Gallery (V3): his slides, two wide over three. */
+.gallery {
+  display: grid;
+  gap: clamp(36px, 4vw, 56px) var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .gallery {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .galleryWide {
+    grid-column: span 3;
+  }
+  .galleryItem {
+    grid-column: span 2;
+  }
+}
+.galleryMore {
+  display: grid;
+  gap: 24px var(--col-gap);
+  margin-top: clamp(64px, 7vw, 104px);
+}
+@media (min-width: 1000px) {
+  .galleryMore {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: start;
+  }
+}
+.patientsLine {
+  max-width: 52ch;
+  margin-top: clamp(40px, 5vw, 64px);
+  font-size: 1.1875rem;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+/* ══ Library ════════════════════════════════════════════════════════════ */
+
+.libRows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fg);
+}
+.libRow {
+  position: relative;
+  display: grid;
+  gap: 4px var(--col-gap);
+  padding: 18px 40px 20px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.libRow:hover .libTitle,
+.libRow:hover .rowArrow {
+  color: var(--accent-text);
+}
+.libRow:hover .rowArrow {
+  transform: translate(2px, -2px);
+}
+.libRow:has(.rowLink:focus-visible) {
+  border-radius: 6px;
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+.libRow .rowArrow {
+  top: 22px;
+}
+.libTitle {
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.libDesc {
+  display: block;
+  margin-top: 4px;
+  color: var(--fg-2);
+}
+.libMeta {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+@media (min-width: 900px) {
+  .libRow {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: baseline;
+    padding-right: 56px;
+  }
+}
+.libFeatured {
+  display: grid;
+  gap: 48px var(--col-gap);
+}
+@media (min-width: 1000px) {
+  .libFeatured {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+  .libFeatured .libRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ══ Dr. Droter (V1, V3) ════════════════════════════════════════════════ */
+
+.about {
+  position: relative;
+  overflow: clip;
+}
+.aboutMedia {
+  position: relative;
+  height: min(68svh, 560px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+}
+.aboutImg {
+  object-fit: cover;
+  object-position: 50% 14%;
+}
+.aboutWrap {
+  position: relative;
+  padding-bottom: var(--space-lg);
+}
+.aboutCopy {
+  max-width: 38rem;
+  margin-top: -40px;
+}
+.aboutCred {
+  margin-top: 14px;
+}
+.aboutStory {
+  margin-top: 28px;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+.aboutQuote {
+  margin: 32px 0 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-strong);
+}
+.aboutQuote p {
+  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+  font-weight: 300;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+}
+.aboutActions {
+  margin-top: 36px;
+}
+@media (min-width: 1000px) {
+  .about {
+    display: flex;
+    align-items: center;
+    min-height: min(94svh, 900px);
+  }
+  .aboutMedia {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 48%;
+    height: auto;
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, rgb(0 0 0 / 0.4) 14%, #000 34%),
+      linear-gradient(to bottom, transparent 0%, #000 16%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to left, transparent 0%, rgb(0 0 0 / 0.4) 14%, #000 34%),
+      linear-gradient(to bottom, transparent 0%, #000 16%);
+    mask-composite: intersect;
+  }
+  .aboutWrap {
+    padding-block: var(--space-lg);
+  }
+  .aboutCopy {
+    margin-top: 0;
+    margin-left: 50%;
+    padding-left: var(--col-gap);
+  }
+}
+
+/* ══ V2 · Portrait hero ═════════════════════════════════════════════════ */
+
+.ph {
+  position: relative;
+  overflow: clip;
+}
+.phGrid {
+  display: grid;
+}
+.phMedia {
+  position: relative;
+  order: -1;
+  height: min(62svh, 560px);
+  margin-inline: calc(-1 * var(--gutter));
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+}
+.phImg {
+  object-fit: cover;
+  object-position: 50% 12%;
+}
+.phCopy {
+  position: relative;
+  display: grid;
+  gap: 36px;
+  margin-top: -56px;
+  padding-bottom: clamp(32px, 6vw, 56px);
+}
+.phTitle {
+  max-width: 11ch;
+}
+.phName {
+  font-size: 1.375rem;
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.phByline .cred {
+  margin-top: 4px;
+}
+@media (min-width: 1000px) {
+  .ph {
+    display: flex;
+    min-height: min(calc(100svh - var(--hd-h) - 36px), 980px);
+  }
+  .ph > :global(.wrap) {
+    display: flex;
+  }
+  .phGrid {
+    flex: 1;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    column-gap: var(--col-gap);
+  }
+  .phMedia {
+    order: 0;
+    height: auto;
+    min-height: 600px;
+    margin-left: 0;
+    margin-right: calc(-1 * (max(0px, (100vw - var(--maxw) - 2 * var(--gutter)) / 2) + var(--gutter)));
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.12) 8%, rgb(0 0 0 / 0.42) 18%, rgb(0 0 0 / 0.78) 28%, #000 40%),
+      linear-gradient(to bottom, transparent 0%, #000 16%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.12) 8%, rgb(0 0 0 / 0.42) 18%, rgb(0 0 0 / 0.78) 28%, #000 40%),
+      linear-gradient(to bottom, transparent 0%, #000 16%);
+    mask-composite: intersect;
+  }
+  .phImg {
+    object-position: 50% 0%;
+  }
+  .phCopy {
+    align-content: space-between;
+    margin-top: 0;
+    padding-block: clamp(40px, 5vw, 80px) clamp(28px, 3vw, 44px);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .phImg {
+    animation: portrait 2.2s var(--ease-out) both;
+  }
+}
+@keyframes portrait {
+  from {
+    transform: scale(1.045);
+    transform-origin: 50% 30%;
+    filter: blur(2px);
+  }
+}
+
+/* Airway Bite card, in the portrait hero */
+.abCard {
+  --fg: var(--ink);
+  --fg-2: var(--slate);
+  --line-strong: var(--hair-strong);
+  --accent-text: var(--signal-ink);
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 14px 16px;
+  align-items: center;
+  max-width: 560px;
+  padding: 12px 16px 16px 12px;
+  border-radius: var(--r-card);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-1);
+}
+.abThumb {
+  position: relative;
+  align-self: stretch;
+  min-height: 72px;
+  overflow: hidden;
+  border-radius: var(--r-inner);
+  background: var(--porcelain);
+}
+.abThumbImg {
+  object-fit: contain;
+  transform: scale(1.3);
+}
+.abTitle {
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+}
+.abLine {
+  margin-top: 2px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--fg-2);
+}
+.abActions {
+  grid-column: 1 / -1;
+  gap: 4px 18px;
+}
+@media (min-width: 560px) {
+  .abCard {
+    grid-template-columns: 124px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 10px 22px;
+    padding: 14px 24px 14px 14px;
+  }
+  .abThumb {
+    grid-row: 1 / span 2;
+    min-height: 124px;
+  }
+  .abActions {
+    grid-column: 2;
+    align-self: start;
+  }
+  .abBody {
+    align-self: end;
+  }
+}
+
+/* ══ V2 · His diagnostic approach ═══════════════════════════════════════ */
+
+.daGrid {
+  display: grid;
+  gap: 48px var(--col-gap);
+}
+.daLead {
+  margin-top: 24px;
+}
+.daTypes {
+  display: grid;
+  gap: 12px;
+  margin-top: 32px;
+  font-size: clamp(1.1875rem, 1.1rem + 0.3vw, 1.3125rem);
+  line-height: 1.45;
+}
+.daTypes dt,
+.daTypes dd {
+  display: inline;
+  margin: 0;
+}
+.daTypes dt {
+  font-weight: 500;
+}
+.daTypes dt::after {
+  content: ". ";
+}
+.daTypes dd {
+  color: var(--fg-2);
+}
+.daOverlay {
+  max-width: 54ch;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
+  color: var(--fg-2);
+}
+@media (min-width: 1000px) {
+  .daGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+}
+
+.emph {
+  margin: 0;
+}
+.emph blockquote {
+  margin: 0;
+}
+.emphText {
+  max-width: 24ch;
+  font-size: clamp(2rem, 1.35rem + 2.4vw, 3.75rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+.emphFoot {
+  display: grid;
+  gap: 24px var(--col-gap);
+  margin-top: clamp(32px, 4vw, 56px);
+}
+.emphCap {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.emphBody {
+  max-width: 60ch;
+  color: var(--fg-2);
+}
+@media (min-width: 1000px) {
+  .emphFoot {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.evGrid {
+  display: grid;
+  gap: 32px var(--col-gap);
+}
+.evPassage {
+  display: grid;
+  gap: 22px;
+}
+.evItem {
+  display: grid;
+  grid-template-columns: 3.3em minmax(0, 1fr);
+  max-width: 44rem;
+  font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.4375rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+}
+.evNum {
+  font-weight: 500;
+}
+.evCaveat {
+  max-width: 60ch;
+  margin-top: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
+  color: var(--fg-2);
+}
+@media (min-width: 1000px) {
+  .evGrid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: start;
+  }
+}
+
+/* ══ V2 · Bridge to the device (night) ══════════════════════════════════ */
+
+.brHead {
+  display: grid;
+  gap: 32px var(--col-gap);
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+.brLead {
+  margin-top: 20px;
+}
+.brQuote {
+  margin: 0;
+}
+.brQuote blockquote {
+  margin: 0;
+}
+.brQuote p {
+  max-width: 34ch;
+  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: -0.016em;
+}
+.brQuote figcaption {
+  margin-top: 16px;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.brMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+}
+.brLoop {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% 50%;
+}
+.brActions {
+  margin-top: 32px;
+}
+@media (min-width: 760px) {
+  .brMedia {
+    aspect-ratio: 1920 / 816;
+  }
+}
+.brDevice {
+  min-width: 0;
+  max-width: 680px;
+  margin: 8px auto 0;
+  width: 100%;
+}
+@media (min-width: 1000px) {
+  .brHead {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-areas:
+      "copy device"
+      "quote device";
+    align-items: start;
+    row-gap: clamp(32px, 4vw, 56px);
+  }
+  .brCopy {
+    grid-area: copy;
+    align-self: end;
+  }
+  .brQuote {
+    grid-area: quote;
+  }
+  .brDevice {
+    grid-area: device;
+    align-self: center;
+    width: auto;
+    max-width: none;
+    margin: 0 calc(-1 * var(--gutter)) 0 0;
+  }
+}
+
+/* A render on the night field: lit by its own studio light, grounded by a
+   soft, offset shadow taken from its silhouette (no halo behind it). */
+.nightRender .renderImg {
+  filter: drop-shadow(0 28px 34px rgb(2 6 14 / 0.62));
+}
+
+/* ══ Tutorial teaser ════════════════════════════════════════════════════ */
+
+.tt {
+  display: grid;
+  gap: 40px var(--col-gap);
+}
+.ttMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.ttMedia:focus-visible {
+  outline-offset: 4px;
+}
+.ttImg {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+.ttMedia:hover .ttImg {
+  transform: scale(1.025);
+}
+.ttPlay {
+  position: absolute;
+  left: clamp(14px, 2vw, 24px);
+  bottom: clamp(14px, 2vw, 24px);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 20px 0 16px;
+  border-radius: var(--r-pill);
+  background: var(--night);
+  color: var(--on-night);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgb(11 21 38 / 0.12), 0 12px 28px -14px rgb(11 21 38 / 0.6);
+  transition: background-color var(--dur-1) var(--ease-out);
+}
+.ttMedia:hover .ttPlay {
+  background: var(--night-3);
+}
+.ttTime {
+  color: var(--on-night-2);
+}
+.ttLead {
+  margin-top: 20px;
+}
+.phases {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fg);
+}
+.phase {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2em minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: baseline;
+  padding: 15px 36px 16px 0;
+  border-bottom: 1px solid var(--line-strong);
+}
+.phase:hover .phaseTitle,
+.phase:hover .rowArrow {
+  color: var(--accent-text);
+}
+.phase:hover .rowArrow {
+  transform: translateX(4px);
+}
+.phase:has(.rowLink:focus-visible) {
+  border-radius: 6px;
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+.phase .rowArrow {
+  top: 18px;
+}
+.phaseN {
+  color: var(--fg-2);
+}
+.phaseTitle {
+  font-weight: 500;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.phaseSteps {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.ttActions {
+  margin-top: 32px;
+}
+@media (min-width: 1000px) {
+  .tt {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+  }
+}
+
+/* ══ V3 · Joint hero ════════════════════════════════════════════════════ */
+
+.jh {
+  padding-top: clamp(24px, 3vw, 44px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+.jhTitle {
+  max-width: 17ch;
+}
+.jhLead {
+  max-width: 40ch;
+}
+
+.entries {
+  margin-top: 32px;
+  border-top: 1px solid var(--line-strong);
+}
+.entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+  padding: 14px 4px 14px 0;
+  border-bottom: 1px solid var(--line-strong);
+  font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.014em;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.entryWho {
+  color: var(--fg-2);
+  transition: color var(--dur-1) var(--ease-out);
+}
+.entry svg {
+  flex: none;
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.entry:hover,
+.entry:hover .entryWho {
+  color: var(--accent-text);
+}
+.entry:hover svg {
+  transform: translateX(4px);
+}
+.entry:focus-visible {
+  border-radius: 6px;
+}
+
+/* The healthy / damaged plates: plate left; toggle, caption and the ways in on the right */
+.jp {
+  display: grid;
+  gap: 20px var(--col-gap);
+  margin-top: clamp(24px, 2.6vw, 36px);
+}
+.jpSide {
+  display: grid;
+  gap: 32px;
+}
+
+.jpMat {
+  padding: clamp(8px, 1.3vw, 16px);
+  border-radius: var(--r-card);
+  background: var(--white);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 1px 2px rgb(11 21 38 / 0.04),
+    0 26px 48px -30px rgb(11 21 38 / 0.42);
+}
+.jpStage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.jpImg {
+  object-fit: contain;
+}
+.jpTop {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.1s var(--ease-out);
+}
+.jpStage[data-state="damaged"] .jpTop {
+  clip-path: inset(0 0 0 0);
+}
+.jpBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 20px;
+}
+.jpCap {
+  flex: 1 1 22rem;
+  max-width: 48ch;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+@media (min-width: 1000px) {
+  .jp {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    align-items: start;
+  }
+  .jpSide {
+    gap: clamp(32px, 3.4vw, 48px);
+    padding-top: 2px;
+  }
+  .jpBar {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0;
+  }
+  .jpCap {
+    flex: none;
+  }
+}
+
+/* ══ V3 · Airway Bite band (night) ══════════════════════════════════════ */
+
+.band {
+  display: grid;
+  gap: clamp(24px, 5vw, 40px) var(--col-gap);
+  align-items: center;
+}
+.bandMedia {
+  min-width: 0;
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+}
+.bandCopy {
+  min-width: 0;
+}
+.bandLead {
+  margin-top: 20px;
+}
+.bandUse {
+  margin-top: 14px;
+  color: var(--fg-2);
+}
+.bandActions {
+  margin-top: 32px;
+}
+@media (min-width: 1000px) {
+  .band {
+    /* The copy column holds the CTA row on one line. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 36rem);
+  }
+  .bandMedia {
+    width: auto;
+    max-width: none;
+    margin: -24px 0 -24px calc(-1 * var(--gutter));
+  }
+}
+
+/* ══ V3 · TMD is not one disease ════════════════════════════════════════ */
+
+.nodTop {
+  display: grid;
+  gap: 40px var(--col-gap);
+}
+.nodLead {
+  margin-top: 24px;
+}
+.nodCats {
+  display: grid;
+  gap: 40px var(--col-gap);
+  margin-top: clamp(56px, 7vw, 104px);
+}
+.catsTitle {
+  margin-bottom: 16px;
+}
+.cats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fg);
+  counter-reset: cat;
+}
+.cat {
+  display: grid;
+  grid-template-columns: 2em minmax(0, 1fr);
+  padding: 13px 0 14px;
+  border-bottom: 1px solid var(--line-strong);
+  counter-increment: cat;
+}
+.cat::before {
+  content: counter(cat);
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+}
+.catName {
+  font-weight: 500;
+}
+.catNote {
+  display: block;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.nodMore {
+  max-width: 46rem;
+  margin-top: clamp(48px, 6vw, 80px);
+}
+@media (min-width: 1000px) {
+  .nodTop {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+  .nodTop .counts {
+    padding-top: 10px;
+  }
+  .nodCats {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+}

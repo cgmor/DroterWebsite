@@ -1,0 +1,624 @@
+/* Education components (Read mode): notice, guide body, contents rail, FAQ,
+   guide list, library index. Tokens come from .aps (src/app/[v]/aps.css). */
+
+/* ── Notice ─────────────────────────────────────────────────────────────── */
+
+.notice {
+  display: grid;
+  align-items: start;
+  max-width: 64ch;
+  border-radius: 14px;
+  line-height: 1.55;
+}
+.noticeImportant {
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 14px;
+  padding: 20px 24px 22px 20px;
+  background: var(--white);
+  box-shadow:
+    inset 0 0 0 1.5px var(--ink),
+    0 1px 2px rgb(11 21 38 / 0.05),
+    0 14px 30px -24px rgb(11 21 38 / 0.45);
+  color: var(--ink);
+}
+.noticeImportant .noticeText {
+  font-weight: 500;
+}
+.noticeNote {
+  padding: 22px 24px;
+  background: var(--mist);
+  color: var(--ink-2);
+}
+.noticeIcon {
+  margin-top: 1px;
+  color: var(--ink);
+}
+.noticeText {
+  font-size: 1.0625rem;
+}
+
+/* ── Guide body ─────────────────────────────────────────────────────────── */
+
+.guide {
+  display: grid;
+}
+.gs {
+  display: grid;
+  gap: 32px var(--col-gap);
+  padding-block: clamp(44px, 5.5vw, 72px);
+  border-top: 1px solid var(--line);
+}
+.gs:first-child {
+  border-top: 0;
+  padding-top: 8px;
+}
+.gs:last-child {
+  padding-bottom: 0;
+}
+.gsText {
+  max-width: 64ch;
+}
+.gsTitle.gsTitle {
+  margin: 0 0 0.55em;
+  font-size: clamp(1.5rem, 1.28rem + 0.75vw, 2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.024em;
+}
+.gsTitle + * {
+  margin-top: 0;
+}
+.gsFig {
+  min-width: 0;
+}
+@media (min-width: 1000px) {
+  .guideSplit .gs {
+    grid-template-columns: minmax(0, 11fr) minmax(0, 13fr);
+    align-items: start;
+  }
+  .guideSplit .gsFig {
+    position: sticky;
+    top: calc(var(--hd-h) + 32px);
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .guideSplit .gsText {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+.guideSteps.guideSteps > li::before {
+  content: counter(aps-n);
+  font-size: 0.9375rem;
+  line-height: 1.95;
+  color: var(--ink);
+}
+.guideNotice {
+  margin-top: 1.6em;
+}
+
+/* ── Contents (on this page) ────────────────────────────────────────────── */
+
+.toc {
+  font-size: 0.9375rem;
+}
+.tocList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tocLink {
+  position: relative;
+  display: block;
+  color: var(--slate);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.tocLink:hover {
+  color: var(--ink);
+}
+.tocLink[aria-current] {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+@media (min-width: 1100px) {
+  .toc {
+    position: sticky;
+    top: calc(var(--hd-h) + 40px);
+    align-self: start;
+    max-height: calc(100dvh - var(--hd-h) - 72px);
+    overflow-y: auto;
+    padding: 4px 4px 4px 0;
+    scrollbar-width: thin;
+  }
+  .tocToggle {
+    display: none;
+  }
+  .tocTitle {
+    margin-bottom: 18px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .tocList {
+    position: relative;
+    display: grid;
+    padding-left: 22px;
+  }
+  .tocList::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: 3.5px;
+    width: 1px;
+    background: var(--hair-strong);
+  }
+  .tocLink {
+    padding: 7px 0;
+    line-height: 1.35;
+  }
+  .tocLink::before {
+    content: "";
+    position: absolute;
+    top: calc(7px + 0.675em - 4px);
+    left: -22px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: inset 0 0 0 1px var(--hair-strong);
+    transition:
+      background-color var(--dur-2) var(--ease-out),
+      box-shadow var(--dur-2) var(--ease-out),
+      transform var(--dur-2) var(--ease-out);
+  }
+  .tocLink:hover::before {
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .tocLink[aria-current]::before {
+    background: var(--signal);
+    box-shadow: 0 0 0 3px var(--white);
+    transform: scale(1.12);
+  }
+}
+
+@media (max-width: 1099.98px) {
+  .toc {
+    position: sticky;
+    top: var(--hd-h);
+    z-index: 30;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    background: var(--white);
+    box-shadow:
+      0 1px 0 var(--hair),
+      0 12px 24px -22px rgb(11 21 38 / 0.4);
+  }
+  .tocTitle {
+    display: none;
+  }
+  .tocToggle {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 54px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: var(--ink);
+    text-align: left;
+  }
+  .tocToggleLabel {
+    flex: none;
+    font-size: 0.875rem;
+    color: var(--slate);
+  }
+  .tocCurrent {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .tocChevron {
+    flex: none;
+    transition: transform var(--dur-2) var(--ease-out);
+  }
+  .toc[data-open] .tocChevron {
+    transform: rotate(180deg);
+  }
+  .tocList {
+    display: none;
+    max-height: min(62dvh, 520px);
+    overflow-y: auto;
+    padding: 2px 0 14px;
+    border-top: 1px solid var(--hair);
+  }
+  .toc[data-open] .tocList {
+    display: grid;
+  }
+  .tocLink {
+    padding: 11px 0;
+    font-size: 1rem;
+  }
+  .tocList li + li .tocLink {
+    border-top: 1px solid var(--hair);
+    border-radius: 0;
+  }
+  .tocLink[aria-current] {
+    color: var(--signal-ink);
+  }
+}
+
+/* ── FAQ accordion ──────────────────────────────────────────────────────── */
+
+.faq {
+  border-top: 1px solid var(--line-strong);
+}
+.faqItem {
+  border-bottom: 1px solid var(--line);
+}
+.faqQ {
+  font-size: inherit;
+}
+.faqBtn {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 22px 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  font-size: clamp(1.125rem, 1.04rem + 0.32vw, 1.3125rem);
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  color: var(--fg);
+  text-align: left;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.faqBtn:hover {
+  color: var(--ink-2);
+}
+.faqIcon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  transition:
+    box-shadow var(--dur-1) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out);
+}
+.faqBtn:hover .faqIcon {
+  box-shadow: inset 0 0 0 1px var(--fg);
+}
+.faqItem[data-open] .faqIcon {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: none;
+}
+.faqIcon svg {
+  grid-area: 1 / 1;
+  transition:
+    transform var(--dur-3) var(--ease-out),
+    opacity var(--dur-2) var(--ease-out);
+}
+.faqMinus {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+.faqItem[data-open] .faqPlus {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+.faqItem[data-open] .faqMinus {
+  opacity: 1;
+  transform: none;
+}
+.faqPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-3) var(--ease-out);
+}
+.faqItem[data-open] .faqPanel {
+  grid-template-rows: 1fr;
+}
+.faqClip {
+  min-height: 0;
+  overflow: hidden;
+}
+.faqA {
+  max-width: 62ch;
+  padding: 0 60px 28px 0;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+}
+.faqItem[data-open] .faqA {
+  opacity: 1;
+  transform: none;
+}
+@media (max-width: 560px) {
+  .faqA {
+    padding-right: 0;
+  }
+}
+
+/* ── Guide list (related guides) ────────────────────────────────────────── */
+
+.gl {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+.glItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  align-items: baseline;
+  gap: 4px 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.glTitle {
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+}
+.glLink {
+  text-decoration: none;
+  outline: none;
+}
+.glLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+}
+.glItem:has(.glLink:focus-visible) {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+  border-radius: 10px;
+}
+.glClinical {
+  grid-column: 1;
+  color: var(--fg-2);
+}
+.glArrow {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.glItem:hover .glArrow {
+  color: var(--accent-text);
+  transform: translateX(4px);
+}
+.glItem:hover .glTitle {
+  color: var(--ink-2);
+}
+@media (min-width: 760px) {
+  .glItem {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 24px;
+  }
+  .glClinical {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .glArrow {
+    grid-column: 3;
+  }
+}
+
+/* ── Library index ──────────────────────────────────────────────────────── */
+
+.lib {
+  display: grid;
+}
+.libBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.libCount {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.libGroup {
+  padding-top: clamp(56px, 7vw, 104px);
+}
+.libHead {
+  display: grid;
+  gap: 28px var(--col-gap);
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+@media (min-width: 900px) {
+  .libHead:has(.libAside) {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    align-items: start;
+  }
+}
+.libHeadCopy {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+.libLead {
+  max-width: 52ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--fg-2);
+}
+.libAside {
+  min-width: 0;
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 24px;
+  grid-template-areas:
+    "kind format icon"
+    "main main main"
+    "meta meta meta";
+  align-items: baseline;
+  gap: 8px 10px;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid var(--line);
+}
+.row[data-live]::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-1 * clamp(10px, 1.4vw, 18px));
+  z-index: 0;
+  border-radius: 14px;
+  background: var(--mist);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+.row[data-live]:hover::before {
+  opacity: 1;
+}
+.row > * {
+  position: relative;
+  z-index: 1;
+}
+.rowKind {
+  grid-area: kind;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.rowFormat {
+  grid-area: format;
+  font-size: 0.875rem;
+  color: var(--fg-2);
+}
+.rowFormat:empty {
+  display: none;
+}
+.rowFormat::before {
+  content: "·";
+  margin-right: 10px;
+  color: var(--fg-2);
+}
+.rowMain {
+  grid-area: main;
+  display: grid;
+  gap: 6px;
+}
+.rowTitle {
+  font-size: clamp(1.1875rem, 1.1rem + 0.3vw, 1.375rem);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.014em;
+}
+.rowLink {
+  text-decoration: none;
+  outline: none;
+}
+.rowLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 14px;
+}
+.row:has(.rowLink:focus-visible) {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+.rowDesc {
+  max-width: 60ch;
+  color: var(--fg-2);
+  line-height: 1.55;
+}
+.rowState {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: start;
+  margin-top: 6px;
+  padding: 5px 12px 5px 9px;
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 1px var(--hair-strong);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.rowMeta {
+  grid-area: meta;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.rowMeta:empty {
+  display: none;
+}
+.rowIcon {
+  grid-area: icon;
+  align-self: start;
+  justify-self: end;
+  color: var(--ink);
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.row[data-live]:hover .rowIcon {
+  color: var(--accent-text);
+  transform: translate(2px, -2px);
+}
+.row[data-live]:hover .rowTitle {
+  color: var(--ink-2);
+}
+
+@media (min-width: 900px) {
+  .row {
+    grid-template-columns: 8.5rem minmax(0, 1fr) minmax(9rem, 13rem) 4.5rem 24px;
+    grid-template-areas: "kind main meta format icon";
+    gap: 6px var(--col-gap);
+    padding: 26px 0 28px;
+  }
+  .rowKind,
+  .rowMeta,
+  .rowFormat {
+    padding-top: 4px;
+  }
+  .rowFormat::before {
+    content: none;
+  }
+  .rowIcon {
+    padding-top: 4px;
+  }
+}

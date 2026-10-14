@@ -1,0 +1,241 @@
+/* /[v]/about: Dr. Droter. Prestige from scale, air and restraint, in the
+   shared Geist world (no new typeface). */
+
+/* ── Opening: portrait + name ───────────────────────────────────────── */
+
+.open {
+  background: var(--white);
+}
+.openGrid {
+  display: grid;
+  gap: 36px var(--col-gap);
+  align-items: end;
+  padding-top: clamp(24px, 4vw, 64px);
+  padding-bottom: var(--space-md);
+}
+.portrait {
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+  box-shadow: var(--shadow-2);
+}
+.portraitImg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.name {
+  font-size: clamp(2.5rem, 1.1rem + 4.6vw, 5.25rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: wrap;
+}
+.degree {
+  color: var(--slate);
+}
+.credit {
+  display: grid;
+  gap: 2px;
+  margin-top: clamp(20px, 2.4vw, 32px);
+  font-size: 1.0625rem;
+  color: var(--slate);
+}
+.story {
+  max-width: 46ch;
+  margin-top: clamp(32px, 4vw, 56px);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--hair-strong);
+  font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem);
+  line-height: 1.55;
+  letter-spacing: -0.008em;
+  color: var(--ink-2);
+}
+@media (min-width: 640px) and (max-width: 899px) {
+  .portrait {
+    max-width: 440px;
+  }
+}
+@media (min-width: 900px) {
+  .openGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: clamp(40px, 6vw, 112px);
+  }
+  .openCopy {
+    padding-bottom: 8px;
+  }
+}
+
+/* ── Pull quote ─────────────────────────────────────────────────────── */
+
+.quoteSec {
+  padding-block: clamp(72px, 9vw, 152px);
+}
+.quote {
+  margin: 0;
+}
+.quote blockquote {
+  margin: 0;
+}
+.quote p {
+  max-width: 20ch;
+  font-size: clamp(2.125rem, 1.15rem + 3.4vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+.hang {
+  margin-left: -0.37em;
+}
+@media (max-width: 639px) {
+  .hang {
+    margin-left: 0;
+  }
+}
+.quoteBy {
+  margin-top: clamp(24px, 3vw, 40px);
+  font-size: 1rem;
+  color: var(--slate);
+}
+
+/* ── Biography ──────────────────────────────────────────────────────── */
+
+.bioGrid {
+  display: grid;
+  gap: 28px var(--col-gap);
+  padding-top: clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--hair);
+}
+.bioTitle {
+  max-width: 12ch;
+}
+@media (min-width: 1000px) {
+  .bioGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+  .bioTitle {
+    position: sticky;
+    top: calc(var(--hd-h) + 32px);
+  }
+}
+
+/* ── Facts, as one passage ──────────────────────────────────────────── */
+
+.facts {
+  max-width: 30ch;
+  font-size: clamp(1.75rem, 1.15rem + 2.1vw, 3.125rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.026em;
+  color: var(--slate);
+  text-wrap: pretty;
+}
+/* The number is set in the sentence at the passage's own size, as on the
+   home's "40 different diseases…": emphasis by weight and colour only.
+   It sits directly in the <p> (no per-fact wrapper span): with the wrapper,
+   Chrome could paint the figures at a reduced size after a restyle. */
+.factVal {
+  font-size: 1em;
+  font-weight: 400;
+  font-variant-caps: normal;
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+/* ── Training + teaching ────────────────────────────────────────────── */
+
+.cv {
+  display: grid;
+  gap: 64px var(--col-gap);
+}
+.cvTitle {
+  margin-bottom: 20px;
+}
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--fg);
+}
+.rows li {
+  display: grid;
+  gap: 2px;
+  padding: 16px 0 17px;
+  border-bottom: 1px solid var(--hair-strong);
+}
+.rowMain {
+  font-weight: 500;
+  letter-spacing: -0.006em;
+}
+.rowDetail {
+  color: var(--slate);
+}
+@media (min-width: 900px) {
+  .cv {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(40px, 5vw, 96px);
+  }
+}
+
+/* ── His approach, in his words ─────────────────────────────────────── */
+
+.approach {
+  display: grid;
+  gap: 48px var(--col-gap);
+  align-items: start;
+}
+.ownWords {
+  margin: 28px 0 0;
+}
+.ownWords blockquote {
+  display: grid;
+  gap: 1.1em;
+  max-width: 60ch;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+.ownWordsBy {
+  margin-top: 20px;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.emphasis {
+  max-width: 34ch;
+  margin-top: clamp(56px, 7vw, 104px);
+  padding-top: clamp(24px, 3vw, 36px);
+  border-top: 1px solid var(--line-strong);
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.375rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.024em;
+}
+@media (min-width: 1000px) {
+  .approach {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  }
+  .approachFig {
+    padding-top: 8px;
+  }
+}
+
+/* ── Lectures + literature ──────────────────────────────────────────── */
+
+.lit {
+  display: grid;
+  gap: 48px var(--col-gap);
+}
+.litTitle {
+  margin-bottom: 14px;
+  font-size: 1.1875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 1000px) {
+  .lit {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}

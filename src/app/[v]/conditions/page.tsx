@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { categoryId, guidesByCategory } from "@/components/education/categories";
 import ConditionCard, { ConditionGrid } from "@/components/education/ConditionCard";
+import { ButtonLink } from "@/components/site/Button";
 import { ArrowRight } from "@/components/site/icons";
 import { href, isSite, siteHas, routes, type SiteId } from "@/components/site/links";
 import { Section, SectionHead } from "@/components/site/Section";
@@ -35,9 +35,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     ? { title: SLEEP_TITLE, description: SLEEP_DESCRIPTION }
     : { title: education.conditionsHeading, description: education.conditionsIntro };
 }
-
-/** Cells left in the last row of an n-item grid of `cols` columns (a full row when it divides evenly). */
-const rest = (n: number, cols: number) => cols - (n % cols);
 
 /** The guides a site carries, in its order. */
 const siteGuides = (v: SiteId) =>
@@ -104,26 +101,22 @@ function CommonConditions({ v }: { v: SiteId }) {
         {more.length > 0 && (
           <section className={s.moreGroup} aria-labelledby="more-title">
             <SectionHead id="more-title" layout="center" className={s.head} title="More conditions" lead={understanding.intro} />
-            <ConditionGrid>
+            {/* An even count as two even rows (four: 2 + 2), so no card is
+                left alone in a row; an odd count keeps the three-up grid. */}
+            <ConditionGrid cols={more.length % 2 === 0 ? 2 : 3}>
               {more.map((g) => (
                 <ConditionCard key={g.slug} guide={g} href={href(v, routes.condition(g.slug))} as="h3" />
               ))}
-              {/* The closing card fills out the last row: the way into his
-                  explanation of TMD, under his own line about "TMJ". Built
-                  like the condition cards (title, his words, a ruled foot). */}
-              <li className={s.more} style={{ "--rest-2": rest(more.length, 2), "--rest-3": rest(more.length, 3) } as CSSProperties}>
-                <h3 className={s.moreTitle}>
-                  <Link href={href(v, routes.understanding)} className={s.moreLink}>
-                    {understandingLabel}
-                  </Link>
-                </h3>
-                <p className={s.moreBody}>{understanding.thesis.line}</p>
-                <p className={s.moreFoot}>
-                  <span>{understanding.thesis.attribution}</span>
-                  <ArrowRight size={18} className={s.moreArrow} />
-                </p>
-              </li>
             </ConditionGrid>
+            {/* The way into his explanation of TMD, as a quiet link under the
+                grid (the home's "All conditions"), not a card among the conditions. */}
+            {siteHas(v, "understanding-tmd") && (
+              <div className={s.after}>
+                <ButtonLink href={href(v, routes.understanding)} variant="secondary">
+                  {understandingLabel}
+                </ButtonLink>
+              </div>
+            )}
           </section>
         )}
       </Section>

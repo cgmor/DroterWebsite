@@ -1,0 +1,30 @@
+/* "Shared files for dentists · Password required": one centred line under a
+   resources grid. The lock says what the note says. */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 16px;
+  margin: clamp(28px, 3.2vw, 40px) 0 0;
+  text-align: center;
+}
+.link {
+  min-height: 44px;
+  gap: 8px;
+  font-size: 1.0625rem;
+}
+.lock {
+  flex: none;
+  color: var(--fg-2);
+  transition: color var(--dur-1) var(--ease-out);
+}
+.link:hover .lock {
+  color: currentColor;
+}
+.note {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--fg-2);
+}

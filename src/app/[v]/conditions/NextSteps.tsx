@@ -3,9 +3,17 @@ import { ArrowRight, ArrowUpRight } from "@/components/site/icons";
 import { href, routes, type SiteId } from "@/components/site/links";
 import PracticePanel from "@/components/site/PracticePanel";
 import { Section, SectionHead } from "@/components/site/Section";
-import { airwayBite, applianceGuide, education } from "@/content/aps";
+import { airwayBite, applianceGuide } from "@/content/aps";
 import { sitePages } from "@/content/sites";
-import { applianceGroups, lab, practiceSteps, type ApplianceGroup, type PracticeCard, type SiteTarget } from "@/content/solutions";
+import {
+  applianceGroups,
+  lab,
+  practiceSteps,
+  sleepSupplements,
+  type ApplianceGroup,
+  type PracticeCard,
+  type SiteTarget,
+} from "@/content/solutions";
 import s from "./NextSteps.module.css";
 
 type Props = {
@@ -22,11 +30,12 @@ type Props = {
 const APPLIANCES_LABEL = sitePages.apsleep.find((p) => p.slug === "appliances")?.label ?? "Appliances";
 
 /**
- * "What to do next": a centred opening in his words, then the way on for the
- * site. APSleep.com: his products chart filtered to the problem (each row to
- * its anchor on /apsleep/appliances), then the lab, sorted for patients and
- * dentists. drdroter.com: his own next steps where he has them, then New
- * Patient Information. No links between the two sites.
+ * "What to do next": a centred heading (it stands alone, as other centred
+ * heads do), then the way on for the site. APSleep.com: his products chart
+ * filtered to the problem (each row to its anchor on /apsleep/appliances),
+ * then the lab, sorted for patients and dentists. drdroter.com: his own next
+ * steps where he has them, then New Patient Information. No links between
+ * the two sites.
  */
 export default function NextSteps({ v, slug, tone = "mist", flush }: Props) {
   return (
@@ -36,7 +45,6 @@ export default function NextSteps({ v, slug, tone = "mist", flush }: Props) {
         layout="center"
         className={s.head}
         title="What to do next"
-        lead={education.patientsLine}
         actions={
           v === "apsleep" && !slug ? (
             <Link href={href(v, routes.appliances)} className="lnk">
@@ -46,7 +54,11 @@ export default function NextSteps({ v, slug, tone = "mist", flush }: Props) {
           ) : undefined
         }
       />
-      {v === "apsleep" ? <SleepSteps v={v} groups={slug ? applianceGroups(slug) : []} /> : <PracticeSteps v={v} slug={slug} tone={tone} />}
+      {v === "apsleep" ? (
+        <SleepSteps v={v} groups={slug ? applianceGroups(slug) : []} extra={slug ? sleepSupplements(slug) : undefined} />
+      ) : (
+        <PracticeSteps v={v} slug={slug} tone={tone} />
+      )}
     </Section>
   );
 }
@@ -56,9 +68,10 @@ export default function NextSteps({ v, slug, tone = "mist", flush }: Props) {
 /**
  * His products chart, cut to this problem's rows: the same hairline matrix as
  * /apsleep/appliances (global `ag-*` styles), in a card the width of the
- * column. Under it, the lab for each audience as two matching cards.
+ * column. Under it, the lab for each audience as two matching cards, and for
+ * clenching and sleep grinding his supplement note as a third.
  */
-function SleepSteps({ v, groups }: { v: SiteId; groups: ApplianceGroup[] }) {
+function SleepSteps({ v, groups, extra }: { v: SiteId; groups: ApplianceGroup[]; extra?: PracticeCard }) {
   const labLink = (
     <a href={lab.url} target="_blank" rel="noopener" aria-label={`${lab.domain} (opens in a new tab)`} className={`lnk ${s.cardLink}`}>
       {lab.domain}
@@ -77,7 +90,7 @@ function SleepSteps({ v, groups }: { v: SiteId; groups: ApplianceGroup[] }) {
         </section>
       )}
 
-      <ul className={s.grid} data-width={groups.length > 0 ? "wide" : "narrow"}>
+      <ul className={s.grid} data-width={groups.length > 0 ? "wide" : "narrow"} data-count={extra ? 3 : 2}>
         <li className={s.card}>
           <h3 className={s.title}>For patients</h3>
           <div className={s.content}>
@@ -94,6 +107,11 @@ function SleepSteps({ v, groups }: { v: SiteId; groups: ApplianceGroup[] }) {
             {labLink}
           </div>
         </li>
+        {extra && (
+          <li className={s.card}>
+            <StepCard v={v} c={extra} />
+          </li>
+        )}
       </ul>
     </div>
   );

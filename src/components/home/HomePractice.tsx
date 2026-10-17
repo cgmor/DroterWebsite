@@ -37,6 +37,9 @@ const nine = practiceNine
 /** His 2005 Dentistry Today article, to clinicians: its closing sentence on "TMJ" and "TMD". (Sentences may end inside a quotation: …“knee.”) */
 const toClinicians = def.paragraphs[2].split(/(?<=[.!?][”"]?)\s+/).pop() ?? "";
 
+/** To patients: the sentence that opens his closing word to them on drdroter.com/facial-pain ("Different Beliefs"). */
+const toPatients = understanding.pain.beliefs.paragraphs.at(-1)?.split(/(?<=[.!?])\s+/)[0] ?? "";
+
 /**
  * "TMDs- What are the choices? (190 Diagnoses, 7 Categories)": the image he
  * published on drdroter.com/facial-pain (Web-Images-23.7 017) directly under
@@ -139,7 +142,7 @@ function PracticeSort({ v }: { v: SiteId }) {
   const doors = [
     {
       title: "For patients",
-      line: education.patientsLine,
+      line: toPatients,
       links: [
         { label: "Find your condition", to: href(v, routes.conditions) },
         { label: "Understanding TMD", to: href(v, routes.understanding) },

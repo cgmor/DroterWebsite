@@ -51,8 +51,10 @@
   gap: 16px;
   align-content: start;
 }
+/* 22ch: titles up to about 25 characters ("Uncomfortable Bite (Occlusion)")
+   hold one line on desktop, so the openings match in height. */
 .title {
-  max-width: 18ch;
+  max-width: 22ch;
   font-size: var(--fs-h1);
   text-wrap: balance;
 }

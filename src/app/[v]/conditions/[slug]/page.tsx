@@ -30,6 +30,30 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { title: g.title, description: g.summary };
 }
 
+/** Words only: case, quotation marks and punctuation aside. */
+const norm = (text: string) =>
+  text
+    .toLowerCase()
+    .replace(/[“”‘’"'.,;:!?()]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+/**
+ * The opening without repeats. His guides sometimes give the same words as
+ * the patient's line, the summary and the signs (Clenching: "Patient is
+ * aware. Masseters ache…" three times). Each is shown once: a sign that is
+ * the patient's line is dropped; a summary that the remaining signs already
+ * say in full gives way to the list (the scannable form); no signs left, no
+ * Signs block. Nothing is added: only his duplicated words are left out.
+ */
+function opening(g: ConditionGuide): { signs: string[]; showSummary: boolean } {
+  const words = norm(g.plainName);
+  const signs = g.signs.filter((x) => norm(x) !== words);
+  const summary = norm(g.summary);
+  const showSummary = !(signs.length > 0 && signs.every((x) => summary.includes(norm(x))));
+  return { signs, showSummary };
+}
+
 /** The guides a site carries, in its order. */
 const siteGuides = (v: SiteId) =>
   siteConditions[v].map((slug) => conditionGuides.find((g) => g.slug === slug)).filter((g): g is ConditionGuide => Boolean(g));
@@ -62,14 +86,15 @@ export default async function ConditionPage({ params }: { params: Params }) {
   const g = guideFor(v, found);
   const related = relatedGuides(siteGuides(v), g);
   const sleep = v === "apsleep";
+  const top = opening(g);
 
-  const signs = (
+  const signs = top.signs.length > 0 && (
     <section className={s.signs} aria-labelledby="signs-title">
       <h2 className={s.signsTitle} id="signs-title">
         Signs
       </h2>
       <ul className={s.signsList}>
-        {g.signs.map((sign) => (
+        {top.signs.map((sign) => (
           <li key={sign}>{sign}</li>
         ))}
       </ul>
@@ -91,7 +116,7 @@ export default async function ConditionPage({ params }: { params: Params }) {
           <div className={s.mastCopy}>
             <h1 className={`t-h1 ${s.title}`}>{g.title}</h1>
             <p className={s.words}>“{g.plainName}”</p>
-            <p className={s.summary}>{g.summary}</p>
+            {top.showSummary && <p className={s.summary}>{g.summary}</p>}
             {g.pending && <p className={s.pending}>{pendingGuideNote}</p>}
             {g.hero && signs}
             <div className={s.byline}>

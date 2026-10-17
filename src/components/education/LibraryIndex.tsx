@@ -129,7 +129,8 @@ function Row({ e }: { e: LibraryEntry }) {
 
   return (
     <li className={s.row} data-live={live || undefined}>
-      <span className={s.rowKind}>{e.kind}</span>
+      {/* One label per entry (its meta: "Published article", "International
+          Dental Journal"); a separate type column only repeated it. */}
       <div className={s.rowMain}>
         {/* A document's own title, not a page heading (titles like his 2005 article's carry "Treatment"). */}
         <p className={s.rowTitle}>{title}</p>

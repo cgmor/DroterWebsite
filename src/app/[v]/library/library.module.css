@@ -240,20 +240,33 @@
   color: var(--ink-2);
   text-wrap: pretty;
 }
+/* Every item carries a 36px "·" slot in front; the list is pulled 36px left
+   and that strip is clipped, so a line never starts with a stray dot when
+   the byline wraps on a phone. */
 .byline {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
-  margin: 0;
+  gap: 4px 0;
+  margin: 0 0 0 -36px;
   padding: 0;
   list-style: none;
+  clip-path: inset(0 0 0 36px);
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--slate);
 }
-.byline > * + *::before {
+.byline > *::before {
   content: "·";
-  margin-right: 18px;
+  display: inline-block;
+  width: 36px;
+  text-align: center;
+  color: var(--slate);
+}
+/* Amazon's Associates statement, under the byline (only once the tag is set). */
+.disclosure {
+  max-width: 62ch;
+  font-size: 0.875rem;
+  line-height: 1.45;
   color: var(--slate);
 }
 
@@ -328,10 +341,13 @@
   font-weight: 500;
   color: var(--ink-2);
 }
+/* The buy link: small and quiet under his notes, an off-site ↗. */
 .pBuy {
   justify-self: start;
-  margin-top: 6px;
+  margin-top: 4px;
+  padding-block: 2px;
   font-size: 0.9375rem;
+  line-height: 1.55;
 }
 
 /* His general advice: plain paragraphs in a reading measure. */

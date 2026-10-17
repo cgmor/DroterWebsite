@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
     // studio renders and the portrait crisp (q75 smears fine detail).
     qualities: [75, 90],
   },
+  // The dentist sharing area reads its read-only fallback files (used only
+  // until the Blob store is connected) from private/dentist-files/, which is
+  // outside public/ so nothing there is served without the password.
+  outputFileTracingIncludes: {
+    "/api/dentists/**": ["./private/dentist-files/**/*"],
+    "/*/dentists": ["./private/dentist-files/**/*"],
+    "/*/dentists/**": ["./private/dentist-files/**/*"],
+  },
   // The three design versions (/v1, /v2, /v3) became two sites on Oct 15. Links
   // already sent for review land on the matching page of the right site.
   async redirects() {

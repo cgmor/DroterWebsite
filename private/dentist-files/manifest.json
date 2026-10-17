@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "id": "sample-placeholder",
+      "title": "Sample file",
+      "note": "Placeholder. Dr. Droter will add his own files.",
+      "fileName": "Sample file.pdf",
+      "contentType": "application/pdf",
+      "size": 23136,
+      "uploadedAt": "2026-10-16T12:00:00.000Z",
+      "availableUntil": null,
+      "visible": true,
+      "key": "sample-file.pdf"
+    }
+  ]
+}

@@ -10,12 +10,15 @@
  *    dentist to use that lab." The chart's MAD row links to the Airway Bite,
  *    as it does on /apsleep/appliances ("The airway bite is kind of a thing a
  *    dentist can take in order").
+ *    For clenching and sleep grinding it adds his supplement note in place
+ *    (the handout itself is a drdroter.com page).
  *  - drdroter.com: his own next steps where he has them (the approach lists
  *    from his brochure, linked to the page on the same site that says more;
- *    "a specific guard from Nate" at Living Tree Dental Lab for sleep grinding;
- *    his occlusal adjustment sentences for an uneven bite; his handouts as the
- *    resources), then his practice (New Patient Information) for every
- *    condition. No links to APSleep.com.
+ *    for clenching and sleep grinding the guards in his chart's row, then
+ *    Living Tree Dental Lab, "a specific guard from Nate"; his occlusal
+ *    adjustment sentences for an uneven bite; his handouts as the resources),
+ *    then his practice (New Patient Information) for every condition. No
+ *    links to APSleep.com.
  */
 import { applianceGuide } from "./aps";
 import { livingTree } from "./labs";
@@ -148,6 +151,34 @@ const supplementCard: PracticeCard = {
   link: { label: supplements.title, to: { resource: supplements.slug } },
 };
 
+/**
+ * The guards to try ("a link going from clenching… leading you to different
+ * guards you can try"): one row of his products chart, under the chart's own
+ * question, each appliance with his line for it (aps.ts `applianceGuide`). The
+ * row's note is left off: its source (the 2021 apsleep.com products page) is
+ * not in his corpus, and the approach list beside it already gives his words
+ * for it ("D-PAS night guard (if inhibition)"). On drdroter.com it links
+ * nowhere, as the chart's page is on the other site.
+ */
+function guardsCard(id: (typeof applianceGuide.groups)[number]["id"]): PracticeCard | undefined {
+  const g = applianceGuide.groups.find((x) => x.id === id);
+  if (!g) return undefined;
+  return {
+    heading: applianceGuide.title,
+    items: g.items.filter((i) => i.detail).map((i) => ({ name: i.name, detail: i.detail })),
+  };
+}
+
+/**
+ * APSleep.com's resources step for clenching and sleep grinding: the same
+ * products as drdroter.com's supplement card (his note naming grinding and
+ * clenching), shown in place, with no link to the other site.
+ */
+export function sleepSupplements(slug: string): PracticeCard | undefined {
+  if (slug !== "clenching" && slug !== "sleep-grinding") return undefined;
+  return supplementCard.items?.length ? { heading: supplementCard.heading, items: supplementCard.items } : undefined;
+}
+
 /** His Hot, Cold, Hot handout, for sore neck muscles: its title, his line for it, his heading word on it. */
 const hotColdHotCard: PracticeCard = {
   heading: hotColdHot.title,
@@ -161,8 +192,8 @@ const cards = (...list: (PracticeCard | undefined)[]) => list.filter((c): c is P
 
 /** Keyed by condition slug. Conditions not listed lead to his practice alone. */
 export const practiceSteps: Record<string, PracticeCard[]> = {
-  clenching: cards(approach("clenching"), supplementCard),
-  "sleep-grinding": cards(approach("sleep-grinding"), labCard, supplementCard),
+  clenching: cards(approach("clenching"), guardsCard("clenching"), labCard, supplementCard),
+  "sleep-grinding": cards(approach("sleep-grinding"), guardsCard("grinding"), labCard, supplementCard),
   "occlusal-muscle-disharmony": cards(
     adjustment && { ...adjustment, link: { label: guide("uncomfortable-bite")?.title ?? "", to: { condition: "uncomfortable-bite" } } },
   ),

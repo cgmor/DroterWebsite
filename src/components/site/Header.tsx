@@ -31,8 +31,13 @@ export default function Header({ v }: { v: SiteId }) {
   const pathname = usePathname() ?? `/${v}`;
   const rest = pathname.slice(v.length + 1) || "/";
   const action = siteAction(v, rest);
-  /* The button already carries its page, so the nav doesn't repeat it. */
-  const nav = NAV[v].filter((item) => href(v, item.path) !== action.href);
+  /* The nav is the same on every page: the site's standing button (APSleep.com:
+     "For dentists") carries its own page, so the nav never repeats it, even on
+     a page whose button is something else (the Airway Bite page's order
+     button). On the button's own page the button is marked as the current page. */
+  const standing = siteAction(v, routes.home);
+  const nav = NAV[v].filter((item) => href(v, item.path) !== standing.href);
+  const actionCurrent = !action.external && action.href === href(v, rest) ? "page" : undefined;
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstRef = useRef<HTMLAnchorElement>(null);
@@ -89,6 +94,7 @@ export default function Header({ v }: { v: SiteId }) {
           <a
             href={action.href}
             {...(action.external ? { target: "_blank", rel: "noopener" } : {})}
+            aria-current={actionCurrent}
             className={`btn btn-primary btn-sm hd-order ${h.order}`}
           >
             <span className="btn-label">{action.label}</span>
@@ -131,7 +137,8 @@ export default function Header({ v }: { v: SiteId }) {
             <a
               href={action.href}
               {...(action.external ? { target: "_blank", rel: "noopener" } : {})}
-              className="btn btn-primary btn-block"
+              aria-current={actionCurrent}
+              className={`btn btn-primary btn-block ${h.action}`}
             >
               <span className="btn-label">{action.label}</span>
               {action.external && <ArrowUpRight size={16} className="btn-icon" />}

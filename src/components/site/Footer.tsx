@@ -7,19 +7,58 @@ import { ArrowUpRight } from "./icons";
 import { href, routes, tel, type SiteId } from "./links";
 import SiteMark from "./SiteMark";
 
+/**
+ * His credit, in his words: "He is a visiting faculty member at the LD Pankey
+ * Institute in Florida." (drdroter.com/about-dr-droter), as on the About page.
+ */
+const facultyLine = (() => {
+  const m = doctor.bio[2].match(/He is an? (visiting faculty member at [^.]+)\./);
+  return m ? m[1][0].toUpperCase() + m[1].slice(1) : doctor.affiliation;
+})();
+
 type Column = { title: string; links: { label: string; to: string; file?: boolean; external?: boolean }[] };
 
-/** Site footer: brand, the site's action, nav columns, contact, legal line. */
+/**
+ * Site footer: the brand with the contact beside it (so the top row is filled
+ * across), then the link columns, then the legal line.
+ */
 export default function Footer({ v }: { v: SiteId }) {
   return v === "apsleep" ? <ApsFooter v={v} /> : <PracticeFooter v={v} />;
 }
 
+/** Phone and address: the right half of the footer's top row. */
+function Contact({ phone, lines }: { phone: string; lines: string[] }) {
+  return (
+    <div className="ft-contact">
+      <h2 className="ft-h">Contact</h2>
+      <p className="ft-text">
+        <a className="ft-link num" href={tel(phone)}>
+          {phone}
+        </a>
+      </p>
+      <address className="ft-text ft-address">
+        {lines.map((l) => (
+          <span key={l}>{l}</span>
+        ))}
+      </address>
+    </div>
+  );
+}
+
 function ApsFooter({ v }: { v: SiteId }) {
+  /* Three columns, none of them a single link: the company (home, about),
+     the patient side, the dentist side. */
   const columns: Column[] = [
+    {
+      title: brand.name,
+      links: [
+        { label: "Home", to: href(v) },
+        { label: `About ${doctor.shortName}`, to: href(v, routes.about) },
+      ],
+    },
     {
       title: "Sleep and airway",
       links: [
-        { label: "Home", to: href(v) },
         { label: "Sleep problems", to: href(v, routes.conditions) },
         { label: "Appliances", to: href(v, routes.appliances) },
       ],
@@ -33,10 +72,6 @@ function ApsFooter({ v }: { v: SiteId }) {
         { label: distributor.name, to: distributor.url, external: true },
       ],
     },
-    {
-      title: brand.name,
-      links: [{ label: `About ${doctor.shortName}`, to: href(v, routes.about) }],
-    },
   ];
 
   return (
@@ -49,24 +84,11 @@ function ApsFooter({ v }: { v: SiteId }) {
             </Link>
             <p className="ft-tagline">{brand.tagline}</p>
           </div>
+          <Contact phone={contact.officePhone} lines={[contact.company.name, ...contact.company.lines]} />
         </div>
 
         <div className="ft-grid">
           <Columns columns={columns} />
-          <div className="ft-col">
-            <h2 className="ft-h">Contact</h2>
-            <p className="ft-text">
-              <a className="ft-link num" href={tel(contact.officePhone)}>
-                {contact.officePhone}
-              </a>
-            </p>
-            <address className="ft-text ft-address">
-              {contact.company.name}
-              {contact.company.lines.map((l) => (
-                <span key={l}>{l}</span>
-              ))}
-            </address>
-          </div>
         </div>
 
         <div className="ft-base">
@@ -103,31 +125,20 @@ function PracticeFooter({ v }: { v: SiteId }) {
   return (
     <footer className="ft">
       <div className="wrap">
+        {/* A letterhead: his name and his credit line beside the office. No
+            tagline: his line would repeat the home page's h1 word for word. */}
         <div className="ft-top">
           <div className="ft-brand">
             <Link href={href(v)} aria-label={`${doctor.name}, home`} className="ft-logo">
               <SiteMark v={v} className="ft-lockup" />
             </Link>
-            <p className="ft-tagline">{doctor.pullQuote}</p>
+            <p className="ft-cred">{facultyLine}</p>
           </div>
+          <Contact phone={practice.phone} lines={practice.addressLines} />
         </div>
 
         <div className="ft-grid">
           <Columns columns={columns} />
-          <div className="ft-col">
-            <h2 className="ft-h">Contact</h2>
-            <p className="ft-text">
-              <a className="ft-link num" href={tel(practice.phone)}>
-                {practice.phone}
-              </a>
-            </p>
-            <address className="ft-text ft-address">
-              {doctor.name}
-              {practice.addressLines.map((l) => (
-                <span key={l}>{l}</span>
-              ))}
-            </address>
-          </div>
         </div>
 
         <div className="ft-base">
@@ -147,8 +158,12 @@ function Columns({ columns }: { columns: Column[] }) {
           <li key={l.label}>
             {l.external ? (
               <a className="ft-link" href={l.to} target="_blank" rel="noopener">
-                {l.label}
-                <ArrowUpRight size={12} className="ft-ext" />
+                {/* The ↗ holds to the last word, so a wrapped label never strands it. */}
+                {l.label.slice(0, l.label.lastIndexOf(" ") + 1)}
+                <span className="ft-nowrap">
+                  {l.label.slice(l.label.lastIndexOf(" ") + 1)}
+                  <ArrowUpRight size={12} className="ft-ext" />
+                </span>
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             ) : l.file ? (

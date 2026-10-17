@@ -47,7 +47,6 @@ export function ConditionCards({ v, guides = conditionGuides }: { v: SiteId; gui
             <ArrowRight size={18} className={s.cardMoreArrow} />
           </Link>
         </h3>
-        <p className={s.cardMoreLine}>{education.patientsLine}</p>
       </li>
     </ul>
   );

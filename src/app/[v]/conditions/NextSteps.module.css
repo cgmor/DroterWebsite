@@ -139,6 +139,19 @@
     max-width: 960px;
     margin-inline: auto;
   }
+  /* Three (the lab twice, then his supplement note): the third takes the
+     full row until there is room for all three across. */
+  .grid[data-count="3"] > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1000px) {
+  .grid[data-count="3"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .grid[data-count="3"] > :last-child {
+    grid-column: auto;
+  }
 }
 
 /* ── drdroter.com: his steps, then New Patient Information ──────────────── */
@@ -178,7 +191,8 @@
 }
 @media (min-width: 640px) {
   .steps[data-count="2"],
-  .steps[data-count="3"] {
+  .steps[data-count="3"],
+  .steps[data-count="4"] {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   /* Three on two columns: the last takes the full row. */

@@ -175,18 +175,29 @@ function Indication({
 }) {
   const count = g.items.length + (extra ? 1 : 0);
   const layout = media ? s.cards : `${s.cards} ${count > 1 ? s.cardsPair : s.cardsSolo}`;
+  /* One appliance with no photograph and no line of his (APS Lat-Brux): a
+     spec row (label against the name, on the index table's rule), not an
+     empty card. */
+  const lone = !media && !extra && g.items.length === 1 && !THUMBS[g.items[0].name] && !g.items[0].detail ? g.items[0] : undefined;
   return (
     <section id={g.id} aria-labelledby={`${g.id}-title`} className={s.ind}>
       <SectionHead id={`${g.id}-title`} title={g.indication} lead={lead} layout="center" />
       <div className={media ? s.indGrid : undefined}>
         {media && <div className={s.media}>{media}</div>}
         <div className={s.stack}>
-          <ul className={layout}>
-            {g.items.map((item) => (
-              <ApplianceCard key={item.name} item={item} />
-            ))}
-            {extra}
-          </ul>
+          {lone ? (
+            <dl className={s.spec}>
+              <dt className={s.specLabel}>Appliance</dt>
+              <dd className={s.specName}>{lone.name}</dd>
+            </dl>
+          ) : (
+            <ul className={layout}>
+              {g.items.map((item) => (
+                <ApplianceCard key={item.name} item={item} />
+              ))}
+              {extra}
+            </ul>
+          )}
           {g.note && (
             <p className={s.note}>
               <span className={s.noteLabel}>Note</span>
@@ -257,7 +268,8 @@ export default async function AppliancesPage({ params }: { params: Promise<{ v: 
 
       {/* The airway indications share the night field. Lat-Brux has no photograph
           or description in his chart yet, so its indication is the short one: his
-          line, the appliance, the way back. The airway still is shown once, below. */}
+          line, the appliance as a spec row, the way back. The airway still is
+          shown once, below. */}
       <Section tone="night" as="div">
         <Indication v={v} g={grindingAirway} lead={whileYouSleep.body} />
         <Indication

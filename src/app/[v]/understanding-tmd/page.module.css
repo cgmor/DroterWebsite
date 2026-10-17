@@ -295,6 +295,51 @@
   font-weight: 500;
   color: var(--ink);
 }
+/* His headache figure: the panel's closing line, under a hairline, with the
+   guide it opens. */
+.signsStat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 32px;
+  margin-top: clamp(22px, 2.6vw, 30px);
+  padding-top: clamp(18px, 2.2vw, 24px);
+  border-top: 1px solid var(--hair-strong);
+  font-size: clamp(1.125rem, 1.06rem + 0.28vw, 1.3125rem);
+  line-height: 1.45;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.signsStat > span {
+  flex: 1 1 32ch;
+  max-width: 52ch;
+}
+.signsStatLink {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 0.3em;
+  border-radius: 4px;
+  transition:
+    color var(--dur-1) var(--ease-out),
+    text-decoration-color var(--dur-1) var(--ease-out);
+}
+.signsStatLink:hover {
+  color: var(--signal-ink);
+  text-decoration-color: currentColor;
+}
+.signsStatLink:hover .catArrow {
+  color: currentColor;
+  transform: translateX(3px);
+}
 
 /* ── TMD is not one disease ─────────────────────────────────────────────── */
 
@@ -489,23 +534,26 @@
     align-items: start;
   }
 }
+/* The seven groups flow as columns of lists (not a grid of cells), so an
+   odd count never leaves an empty cell in the last row. */
 .groups {
-  display: grid;
-  gap: 36px var(--col-gap);
+  column-gap: var(--col-gap);
   margin-top: clamp(48px, 6vw, 80px);
 }
 @media (min-width: 600px) {
   .groups {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    columns: 2;
   }
 }
 @media (min-width: 1240px) {
   .groups {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    columns: 4;
   }
 }
 .group {
+  break-inside: avoid;
   padding-top: 16px;
+  padding-bottom: 36px;
   border-top: 1px solid var(--ink);
 }
 .groupName {

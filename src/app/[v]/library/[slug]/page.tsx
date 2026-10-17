@@ -9,6 +9,8 @@ import { href, isSite, siteHas, routes } from "@/components/site/links";
 import PracticePanel from "@/components/site/PracticePanel";
 import { Section, SectionHead } from "@/components/site/Section";
 import {
+  amazonDisclosure,
+  buyLink,
   hotColdHot,
   resourcePages,
   resourceSite,
@@ -25,9 +27,15 @@ import s from "../library.module.css";
 
 type Params = Promise<{ v: string; slug: string }>;
 
-/** Only drdroter.com carries his handouts; APSleep.com's /library/* is a 404. */
-export function generateStaticParams({ params }: { params: { v: string } }) {
-  return params.v === resourceSite ? resourcePages.map((r) => ({ slug: r.slug })) : [];
+/**
+ * Only drdroter.com carries his handouts; APSleep.com's /library/* is a 404
+ * (the page calls notFound()). Every site gets the full list on purpose:
+ * Next 16 drops all of this route's paths from the build when one parent
+ * gets [] here, and with dynamicParams = false in the [v] layout every
+ * handout page would then 404 in production.
+ */
+export function generateStaticParams() {
+  return resourcePages.map((r) => ({ slug: r.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -90,7 +98,7 @@ export default async function ResourcePage({ params }: { params: Params }) {
 
 /* ───────────────────────── Pieces ───────────────────────── */
 
-function Mast({ title, lead, byline }: { title: string; lead?: string; byline?: ReactNode[] }) {
+function Mast({ title, lead, byline, note }: { title: string; lead?: string; byline?: ReactNode[]; note?: string }) {
   return (
     <header className={s.mast}>
       <h1 className={`t-h1 ${s.title}`}>{title}</h1>
@@ -102,38 +110,52 @@ function Mast({ title, lead, byline }: { title: string; lead?: string; byline?: 
           ))}
         </ul>
       )}
+      {note && <p className={s.disclosure}>{note}</p>}
     </header>
   );
 }
 
-/** His products as hairline rows: the name against his notes, his "Disadvantage" line, and a buy link once there is one. */
+/**
+ * His products as hairline rows: the name against his notes, his
+ * "Disadvantage" line, and a quiet buy link (an Amazon search for the product
+ * as he names it; tagged once there is an Associates ID). The link is
+ * sponsored: rel="sponsored nofollow noopener", new tab.
+ */
 function Products({ items }: { items: Product[] }) {
   return (
     <ul className={s.products}>
-      {items.map((p) => (
-        <li key={p.name} className={s.product}>
-          <h3 className={s.pName}>{p.name}</h3>
-          {(p.notes.length > 0 || p.disadvantage || p.buyUrl) && (
-            <div className={s.pBody}>
-              {p.notes.map((n) => (
-                <p key={n}>{n}</p>
-              ))}
-              {p.disadvantage && (
-                <p className={s.pDis}>
-                  <span className={s.pDisLabel}>Disadvantage:</span> {p.disadvantage}
-                </p>
-              )}
-              {p.buyUrl && (
-                <a href={p.buyUrl} target="_blank" rel="noopener sponsored" className={`lnk ${s.pBuy}`}>
-                  Buy on Amazon
-                  <ArrowUpRight size={16} className="lnk-icon" />
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              )}
-            </div>
-          )}
-        </li>
-      ))}
+      {items.map((p) => {
+        const buy = buyLink(p);
+        return (
+          <li key={p.name} className={s.product}>
+            <h3 className={s.pName}>{p.name}</h3>
+            {(p.notes.length > 0 || p.disadvantage || buy) && (
+              <div className={s.pBody}>
+                {p.notes.map((n) => (
+                  <p key={n}>{n}</p>
+                ))}
+                {p.disadvantage && (
+                  <p className={s.pDis}>
+                    <span className={s.pDisLabel}>Disadvantage:</span> {p.disadvantage}
+                  </p>
+                )}
+                {buy && (
+                  <a
+                    href={buy.href}
+                    target="_blank"
+                    rel="sponsored nofollow noopener"
+                    aria-label={`${buy.label}: ${p.name} (opens in a new tab)`}
+                    className={`lnk ${s.pBuy}`}
+                  >
+                    {buy.label}
+                    <ArrowUpRight size={16} className="lnk-icon" />
+                  </a>
+                )}
+              </div>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -206,6 +228,7 @@ function Supplements() {
             {d.whereToBuy.heading}: {d.whereToBuy.text}
           </>,
         ].filter(Boolean)}
+        note={amazonDisclosure}
       />
       <div className={s.doc}>
         {d.groups.map((g) => (
@@ -223,7 +246,7 @@ function Toothpaste() {
   const reading = literature.filter((r) => d.reading.some((t) => r.title.startsWith(t))).map(fromResource);
   return (
     <>
-      <Mast title={d.title} byline={[d.author, yearOf(d.docTitle)].filter(Boolean)} />
+      <Mast title={d.title} byline={[d.author, yearOf(d.docTitle)].filter(Boolean)} note={amazonDisclosure} />
       <div className={s.doc}>
         <div className={s.pair}>
           <section className={s.pairCol} aria-labelledby="advice-title">

@@ -820,20 +820,24 @@
     line-height: 1.22;
     letter-spacing: -0.024em;
   }
-  .aps .ft-order {
-    display: grid;
-    gap: 18px;
-    justify-items: start;
-    align-content: end;
+  .aps .ft-cred {
+    margin-top: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--slate);
   }
   .aps .ft-text {
     max-width: 40ch;
     color: var(--slate);
   }
   .aps .ft-ext {
+    display: inline-block;
     margin-left: 4px;
     vertical-align: -1px;
     opacity: 0.6;
+  }
+  .aps .ft-nowrap {
+    white-space: nowrap;
   }
   .aps .ft-grid {
     display: grid;
@@ -849,15 +853,16 @@
   }
   .aps .ft-list {
     display: grid;
-    gap: 10px;
+    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
+    /* A label that wraps reads as one link, not two. */
+    line-height: 1.35;
   }
+  /* Inline, so a wrapped label keeps the ↗ after its last word. */
   .aps .ft-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    display: inline;
     color: var(--slate);
     text-decoration: none;
     border-radius: 4px;
@@ -873,6 +878,10 @@
     margin-top: 14px;
     color: var(--slate);
   }
+  /* Each address line holds together ("4000 Mitchellville Road"). */
+  .aps .ft-address span {
+    white-space: nowrap;
+  }
   .aps .ft-base {
     display: flex;
     flex-wrap: wrap;
@@ -883,19 +892,22 @@
     font-size: 0.875rem;
     color: var(--slate);
   }
-  @media (min-width: 900px) {
-    /* The order block sits at the column's right edge, on the tagline's last
-       line, instead of floating at the start of a wide right column. */
+  /* The top row: the brand, and the contact beside it. From 900px both rows
+     share four columns: the brand spans three with the contact in the
+     fourth; the link columns take the first three under it. */
+  @media (min-width: 640px) {
     .aps .ft-top {
       grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
+      align-items: start;
     }
-    .aps .ft-order {
-      justify-items: end;
-      text-align: right;
-    }
+  }
+  @media (min-width: 900px) {
+    .aps .ft-top,
     .aps .ft-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .aps .ft-brand {
+      grid-column: span 3;
     }
   }
 
@@ -1464,12 +1476,14 @@
     font-weight: 500;
     color: var(--fg);
     text-decoration: none;
+    /* A resting fill, so each digit reads as a button (chairside, on a phone). */
+    background: var(--track);
     transition:
       background-color var(--dur-1) var(--ease-out),
       color var(--dur-1) var(--ease-out);
   }
   .aps .jumpbar-chip:hover {
-    background: var(--track);
+    background: var(--line);
   }
   .aps .jumpbar-chip[aria-current] {
     background: var(--ink);
@@ -1485,9 +1499,17 @@
     border-radius: 1px;
     background: var(--signal);
   }
+  /* Narrow phones keep the short label ("Step") so the digits read as step
+     links; the gaps tighten so the nine chips still fit one line at 360px. */
   @media (max-width: 419px) {
-    .aps .jumpbar-label {
-      display: none;
+    .aps .jumpbar {
+      gap: 8px;
+    }
+    .aps .jumpbar-list {
+      gap: 2px;
+    }
+    .aps .jumpbar-chip {
+      border-radius: 8px;
     }
   }
 

@@ -494,9 +494,8 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) 24px;
   grid-template-areas:
-    "kind format icon"
-    "main main main"
-    "meta meta meta";
+    "meta format icon"
+    "main main main";
   align-items: baseline;
   gap: 8px 10px;
   padding: 22px 0 24px;
@@ -519,12 +518,6 @@
   position: relative;
   z-index: 1;
 }
-.rowKind {
-  grid-area: kind;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--ink);
-}
 .rowFormat {
   grid-area: format;
   font-size: 0.875rem;
@@ -537,6 +530,9 @@
   content: "·";
   margin-right: 10px;
   color: var(--fg-2);
+}
+.rowMeta:empty + .rowFormat::before {
+  content: none;
 }
 .rowMain {
   grid-area: main;
@@ -585,8 +581,9 @@
 }
 .rowMeta {
   grid-area: meta;
-  font-size: 0.9375rem;
-  color: var(--fg-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
 }
 .rowMeta:empty {
   display: none;
@@ -610,15 +607,19 @@
 
 @media (min-width: 900px) {
   .row {
-    grid-template-columns: 8.5rem minmax(0, 1fr) minmax(9rem, 13rem) 4.5rem 24px;
-    grid-template-areas: "kind main meta format icon";
+    grid-template-columns: minmax(0, 1fr) minmax(9rem, 13rem) 4.5rem 24px;
+    grid-template-areas: "main meta format icon";
     gap: 6px var(--col-gap);
     padding: 26px 0 28px;
   }
-  .rowKind,
   .rowMeta,
   .rowFormat {
     padding-top: 4px;
+  }
+  .rowMeta {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--fg-2);
   }
   .rowFormat::before {
     content: none;

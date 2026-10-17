@@ -10,6 +10,7 @@ import { livingTree } from "@/content/labs";
 import { resourcePages, resourceSite } from "@/content/resources";
 import { sitePages } from "@/content/sites";
 import { literature } from "@/content/tmd";
+import SharedFilesLink from "../dentists/SharedFilesLink";
 import { fromResource } from "./entries";
 import ResourceCard, { ResourceGrid } from "./ResourceCard";
 import s from "./library.module.css";
@@ -55,6 +56,7 @@ function Resources({ v }: { v: SiteId }) {
           {/* His page heading; his drdroter.com Medical Literature page has no intro, so none is written for it. */}
           <SectionHead id="literature-title" layout="center" className={s.head} title="Medical Literature" />
           <LibraryRows entries={rows} className={s.literature} />
+          <SharedFilesLink v={v} />
         </Section>
       )}
 
@@ -107,6 +109,7 @@ function ForDentists({ v }: { v: SiteId }) {
             />
           )}
         </ResourceGrid>
+        <SharedFilesLink v={v} />
       </Section>
 
       <Section space="md" labelledBy="order-title">

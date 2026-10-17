@@ -814,8 +814,15 @@ export type Resource = {
   href?: string;
   meta?: string;
   audience: "dentists" | "patients" | "both";
+  /** His own writing: the About pages show only these and link to the rest. */
+  own?: boolean;
 };
 
+/**
+ * His drdroter.com Medical Literature. Each entry carries one label (`meta`,
+ * before " · PDF"): Published article, International Dental Journal, Article.
+ * The library rows show that label alone (`kind` is not shown).
+ */
 export const literature: Resource[] = [
   {
     title: "An Orthopaedic Approach to the Diagnosis and Treatment of Disorders of the Temporomandibular Joint",
@@ -824,6 +831,7 @@ export const literature: Resource[] = [
     href: "/aps/literature/DroterOrthopedDx.pdf",
     meta: "Published article · PDF",
     audience: "dentists",
+    own: true,
   },
   {
     title: "The worn dentition – pathognomonic patterns of abrasion and erosion",

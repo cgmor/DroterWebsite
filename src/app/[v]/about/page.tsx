@@ -64,7 +64,8 @@ const beliefs = understanding.pain.beliefs;
 export default async function AboutPage({ params }: { params: Promise<{ v: string }> }) {
   const { v } = await params;
   if (!isSite(v) || !siteHas(v, "about")) notFound();
-  const items = literature.filter((r) => onSite(v, r.href));
+  /* His own article; the rest of the literature is on the site's library page. */
+  const items = literature.filter((r) => r.own && onSite(v, r.href));
 
   if (v === "droter") {
     /* white · mist · white (· white, ruled) · white (+ mist panel) · footer
@@ -236,7 +237,7 @@ function Beliefs() {
   );
 }
 
-/** His drdroter.com "Medical Literature" (published articles; no lecture slides), then the way to the site's library page. */
+/** His own article from his drdroter.com "Medical Literature", then the way to the rest on the site's library page. */
 function Literature({ v, items, ruled }: { v: SiteId; items: Resource[]; ruled?: boolean }) {
   const libraryLabel = sitePages[v].find((p) => p.slug === "library")?.label ?? "Library";
   return (

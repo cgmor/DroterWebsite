@@ -16,6 +16,7 @@ import PracticePanel from "@/components/site/PracticePanel";
 import Reveal from "@/components/site/Reveal";
 import { Section, SectionHead } from "@/components/site/Section";
 import { doctor, education } from "@/content/aps";
+import { siteConditions } from "@/content/sites";
 import { hotColdHot, tmjBrochure as brochure } from "@/content/resources";
 import { conditionGuides, understanding as u } from "@/content/tmd";
 import s from "./page.module.css";
@@ -84,6 +85,8 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
   const p = u.pain;
   const a = u.approaches;
   const guided = new Set(conditionGuides.map((g) => g.category));
+  /** The guide whose summary is his headache figure (drdroter.com/uncomfortable-bite-occlusion). */
+  const uncomfortableBite = conditionGuides.find((g) => g.summary === u.signs.headacheStat && siteConditions[v].includes(g.slug));
   const [slideCauses, slideTherapies, slideMatch] = a.figures;
 
   return (
@@ -162,8 +165,17 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
               <p className={s.signsNote}>
                 <span className={s.signsNoteLabel}>Note:</span> {brochure.note}
               </p>
+              {/* His headache figure closes the panel and leads to the guide it opens. */}
+              {uncomfortableBite && (
+                <p className={s.signsStat}>
+                  <span>{u.signs.headacheStat}</span>
+                  <Link href={href(v, routes.condition(uncomfortableBite.slug))} className={s.signsStatLink}>
+                    {uncomfortableBite.title}
+                    <ArrowRight size={16} className={s.catArrow} />
+                  </Link>
+                </p>
+              )}
             </div>
-            <p className={s.keyLine}>{u.signs.headacheStat}</p>
           </section>
 
           {/* TMD is not one disease */}
@@ -364,7 +376,6 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
           layout="center"
           className={s.head}
           title={education.conditionsHeading}
-          lead={education.patientsLine}
           actions={
             <>
               <ButtonLink href={href(v, routes.conditions)}>Find your condition</ButtonLink>

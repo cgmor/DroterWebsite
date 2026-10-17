@@ -1,4 +1,4 @@
 {
-  "prompt": "Origin: frame extracted with ffmpeg from ArrowPath Sleep's own Airway Bite tutorial animation (final_animation_only.mp4, Blender project, Oct 2026); no generative model.",
-  "createdAt": "2026-10-14T15:25:05.844Z"
+  "prompt": "Origin: frame extracted with ffmpeg from ArrowPath Sleep's own Airway Bite tutorial animation (final_animation_only_nohole.mp4, Blender project, Oct 2026), whose demo section was re-rendered 2026-10-17 in Blender 4.5.9 (EEVEE, 48 samples, 1920 x 1080) with the Airway Bite CAD's 3.88 mm through-bore removed and its front block narrowed and lowered to match photos of the physical device (Airway Anterior Stop 4.0mm 3.88brush v4 no-hole.stl, the correct device); no generative model.",
+  "createdAt": "2026-10-17T09:55:16.681Z"
 }

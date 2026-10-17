@@ -3,7 +3,7 @@ import { understanding } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
 import Disclosure from "@/components/site/Disclosure";
 import Figure from "@/components/site/Figure";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import { Prose, Section } from "@/components/site/Section";
 import s from "./home.module.css";
 
@@ -66,7 +66,7 @@ export function Thesis({ className }: { className?: string }) {
  * centred unit; under them the counts sit beside his own "190 diagnoses,
  * 7 categories" slide, centred on each other.
  */
-export function DiagnosisTurn({ v }: { v: VersionId }) {
+export function DiagnosisTurn({ v }: { v: SiteId }) {
   return (
     <Section labelledBy="turn-title" id="tmd">
       <header className={`shead shead-center ${s.turnHead}`}>
@@ -95,7 +95,7 @@ export function DiagnosisTurn({ v }: { v: VersionId }) {
  * categories beside the 40-diseases slide, with the full version one expand
  * away under the list (so nothing is left alone across the page).
  */
-export function NotOneDisease({ v }: { v: VersionId }) {
+export function NotOneDisease({ v }: { v: SiteId }) {
   return (
     <Section labelledBy="nod-title">
       <div className={s.nodTop}>

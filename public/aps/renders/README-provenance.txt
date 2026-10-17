@@ -20,5 +20,13 @@ from the CAD GLBs in this repository:
 Used as the poster and fallback image for the Temp Anterior Stop 3D stage
 on /appliances (src/components/product/AnteriorStopModel.tsx).
 
-The device-airway-bite-*.png renders predate this note; their PNG metadata
-records a Blender Cycles render (192 samples) dated 2026-10-13.
+device-airway-bite-three-quarter.png
+device-airway-bite-side.png
+device-airway-bite-top.png
+
+Re-rendered 2026-10-15 in Blender 5.1.1 (headless, Cycles, 192 samples,
+denoised, 2000 x 2000 px transparent PNG) with the same camera, light and
+"Clear resin" material as the 2026-10-13 originals, from the Airway Bite CAD
+with its 3.88 mm through-bore removed ("no hole", the correct device):
+  Airway Anterior Stop 4.0mm 3.88brush v4 no-hole.stl
+The same no-hole mesh is in /aps/3d/airway-bite.glb.

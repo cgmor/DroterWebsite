@@ -8,11 +8,13 @@ import m from "./stepmap.module.css";
  * From 1024px it is a full map with the step names; below that a compact
  * numbered bar that sticks under the site header until the protocol begins
  * (place it as a direct child of a wrapper that ends there).
+ * `contained`: inside a section's own column, on that section's ground, never
+ * sticky (the steps below carry their own phone jump bar).
  */
-export default function StepJump({ className, id = "jump" }: { className?: string; id?: string }) {
+export default function StepJump({ className, id = "jump", contained = false }: { className?: string; id?: string; contained?: boolean }) {
   return (
-    <nav className={[m.map, className].filter(Boolean).join(" ")} aria-label="Protocol steps" id={id}>
-      <div className={`wrap ${m.inner}`}>
+    <nav className={[m.map, contained && m.contained, className].filter(Boolean).join(" ")} aria-label="Protocol steps" id={id}>
+      <div className={contained ? m.inner : `wrap ${m.inner}`}>
         <ol className={m.phases}>
           {airwayBite.phases.map((ph) => (
             <li key={ph.id} className={m.phase} style={{ flexGrow: ph.steps.length, "--n": ph.steps.length } as CSSProperties}>

@@ -4,7 +4,7 @@ import { airwayBite, distributor, doctor } from "@/content/aps";
 import { understanding } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
 import { ArrowRight } from "@/components/site/icons";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import { SpecStrip } from "@/components/site/SpecRows";
 import { airwaySpecStrip } from "@/components/site/specs";
 import { facultyLine } from "./AboutDroter";
@@ -54,7 +54,7 @@ export function DeviceHero() {
  * wide) beside his thesis as the h1, his name and credit line, and in the
  * same view, the Airway Bite as his chairside technique.
  */
-export function PortraitHero({ v }: { v: VersionId }) {
+export function PortraitHero({ v }: { v: SiteId }) {
   return (
     <section className={`tone-porcelain ${s.ph}`} id="top" aria-labelledby="top-title">
       <div className="wrap">
@@ -131,7 +131,7 @@ export function PortraitHero({ v }: { v: VersionId }) {
  * Many Causes of Facial Pain" (drdroter.com/facial-pain), with the two ways
  * in: patients to the conditions, dentists to the Airway Bite.
  */
-export function JointHero({ v }: { v: VersionId }) {
+export function JointHero({ v }: { v: SiteId }) {
   return (
     <section className={`tone-porcelain ${s.jh}`} id="top" aria-labelledby="top-title">
       <div className="wrap">

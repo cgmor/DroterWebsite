@@ -1,99 +1,114 @@
+import Link from "next/link";
 import { library, type LibraryItem } from "@/content/aps";
-import { understanding } from "@/content/tmd";
+import { literature } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
-import { ArrowUpRight } from "@/components/site/icons";
-import ImageCard from "@/components/site/ImageCard";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { ArrowRight, ArrowUpRight } from "@/components/site/icons";
+import { href, routes, type SiteId } from "@/components/site/links";
 import Reveal from "@/components/site/Reveal";
 import { Section, SectionHead, type Tone } from "@/components/site/Section";
 import s from "./home.module.css";
 
+type Row = { key: string; title: string; line: string; meta: string; href: string; external: boolean };
+
 /**
- * His lectures and the literature on his drdroter.com pages (Pankey TMD 2026,
- * Medical Literature), each described in his own link text or citation. The
- * Airway Bite's own instructions and video live with the device.
+ * What each site lists, with no lecture slides and no patient downloads:
+ *  - drdroter.com: the medical literature from his drdroter.com pages, each
+ *    described in his own link text or citation;
+ *  - APSleep.com: the Airway Bite's documents for dentists (the printable
+ *    instructions, and the tutorial on the Airway Bite page). Nothing hosted
+ *    on drdroter.com, so the two sites do not link to each other.
  */
-type LinkedItem = LibraryItem & { href: string };
-const ITEMS: LinkedItem[] = (library.dentists as LibraryItem[]).filter(
-  (r): r is LinkedItem => Boolean(r.href) && (r.kind === "Lecture" || r.kind === "Article" || r.kind === "Reference"),
-);
-/** "Different diagnoses have different therapies", a slide from the Pankey course. */
-const lectureSlide = understanding.approaches.figures[2];
+function rowsFor(v: SiteId): Row[] {
+  if (v === "droter") {
+    return literature
+      .filter((r): r is typeof r & { href: string } => Boolean(r.href))
+      .map((r) => ({
+        key: r.title,
+        title: r.title,
+        line: r.description,
+        meta: r.meta ?? "",
+        href: r.href,
+        external: true,
+      }));
+  }
+  return (library.dentists as LibraryItem[])
+    .filter((r): r is LibraryItem & { href: string } => Boolean(r.href))
+    .map((r) => {
+      const video = r.kind === "Video";
+      return {
+        key: r.title,
+        title: r.title,
+        line: r.description,
+        meta: [r.meta, r.format].filter(Boolean).join(" · "),
+        href: video ? href(v, `${routes.airwayBite}#tutorial`) : r.href,
+        external: !video,
+      };
+    });
+}
 
-const metaLine = (r: LibraryItem) => [r.meta, r.format].filter(Boolean).join(" · ");
-/** His link text sometimes repeats the title ("Gill Ortho Ceph Analysis Extract"); print it once. */
-const squash = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, "");
-const ownLine = (r: LibraryItem) => (r.description && squash(r.description) !== squash(r.title) ? r.description : "");
-
-function Rows({ items }: { items: LinkedItem[] }) {
+function Rows({ items }: { items: Row[] }) {
   return (
     <ul className={s.libRows}>
-      {items.map((r) => (
-        <li key={r.title} className={s.libRow}>
-          <span>
-            <a href={r.href} target="_blank" rel="noopener" className={`${s.rowLink} ${s.libTitle}`}>
-              {r.title}
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
-            {ownLine(r) && <span className={s.libDesc}>{ownLine(r)}</span>}
-          </span>
-          <span className={s.libMeta}>{metaLine(r)}</span>
-          <ArrowUpRight size={20} className={s.rowArrow} />
-        </li>
-      ))}
+      {items.map((r) => {
+        const Arrow = r.external ? ArrowUpRight : ArrowRight;
+        return (
+          <li key={r.key} className={s.libRow}>
+            <span>
+              {r.external ? (
+                <a href={r.href} target="_blank" rel="noopener" className={`${s.rowLink} ${s.libTitle}`}>
+                  {r.title}
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ) : (
+                <Link href={r.href} className={`${s.rowLink} ${s.libTitle}`}>
+                  {r.title}
+                </Link>
+              )}
+              {r.line && <span className={s.libDesc}>{r.line}</span>}
+            </span>
+            <span className={s.libMeta}>{r.meta}</span>
+            <Arrow size={20} className={s.rowArrow} />
+          </li>
+        );
+      })}
     </ul>
   );
 }
 
 /**
- * His lectures and the literature he publishes and recommends, under his own
- * page heading "Medical Literature". `featured` leads with the Pankey course
- * as a slide card (V2); otherwise a hairline index.
+ * A short index for the home compositions: "Medical Literature" (his own page
+ * heading) on drdroter.com, "For dentists" on APSleep.com, with a way to the
+ * full page. Renders nothing when there is nothing to list. `featured` is kept
+ * for older compositions and no longer changes the layout (it used to lead with
+ * a lecture slide).
  */
 export default function Library({
   v,
-  title = "Medical Literature",
+  title,
   tone = "white",
-  featured = false,
 }: {
-  v: VersionId;
+  v: SiteId;
   title?: string;
   tone?: Tone;
   featured?: boolean;
 }) {
-  const [lead, ...rest] = ITEMS;
+  const items = rowsFor(v);
+  if (items.length === 0) return null;
+  const droter = v === "droter";
   return (
     <Section tone={tone} labelledBy="lib-title" id="library">
       <SectionHead
         id="lib-title"
-        title={title}
+        title={title ?? (droter ? "Medical Literature" : "For dentists")}
         layout="center"
         actions={
-          <ButtonLink href={href(v, routes.library)} variant="quiet">
-            The full library
+          <ButtonLink href={href(v, droter ? `${routes.library}#literature` : routes.library)} variant="quiet">
+            {droter ? "All resources" : "More for dentists"}
           </ButtonLink>
         }
       />
       <Reveal>
-        {featured ? (
-          <div className={s.libFeatured}>
-            <ImageCard
-              href={lead.href}
-              image={{ src: lectureSlide.src, alt: lectureSlide.alt }}
-              title={lead.title}
-              line={ownLine(lead) || undefined}
-              meta={`${lead.kind} · ${lead.format}`}
-              ratio="16/10"
-              fit="contain"
-              field="white"
-              as="h3"
-              sizes="(min-width: 1000px) 540px, 100vw"
-            />
-            <Rows items={rest} />
-          </div>
-        ) : (
-          <Rows items={ITEMS} />
-        )}
+        <Rows items={items} />
       </Reveal>
     </Section>
   );

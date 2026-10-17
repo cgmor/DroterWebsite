@@ -22,6 +22,17 @@ function chapterForStep(n: number) {
   return CHAPTERS.find((c) => (c.ifuSteps as readonly number[]).includes(n));
 }
 
+/**
+ * One tutorial voice at a time: every tutorial <video> carries `data-tutorial`,
+ * and the one that starts playing pauses the rest (the page player and the
+ * chairside step clips). Muted background loops are untouched.
+ */
+export function pauseOtherTutorials(self: HTMLVideoElement) {
+  document.querySelectorAll<HTMLVideoElement>("video[data-tutorial]").forEach((v) => {
+    if (v !== self && !v.paused) v.pause();
+  });
+}
+
 /* ── Video state ─────────────────────────────────────────────────────── */
 
 function usePlayer() {
@@ -37,7 +48,10 @@ function usePlayer() {
     const onMeta = () => {
       if (Number.isFinite(v.duration) && v.duration > 0) setDuration(v.duration);
     };
-    const onPlay = () => setEngaged(true);
+    const onPlay = () => {
+      setEngaged(true);
+      pauseOtherTutorials(v);
+    };
     const events: [string, () => void][] = [
       ["timeupdate", onTime],
       ["seeked", onTime],
@@ -80,6 +94,7 @@ function Video({ videoRef, preload }: { videoRef: React.RefObject<HTMLVideoEleme
         poster={v.poster}
         width={1920}
         height={1080}
+        data-tutorial=""
         aria-label={`${airwayBite.name} tutorial, ${v.durationLabel}`}
       >
         <source src={v.src720} type="video/mp4" media="(max-width: 900px)" />

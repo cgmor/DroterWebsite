@@ -1,0 +1,203 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   drdroter.com home (HomePractice): page-scoped composition on aps.css.
+   Band rhythm: porcelain (him) · white (patients | dentists) · mist (the
+   nine) · white (TMD in brief) · white + mist panel (new patients) · footer.
+   One authored motion moment: the portrait settles into the porcelain field.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ══ Opening: something about him ═════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  overflow: clip;
+}
+.heroGrid {
+  display: grid;
+  gap: 28px var(--col-gap);
+  padding-block: clamp(28px, 6vw, 40px) clamp(48px, 7vw, 64px);
+}
+/* A modest framed photograph: never wider than 380px, never larger than life. */
+.portrait {
+  position: relative;
+  width: min(56%, 220px);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 1px 2px rgb(11 21 38 / 0.04),
+    0 22px 44px -32px rgb(11 21 38 / 0.4);
+}
+.portraitImg {
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.copy {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+}
+/* His thesis is a full sentence: held below the display cap, on a measure
+   that reads as a statement rather than a poster. */
+.title {
+  max-width: 20ch;
+  font-size: clamp(2.125rem, 1.7rem + 1.6vw, 3.25rem);
+  line-height: 1.04;
+  text-wrap: balance;
+}
+.lead {
+  max-width: 40ch;
+  margin-top: clamp(20px, 2.4vw, 28px);
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  letter-spacing: -0.008em;
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+/* The byline signs both sentences above it. */
+.byline {
+  margin-top: clamp(28px, 3.2vw, 40px);
+  padding-top: 20px;
+  border-top: 1px solid var(--line-strong);
+  min-width: min(100%, 22rem);
+}
+.name {
+  font-size: 1.375rem;
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+.cred {
+  margin-top: 4px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+.heroActions {
+  margin-top: clamp(28px, 3.2vw, 36px);
+  column-gap: 20px;
+}
+@media (min-width: 1000px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+    padding-block: clamp(56px, 5vw, 80px);
+  }
+  /* Portrait top aligns with the headline. */
+  .portrait {
+    order: 1;
+    justify-self: end;
+    width: min(100%, 380px);
+  }
+  .copy {
+    padding-top: 4px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .portraitImg {
+    animation: settle 2.2s var(--ease-out) both;
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(1.045);
+    transform-origin: 50% 30%;
+    filter: blur(2px);
+  }
+}
+
+/* ══ The sort: patients | dentists ══════════════════════════════════════ */
+
+/* Two plain ways in, ruled like the spec sheet; the links align along the foot. */
+.doors {
+  display: grid;
+  gap: 40px var(--col-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.door {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 24px;
+  border-top: 1px solid var(--fg);
+}
+.doorTitle {
+  margin-bottom: 12px;
+}
+.doorLine {
+  max-width: 42ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+.doorActions {
+  margin: auto 0 0;
+  padding: 20px 0 0;
+  list-style: none;
+  gap: 0 28px; /* the links are 44px targets already; stacked, they sit as one list */
+}
+@media (min-width: 760px) {
+  .doors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(40px, 5vw, 80px);
+  }
+}
+
+/* ══ The nine ═══════════════════════════════════════════════════════════ */
+
+/* The cards are the shared plain condition cards (home.module.css): a 3 × 3
+   grid from 1000px. At two columns the ninth card takes the whole last row,
+   so nothing is left ragged. The index link sits under the grid. */
+@media (min-width: 640px) and (max-width: 999.98px) {
+  .nine > li:last-child {
+    grid-column: 1 / -1;
+  }
+}
+.after {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+/* ══ TMD in brief ═══════════════════════════════════════════════════════ */
+
+/* His figured sentences beside the "190 Diagnoses, 7 Categories" image from
+   his facial-pain page (no caption: the slide shows its own title), centred
+   on each other under the centred opening. */
+.tmdBody {
+  display: grid;
+  gap: 40px var(--col-gap);
+}
+.figured {
+  display: grid;
+  gap: 20px;
+  max-width: 44ch;
+  font-size: clamp(1.1875rem, 1.05rem + 0.45vw, 1.375rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+/* Each figure is emphasised where it stands in his sentence: weight and ink only. */
+.figure {
+  font-weight: 500;
+  color: var(--fg);
+}
+.tmdLink {
+  margin-top: clamp(28px, 3.2vw, 40px);
+}
+@media (min-width: 1000px) {
+  .tmdBody {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+  /* The plate stops at half its source width; it closes on the column's right edge. */
+  .tmdBody > figure {
+    justify-self: end;
+    width: 100%;
+  }
+}

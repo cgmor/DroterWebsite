@@ -1,29 +1,24 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { airwayBite, doctor, education } from "@/content/aps";
+import { brand, doctor } from "@/content/aps";
 import { understanding } from "@/content/tmd";
-import { HomeV1, HomeV2, HomeV3 } from "@/components/home/Homes";
-import { isVersion, type VersionId } from "@/components/site/links";
+import { HomeAps, HomePractice } from "@/components/home/Homes";
+import { isSite, type SiteId } from "@/components/site/links";
 
 /**
- * The three home pages under review. One world, three compositions:
- * V1 leads with the Airway Bite, V2 with Dr. Droter, V3 with TMD education.
- * The compositions live in src/components/home.
+ * The two home pages: APSleep.com (sleep and airway) and drdroter.com (TMD
+ * and facial pain). The compositions live in src/components/home.
  */
 
-/** Descriptions are his own sentences (IFU slide 1 and his email; drdroter.com). */
-const META: Record<VersionId, Metadata> = {
-  v1: {
-    title: { absolute: `ArrowPath Sleep ${airwayBite.shortName} | APSleep.com` },
-    description: `${airwayBite.purpose} ${airwayBite.summary}`,
+/** Descriptions are his own sentences (apsleep.com 2021; drdroter.com). */
+const META: Record<SiteId, Metadata> = {
+  apsleep: {
+    title: { absolute: `ArrowPath Sleep | APSleep.com` },
+    description: brand.tagline,
   },
-  v2: {
-    title: { absolute: `${doctor.name}, ArrowPath Sleep | APSleep.com` },
-    description: `${education.keyMessages[0]} ${doctor.pullQuote}`,
-  },
-  v3: {
-    title: { absolute: `TMD, facial pain and the ${airwayBite.shortName} | ArrowPath Sleep (APSleep.com)` },
-    description: understanding.intro,
+  droter: {
+    title: { absolute: `${doctor.name} | TMD and facial pain` },
+    description: `${doctor.pullQuote} ${understanding.intro}`,
   },
 };
 
@@ -31,14 +26,12 @@ type Props = { params: Promise<{ v: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { v } = await params;
-  return isVersion(v) ? META[v] : {};
+  return isSite(v) ? META[v] : {};
 }
 
 export default async function Home({ params }: Props) {
   const { v } = await params;
-  if (!isVersion(v)) notFound();
+  if (!isSite(v)) notFound();
 
-  if (v === "v2") return <HomeV2 v={v} />;
-  if (v === "v3") return <HomeV3 v={v} />;
-  return <HomeV1 v={v} />;
+  return v === "droter" ? <HomePractice v={v} /> : <HomeAps v={v} />;
 }

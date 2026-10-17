@@ -1,24 +1,16 @@
-/* /[v]/appliances: the APS line by clinical indication (Persuade-lite). */
+/* /[v]/appliances: the APS line by indication. Every indication opens the same
+   way (a centred heading and his line), then its picture beside its
+   appliances as plain cards, then the way back to the sleep problem. */
 
-/* ── Intro + matrix ─────────────────────────────────────────────────── */
+/* ── Opening: his question, the four indications, his chart ─────────── */
 
 .intro {
-  padding-top: clamp(40px, 5vw, 80px);
-}
-.matrixHead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 14px 32px;
-  margin-bottom: 20px;
-}
-.subtitle {
-  color: var(--fg-2);
+  padding-top: clamp(48px, 5.5vw, 88px);
 }
 .index ul {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -35,120 +27,66 @@
   font-weight: 500;
   color: var(--fg);
   text-decoration: none;
-  transition: border-color var(--dur-1) var(--ease-out);
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
 }
 .indexLink:hover {
   border-color: var(--fg);
 }
 
-/* ── Shared pieces ──────────────────────────────────────────────────── */
+/* The chart's indication names jump to their sections. */
+.intro :global(.ag-ind-link) {
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 0.22em;
+  transition:
+    color var(--dur-1) var(--ease-out),
+    text-decoration-color var(--dur-1) var(--ease-out);
+}
+.intro :global(.ag-ind-link):hover {
+  color: var(--accent-text);
+  text-decoration-color: currentColor;
+}
 
-.pattern {
-  margin-top: 20px;
+/* ── An indication ──────────────────────────────────────────────────── */
+
+/* Two indications on one field (the night band): the first one's closing
+   hairline parts them; the band's own rhythm sits below it. */
+.ind + .ind {
+  margin-top: var(--space-lg);
 }
-.items {
-  margin: 32px 0 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--fg);
-}
-.items li {
+
+.indGrid {
   display: grid;
-  gap: 2px;
-  padding: 16px 0 17px;
-  border-bottom: 1px solid var(--line-strong);
-}
-.itemName {
-  font-size: 1.1875rem;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.012em;
-}
-.itemDetail {
-  color: var(--fg-2);
-}
-
-/* ── Clenching (porcelain, 3D) ──────────────────────────────────────── */
-
-.clenchGrid {
-  display: grid;
-  gap: 40px var(--col-gap);
+  gap: 32px var(--col-gap);
   align-items: center;
 }
-.guideLink {
-  margin-top: 28px;
-}
 @media (min-width: 1000px) {
-  .clenchGrid {
+  .indGrid {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   }
 }
 
-/* ── Grinding (typographic) ─────────────────────────────────────────── */
-
-.grindGrid {
-  display: grid;
-  gap: 40px var(--col-gap);
+/* The Temp Anterior Stop model keeps its own 4:3 framing (the viewer is not
+   resized, so the device is not shrunk); the stage only crops the band above
+   the device, which its silhouette never reaches at any turn (top 23% of the
+   frame, measured over a full rotation of both versions). The studio render
+   that holds the stage is cropped the same way. */
+.modelCrop :global(.ms-stage) {
+  aspect-ratio: 13 / 8;
+  overflow: clip;
 }
-.qa {
-  margin-top: 40px;
+.modelCrop :global(.ms-viewer) {
+  inset: auto 0 0;
+  height: auto;
+  aspect-ratio: 4 / 3;
 }
-.qaQ {
-  font-size: var(--fs-h3);
-  font-weight: 400;
-  line-height: 1.22;
-  letter-spacing: -0.018em;
-}
-.qaA {
-  margin-top: 12px;
-  max-width: 58ch;
-  color: var(--fg-2);
-}
-.grindLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px 32px;
-  margin-top: 32px;
-}
-@media (min-width: 1000px) {
-  .grindGrid {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: start;
-  }
-  .grindBody .items {
-    margin-top: 12px;
-  }
-}
-
-/* ── Airway indications (night) ─────────────────────────────────────── */
-
-/* The airway rule sits on the first line, however the heading wraps. */
-.airTitle {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-.airTitle :global(.airway-line) {
-  width: 32px;
-  margin-top: 0.52em;
-  background: var(--signal-night);
-}
-
-.gaGrid {
-  display: grid;
-  gap: 36px var(--col-gap);
-  align-items: start;
-}
-@media (min-width: 900px) {
-  .gaGrid {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  }
+.modelCrop :global(.ms-stage) img {
+  object-fit: cover;
+  object-position: 50% 100%;
 }
 
 .still {
-  margin: 0;
-}
-.stillFrame {
   overflow: hidden;
   border-radius: var(--r-card);
   background: var(--porcelain);
@@ -158,105 +96,245 @@
   width: 100%;
   height: auto;
 }
-.stillCap {
-  max-width: 62ch;
-  margin-top: 14px;
+
+/* ── Appliance cards ────────────────────────────────────────────────── */
+
+.cards {
+  display: grid;
+  gap: clamp(12px, 1.4vw, 16px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* No picture beside them: the appliances as an even pair on the same
+   measure as the cards elsewhere on the page; a lone appliance takes the
+   width of one card of that pair, centred under the heading. */
+@media (min-width: 720px) {
+  .cardsPair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 980px;
+    margin-inline: auto;
+  }
+  .cardsSolo {
+    max-width: 482px;
+    margin-inline: auto;
+  }
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  padding: 14px 22px 14px 14px;
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.card:not(:has(.thumb)) {
+  grid-template-columns: minmax(0, 1fr);
+  padding: 22px;
+}
+:global(.tone-porcelain) .card {
+  background: var(--white);
+}
+:global(.tone-night) .card {
+  box-shadow: inset 0 0 0 1px var(--hair-night);
+}
+
+.thumb {
+  width: 160px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--r-inner);
+  background: var(--porcelain);
+}
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.thumb[data-fit="contain"] {
+  background: var(--white);
+}
+.thumb[data-fit="contain"] img {
+  object-fit: contain;
+}
+
+.cardBody {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.cardTitle {
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+.cardLine {
   font-size: 0.9375rem;
   line-height: 1.5;
   color: var(--fg-2);
 }
-.stillCapTitle {
-  font-weight: 500;
-  color: var(--fg);
-}
-
-.airway {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--line);
-}
-.relation {
-  margin-top: var(--space-md);
-}
-.relTitle {
-  max-width: 34ch;
-  margin-bottom: clamp(28px, 3.4vw, 48px);
-  font-size: var(--fs-passage);
-  font-weight: 300;
-  line-height: 1.2;
-  letter-spacing: -0.024em;
-}
-.relGrid {
-  display: grid;
-  gap: 32px var(--col-gap);
-  align-items: start;
-}
-.relDevice {
-  margin: 0;
-}
-.relDeviceField {
-  position: relative;
-  aspect-ratio: 2 / 1;
-  overflow: hidden;
-  border-radius: var(--r-card);
-  background: var(--night-2);
-  box-shadow: inset 0 0 0 1px var(--hair-night);
-}
-/* Three-quarter render, cropped to the device (alpha bbox ≈ 15–80% × 30–86%). */
-.relRender {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(78%, 420px);
-  max-width: none;
-  height: auto;
-  transform: translate(-47.3%, -58%);
-}
-.relFig :global(.fig-cap) {
+.cardMore {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  line-height: 1.5;
   color: var(--fg-2);
 }
-.relFoot {
-  display: grid;
-  gap: 24px;
-  justify-items: start;
-  max-width: 62ch;
-  margin-top: 36px;
-  color: var(--fg-2);
-}
-@media (min-width: 900px) {
-  .relGrid {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: stretch;
-  }
-  .relDeviceField {
-    aspect-ratio: auto;
-    height: 100%;
-    min-height: 100%;
-  }
-  .relDevice {
-    display: grid;
-    grid-template-rows: 1fr auto;
-    height: 100%;
-  }
-}
-
-/* ── Close ──────────────────────────────────────────────────────────── */
-
-/* A centred closing line: the distributor, then the two ways on. */
-.closeGrid {
-  display: grid;
-  justify-items: center;
-  gap: 28px;
-  text-align: center;
-}
-.closeGrid h2 {
-  max-width: 22ch;
-  text-wrap: balance;
-}
-.closeActions {
+/* His chart's note for the indication: the last row of the card stack, a
+   hairline row on the cards' measure and radius. */
+.note {
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 14px;
+  margin-top: clamp(12px, 1.4vw, 16px);
+  padding: 14px 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-card);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+.noteLabel {
+  color: var(--fg-2);
+}
+
+/* The Airway Bite card: the whole card opens its page. */
+.cardLink {
+  text-decoration: none;
+  outline: none;
+  transition: color var(--dur-1) var(--ease-out);
+}
+.cardLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+.linkCard {
+  transition:
+    box-shadow var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+.linkCard:hover {
+  transform: translateY(-2px);
+}
+.linkCard:hover .cardLink {
+  color: var(--accent-text);
+}
+.linkCard:has(.cardLink:focus-visible) {
+  outline: 2px solid var(--signal-night);
+  outline-offset: 3px;
+}
+.cardFoot {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 0.875rem;
+  color: var(--fg-2);
+}
+.cardArrow {
+  flex: none;
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.linkCard:hover .cardArrow {
+  color: var(--accent-text);
+  transform: translateX(4px);
+}
+
+/* ── Back to the sleep problem ──────────────────────────────────────── */
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
   justify-content: center;
-  gap: 12px 28px;
+  gap: 14px 40px;
+  margin-top: clamp(36px, 4vw, 52px);
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.answerGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px 24px;
+}
+.answerLabel {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+.toOrder {
+  color: var(--fg-2);
+}
+
+/* ── Ordering ───────────────────────────────────────────────────────── */
+
+.sort {
+  display: grid;
+  gap: clamp(12px, 1.4vw, 16px);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 720px) {
+  .sort {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.sortCard {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 16px;
+  padding: clamp(22px, 2.4vw, 30px);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.sortLine {
+  color: var(--fg-2);
+}
+
+@media (max-width: 719px) {
+  .sort {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sortCard {
+    padding: 20px;
+  }
+  /* The lab's full name stays on one line down to 380px; narrower, it wraps
+     inside the pill rather than pushing the card off the screen. */
+  .sortCard :global(.btn) {
+    max-width: 100%;
+    padding: 10px 16px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .thumb {
+    width: 112px;
+  }
+  .card {
+    gap: 16px;
+    padding: 12px 16px 12px 12px;
+  }
+  .cardTitle {
+    font-size: 1.0625rem;
+  }
+  .answers {
+    gap: 14px 28px;
+  }
 }

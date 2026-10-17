@@ -178,6 +178,26 @@
   }
 }
 
+/* Contained: in a section's column, on its ground, desktop only (under
+   1024px the chairside steps carry their own sticky jump bar). */
+.contained {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .contained {
+    display: block;
+    position: static;
+    background: none;
+    box-shadow: none;
+  }
+  .contained .inner {
+    padding-block: 0;
+  }
+  .contained .node {
+    background: var(--bg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .stop,
   .node,

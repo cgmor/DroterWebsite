@@ -1,7 +1,7 @@
 import { airwayBite, brand, doctor } from "@/content/aps";
 import { understanding } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import { Section, SectionHead } from "@/components/site/Section";
 import s from "./home.module.css";
 
@@ -28,7 +28,7 @@ const forwardLine = airwayBite.airwayStory[1].body.replace(/^But if/, "If");
  * is for, then three plain ways in: dentists to the Airway Bite, patients to
  * his TMD teaching, everyone to the man. Every sentence is his.
  */
-export default function Orientation({ v }: { v: VersionId }) {
+export default function Orientation({ v }: { v: SiteId }) {
   const paths = [
     {
       title: "For dentists",

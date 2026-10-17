@@ -1,6 +1,6 @@
 # APSleep.com site system (`src/components/site`)
 
-One world for /v1, /v2, /v3. Routes live in `src/app/[v]/…`; the layout already renders ReviewBar, `Header`, `<main id="main">`, `Footer` and imports `aps.css`. Pages get `params: Promise<{ v: string }>`; narrow it with `isVersion(v)`. Child dynamic segments (e.g. `conditions/[slug]`) need their own `generateStaticParams` (the `[v]` layout sets `dynamicParams = false`). Copy comes from `@/content/aps` and `@/content/tmd` only. No eyebrow/kicker labels, no 01/02/03 (except real steps), mono only for measurements, timecodes and spec values.
+One world for /v1, /v2, /v3. Routes live in `src/app/[v]/…`; the layout already renders ReviewBar, `Header`, `<main id="main">`, `Footer` and imports `aps.css`. Pages get `params: Promise<{ v: string }>`; narrow it with `isSite(v)`. Child dynamic segments (e.g. `conditions/[slug]`) need their own `generateStaticParams` (the `[v]` layout sets `dynamicParams = false`). Copy comes from `@/content/aps` and `@/content/tmd` only. No eyebrow/kicker labels, no 01/02/03 (except real steps), mono only for measurements, timecodes and spec values.
 
 Import from `@/components/site` (barrel) or the file directly. Server components unless marked (client).
 
@@ -37,7 +37,7 @@ Import from `@/components/site` (barrel) or the file directly. Server components
 | `ModelStage`, `RangeScale` | — | The two halves of the detail section, if a page needs them alone. |
 
 ## Helpers (`links.ts`, `specs.ts`, `icons.tsx`, `motion.ts`)
-- `href(v, path)` → version-relative URL: `href("v2", routes.airwayBite + "#steps")` = `/v2/airway-bite#steps`. `routes`: `home, airwayBite, appliances, understanding, conditions, condition(slug), library, about`. Also `NAV`, `isVersion`, `tel(phone)`.
+- `href(v, path)` → version-relative URL: `href("v2", routes.airwayBite + "#steps")` = `/v2/airway-bite#steps`. `routes`: `home, airwayBite, appliances, understanding, conditions, condition(slug), library, about`. Also `NAV`, `isSite`, `tel(phone)`.
 - `airwayNumbers` (`anteriorStop` 4 mm, `range` 10–12 mm, `target` ≈ 50%), `airwaySpecStrip`, `kitItems`: every number traced to his IFU. Do not invent others (the model's bounding box is not his number, so it is not printed). `airwaySpecStrip` is millimetres only (4 mm · 10–12 mm); the target goes in running text, in body type, never in a mono row.
 - `Icons.*`: ArrowRight, ArrowUpRight, ArrowDown, Play, Download, Plus, Minus, Menu, Close, Rotate, Phone, Expand, Check, Document (20-grid, 1.5 stroke).
 - `useReducedMotion()` (client only).

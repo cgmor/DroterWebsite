@@ -8,17 +8,19 @@ import GuideBody from "@/components/education/GuideBody";
 import { ArrowLeft } from "@/components/education/icons";
 import Disclosure from "@/components/site/Disclosure";
 import Figure from "@/components/site/Figure";
-import { href, isVersion, routes } from "@/components/site/links";
-import PracticePanel from "@/components/site/PracticePanel";
+import { href, isSite, routes, type SiteId } from "@/components/site/links";
 import { Section, SectionHead } from "@/components/site/Section";
-import { doctor, education } from "@/content/aps";
-import { conditionGuides, pendingGuideNote } from "@/content/tmd";
+import { applianceGuide, doctor } from "@/content/aps";
+import { siteConditions } from "@/content/sites";
+import { appliancesFor, relatedGuides } from "@/content/solutions";
+import { conditionGuides, pendingGuideNote, type ConditionGuide, type Figure as FigureData } from "@/content/tmd";
+import NextSteps from "../NextSteps";
 import s from "./page.module.css";
 
 type Params = Promise<{ v: string; slug: string }>;
 
-export function generateStaticParams() {
-  return conditionGuides.map((g) => ({ slug: g.slug }));
+export function generateStaticParams({ params }: { params: { v: string } }) {
+  return isSite(params.v) ? siteConditions[params.v].map((slug) => ({ slug })) : [];
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
@@ -28,22 +30,38 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return { title: g.title, description: g.summary };
 }
 
-/** Three related guides (one even row): the same category first, then the next guides in list order. */
-function relatedTo(slug: string, category: string) {
-  const others = conditionGuides.filter((x) => x.slug !== slug);
-  const same = others.filter((x) => x.category === category);
-  const at = conditionGuides.findIndex((x) => x.slug === slug);
-  const after = [...conditionGuides.slice(at + 1), ...conditionGuides.slice(0, at)].filter((x) => x.category !== category);
-  return [...same, ...after].slice(0, 3);
+/** The guides a site carries, in its order. */
+const siteGuides = (v: SiteId) =>
+  siteConditions[v].map((slug) => conditionGuides.find((g) => g.slug === slug)).filter((g): g is ConditionGuide => Boolean(g));
+
+/**
+ * The guide as each site shows it. The products chart section ("Are you
+ * wearing the correct night guard?") moves into What to do next on APSleep.com
+ * and is left off drdroter.com, which carries no ArrowPath products; there the
+ * animation stills are also described without the product's name. His text is
+ * otherwise untouched.
+ */
+function guideFor(v: SiteId, g: ConditionGuide): ConditionGuide {
+  const plain = (f: FigureData): FigureData =>
+    v === "droter" ? { ...f, alt: f.alt.replace("Dr. Droter’s Airway Bite animation", "Dr. Droter’s animation") } : f;
+  return {
+    ...g,
+    hero: g.hero && plain(g.hero),
+    full: g.full
+      .filter((sec) => sec.heading !== applianceGuide.title)
+      .map((sec) => (sec.figure ? { ...sec, figure: plain(sec.figure) } : sec)),
+  };
 }
 
 export default async function ConditionPage({ params }: { params: Params }) {
   const { v, slug } = await params;
-  if (!isVersion(v)) notFound();
-  const g = conditionGuides.find((x) => x.slug === slug);
-  if (!g) notFound();
+  if (!isSite(v) || !siteConditions[v].includes(slug)) notFound();
+  const found = conditionGuides.find((x) => x.slug === slug);
+  if (!found) notFound();
 
-  const related = relatedTo(g.slug, g.category);
+  const g = guideFor(v, found);
+  const related = relatedGuides(siteGuides(v), g);
+  const sleep = v === "apsleep";
 
   const signs = (
     <section className={s.signs} aria-labelledby="signs-title">
@@ -66,7 +84,7 @@ export default async function ConditionPage({ params }: { params: Params }) {
       <div className={`wrap ${s.top}`}>
         <Link href={href(v, routes.conditions)} className={s.back}>
           <ArrowLeft size={16} className={s.backIcon} />
-          All conditions
+          {sleep ? "All sleep problems" : "All conditions"}
         </Link>
 
         <div className={s.mast} data-hero={g.hero ? true : undefined}>
@@ -78,13 +96,18 @@ export default async function ConditionPage({ params }: { params: Params }) {
             {g.hero && signs}
             <div className={s.byline}>
               <Image src={doctor.headshot} alt="" width={1991} height={2416} sizes="44px" quality={90} className={s.bylinePortrait} />
-              {/* Two items, not a sentence: his name, and the category as a link back to it. */}
+              {/* Two items, not a sentence: his name, and on drdroter.com the
+                  category as a link back to it (APSleep.com: his credit line). */}
               <div className={s.bylineText}>
                 <span className={s.bylineName}>{doctor.name}</span>
                 <span className={s.bylineMeta}>
-                  <Link href={href(v, `${routes.conditions}#${categoryId(g.category)}`)} className={s.bylineCat}>
-                    {g.category}
-                  </Link>
+                  {sleep ? (
+                    doctor.title
+                  ) : (
+                    <Link href={href(v, `${routes.conditions}#${categoryId(g.category)}`)} className={s.bylineCat}>
+                      {g.category}
+                    </Link>
+                  )}
                 </span>
               </div>
             </div>
@@ -99,13 +122,15 @@ export default async function ConditionPage({ params }: { params: Params }) {
         </div>
       </div>
 
-      {/* ── The complete version, one expand away ─────────────────────── */}
+      {/* ── The complete version, one expand away: a slim control row (the
+            title over one quiet line naming its sections, the expand button
+            at the right), the write-up opening under it. ───────────────── */}
       <section className={`wrap ${s.fullSec}`} aria-labelledby="full-title">
         <Disclosure
           className={s.dsc}
           summary={
             <div className={s.fullHead}>
-              <h2 className={`t-h2 ${s.fullTitle}`} id="full-title">
+              <h2 className={s.fullTitle} id="full-title">
                 The complete version
               </h2>
               <ol className={s.fullIndex} aria-label="Sections">
@@ -120,29 +145,36 @@ export default async function ConditionPage({ params }: { params: Params }) {
         </Disclosure>
       </section>
 
-      {/* ── Related guides: one even row of the same cards as /conditions ── */}
-      <Section tone="mist" space="md" labelledBy="related-title">
+      {/* ── What to do next: the appliances and the lab (APSleep.com), or
+            his step and the practice (drdroter.com). ──────────────────── */}
+      <NextSteps v={v} slug={g.slug} />
+
+      {/* ── Related guides from the same site: one even row of the same
+            cards as the index, on white so the mist footer stays apart. ── */}
+      <Section space="md" labelledBy="related-title">
         <SectionHead
           id="related-title"
           layout="center"
-          title="Related conditions"
+          title={sleep ? "Other sleep problems" : "Related conditions"}
           actions={
-            <Link href={href(v, routes.conditions)} className={s.allLink}>
-              All conditions
-            </Link>
+            sleep ? undefined : (
+              <Link href={href(v, routes.conditions)} className={s.allLink}>
+                All conditions
+              </Link>
+            )
           }
         />
-        <ConditionGrid>
+        <ConditionGrid className={s.related}>
           {related.map((r) => (
-            <ConditionCard key={r.slug} guide={r} href={href(v, routes.condition(r.slug))} as="h3" />
+            <ConditionCard
+              key={r.slug}
+              guide={r}
+              href={href(v, routes.condition(r.slug))}
+              as="h3"
+              meta={sleep ? appliancesFor(r.slug) : undefined}
+            />
           ))}
         </ConditionGrid>
-      </Section>
-
-      {/* ── Close ─────────────────────────────────────────────────────── */}
-      <Section space="md" labelledBy="practice-title">
-        <p className={s.patientsLine}>{education.patientsLine}</p>
-        <PracticePanel />
       </Section>
     </>
   );

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { doctor } from "@/content/aps";
 import { ButtonLink } from "@/components/site/Button";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import { Section, type Tone } from "@/components/site/Section";
 import s from "./home.module.css";
 
@@ -22,7 +22,7 @@ export default function AboutDroter({
   story = doctor.founderStory,
   tone = "mist",
 }: {
-  v: VersionId;
+  v: SiteId;
   story?: string;
   tone?: Tone;
 }) {

@@ -185,13 +185,21 @@
 
 /* ── The complete version ───────────────────────────────────────────────── */
 
+/* A slim control row on a mist card, inset on the white band at every width
+   (so it never meets the mist band below edge to edge): the title over one
+   quiet line naming its sections, the expand button at the right. Open, the
+   card turns white with a hairline and the write-up runs full width under
+   the row. */
 .fullSec {
-  padding-bottom: clamp(56px, 7vw, 112px);
+  padding-bottom: var(--space-md);
   scroll-margin-top: calc(var(--hd-h) + 16px);
 }
 .dsc {
-  margin-inline: calc(-1 * var(--gutter));
-  padding: 32px var(--gutter) 36px;
+  display: grid;
+  align-items: center;
+  column-gap: var(--col-gap);
+  padding: clamp(20px, 2.4vw, 30px) clamp(20px, 2.8vw, 36px);
+  border-radius: var(--r-card);
   background: var(--mist);
   transition:
     background-color var(--dur-3) var(--ease-out),
@@ -199,58 +207,74 @@
 }
 .dsc[data-open] {
   background: var(--white);
-  box-shadow: 0 -1px 0 var(--hair);
+  box-shadow: inset 0 0 0 1px var(--hair);
+}
+.dsc :global(.dsc-summary) {
+  min-width: 0;
+  margin-bottom: 0;
+}
+.dsc :global(.dsc-panel) {
+  grid-column: 1 / -1;
+}
+/* Stacked on phones: the button under the title, the same gap as a card. */
+@media (max-width: 699.98px) {
+  .dsc :global(.dsc-btn) {
+    margin-top: 16px;
+  }
 }
 @media (min-width: 700px) {
   .dsc {
-    margin-inline: 0;
-    padding: clamp(32px, 4.4vw, 64px);
-    border-radius: var(--r-card);
+    grid-template-columns: minmax(0, 1fr) auto;
   }
-  .dsc[data-open] {
-    box-shadow: inset 0 0 0 1px var(--hair);
+  .dsc :global(.dsc-btn) {
+    justify-self: end;
   }
 }
-.dsc :global(.dsc-summary) {
-  margin-bottom: clamp(28px, 3.5vw, 40px);
-}
-/* Title, the section index and the expand button read as one stacked unit. */
 .fullHead {
   display: grid;
-  gap: clamp(18px, 2.2vw, 26px);
+  gap: 6px;
 }
 .fullTitle {
-  font-size: var(--fs-h2);
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
+/* The sections, as one quiet line: "Pattern · Approach". */
 .fullIndex {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  column-gap: var(--col-gap);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 0;
   margin: 0;
   padding: 0;
   list-style: none;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--slate);
 }
-.fullIndex > li {
-  padding: 10px 0 11px;
-  border-top: 1px solid var(--hair-strong);
-  line-height: 1.4;
-  color: var(--ink-2);
+/* The dot ends an item, so a wrapped line never starts with one. */
+.fullIndex > li:not(:last-child)::after {
+  content: "·";
+  padding-inline: 0.55em;
+  color: var(--hair-strong);
 }
-/* On phones the section index is left to the expanded write-up itself. */
+/* On phones a long index (five sections or more) is left to the write-up. */
 @media (max-width: 699.98px) {
-  .fullIndex {
+  .fullIndex:has(> li:nth-child(5)) {
     display: none;
   }
 }
 
 /* The expand control, made the page's clearest next action. */
 .dsc :global(.dsc-btn) {
-  min-height: 56px;
-  padding: 0 26px 0 9px;
+  justify-self: start;
+  min-height: 52px;
+  padding: 0 24px 0 8px;
   border-color: var(--ink);
   background: var(--ink);
   color: var(--white);
-  font-size: 1.0625rem;
+  font-size: 1rem;
+  white-space: nowrap;
   transition:
     background-color var(--dur-1) var(--ease-out),
     border-color var(--dur-1) var(--ease-out);
@@ -260,8 +284,8 @@
   background: var(--ink-2);
 }
 .dsc :global(.dsc-icon) {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   background: var(--white);
   color: var(--ink);
 }
@@ -278,10 +302,10 @@
   color: var(--white);
 }
 .dsc :global(.dsc-content) {
-  padding-top: clamp(40px, 5vw, 64px);
+  padding-top: clamp(24px, 3vw, 40px);
 }
 
-/* ── Related + close ──────────────────────────────────────────────────── */
+/* ── Related ──────────────────────────────────────────────────── */
 
 .allLink {
   font-size: 0.9375rem;
@@ -299,20 +323,11 @@
   color: var(--signal-ink);
   text-decoration-color: currentColor;
 }
-/* His line, centred like the section openings, then the panel. */
-.patientsLine {
-  max-width: 40ch;
-  margin: 0 auto clamp(28px, 3.5vw, 44px);
-  font-size: var(--fs-passage);
-  font-weight: 350;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  text-align: center;
-  text-wrap: balance;
-}
-@media (max-width: 639.98px) {
-  .patientsLine {
-    margin-inline: 0;
-    text-align: left;
+
+/* One even row: three cards on three columns, two on two (tablet), and the
+   full list stacked on phones. */
+@media (min-width: 640px) and (max-width: 999.98px) {
+  .related > :nth-child(3) {
+    display: none;
   }
 }

@@ -4,7 +4,7 @@ import { airwayBite, applianceGuide, distributor, doctor } from "@/content/aps";
 import ApplianceGuide from "@/components/site/ApplianceGuide";
 import { ButtonLink } from "@/components/site/Button";
 import { ArrowRight, Play } from "@/components/site/icons";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import Loop from "@/components/site/Loop";
 import Reveal from "@/components/site/Reveal";
 import { Section, SectionHead, type Tone } from "@/components/site/Section";
@@ -22,7 +22,7 @@ const runtime = airwayBite.video.durationLabel.replace(/^(\d+) min (\d+) s$/, (_
  * tapping into position), under the kit's name from its label. A row's second
  * line renders only when the content has one.
  */
-export function Advantages({ v }: { v: VersionId }) {
+export function Advantages({ v }: { v: SiteId }) {
   return (
     <Section labelledBy="adv-title">
       <div className={s.advGrid}>
@@ -62,7 +62,7 @@ export function Advantages({ v }: { v: VersionId }) {
 }
 
 /** V1: the full tutorial with its chapter list (the hero's "Watch the tutorial" lands here). */
-export function TutorialSection({ v, tone = "mist" }: { v: VersionId; tone?: Tone }) {
+export function TutorialSection({ v, tone = "mist" }: { v: SiteId; tone?: Tone }) {
   return (
     <Section tone={tone} labelledBy="tut-title">
       <SectionHead
@@ -81,7 +81,7 @@ export function TutorialSection({ v, tone = "mist" }: { v: VersionId; tone?: Ton
 }
 
 /** V2: a teaser for the tutorial and the four phases of the protocol, each a link into /airway-bite. */
-export function TutorialTeaser({ v, tone = "white" }: { v: VersionId; tone?: Tone }) {
+export function TutorialTeaser({ v, tone = "white" }: { v: SiteId; tone?: Tone }) {
   return (
     <Section tone={tone} labelledBy="tt-title">
       <div className={s.tt}>
@@ -139,7 +139,7 @@ export function TutorialTeaser({ v, tone = "white" }: { v: VersionId; tone?: Ton
  * grounded by a shadow taken from its silhouette), his own framing of the
  * job, and the airway loop.
  */
-export function AirwayBridge({ v }: { v: VersionId }) {
+export function AirwayBridge({ v }: { v: SiteId }) {
   return (
     <Section tone="night" labelledBy="br-title">
       <div className={s.brHead}>
@@ -188,7 +188,7 @@ export function AirwayBridge({ v }: { v: VersionId }) {
  * taken from its silhouette), his framing of the job and his advantages
  * (IFU slide 1 and his email), then the order route.
  */
-export function AirwayBand({ v }: { v: VersionId }) {
+export function AirwayBand({ v }: { v: SiteId }) {
   return (
     <Section tone="night" space="md" labelledBy="band-title">
       <div className={s.band}>
@@ -219,7 +219,7 @@ export function AirwayBand({ v }: { v: VersionId }) {
 }
 
 /** The appliance guide, framed with its own heading and a link to /appliances. */
-export function AppliancesBlock({ v, tone = "white" }: { v: VersionId; tone?: Tone }) {
+export function AppliancesBlock({ v, tone = "white" }: { v: SiteId; tone?: Tone }) {
   return (
     <Section tone={tone} labelledBy="ag-title" id="appliances">
       <SectionHead

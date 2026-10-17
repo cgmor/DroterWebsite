@@ -1,0 +1,174 @@
+/* ChairsideSteps: one row per phase. Phones: heading, the still (it becomes
+   the clip), his slide caption, the steps. From 900px: the still and caption
+   on the left (7), the heading and steps on the right (5); the still stays in
+   view while its steps are read. The step rows themselves use the shared
+   .steps / .step styles. */
+
+/* A block, not a grid, so the phone jump bar can stick for the whole list. */
+.root {
+  min-width: 0;
+}
+.phases {
+  display: grid;
+  gap: clamp(56px, 6vw, 88px);
+}
+
+.phase {
+  display: grid;
+  gap: 20px;
+  align-items: start;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.title {
+  font-size: var(--fs-h3);
+  font-weight: 350;
+  line-height: 1.15;
+  letter-spacing: -0.026em;
+  color: var(--fg);
+  text-wrap: balance;
+}
+.range {
+  flex: none;
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+
+/* The frame keeps the clean stills' 1920 × 816 shape whether it holds the
+   still or the clip, so pressing play never moves the page. */
+.frame {
+  position: relative;
+  scroll-margin-top: calc(var(--hd-h) + 72px); /* clear the header and the jump bar (under 1024px) */
+  aspect-ratio: 1920 / 816;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+}
+.poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  cursor: pointer;
+}
+.still {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+.poster:hover .still {
+  transform: scale(1.02);
+}
+.posterPlay {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 14px 0 12px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  font-size: 0.8125rem;
+  color: var(--ink);
+  box-shadow: var(--shadow-1);
+  transition:
+    background-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+.poster:hover .posterPlay,
+.poster:focus-visible .posterPlay {
+  background: var(--signal);
+  color: #ffffff;
+}
+.poster:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+/* The tutorial frame is 16:9 with its caption bar along the bottom; cover +
+   top keeps the same crop as the clean still above it. */
+.clip {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  background: var(--porcelain);
+}
+
+.caption {
+  max-width: 62ch;
+  margin-top: 14px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--fg-2);
+}
+
+.stepsCol {
+  min-width: 0;
+}
+/* Class 2 / Class 3 under steps 1–2: label column wide enough for "Class 2". */
+.occ {
+  margin-top: 28px;
+}
+.occ :global(.spec-row) {
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+}
+
+@media (max-width: 899px) {
+  .phase {
+    scroll-margin-top: calc(var(--hd-h) + 72px);
+  }
+}
+
+@media (min-width: 900px) {
+  .phase {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: auto 1fr;
+    gap: 24px clamp(32px, 4vw, 64px);
+  }
+  .head {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .visual {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: calc(var(--hd-h) + 72px); /* under the jump bar, which shows until 1024px */
+  }
+  .stepsCol {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .frame {
+    scroll-margin-top: calc(var(--hd-h) + 24px);
+  }
+  .visual {
+    top: calc(var(--hd-h) + 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .still,
+  .posterPlay {
+    transition: none;
+  }
+  .poster:hover .still {
+    transform: none;
+  }
+}

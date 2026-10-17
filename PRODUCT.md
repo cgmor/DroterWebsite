@@ -1,5 +1,13 @@
 # Product
 
+> **Current direction (Dr. Droter, Oct 14 call and his follow-up): two separate websites in one design.**
+> - **drdroter.com** is his practice. It is pain/TMD-focused, for patients searching for pain, and leads with him, a patient/dentist sort and the nine common conditions. It carries no Airway Bite or ArrowPath products.
+> - **APSleep.com** covers airway and sleep, for patients and dentists. It leads with patients' sleep problems and their solutions ("I clench at night. Sleep bruxism."). The Airway Bite is a dentist product on its own page and never leads the home page.
+> - Dentists order appliances from Living Tree Dental Lab ("Patients would have to ask their dentist to use that lab."). The Airway Bite is ordered from Great Lakes Dental.
+> - No cross-linking between the two sites for now.
+> - No lecture slides anywhere. Patient handouts become web pages, not downloads.
+> - This supersedes the "three emphases" direction and the Airway Bite-first purpose below where they conflict. Code: `src/content/sites.ts`.
+
 <!-- impeccable:product-schema 1 -->
 
 ## Platform
@@ -43,7 +51,7 @@ Success means Dr. Droter, a demanding client who said "I do not have a professio
 - **No price, no cart, no checkout.** The order CTA is "Order through Great Lakes Dental."
 - **Never publish his questionnaires** (Facial Problem Questionnaire, Occlusion screen, Sleep Fatigue screen). He considers the questions his core IP.
 - **Practice information is light touch:** a short "See Dr. Droter in Bowie" panel with the office phone, not a full new-patient section.
-- **The full tutorial video and the interactive 3D model of the device are published as they are.** Cole made this decision on 2026-10-14 and will confirm patient consent and IP with Dr. Droter.
+- **The full tutorial video and the interactive 3D model of the device are published as they are.** Cole made this decision on 2026-10-14. Patient consent for the chairside footage is confirmed (Cole, 2026-10-15).
 - **Undecided:** the exact public email, the suite number (330B / B330), patent-pending wording, and the launch date.
 
 ## Brand Commitments

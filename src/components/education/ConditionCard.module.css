@@ -1,4 +1,5 @@
-/* Condition cards: plain white cards in an even grid on a mist band. */
+/* Condition cards: plain cards in an even grid. They take the band's surface:
+   white on a mist band, mist on a white one. */
 
 .grid {
   display: grid;
@@ -16,16 +17,27 @@
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+  /* A short set (APSleep.com's four): two even rows, on a narrower measure so
+     the cards keep the proportions of the three-column grid. */
+  .grid2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 960px;
+    margin-inline: auto;
+  }
 }
 
+/* Four rows (title, the patient's words, summary, foot) on the grid's shared
+   rows, so the titles, the summaries and the rules over the foot lines line
+   up across a row even when one foot line wraps. */
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
+  row-gap: 8px;
   padding: clamp(22px, 2.2vw, 28px);
   border-radius: var(--r-card);
-  background: var(--white);
+  background: var(--surface);
   transition:
     box-shadow var(--dur-2) var(--ease-out),
     transform var(--dur-2) var(--ease-out);
@@ -72,32 +84,34 @@
   line-height: 1.55;
   color: var(--ink-2);
 }
-.note {
-  margin-top: 4px;
-  font-size: 0.875rem;
-  line-height: 1.45;
-  color: var(--slate);
-}
 .foot {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-top: auto;
   padding-top: 18px;
   border-top: 1px solid var(--hair);
   font-size: 0.875rem;
   line-height: 1.4;
   color: var(--slate);
 }
-/* The foot sits on the card's last line; the auto margin above it absorbs
-   uneven summaries, and this keeps a minimum gap on the tallest card. */
-.summary,
-.note {
-  margin-bottom: 10px;
+/* A list foot (the appliances): one line of names, dot-separated; the dot
+   ends a name, so a wrapped line never starts with one. */
+.metaList {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.summary:has(+ .note) {
-  margin-bottom: 0;
+.metaList > li:not(:last-child)::after {
+  content: "·";
+  padding-inline: 0.45em;
+}
+/* The foot row sits under the tallest summary in the row; this keeps a
+   minimum gap above its rule. */
+.summary {
+  margin-bottom: 10px;
 }
 .arrow {
   flex: none;

@@ -1,11 +1,11 @@
-/* /[v]/airway-bite: the chairside page (Operate mode).
+/* /[v]/airway-bite: the Airway Bite page (Operate mode; the kit's QR target).
    Page-scoped composition on the shared tokens; the foundation stays untouched. */
 
-/* ── Product header ─────────────────────────────────────────────────── */
-
-.lead {
-  position: relative;
+.nowrap {
+  white-space: nowrap;
 }
+
+/* ── Product header ─────────────────────────────────────────────────── */
 
 .top {
   overflow: clip;
@@ -13,7 +13,7 @@
 .topGrid {
   display: grid;
   align-items: center;
-  gap: 24px var(--col-gap);
+  gap: 28px var(--col-gap);
   padding-top: clamp(28px, 4vw, 56px);
   padding-bottom: clamp(28px, 3.6vw, 52px);
 }
@@ -29,11 +29,26 @@
   gap: 12px;
   margin-top: 28px;
 }
-.topWatch {
-  justify-self: start;
+.topLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+  margin-top: 14px;
 }
 .topMedia {
   display: none;
+}
+
+/* Phones: a real photograph of the kit under the actions. */
+.topPhoto {
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+}
+.topPhotoImg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 @media (min-width: 640px) {
@@ -43,14 +58,14 @@
     align-items: center;
     gap: 12px 16px;
   }
-  .topWatch {
-    margin-left: 8px;
-  }
 }
 
 @media (min-width: 760px) {
   .topGrid {
     grid-template-columns: minmax(0, 1fr) clamp(240px, 30vw, 420px);
+  }
+  .topPhoto {
+    display: none;
   }
   /* The render sits in a square, cropped to the device (alpha bbox ≈ 15–80% × 30–86%). */
   .topMedia {
@@ -70,31 +85,141 @@
   }
 }
 
-/* ── Before you begin ───────────────────────────────────────────────── */
+/* ── See it chairside: tutorial, photographs, his slides ────────────── */
 
-/* The heading and his prerequisite read as one block. */
-.beforeHead {
-  display: grid;
+/* Under 1000px the player stacks; its twelve chapters become one swipeable
+   track of chips under the console, so the photographs follow closely. */
+@media (max-width: 999px) {
+  .see :global(.tp) {
+    row-gap: 16px;
+  }
+  .see :global(.tp-side .chl) {
+    display: flex;
+    gap: 6px;
+    min-width: 0;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: var(--gutter);
+    border-top: 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+  }
+  .see :global(.tp-side .chl li) {
+    flex: none;
+  }
+  .see :global(.tp-side .chl-btn) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-pill);
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+  .see :global(.tp-side .chl-btn[aria-current]) {
+    border-color: var(--signal);
+  }
+}
+
+/* Photographs: an even grid from 760px; below that one swipeable strip so the
+   steps stay close. The hero shows the kit photograph below 760px, so there the
+   strip starts at the try-in rather than showing the kit twice. */
+.photos,
+.slides {
+  display: flex;
   gap: 14px;
-  margin-bottom: var(--head-gap);
+  margin: clamp(40px, 5vw, 64px) calc(-1 * var(--gutter)) 0;
+  padding: 0 var(--gutter) 6px;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
 }
-.prereq {
-  max-width: 44ch;
-  font-size: var(--fs-lead);
-  font-weight: 400;
-  line-height: 1.45;
-  letter-spacing: -0.008em;
-  color: var(--ink-2);
+.photo,
+.slide {
+  flex: 0 0 84%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+.slides {
+  margin-top: 24px;
 }
 
-.beforeGrid {
-  display: grid;
-  gap: 44px var(--col-gap);
+.slidesHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line-strong);
 }
-@media (min-width: 900px) {
-  .beforeGrid {
+.slidesTitle {
+  font-size: var(--fs-h3);
+  font-weight: 350;
+  line-height: 1.15;
+  letter-spacing: -0.026em;
+  color: var(--fg);
+}
+
+@media (max-width: 759px) {
+  .photo:first-child {
+    display: none;
+  }
+}
+@media (min-width: 640px) {
+  .slides {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 3.2vw, 44px) var(--col-gap);
+    margin: 32px 0 0;
+    padding: 0;
+    overflow: visible;
+  }
+}
+@media (min-width: 760px) {
+  .photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 3.2vw, 44px) var(--col-gap);
+    margin-inline: 0;
+    padding: 0;
+    overflow: visible;
+  }
+}
+@media (min-width: 1000px) {
+  .photos {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* ── Instructions for use ───────────────────────────────────────────── */
+
+/* What to have ready: the kit still, the kit, what you will need. */
+.before {
+  display: grid;
+  gap: 32px var(--col-gap);
+  align-items: start;
+}
+.kitStill {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--porcelain);
+}
+.kitImg {
+  object-fit: cover;
 }
 .colTitle {
   margin-bottom: 14px;
@@ -102,6 +227,7 @@
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: -0.01em;
+  color: var(--fg);
 }
 .list {
   margin: 0;
@@ -114,81 +240,57 @@
   border-bottom: 1px solid var(--line-strong);
   line-height: 1.45;
 }
-.colNote {
-  margin-top: 12px;
-  font-size: 0.9375rem;
-  color: var(--fg-2);
-}
-
-.kitBody {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  gap: 18px;
-  align-items: start;
-}
-.kitStill {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-radius: var(--r-inner);
-  background: var(--porcelain);
-}
-.kitImg {
-  object-fit: cover;
-}
-@media (min-width: 900px) {
-  .kitBody {
-    display: block;
+/* Tablets: the still runs across both columns at its own wide shape (no crop). */
+@media (min-width: 640px) {
+  .before {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .kitStill {
+    grid-column: 1 / -1;
+    aspect-ratio: 1920 / 816;
+  }
+}
+@media (min-width: 900px) {
+  .before {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .kitStill {
+    grid-column: auto;
     aspect-ratio: 16 / 10;
-    margin-bottom: 20px;
-    border-radius: var(--r-card);
   }
 }
 
-/* Class II / III rows stay two-column even in the narrow third. */
-.occ :global(.spec-row) {
-  grid-template-columns: 6.5rem minmax(0, 1fr);
+/* The protocol map heads the steps on desktop (it hides itself below 1024px). */
+.map {
+  margin-top: var(--space-md);
+  padding-top: 36px;
+  border-top: 1px solid var(--line-strong);
 }
-
-/* ── The protocol ───────────────────────────────────────────────────── */
-
-/* Before you begin carries the prerequisite and the occlusions, and the IFU
-   slides sit together further down, so the step column is only steps. */
-.protocol :global(.cs-prereq),
-.protocol :global(.ph-occ),
-.protocol :global(.ph-ifu) {
-  display: none;
+.chairside {
+  margin-top: 48px;
 }
-@media (max-width: 1023px) {
-  .protocol {
-    padding-top: var(--space-md);
-  }
-  .protocolHead {
-    margin-bottom: 28px;
+@media (min-width: 1024px) {
+  .chairside {
+    margin-top: 72px;
   }
 }
 
-/* ── Advantages ─────────────────────────────────────────────────────── */
+/* ── Kit and advantages ─────────────────────────────────────────────── */
 
 .advGrid {
   display: grid;
-  gap: 40px var(--col-gap);
-}
-.advLead {
-  margin-top: 16px;
+  gap: 32px var(--col-gap);
+  align-items: start;
 }
 .advStill {
-  margin-top: 32px;
+  position: relative;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--r-card);
   background: var(--porcelain);
 }
 .advImg {
-  display: block;
-  width: 100%;
-  height: auto;
+  object-fit: cover;
 }
 .advList {
   margin: 0;
@@ -199,7 +301,7 @@
 .advRow {
   display: grid;
   gap: 4px var(--col-gap);
-  padding: 20px 0 22px;
+  padding: 18px 0 20px;
   border-bottom: 1px solid var(--line-strong);
 }
 .advTitle {
@@ -212,57 +314,27 @@
   margin: 0;
   color: var(--fg-2);
 }
-@media (min-width: 640px) {
-  .advRow {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: baseline;
-  }
-  /* A sentence with no second line takes the whole row. */
-  .advTitle:only-child {
-    grid-column: 1 / -1;
+/* Tablets: a wide band above the list rather than a tall 4:3 block. */
+@media (min-width: 640px) and (max-width: 999px) {
+  .advStill {
+    aspect-ratio: 21 / 9;
   }
 }
 @media (min-width: 1000px) {
   .advGrid {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    align-items: start;
   }
-  .advHead {
-    position: sticky;
-    top: calc(var(--hd-h) + 32px);
-  }
-  .advList {
-    margin-top: 10px;
-  }
-}
-
-/* ── IFU plates ─────────────────────────────────────────────────────── */
-
-.ifu {
-  row-gap: clamp(32px, 3.6vw, 48px);
 }
 
 /* ── Order close (night) ────────────────────────────────────────────── */
 
-.orderGrid {
-  display: grid;
-  gap: 24px var(--col-gap);
-  align-items: center;
-}
-.orderTitle {
-  max-width: 18ch;
-  text-wrap: balance;
-}
-.orderLead {
-  margin-top: 24px;
-}
-.orderActions {
-  margin-top: 36px;
-}
-/* Side render, cropped to the device (alpha bbox ≈ 14–85% × 28–74%). */
+/* Under the centred opening: the side render, cropped to the device
+   (alpha bbox ≈ 14–85% × 28–74%; the 2026-10-15 no-hole renders keep the framing). */
 .orderMedia {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
+  max-width: 520px;
+  margin-inline: auto;
   overflow: hidden;
 }
 .orderRender {
@@ -274,16 +346,11 @@
   height: auto;
   transform: translate(-49.8%, -51%);
 }
-@media (min-width: 900px) {
-  .orderGrid {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  }
-}
 
 .next {
   display: grid;
   gap: 20px var(--col-gap);
-  margin-top: clamp(56px, 7vw, 104px);
+  margin-top: clamp(40px, 5vw, 72px);
   padding-top: 28px;
   border-top: 1px solid var(--line);
 }

@@ -3,19 +3,36 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import ApsLogo from "@/components/shared/ApsLogo";
-import { contact, distributor } from "@/content/aps";
+import { contact, distributor, doctor } from "@/content/aps";
+import SiteMark from "./SiteMark";
 import h from "./header.module.css";
 import { ArrowUpRight, Close, Menu } from "./icons";
-import { NAV, href, tel, type VersionId } from "./links";
+import { NAV, href, routes, tel, type SiteId } from "./links";
 
 /**
- * Sticky site header: lockup, primary nav and the Order action. Below 1180px
- * the nav moves into a sheet menu.
+ * The header's one button. drdroter.com: call the office. APSleep.com leads
+ * with patients, so its button is the dentist route; the Great Lakes order
+ * button appears only on the Airway Bite page ("the lead in I don't want is
+ * the airway bite").
  */
-export default function Header({ v }: { v: VersionId }) {
+function siteAction(v: SiteId, rest: string) {
+  if (v === "droter") return { href: tel(contact.officePhone), label: `Call ${contact.officePhone}`, external: false };
+  if (rest === routes.airwayBite || rest.startsWith(`${routes.airwayBite}/`)) {
+    return { href: distributor.url, label: distributor.cta, external: true };
+  }
+  return { href: href(v, routes.library), label: "For dentists", external: false };
+}
+
+/**
+ * Sticky site header: brand, primary nav and the site's one action. Below 1180px the nav
+ * moves into a sheet menu.
+ */
+export default function Header({ v }: { v: SiteId }) {
   const pathname = usePathname() ?? `/${v}`;
   const rest = pathname.slice(v.length + 1) || "/";
+  const action = siteAction(v, rest);
+  /* The button already carries its page, so the nav doesn't repeat it. */
+  const nav = NAV[v].filter((item) => href(v, item.path) !== action.href);
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstRef = useRef<HTMLAnchorElement>(null);
@@ -52,13 +69,13 @@ export default function Header({ v }: { v: VersionId }) {
         Skip to content
       </a>
       <div className="wrap hd-bar">
-        <Link href={href(v)} className="hd-logo" aria-label="ArrowPath Sleep, home" onClick={close}>
-          <ApsLogo variant="wordmark" className="hd-lockup" />
+        <Link href={href(v)} className="hd-logo" aria-label={`${v === "apsleep" ? "ArrowPath Sleep" : doctor.name}, home`} onClick={close}>
+          <SiteMark v={v} className="hd-lockup" />
         </Link>
 
         <nav aria-label="Main" className="hd-nav">
           <ul>
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <li key={item.path}>
                 <Link href={href(v, item.path)} className="hd-link" aria-current={isActive(item.path) ? "page" : undefined}>
                   {item.label}
@@ -69,9 +86,13 @@ export default function Header({ v }: { v: VersionId }) {
         </nav>
 
         <div className="hd-end">
-          <a href={distributor.url} target="_blank" rel="noopener" className={`btn btn-primary btn-sm hd-order ${h.order}`}>
-            <span className="btn-label">{distributor.cta}</span>
-            <span className="sr-only"> (opens in a new tab)</span>
+          <a
+            href={action.href}
+            {...(action.external ? { target: "_blank", rel: "noopener" } : {})}
+            className={`btn btn-primary btn-sm hd-order ${h.order}`}
+          >
+            <span className="btn-label">{action.label}</span>
+            {action.external && <span className="sr-only"> (opens in a new tab)</span>}
           </a>
           <button
             ref={toggleRef}
@@ -91,7 +112,7 @@ export default function Header({ v }: { v: VersionId }) {
         <div className="wrap hd-sheet-inner">
           <nav aria-label="Main, menu">
             <ul className="hd-sheet-list">
-              {NAV.map((item, i) => (
+              {nav.map((item, i) => (
                 <li key={item.path} style={{ "--i": i } as React.CSSProperties}>
                   <Link
                     ref={i === 0 ? firstRef : undefined}
@@ -107,10 +128,14 @@ export default function Header({ v }: { v: VersionId }) {
             </ul>
           </nav>
           <div className="hd-sheet-foot">
-            <a href={distributor.url} target="_blank" rel="noopener" className="btn btn-primary btn-block">
-              <span className="btn-label">{distributor.cta}</span>
-              <ArrowUpRight size={16} className="btn-icon" />
-              <span className="sr-only"> (opens in a new tab)</span>
+            <a
+              href={action.href}
+              {...(action.external ? { target: "_blank", rel: "noopener" } : {})}
+              className="btn btn-primary btn-block"
+            >
+              <span className="btn-label">{action.label}</span>
+              {action.external && <ArrowUpRight size={16} className="btn-icon" />}
+              {action.external && <span className="sr-only"> (opens in a new tab)</span>}
             </a>
             <p className="hd-sheet-meta">
               <span>Office</span>

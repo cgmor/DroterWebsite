@@ -830,6 +830,11 @@
     max-width: 40ch;
     color: var(--slate);
   }
+  .aps .ft-ext {
+    margin-left: 4px;
+    vertical-align: -1px;
+    opacity: 0.6;
+  }
   .aps .ft-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

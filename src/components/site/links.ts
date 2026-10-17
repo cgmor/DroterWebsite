@@ -1,8 +1,9 @@
-import { versions, type VersionId } from "@/content/versions";
+import { sitePages, sites, siteHas, type SiteId } from "@/content/sites";
 
-export type { VersionId };
+export type { SiteId };
+export { siteHas };
 
-/** Site paths, relative to a version root. Use with `href(v, routes.x)`. */
+/** Site paths, relative to a site root. Use with `href(v, routes.x)`; `v` is the site id throughout. */
 export const routes = {
   home: "/",
   airwayBite: "/airway-bite",
@@ -15,34 +16,28 @@ export const routes = {
 } as const;
 
 /**
- * Version-relative link.
- *   href("v1")                       → "/v1"
- *   href("v1", "/airway-bite")       → "/v1/airway-bite"
- *   href("v2", "airway-bite#steps")  → "/v2/airway-bite#steps"
- *   href("v3", "#tutorial")          → "/v3#tutorial"
+ * Site-relative link.
+ *   href("apsleep")                       → "/apsleep"
+ *   href("apsleep", "/airway-bite")       → "/apsleep/airway-bite"
+ *   href("apsleep", "airway-bite#steps")  → "/apsleep/airway-bite#steps"
+ *   href("droter", "#conditions")         → "/droter#conditions"
  * Absolute URLs (http…, mailto:, tel:) pass through untouched.
  */
-export function href(v: VersionId, path: string = "/"): string {
+export function href(v: SiteId, path: string = "/"): string {
   if (/^(https?:|mailto:|tel:)/.test(path)) return path;
   if (path === "" || path === "/") return `/${v}`;
   if (path.startsWith("#") || path.startsWith("?")) return `/${v}${path}`;
   return `/${v}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export function isVersion(value: string): value is VersionId {
-  return versions.some((x) => x.id === value);
+export function isSite(value: string): value is SiteId {
+  return sites.some((x) => x.id === value);
 }
 
-/** Primary navigation, in the order the contract fixes. */
-export const NAV = [
-  { label: "Airway Bite", path: routes.airwayBite },
-  { label: "Appliances", path: routes.appliances },
-  { label: "Understanding TMD", path: routes.understanding },
-  { label: "Conditions", path: routes.conditions },
-  { label: "Library", path: routes.library },
-  { label: "About", path: routes.about },
-] as const;
-
+/** Primary navigation for each site: every page it carries except home. */
+export const NAV: Record<SiteId, { label: string; path: string }[]> = Object.fromEntries(
+  sites.map((s) => [s.id, sitePages[s.id].filter((p) => p.slug).map((p) => ({ label: p.label, path: `/${p.slug}` }))]),
+) as Record<SiteId, { label: string; path: string }[]>;
 
 
 /** `tel:` link for a printed phone number. */

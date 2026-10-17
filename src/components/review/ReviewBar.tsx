@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { versions, type VersionId } from "@/content/versions";
+import { sites, type SiteId } from "@/content/sites";
 import AiHighlight from "./AiHighlight";
 
 /**
- * Slim bar pinned above every design version so Dr. Droter can tell which
- * version he is looking at and jump between them. Also carries the
+ * Slim bar pinned above both draft sites so Dr. Droter can tell which site
+ * he is looking at and jump between them. Also carries the
  * "Highlight AI text" switch (see AiHighlight). Removed at launch.
  */
-export default function ReviewBar({ current }: { current: VersionId }) {
-  const active = versions.find((v) => v.id === current)!;
+export default function ReviewBar({ current }: { current: SiteId }) {
+  const active = sites.find((s) => s.id === current)!;
 
   return (
     <div
@@ -22,16 +22,16 @@ export default function ReviewBar({ current }: { current: VersionId }) {
             Draft<span className="hidden sm:inline"> for review</span> ·{" "}
           </span>
           <span className="text-white">
-            <span className="sm:hidden">V{active.number}</span>
+            <span className="sm:hidden">{active.domain}</span>
             <span className="hidden sm:inline">
-              Version {active.number} — {active.name}
+              {active.domain} — {active.focus}
             </span>
           </span>
         </Link>
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <AiHighlight />
-          <nav aria-label="Design versions" className="flex shrink-0 items-center gap-1">
-            {versions.map((v) => (
+          <nav aria-label="Draft sites" className="flex shrink-0 items-center gap-1">
+            {sites.map((v) => (
               <Link
                 key={v.id}
                 href={`/${v.id}`}
@@ -42,10 +42,8 @@ export default function ReviewBar({ current }: { current: VersionId }) {
                     : "rounded-full px-2.5 py-1 hover:bg-white/10 hover:text-white"
                 }
               >
-                <span className="sm:hidden">{v.number}</span>
-                <span className="hidden sm:inline">
-                  {v.number} · {v.name}
-                </span>
+                <span className="sm:hidden">{v.id === "apsleep" ? "APS" : "Droter"}</span>
+                <span className="hidden sm:inline">{v.domain}</span>
               </Link>
             ))}
           </nav>

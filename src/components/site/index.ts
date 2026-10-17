@@ -20,6 +20,6 @@ export { default as SignsChecklist } from "./SignsChecklist";
 export { default as Reveal } from "./Reveal";
 export { default as Loop } from "./Loop";
 export { useReducedMotion } from "./motion";
-export { href, routes, NAV, isVersion, tel, type VersionId } from "./links";
+export { href, routes, NAV, isSite, tel, type SiteId } from "./links";
 export { airwayNumbers, airwaySpecStrip, kitItems } from "./specs";
 export * as Icons from "./icons";

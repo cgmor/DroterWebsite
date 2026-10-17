@@ -4,7 +4,7 @@ import { education } from "@/content/aps";
 import { conditionGuides, type ConditionGuide } from "@/content/tmd";
 import { ArrowRight } from "@/components/site/icons";
 import ImageCard from "@/components/site/ImageCard";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import Reveal from "@/components/site/Reveal";
 import { Section, SectionHead, type Tone } from "@/components/site/Section";
 import s from "./home.module.css";
@@ -24,7 +24,7 @@ const rest = (n: number, cols: number) => cols - (n % cols);
  * card a link. The last cell links to the index and fills out the final row
  * at every column count, so no row is left ragged.
  */
-export function ConditionCards({ v, guides = conditionGuides }: { v: VersionId; guides?: ConditionGuide[] }) {
+export function ConditionCards({ v, guides = conditionGuides }: { v: SiteId; guides?: ConditionGuide[] }) {
   const n = guides.length;
   const fill = { "--rest-2": rest(n, 2), "--rest-3": rest(n, 3) } as CSSProperties;
   return (
@@ -58,7 +58,7 @@ export function ConditionCards({ v, guides = conditionGuides }: { v: VersionId; 
  * other guide as a plain card. Two wide over three when there are five; the
  * wide pair absorbs any remainder so each row is full.
  */
-export function ConditionGallery({ v }: { v: VersionId }) {
+export function ConditionGallery({ v }: { v: SiteId }) {
   const withSlide = conditionGuides.filter((g) => g.hero && ownWords(g));
   const others = conditionGuides.filter((g) => !withSlide.includes(g));
   const m = withSlide.length % 3;

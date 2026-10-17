@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { airwayBite, distributor } from "@/content/aps";
 import { ButtonLink } from "./Button";
 import ModelStage from "./ModelStage";
@@ -25,6 +26,8 @@ type Props = {
   id?: string;
   /** Heading text. The client named this section; keep the default unless asked. */
   title?: string;
+  /** The one-line intro under the heading (his words). Defaults to his IFU line on measuring the protrusive. */
+  lead?: ReactNode;
   /** Show the order action under the spec sheet. */
   showOrder?: boolean;
 };
@@ -34,10 +37,10 @@ type Props = {
  * Top presets beside the hairline spec sheet and the 0–12 mm range scale.
  * Every version keeps this section. Renders its own porcelain Section.
  */
-export default function AirwayBiteInDetail({ id = "in-detail", title = `${airwayBite.shortName}, in detail`, showOrder = true }: Props) {
+export default function AirwayBiteInDetail({ id = "in-detail", title = `${airwayBite.shortName}, in detail`, lead = airwayBite.useWhen, showOrder = true }: Props) {
   return (
     <Section tone="porcelain" id={id} labelledBy={`${id}-title`} className="detail">
-      <SectionHead id={`${id}-title`} title={title} lead={airwayBite.useWhen} layout="center" />
+      <SectionHead id={`${id}-title`} title={title} lead={lead} layout="center" />
       <div className="detail-grid">
         <div className="detail-model">
           <ModelStage />

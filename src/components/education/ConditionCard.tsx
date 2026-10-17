@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "@/components/site/icons";
-import { pendingGuideNote, type ConditionGuide } from "@/content/tmd";
+import type { ConditionGuide } from "@/content/tmd";
 import s from "./ConditionCard.module.css";
 
 type Props = {
@@ -8,14 +8,22 @@ type Props = {
   href: string;
   /** Heading level of the card title. */
   as?: "h2" | "h3";
+  /**
+   * The card's foot line. Defaults to the guide's category (drdroter.com).
+   * A list (APSleep.com: the appliances for it) is set inline, dot-separated,
+   * each name its own item.
+   */
+  meta?: string | string[];
 };
 
 /**
- * One condition guide as a plain white card: the clinical name, the patient's
- * words, his one-line summary, and the category as its foot. The whole card is
- * the link. Used in even grids on a mist band (/conditions, related guides).
+ * One condition guide as a plain card: the clinical name, the patient's words,
+ * his one-line summary, and a foot line (the category, or on APSleep.com the
+ * appliances for it). The whole card is the link. A guide awaiting his full
+ * write-up says so on its own page, not on the card (as on the home page).
+ * The card takes the band's surface: white on a mist band, mist on white.
  */
-export default function ConditionCard({ guide: g, href, as: H = "h2" }: Props) {
+export default function ConditionCard({ guide: g, href, as: H = "h2", meta = g.category }: Props) {
   return (
     <li className={s.card}>
       <H className={s.title}>
@@ -25,18 +33,30 @@ export default function ConditionCard({ guide: g, href, as: H = "h2" }: Props) {
       </H>
       <p className={s.words}>“{g.plainName}”</p>
       <p className={s.summary}>{g.summary}</p>
-      {g.pending && <p className={s.note}>{pendingGuideNote}</p>}
-      <p className={s.foot}>
-        <span>{g.category}</span>
+      <div className={s.foot}>
+        {Array.isArray(meta) ? (
+          <ul className={s.metaList}>
+            {meta.map((m) => (
+              <li key={m}>{m}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>{meta}</p>
+        )}
         <ArrowRight size={18} className={s.arrow} />
-      </p>
+      </div>
     </li>
   );
 }
 
-/** The even grid the cards sit in: one column, two from 640px, three from 1000px. */
-export function ConditionGrid({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <ul className={[s.grid, className].filter(Boolean).join(" ")}>{children}</ul>;
-}
+type GridProps = {
+  children: React.ReactNode;
+  className?: string;
+  /** Columns at full width: 3 (default) or 2 (a short set, e.g. four cards as two even rows). */
+  cols?: 2 | 3;
+};
 
-export const cardStyles = s;
+/** The even grid the cards sit in: one column, two from 640px, three from 1000px (or two throughout). */
+export function ConditionGrid({ children, className, cols = 3 }: GridProps) {
+  return <ul className={[s.grid, cols === 2 && s.grid2, className].filter(Boolean).join(" ")}>{children}</ul>;
+}

@@ -48,29 +48,33 @@ const STATUS = {
 } as const;
 
 /**
- * The library as ruled rows, grouped, with an audience filter. Unpublished
- * items read as a quiet state ("Coming soon", "Dentists only"), never a link.
+ * The library as ruled rows, grouped, with an optional audience filter.
+ * Groups with no rows are not shown. Unpublished items read as a quiet state
+ * ("Coming soon", "Dentists only"), never a link.
  */
-export default function LibraryIndex({ groups }: { groups: LibraryGroup[] }) {
+export default function LibraryIndex({ groups, filter: withFilter = false }: { groups: LibraryGroup[]; filter?: boolean }) {
   const [filter, setFilter] = useState<FilterId>("all");
   const total = groups.reduce((n, g) => n + g.entries.length, 0);
   const visible = groups.map((g) => ({ ...g, rows: g.entries.filter((e) => shows(filter, e.audience)) }));
   const shown = visible.reduce((n, g) => n + g.rows.length, 0);
+  if (total === 0) return null;
 
   return (
     <div className={s.lib}>
-      <div className={s.libBar}>
-        <div className="seg" role="group" aria-label="Show resources for">
-          {FILTERS.map((f) => (
-            <button key={f.id} type="button" className="seg-opt" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
-              {f.label}
-            </button>
-          ))}
+      {withFilter && (
+        <div className={s.libBar}>
+          <div className="seg" role="group" aria-label="Show resources for">
+            {FILTERS.map((f) => (
+              <button key={f.id} type="button" className="seg-opt" aria-pressed={filter === f.id} onClick={() => setFilter(f.id)}>
+                {f.label}
+              </button>
+            ))}
+          </div>
+          <p className={s.libCount} aria-live="polite">
+            {filter === "all" ? `${total} resources` : `${shown} of ${total} resources, for ${filter}`}
+          </p>
         </div>
-        <p className={s.libCount} aria-live="polite">
-          {filter === "all" ? `${total} resources` : `${shown} of ${total} resources, for ${filter}`}
-        </p>
-      </div>
+      )}
 
       {visible.map((g) =>
         g.rows.length === 0 ? null : (
@@ -84,16 +88,23 @@ export default function LibraryIndex({ groups }: { groups: LibraryGroup[] }) {
               </div>
               {g.aside && <div className={s.libAside}>{g.aside}</div>}
             </header>
-
-            <ul className={s.rows}>
-              {g.rows.map((e) => (
-                <Row key={e.key} e={e} />
-              ))}
-            </ul>
+            <LibraryRows entries={g.rows} />
           </section>
         ),
       )}
     </div>
+  );
+}
+
+/** Ruled rows on their own (no group heading, no filter). Renders nothing when empty. */
+export function LibraryRows({ entries, className }: { entries: LibraryEntry[]; className?: string }) {
+  if (entries.length === 0) return null;
+  return (
+    <ul className={[s.rows, className].filter(Boolean).join(" ")}>
+      {entries.map((e) => (
+        <Row key={e.key} e={e} />
+      ))}
+    </ul>
   );
 }
 
@@ -120,7 +131,8 @@ function Row({ e }: { e: LibraryEntry }) {
     <li className={s.row} data-live={live || undefined}>
       <span className={s.rowKind}>{e.kind}</span>
       <div className={s.rowMain}>
-        <h3 className={s.rowTitle}>{title}</h3>
+        {/* A document's own title, not a page heading (titles like his 2005 article's carry "Treatment"). */}
+        <p className={s.rowTitle}>{title}</p>
         {e.description && <p className={s.rowDesc}>{e.description}</p>}
         {state && (
           <p className={s.rowState}>

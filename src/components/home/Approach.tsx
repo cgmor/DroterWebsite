@@ -2,7 +2,7 @@ import { doctor } from "@/content/aps";
 import { understanding } from "@/content/tmd";
 import { ButtonLink } from "@/components/site/Button";
 import Figure from "@/components/site/Figure";
-import { href, routes, type VersionId } from "@/components/site/links";
+import { href, routes, type SiteId } from "@/components/site/links";
 import { Section, SectionHead } from "@/components/site/Section";
 import { Figured } from "./Education";
 import s from "./home.module.css";
@@ -16,7 +16,7 @@ const evidence = understanding.evidence;
  * the quote, with his paragraph beside it; then what the numbers show, under a
  * centred heading: his sentences, each figure emphasised where it stands.
  */
-export default function Approach({ v }: { v: VersionId }) {
+export default function Approach({ v }: { v: SiteId }) {
   return (
     <>
       <Section labelledBy="approach-title" id="approach">

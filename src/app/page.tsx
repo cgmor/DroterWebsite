@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import ApsLogo from "@/components/shared/ApsLogo";
-import { versions, versionPages } from "@/content/versions";
+import { sitePages, sites } from "@/content/sites";
 
 export const metadata = {
-  title: "APSleep.com — Design versions for review",
+  title: "APSleep.com and drdroter.com — Drafts for review",
 };
 
 export default function ReviewIndex() {
@@ -18,12 +18,11 @@ export default function ReviewIndex() {
           <div>
             <ApsLogo variant="lockup" className="mb-10 h-9 w-auto text-[#2b2b2b]" />
             <h1 className="max-w-[18ch] text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] sm:text-[56px]">
-              Three design versions for ArrowPath Sleep
+              Two sites, one design
             </h1>
             <p className="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-black/65">
-              One design, three emphases. Every version carries the same pages — the Airway Bite,
-              the ArrowPath appliances, Understanding TMD, the common conditions, the library of
-              lectures and literature, and Dr. Droter — and differs in what it leads with.
+              APSleep.com covers airway and sleep, for patients and dentists. drdroter.com is the
+              practice, focused on TMD and facial pain. They share one design and stay separate.
             </p>
           </div>
           <Image
@@ -36,16 +35,14 @@ export default function ReviewIndex() {
         </header>
 
         <ol className="mt-4 divide-y divide-black/10">
-          {versions.map((v) => (
-            <li key={v.id} className="grid gap-6 py-10 sm:grid-cols-[120px_1fr_auto] sm:items-start">
-              <p className="text-[64px] font-light leading-none tracking-[-0.04em] text-black/25">
-                {v.number}
-              </p>
+          {sites.map((v) => (
+            <li key={v.id} className="grid gap-6 py-10 sm:grid-cols-[1fr_auto] sm:items-start">
               <div>
-                <h2 className="text-[26px] font-semibold tracking-[-0.01em]">{v.name}</h2>
+                <h2 className="text-[26px] font-semibold tracking-[-0.01em]">{v.domain}</h2>
+                <p className="mt-1 text-[16px] text-black/50">{v.focus}</p>
                 <p className="mt-2 max-w-[56ch] text-[16px] leading-relaxed text-black/65">{v.idea}</p>
                 <ul className="mt-5 flex flex-wrap gap-2">
-                  {versionPages.map((p) => (
+                  {sitePages[v.id].map((p) => (
                     <li key={p.slug}>
                       <Link
                         href={`/${v.id}${p.slug ? `/${p.slug}` : ""}`}
@@ -61,16 +58,16 @@ export default function ReviewIndex() {
                 href={`/${v.id}`}
                 className="inline-flex items-center justify-center rounded-full bg-[#16191D] px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-black"
               >
-                Open version {v.number}
+                Open {v.domain}
               </Link>
             </li>
           ))}
         </ol>
 
         <footer className="mt-10 border-t border-black/10 pt-8 text-[14px] leading-relaxed text-black/50">
-          Drafts only — not yet live. Placeholder items (marked “coming soon”) are waiting on
-          files from Dr. Droter. apsleep.com/airway-bite will keep working at launch so existing
-          QR codes still resolve.
+          Drafts only, not yet live. Items marked “coming soon” are waiting on files from
+          Dr. Droter. apsleep.com/airway-bite will keep working at launch so the kit’s QR code
+          still resolves.
         </footer>
       </div>
     </main>

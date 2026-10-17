@@ -186,10 +186,14 @@
 }
 
 @media (max-width: 1099.98px) {
+  /* min-width: 0 lets the bar shrink inside its grid/flex parent, so the
+     current label ellipsises instead of widening the page. */
   .toc {
     position: sticky;
     top: var(--hd-h);
     z-index: 30;
+    min-width: 0;
+    max-width: calc(100% + 2 * var(--gutter));
     margin-inline: calc(-1 * var(--gutter));
     padding-inline: var(--gutter);
     background: var(--white);
@@ -205,6 +209,7 @@
     align-items: center;
     gap: 14px;
     width: 100%;
+    min-width: 0;
     min-height: 54px;
     padding: 0;
     border: 0;

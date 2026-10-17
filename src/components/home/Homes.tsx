@@ -1,6 +1,6 @@
 import AirwayBiteInDetail from "@/components/site/AirwayBiteInDetail";
 import HowFarForward from "@/components/site/HowFarForward";
-import type { VersionId } from "@/components/site/links";
+import type { SiteId } from "@/components/site/links";
 import PracticePanel from "@/components/site/PracticePanel";
 import { Section } from "@/components/site/Section";
 import AboutDroter from "./AboutDroter";
@@ -40,7 +40,7 @@ function PracticeClose({ flush }: { flush?: boolean }) {
  *   porcelain · white · night · porcelain · white · mist · white · mist ·
  *   white · mist · white (+ practice) · footer mist
  */
-export function HomeV1({ v }: { v: VersionId }) {
+export function HomeV1({ v }: { v: SiteId }) {
   return (
     <>
       <DeviceHero />
@@ -70,7 +70,7 @@ export function HomeV1({ v }: { v: VersionId }) {
  *   porcelain · white · mist · white · night · porcelain · white · mist ·
  *   white · mist · white (+ practice) · footer mist
  */
-export function HomeV2({ v }: { v: VersionId }) {
+export function HomeV2({ v }: { v: SiteId }) {
   return (
     <>
       <PortraitHero v={v} />
@@ -99,7 +99,7 @@ export function HomeV2({ v }: { v: VersionId }) {
  *   porcelain · night · white · mist · porcelain · white · mist ·
  *   white (+ practice) · footer mist
  */
-export function HomeV3({ v }: { v: VersionId }) {
+export function HomeV3({ v }: { v: SiteId }) {
   return (
     <>
       <JointHero v={v} />
@@ -115,3 +115,6 @@ export function HomeV3({ v }: { v: VersionId }) {
     </>
   );
 }
+
+export { default as HomeAps } from "./HomeAps";
+export { default as HomePractice } from "./HomePractice";

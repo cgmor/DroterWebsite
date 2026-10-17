@@ -299,16 +299,17 @@ export const conditionGuides: ConditionGuide[] = [
     plainName: "I clench my teeth",
     category: "Parafunction",
     source: "TMJ Brochure 2026",
-    summary: "The patient is usually aware of clenching. The masseter muscles ache, and the joint may click in the morning.",
-    signs: ["Aware of clenching", "Masseter muscles ache", "Morning clicking"],
+    /** His "6 Common TMDs" chart (TMJ Brochure 2026 v26.4), cell for cell; "hs" spelled out as "at bedtime". */
+    summary: "Patient is aware. Masseters ache. Morning TMJ clicking that resolves.",
+    signs: ["Patient is aware", "Masseters ache", "Morning TMJ clicking that resolves"],
     full: [
       {
         heading: "Pattern",
-        paragraphs: ["The patient is aware of clenching, the masseter muscles ache, and there may be clicking in the morning."],
+        list: ["Patient is aware", "Masseters ache", "Morning TMJ clicking that resolves"],
       },
       {
         heading: "Approach",
-        list: ["Occlusal adjustment", "D-PAS night guard", "Magnesium and vitamin C"],
+        list: ["Occlusal adjustment", "D-PAS night guard (if inhibition)", "Magnesium and Vitamin C at bedtime"],
       },
     ],
   },
@@ -319,20 +320,24 @@ export const conditionGuides: ConditionGuide[] = [
     plainName: "I grind my teeth at night",
     category: "Parafunction",
     source: "TMJ Brochure 2026",
-    summary: "Stress increases grinding, but it is usually not the primary cause. The clinical exam usually reveals it: an uneven bite or a damaged TMJ.",
-    signs: ["Worn teeth", "Chipping, cracking or loosening", "A partner hears grinding"],
+    /** TMJ Brochure 2026 v26.4: the FAQ answer, the signs page and the "6 Common TMDs" chart, verbatim ("night night" typo fixed). */
+    summary: "While stress will cause the amount of grinding to increase, it is usually not the primary cause of the grinding.",
+    signs: ["Teeth that are wearing away", "Teeth that are chipping or breaking", "Teeth that are cracking or splitting"],
     full: [
       {
         heading: "Pattern",
-        paragraphs: ["Worn teeth are the defining sign. Excess force also shows as chipping, breaking, cracking, splitting, moving or loosening teeth."],
+        paragraphs: ["Any signs of excess force on the teeth, including;"],
+        list: ["Teeth that are wearing away.", "Teeth that are chipping or breaking.", "Teeth that are cracking or splitting.", "Teeth that are moving.", "Teeth that are loose."],
       },
       {
         heading: "Causes",
-        paragraphs: ["Stress increases grinding but is usually not the primary cause. Common causes include an uneven bite or a damaged TMJ, and a clinical examination usually reveals which."],
+        paragraphs: [
+          "While stress will cause the amount of grinding to increase, it is usually not the primary cause of the grinding. A clinical examination usually will reveal the cause of the grinding. Common causes of grinding are an uneven bite or a damaged TMJ.",
+        ],
       },
       {
         heading: "Approach",
-        list: ["Protective night guard", "Airway night guard", "Occlusal adjustment where the bite is the cause"],
+        list: ["Protective night guard", "Airway night guard"],
       },
     ],
   },
@@ -345,16 +350,23 @@ export const conditionGuides: ConditionGuide[] = [
     source: "TMJ Brochure 2026",
     /** drdroter.com/uncomfortable-bite-occlusion, verbatim. */
     summary: "An uneven bite causing muscle fatigue is called Occlusal Muscle Disharmony.",
-    signs: ["Sore muscles when chewing", "Headaches", "Slight soreness of the lateral pterygoid"],
+    /** Signs: his "6 Common TMDs" chart. Full: the brochure's OMD page, verbatim ("other the types" → "other types"). */
+    signs: ["Sore muscles when chewing", "Sore Lateral Pterygoid, Headaches", "Day D-PAS relieves symptoms"],
     full: [
       {
         heading: "Pattern",
         paragraphs: [
-          "Teeth that touch imprecisely create muscle tension, which leads to headaches. Distinguishing features are slight soreness of the lateral pterygoid and sore muscles when chewing.",
-          "The critical question: is the primary soreness from the jaw muscles, the jaw joint or the neck muscles — and does the bite have anything to do with it? Half of headaches are not bite-related, so an accurate diagnosis is essential.",
+          "50% of all headaches are related to how the teeth come together.",
+          "The most missed diagnosis I see on patients coming to see me is Occlusal Muscle Disharmony. OMD is the teeth touching imprecisely causing muscle tension. OMD can present as a headache which will seem very similar to other types of headaches. The distinguishing feature of an Occlusal Muscle Disharmony headache is the slight soreness in Lateral Pterygoid muscle and slightly sore muscles on chewing.",
+          "A question that needs to be answered to get effective treatment: Is the primary soreness from the jaw muscles, the jaw joint, the neck muscles and does the bite have anything to do with the symptoms?",
         ],
       },
-      { heading: "Approach", paragraphs: ["Precision refinement of the bite — an occlusal adjustment — rather than muscle relief alone."] },
+      {
+        heading: "Approach",
+        paragraphs: [
+          "Occlusal Muscle Disharmony is best treated by a precision refinement of the bite as opposed to therapies that only make the sore muscles feel better. 50% of headaches are NOT related to the bite, so it is important the clinician determine which disease a patient has before treatment.",
+        ],
+      },
     ],
   },
 
@@ -401,7 +413,7 @@ export const conditionGuides: ConditionGuide[] = [
     category: "TMJ damage",
     source: "TMJ Brochure 2026",
     summary: "The TMJ can be sprained just like an ankle. A sprain is a stretching of a ligament. This can occur during sleep from parafunctional jaw movements.",
-    signs: ["Sudden onset", "Limited opening", "Soft end point on stretching"],
+    signs: ["Sudden onset pain TMJ, sore TMJ", "Limited opening", "Soft end point active stretch"],
     hero: fig("limited-184.jpg", "Dr. Droter’s lecture slide on the acute sprain", 2048, 1024),
     full: [
       {
@@ -412,7 +424,8 @@ export const conditionGuides: ConditionGuide[] = [
         ],
         figure: fig("limited-175.jpg", "Dr. Droter’s lecture slide on the soft and hard end point", 2048, 1024),
       },
-      { heading: "Approach", list: ["Cold laser", "Rest and a soft diet", "An anti-inflammatory (NSAID)", "Anterior repositioning orthotic"] },
+      /* His "6 Common TMDs" chart, verbatim. */
+      { heading: "Approach", list: ["Cold Laser, Ice 15 min 3x a day", "Rest, Soft diet, NSAID 7 days", "Anterior Reposition Orthotic 7 days"] },
     ],
   },
 
@@ -424,7 +437,7 @@ export const conditionGuides: ConditionGuide[] = [
     category: "TMJ damage",
     source: "TMJ Brochure 2026",
     summary: "Those with a stuck disc will present with a hard end point in active stretching test and not be able to move their jaw fully side to side.",
-    signs: ["Limited opening", "Hard end point on stretching", "Can’t move fully side to side"],
+    signs: ["Sore TMJ", "Limited opening", "Hard end point active stretch"],
     hero: fig("limited-189.jpg", "Dr. Droter’s lecture slide on the acute closed lock", 2048, 1024),
     full: [
       {
@@ -808,7 +821,7 @@ export const literature: Resource[] = [
     title: "An Orthopaedic Approach to the Diagnosis and Treatment of Disorders of the Temporomandibular Joint",
     description: "John R Droter DDS Article. Dentistry Today, November 2005.",
     kind: "Article",
-    href: "https://drdroter.com/wp-content/uploads/2016/11/DroterOrthopedDx.pdf",
+    href: "/aps/literature/DroterOrthopedDx.pdf",
     meta: "Published article · PDF",
     audience: "dentists",
   },
@@ -816,7 +829,7 @@ export const literature: Resource[] = [
     title: "The worn dentition – pathognomonic patterns of abrasion and erosion",
     description: "Thomas Abrahamsen Article. Abrahamsen T C, Int Dent J 2005 55: 268-76.",
     kind: "Reference",
-    href: "https://drdroter.com/wp-content/uploads/2016/11/AbrahamsenIDJ.pdf",
+    href: "/aps/literature/AbrahamsenIDJ.pdf",
     meta: "International Dental Journal · PDF",
     audience: "both",
   },
@@ -824,73 +837,28 @@ export const literature: Resource[] = [
     title: "Rath article on Toothpaste Relative Dentin Abrasiveness",
     description: "",
     kind: "Reference",
-    href: "https://drdroter.com/wp-content/uploads/2017/06/Rath-Toothpaste-Abrasiveness-2016.pdf",
+    href: "/aps/literature/Rath-Toothpaste-Abrasiveness-2016.pdf",
     meta: "Article · PDF",
     audience: "both",
   },
 ];
 
-export const lectures: Resource[] = [
-  {
-    title: "Pankey TMD 2026",
-    description: "Day 4 Version",
-    kind: "Lecture",
-    href: "https://drdroter.com/wp-content/uploads/2026/06/Pankey-TMD-2026v2.key-sm.pdf",
-    meta: "L.D. Pankey Institute · 2026 · PDF",
-    audience: "dentists",
-  },
-  {
-    title: "Gill Ortho Ceph Analysis — Extract",
-    description: "Gill Ortho Ceph Analysis Extract",
-    kind: "Lecture",
-    href: "https://drdroter.com/wp-content/uploads/2026/06/Gill-Ortho-Ceph-Analysis-Extract.key.pdf",
-    meta: "L.D. Pankey Institute · 2026 · PDF",
-    audience: "dentists",
-  },
-];
+/**
+ * No lecture slides anywhere (Dr. Droter, Oct 14: "Pankey TMD does not need to
+ * be anywhere"). Pankey TMD 2026 and Gill Ortho Ceph Analysis Extract are gone;
+ * the export stays (empty) so older code compiles. Consumers hide empty lists.
+ */
+export const lectures: Resource[] = [];
 
-export const patientResources: Resource[] = [
-  {
-    title: "HotColdHot Download",
-    description: "Home therapy for sore muscles with triggerpoints",
-    kind: "Handout",
-    href: "https://drdroter.com/wp-content/uploads/2016/06/hotcoldhot2.pdf",
-    meta: "Handout · PDF",
-    audience: "patients",
-  },
-  {
-    title: "Photos: The Big 12",
-    description: "Photos your Dentist can take to help us monitor your progress",
-    kind: "Handout",
-    href: "https://drdroter.com/wp-content/uploads/2017/01/Photo-Guidelines17.1.Big12.pdf",
-    meta: "Guide · PDF",
-    audience: "both",
-  },
-  {
-    title: "Supplement Recommendations",
-    description: "Vitamin Supplements",
-    kind: "Handout",
-    href: "https://drdroter.com/wp-content/uploads/2026/08/Vitamin-Recommendation-26.8.pdf",
-    meta: "Aug 2026 · PDF",
-    audience: "patients",
-  },
-  {
-    title: "Toothpaste Recommendations 2018.5",
-    description: "Oral Hygiene Recommendations",
-    kind: "Handout",
-    href: "https://drdroter.com/wp-content/uploads/2018/05/Toothpaste-Recommendations-2018.5.pdf",
-    meta: "2018 · PDF",
-    audience: "patients",
-  },
-  {
-    title: "Toothpaste Abrasivenss Chart 2016 17.9 article",
-    description: "Toothpaste Abrasivenss Chart 2016 17.9 article",
-    kind: "Reference",
-    href: "https://drdroter.com/wp-content/uploads/2018/01/Toothpaste-Abrasivenss-Chart-2016-17.9-article.pdf",
-    meta: "Chart · PDF",
-    audience: "patients",
-  },
-];
+/**
+ * No patient downloads ("those downloadable pages should be a web page on their
+ * own"). His handouts are web pages now: Hot, Cold, Hot, the supplement and the
+ * toothpaste recommendations, in src/content/resources.ts (/droter/library/…).
+ * "Photos: The Big 12" is a photo guide (captions only, no text of its own), and
+ * the toothpaste abrasiveness chart is a PDF chart; both are left out. The export
+ * stays (empty) so older code compiles.
+ */
+export const patientResources: Resource[] = [];
 
 /* ───────────────────────── Practice (light touch) ───────────────────────── */
 

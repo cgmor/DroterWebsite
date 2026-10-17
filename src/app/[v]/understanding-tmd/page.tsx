@@ -11,12 +11,12 @@ import { ButtonLink } from "@/components/site/Button";
 import Disclosure from "@/components/site/Disclosure";
 import Figure from "@/components/site/Figure";
 import { ArrowRight } from "@/components/site/icons";
-import { href, isVersion, routes } from "@/components/site/links";
+import { href, isSite, siteHas, routes } from "@/components/site/links";
 import PracticePanel from "@/components/site/PracticePanel";
 import Reveal from "@/components/site/Reveal";
-import { Section } from "@/components/site/Section";
-import SignsChecklist from "@/components/site/SignsChecklist";
+import { Section, SectionHead } from "@/components/site/Section";
 import { doctor, education } from "@/content/aps";
+import { hotColdHot, tmjBrochure as brochure } from "@/content/resources";
 import { conditionGuides, understanding as u } from "@/content/tmd";
 import s from "./page.module.css";
 
@@ -78,23 +78,19 @@ const CONTENTS = [
 
 export default async function UnderstandingTmdPage({ params }: { params: Promise<{ v: string }> }) {
   const { v } = await params;
-  if (!isVersion(v)) notFound();
+  if (!isSite(v) || !siteHas(v, "understanding-tmd")) notFound();
 
   const d = u.definition;
   const p = u.pain;
   const a = u.approaches;
-  const h = u.hotColdHot;
   const guided = new Set(conditionGuides.map((g) => g.category));
   const [slideCauses, slideTherapies, slideMatch] = a.figures;
 
   return (
     <>
-      {/* ── Masthead + thesis ─────────────────────────────────────────── */}
+      {/* ── Opening: a centred heading and his line, then his thesis, centred ── */}
       <div className={`wrap ${s.mast}`}>
-        <div className={s.mastGrid}>
-          <h1 className={`t-h1 ${s.title}`}>{u.title}</h1>
-          <p className={s.intro}>{u.intro}</p>
-        </div>
+        <SectionHead as="h1" id="utmd-title" layout="center" className={s.head} title={u.title} lead={u.intro} />
 
         <figure className={s.thesis}>
           <blockquote className={s.thesisQuote}>
@@ -122,8 +118,13 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
                 <p className={s.lede}>{u.joint.paragraphs[0]}</p>
                 <p>{u.joint.paragraphs[1]}</p>
               </div>
+              {/* His self-check, from the brochure's "How The TMJ Works". */}
               <div className={s.selfCheck}>
-                <p className={s.selfCheckText}>{u.joint.selfCheck}</p>
+                {brochure.selfCheck.map((t) => (
+                  <p key={t} className={s.selfCheckText}>
+                    {t}
+                  </p>
+                ))}
               </div>
             </div>
             <Reveal className={s.pair}>
@@ -133,13 +134,34 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
             </Reveal>
           </section>
 
-          {/* Signs and symptoms */}
+          {/* Signs and symptoms: his brochure list, as written (a list to read, not a form to fill in). */}
           <section className={s.sec} id="signs" aria-labelledby="signs-title">
             <h2 className={`t-h2 ${s.h2}`} id="signs-title">
               {u.signs.heading}
             </h2>
             <div className={s.panel}>
-              <SignsChecklist showHeading={false} id="signs-check" />
+              <ol className={s.signs}>
+                {brochure.signs.map((it, i) => (
+                  <li key={it.text} className={s.sign}>
+                    <span className={`num ${s.signN}`} aria-hidden="true">
+                      {i + 1}
+                    </span>
+                    <div className={s.signBody}>
+                      <p>{it.text}</p>
+                      {it.sub && (
+                        <ul className={s.signSub}>
+                          {it.sub.map((x) => (
+                            <li key={x}>{x}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <p className={s.signsNote}>
+                <span className={s.signsNoteLabel}>Note:</span> {brochure.note}
+              </p>
             </div>
             <p className={s.keyLine}>{u.signs.headacheStat}</p>
           </section>
@@ -287,39 +309,28 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
             </Reveal>
           </section>
 
-          {/* Hot, cold, hot */}
+          {/* Hot, cold, hot: his purpose sentence here; the directions are their own page under Resources. */}
           <section className={s.sec} id="hot-cold-hot" aria-labelledby="hot-cold-hot-title">
+            <h2 className={`t-h2 ${s.h2}`} id="hot-cold-hot-title">
+              {u.hotColdHot.heading}
+            </h2>
             <div className={s.handout}>
-              <div className={s.handoutHead}>
-                <h2 className={`t-h2 ${s.h2} ${s.handoutTitle}`} id="hot-cold-hot-title">
-                  {h.heading}
-                </h2>
-                <p className={s.lede}>{h.purpose}</p>
-                <ButtonLink href={h.pdf.href} variant="secondary" icon="download" className={s.handoutPdf}>
-                  {h.pdf.label}
+              <p className={s.handoutPurpose}>{hotColdHot.purpose}</p>
+              <div className={s.handoutGo}>
+                <p className={s.handoutLine}>{hotColdHot.line}</p>
+                <ButtonLink href={href(v, `${routes.library}/${hotColdHot.slug}`)} variant="secondary" icon="arrow">
+                  Hot, Cold, Hot directions
                 </ButtonLink>
               </div>
-              <ol className={s.steps}>
-                {h.steps.map((st, i) => (
-                  <li key={st} className={s.step}>
-                    <span className={`num ${s.stepN}`} aria-hidden="true">
-                      {i + 1}
-                    </span>
-                    <p className={s.stepText}>{st}</p>
-                  </li>
-                ))}
-              </ol>
             </div>
           </section>
 
-          {/* Common questions */}
+          {/* Common questions: his brochure's four, answers as written. */}
           <section className={s.sec} id="questions" aria-labelledby="questions-title">
-            <div className={s.faqGrid}>
-              <h2 className={`t-h2 ${s.h2}`} id="questions-title">
-                Common questions
-              </h2>
-              <Faq items={u.faq} />
-            </div>
+            <h2 className={`t-h2 ${s.h2}`} id="questions-title">
+              Common questions
+            </h2>
+            <Faq items={brochure.faq} />
           </section>
 
           {/* Children and facial development */}
@@ -346,22 +357,23 @@ export default async function UnderstandingTmdPage({ params }: { params: Promise
         </div>
       </div>
 
-      {/* ── Close: the next step and the practice ─────────────────────── */}
+      {/* ── Close: a centred opening (the next step), then the practice ─────── */}
       <Section labelledBy="next-title" className={s.close}>
-        <div className={s.closeHead}>
-          <h2 className={`t-h2 ${s.closeTitle}`} id="next-title">
-            {education.conditionsHeading}
-          </h2>
-          <div className={s.closeAside}>
-            <p className={s.closeLine}>{education.patientsLine}</p>
-            <div className="actions">
+        <SectionHead
+          id="next-title"
+          layout="center"
+          className={s.head}
+          title={education.conditionsHeading}
+          lead={education.patientsLine}
+          actions={
+            <>
               <ButtonLink href={href(v, routes.conditions)}>Find your condition</ButtonLink>
-              <ButtonLink href={href(v, routes.library)} variant="secondary">
-                Lectures and literature
+              <ButtonLink href={href(v, `${routes.library}#literature`)} variant="secondary">
+                Medical literature
               </ButtonLink>
-            </div>
-          </div>
-        </div>
+            </>
+          }
+        />
         <PracticePanel />
       </Section>
     </>

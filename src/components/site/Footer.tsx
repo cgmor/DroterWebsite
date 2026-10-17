@@ -1,36 +1,41 @@
 import Link from "next/link";
-import ApsLogo from "@/components/shared/ApsLogo";
 import { airwayBite, brand, contact, distributor, doctor } from "@/content/aps";
+import { livingTree } from "@/content/labs";
+import { resourcePages } from "@/content/resources";
+import { practice } from "@/content/tmd";
 import { ArrowUpRight } from "./icons";
-import { href, routes, tel, type VersionId } from "./links";
+import { href, routes, tel, type SiteId } from "./links";
+import SiteMark from "./SiteMark";
 
-/** Site footer: brand, order route, nav columns, contact, legal line. */
-export default function Footer({ v }: { v: VersionId }) {
-  const columns = [
+type Column = { title: string; links: { label: string; to: string; file?: boolean; external?: boolean }[] };
+
+/** Site footer: brand, the site's action, nav columns, contact, legal line. */
+export default function Footer({ v }: { v: SiteId }) {
+  return v === "apsleep" ? <ApsFooter v={v} /> : <PracticeFooter v={v} />;
+}
+
+function ApsFooter({ v }: { v: SiteId }) {
+  const columns: Column[] = [
     {
-      title: airwayBite.shortName,
+      title: "Sleep and airway",
       links: [
-        { label: "Overview", to: href(v, routes.airwayBite) },
-        { label: "Chairside steps", to: href(v, `${routes.airwayBite}#steps`) },
-        { label: "Tutorial video", to: href(v, `${routes.airwayBite}#tutorial`) },
-        { label: airwayBite.pdf.label, to: airwayBite.pdf.href, file: true },
+        { label: "Home", to: href(v) },
+        { label: "Sleep problems", to: href(v, routes.conditions) },
         { label: "Appliances", to: href(v, routes.appliances) },
       ],
     },
     {
-      title: "Learn",
+      title: "For dentists",
       links: [
-        { label: "Understanding TMD", to: href(v, routes.understanding) },
-        { label: "Conditions", to: href(v, routes.conditions) },
-        { label: "Library", to: href(v, routes.library) },
+        { label: "Dentist resources", to: href(v, routes.library) },
+        { label: airwayBite.shortName, to: href(v, routes.airwayBite) },
+        { label: livingTree.name, to: livingTree.url, external: true },
+        { label: distributor.name, to: distributor.url, external: true },
       ],
     },
     {
       title: brand.name,
-      links: [
-        { label: `About ${doctor.shortName}`, to: href(v, routes.about) },
-        { label: "Home", to: href(v) },
-      ],
+      links: [{ label: `About ${doctor.shortName}`, to: href(v, routes.about) }],
     },
   ];
 
@@ -40,41 +45,14 @@ export default function Footer({ v }: { v: VersionId }) {
         <div className="ft-top">
           <div className="ft-brand">
             <Link href={href(v)} aria-label="ArrowPath Sleep, home" className="ft-logo">
-              <ApsLogo variant="wordmark" className="ft-lockup" />
+              <SiteMark v={v} className="ft-lockup" />
             </Link>
             <p className="ft-tagline">{brand.tagline}</p>
-          </div>
-          <div className="ft-order">
-            <p className="ft-text">{distributor.note}</p>
-            <a href={distributor.url} target="_blank" rel="noopener" className="btn btn-primary">
-              <span className="btn-label">{distributor.cta}</span>
-              <ArrowUpRight size={16} className="btn-icon" />
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
           </div>
         </div>
 
         <div className="ft-grid">
-          {columns.map((col) => (
-            <nav key={col.title} aria-label={col.title} className="ft-col">
-              <h2 className="ft-h">{col.title}</h2>
-              <ul className="ft-list">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    {l.file ? (
-                      <a className="ft-link" href={l.to}>
-                        {l.label}
-                      </a>
-                    ) : (
-                      <Link className="ft-link" href={l.to}>
-                        {l.label}
-                      </Link>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+          <Columns columns={columns} />
           <div className="ft-col">
             <h2 className="ft-h">Contact</h2>
             <p className="ft-text">
@@ -97,4 +75,94 @@ export default function Footer({ v }: { v: VersionId }) {
       </div>
     </footer>
   );
+}
+
+function PracticeFooter({ v }: { v: SiteId }) {
+  const columns: Column[] = [
+    {
+      title: "Learn",
+      links: [
+        { label: "Understanding TMD", to: href(v, routes.understanding) },
+        { label: "Conditions", to: href(v, routes.conditions) },
+        { label: "Resources", to: href(v, routes.library) },
+      ],
+    },
+    {
+      title: "Patient resources",
+      links: resourcePages.map((r) => ({ label: r.title, to: href(v, `${routes.library}/${r.slug}`) })),
+    },
+    {
+      title: "Practice",
+      links: [
+        { label: `About ${doctor.shortName}`, to: href(v, routes.about) },
+        { label: practice.heading, to: href(v, "/#new-patients") },
+      ],
+    },
+  ];
+
+  return (
+    <footer className="ft">
+      <div className="wrap">
+        <div className="ft-top">
+          <div className="ft-brand">
+            <Link href={href(v)} aria-label={`${doctor.name}, home`} className="ft-logo">
+              <SiteMark v={v} className="ft-lockup" />
+            </Link>
+            <p className="ft-tagline">{doctor.pullQuote}</p>
+          </div>
+        </div>
+
+        <div className="ft-grid">
+          <Columns columns={columns} />
+          <div className="ft-col">
+            <h2 className="ft-h">Contact</h2>
+            <p className="ft-text">
+              <a className="ft-link num" href={tel(practice.phone)}>
+                {practice.phone}
+              </a>
+            </p>
+            <address className="ft-text ft-address">
+              {doctor.name}
+              {practice.addressLines.map((l) => (
+                <span key={l}>{l}</span>
+              ))}
+            </address>
+          </div>
+        </div>
+
+        <div className="ft-base">
+          <p>© 2026 {doctor.name}</p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Columns({ columns }: { columns: Column[] }) {
+  return columns.map((col) => (
+    <nav key={col.title} aria-label={col.title} className="ft-col">
+      <h2 className="ft-h">{col.title}</h2>
+      <ul className="ft-list">
+        {col.links.map((l) => (
+          <li key={l.label}>
+            {l.external ? (
+              <a className="ft-link" href={l.to} target="_blank" rel="noopener">
+                {l.label}
+                <ArrowUpRight size={12} className="ft-ext" />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ) : l.file ? (
+              <a className="ft-link" href={l.to}>
+                {l.label}
+              </a>
+            ) : (
+              <Link className="ft-link" href={l.to}>
+                {l.label}
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  ));
 }

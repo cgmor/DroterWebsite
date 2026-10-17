@@ -58,11 +58,13 @@ type Props = {
   id?: string;
   /** Defaults to his narration's question, "How far do you move it forward?". */
   title?: string;
+  /** The one-line intro under the heading. Defaults to his purpose line (IFU slide 1). */
+  lead?: string;
   /** Night is the airway moment; mist works on lighter pages. */
   tone?: Extract<Tone, "night" | "mist" | "white">;
 };
 
-export default function HowFarForward({ id = "how-far", title, tone = "night" }: Props) {
+export default function HowFarForward({ id = "how-far", title, lead = airwayBite.purpose, tone = "night" }: Props) {
   const [pos, setPos] = useState(0);
   const sliderId = useId();
   const current = POSITIONS[pos];
@@ -70,7 +72,7 @@ export default function HowFarForward({ id = "how-far", title, tone = "night" }:
 
   return (
     <Section tone={tone} id={id} labelledBy={`${id}-title`}>
-      <SectionHead id={`${id}-title`} title={heading} lead={airwayBite.purpose} layout="center" />
+      <SectionHead id={`${id}-title`} title={heading} lead={lead} layout="center" />
 
       <div className={h.grid} style={{ "--pos": pos } as CSSProperties} data-tone={current.tone}>
         <figure className={h.stage}>

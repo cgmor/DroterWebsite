@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import ReviewBar from "@/components/review/ReviewBar";
 import Footer from "@/components/site/Footer";
 import Header from "@/components/site/Header";
-import { isVersion } from "@/components/site/links";
-import { airwayBite, brand, doctor } from "@/content/aps";
-import { versions } from "@/content/versions";
+import { isSite } from "@/components/site/links";
+import { brand, doctor } from "@/content/aps";
+import { sites } from "@/content/sites";
 import "./aps.css";
 
 const geist = Geist({
@@ -24,22 +24,30 @@ const geistMono = Geist_Mono({
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return versions.map((v) => ({ v: v.id }));
+  return sites.map((s) => ({ v: s.id }));
 }
 
-export const metadata: Metadata = {
-  title: {
-    default: `${brand.name}: the ${airwayBite.shortName} and ${doctor.shortName}’s TMD education`,
-    template: `%s | ${brand.name}`,
-  },
-  /* His own words: the 2021 apsleep.com line and his advantages email. */
-  description: `${brand.tagline} ${airwayBite.summary}`,
-  applicationName: brand.name,
-};
-
-export default async function VersionLayout({ children, params }: { children: React.ReactNode; params: Promise<{ v: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ v: string }> }): Promise<Metadata> {
   const { v } = await params;
-  if (!isVersion(v)) notFound();
+  if (v === "droter") {
+    return {
+      title: { default: `${doctor.name}: TMD and facial pain`, template: `%s | ${doctor.name}` },
+      /* His own words (drdroter.com). */
+      description: doctor.pullQuote,
+      applicationName: doctor.name,
+    };
+  }
+  return {
+    title: { default: `${brand.name}: sleep and airway`, template: `%s | ${brand.name}` },
+    /* His own words: the 2021 apsleep.com line. */
+    description: brand.tagline,
+    applicationName: brand.name,
+  };
+}
+
+export default async function SiteLayout({ children, params }: { children: React.ReactNode; params: Promise<{ v: string }> }) {
+  const { v } = await params;
+  if (!isSite(v)) notFound();
 
   return (
     <div className={`aps ${geist.variable} ${geistMono.variable}`}>

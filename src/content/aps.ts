@@ -117,14 +117,21 @@ export const airwayBite = {
     },
   ],
 
-  /** Email (his advantages list), IFU slides and the meeting transcript. Title = his sentence. */
+  /**
+   * Email (his advantages list), IFU slides and the meeting transcript. Title = his sentence.
+   * Order as he dictated it on the Oct 14 2026 call: "Easier, quicker to use, disposable, no parts
+   * to keep track of. Holds jaw in a stable forward position to take the airway bite." That last
+   * line (his call wording) sits right before "Send to lab digitally." in this list only; the IFU
+   * captions keep "Jaw is now held stable in forward position." His tapping line (not in the
+   * dictated run) follows the run, so the five he dictated read back to back.
+   */
   advantages: [
     { title: "Easier and quicker to use.", body: "Within five minutes I had the bite done." },
     { title: "Disposable.", body: "No need to sterilize parts." },
     { title: "No parts to lose or keep track of.", body: "" },
-    { title: "Patients tapping on device relaxes the muscles before taking the airway bite.", body: "" },
+    { title: "Holds jaw in a stable forward position to take the airway bite.", body: "" },
     { title: "Send to lab digitally.", body: "Can also be used to take silicone bite registration." },
-    { title: "Jaw is now held stable in forward position.", body: "" },
+    { title: "Patients tapping on device relaxes the muscles before taking the airway bite.", body: "" },
   ],
 
   /** Label. */
@@ -282,9 +289,49 @@ export const airwayBite = {
     { id: "step-06", label: "Tap into position", start: 89.33, end: 96.96, ifuSteps: [6], still: "/aps/stills/step-06-tap-into-position-clean.webp" },
     { id: "step-07", label: "Lock the position", start: 96.96, end: 106.04, ifuSteps: [7], still: "/aps/stills/step-07-lock-the-position-clean.webp" },
     { id: "step-08", label: "Bite scan", start: 106.04, end: 112.21, ifuSteps: [8, 9], still: "/aps/stills/step-08-bite-scan-clean.webp" },
-    // 116.5–132 s is real chairside footage; the patient's face is visible —
-    // consent for public use is unconfirmed, so never cut it into loops or stills.
+    // 116.5–132 s is real chairside footage; the patient's face is visible.
+    // Cole confirmed consent for public use on 2026-10-15; its stills are `photos` below.
   ],
+
+  /**
+   * Real photographs, in procedure order (the Airway Bite page shows them under the
+   * tutorial). The kit and the scan on screen are frames from the tutorial's
+   * clinical footage already in /aps/stills; the four chairside frames were taken
+   * from the same footage (provenance sidecars beside each file). Captions are his
+   * words: the kit label, his IFU step 1 and his IFU slide captions.
+   */
+  photos: [
+    {
+      src: "/aps/stills/clinical-kit-packet.webp",
+      caption: "APS Airway Bite Kit",
+      alt: "The APS Airway Bite Kit packet held up beside a mounted dental model on an articulator.",
+    },
+    {
+      src: "/aps/airway-bite/chairside-try-in.webp",
+      caption: "Try the device in the mouth.",
+      alt: "Chairside: a dentist seating the Airway Bite on the reclined patient’s upper front teeth.",
+    },
+    {
+      src: "/aps/airway-bite/chairside-mark.webp",
+      caption: "Mark furthest forward and back jaw position and midline with disposable pencil.",
+      alt: "Chairside: the dentist marks the jaw position with the kit’s pencil, holding the APS card ruler at the patient’s chin.",
+    },
+    {
+      src: "/aps/airway-bite/chairside-cure.webp",
+      caption: "Flow flowable composite in front of lower incisors, cure.",
+      alt: "Chairside: a curing light on the composite at the patient’s front teeth, with the Airway Bite in place.",
+    },
+    {
+      src: "/aps/airway-bite/chairside-scan.webp",
+      caption: "Take digital scan bite with anterior stop in place and jaw positioned forward.",
+      alt: "Chairside: an intraoral scanner at the patient’s front teeth, with the Airway Bite in place.",
+    },
+    {
+      src: "/aps/stills/clinical-scan-screen.webp",
+      caption: "Send to lab digitally.",
+      alt: "The digital scan of the upper and lower arches in the forward bite, on the scanning software on a laptop.",
+    },
+  ] as { src: string; caption: string; alt: string }[],
 
   /** Short muted loops for hero backgrounds (MP4 + WebM + poster). */
   loops: {
@@ -303,8 +350,22 @@ export const airwayBite = {
 
 /**
  * Indications and appliances: his product chart (apsleep.com/products) and his 2023
- * "APS products" slide. Details are his slide wording; the Temp Anterior Stop line is
- * from his Oct 2025 email; the title is his 2021 apsleep.com heading.
+ * "APS products" slide. Details are his slide wording; the Temp Anterior Stop line
+ * (`detail` + `more`) is his Oct 2025 email; the title is his 2021 apsleep.com heading.
+ *
+ * `id` is each indication's stable anchor on /apsleep/appliances (other pages link to
+ * /apsleep/appliances#<id>; do not rename). `conditions` are the sleep problems
+ * (slugs in tmd.ts `conditionGuides`) the indication answers: the one mapping from a
+ * sleep problem to its appliances. Derive every list from it, in chart order:
+ * `applianceGuide.groups.filter((g) => g.conditions.includes(slug))`. Fatigue takes
+ * Grinding + Airway and Airway: his brochure's "Sleep and fatigue" approaches list
+ * "Lateral bruxing devices" and "Mandibular advancement".
+ * `lead` is his line under the indication's heading on /apsleep/appliances: the
+ * Pattern cells of his "6 Common TMDs" chart (Clenching) and his answer to "I grind my
+ * teeth at night" (TMJ Brochure 2026, verbatim). An appliance his chart gives no
+ * description shows its name alone (APS Lat-Brux): no placeholder.
+ * The appliances are ordered by dentists from Living Tree Dental Lab (labs.ts); the
+ * Airway Bite that records the MAD bite is ordered from Great Lakes Dental (`distributor`).
  */
 export const applianceGuide = {
   intro: "",
@@ -312,29 +373,50 @@ export const applianceGuide = {
   subtitle: "",
   groups: [
     {
+      id: "clenching",
       indication: "Clenching",
+      lead: "Patient is aware. Masseters ache. Morning TMJ clicking that resolves.",
+      conditions: ["clenching"],
       items: [
         { name: "APS D-PAS", detail: "Diagnostic- Palatal Anterior Stop" },
-        { name: "APS Temp Anterior Stop", detail: "Heat moldable yet hard" },
+        {
+          name: "APS Temp Anterior Stop",
+          detail: "Heat moldable yet hard",
+          more: "Larger than 40 mm so can be used at home for sleep with minimal risk of aspiration.",
+        },
       ],
       note: "Patient must have muscle inhibition.",
     },
     {
+      id: "grinding",
       indication: "Grinding",
+      lead: "Common causes of grinding are an uneven bite or a damaged TMJ.",
+      conditions: ["sleep-grinding"],
       items: [
         { name: "APS Brux-PAS", detail: "with lower Essix" },
         { name: "Lower Hard CR Orthotic", detail: "Hard Lower Full Coverage Centric Relation Orthotic" },
       ],
     },
     {
+      id: "grinding-airway",
       indication: "Grinding + Airway",
+      conditions: ["sleep-grinding", "sleep-breathing-disorders", "daily-fatigue"],
       items: [{ name: "APS Lat-Brux", detail: "" }],
     },
     {
+      id: "airway",
       indication: "Airway",
+      conditions: ["sleep-breathing-disorders", "daily-fatigue"],
       items: [{ name: "MAD", detail: "Final Mandibular Advancement Device" }],
     },
-  ],
+  ] as {
+    id: "clenching" | "grinding" | "grinding-airway" | "airway";
+    indication: string;
+    lead?: string;
+    conditions: string[];
+    items: { name: string; detail: string; more?: string }[];
+    note?: string;
+  }[],
 };
 
 /* ───────────────────────── Dr. Droter ───────────────────────── */
@@ -387,7 +469,7 @@ export const doctor = {
   ],
 };
 
-/* ───────────────────────── Library (lectures + education) ───────────────────────── */
+/* ───────────────────────── For dentists (APSleep.com /library) ───────────────────────── */
 
 export type LibraryItem = {
   title: string;
@@ -399,6 +481,13 @@ export type LibraryItem = {
   status?: "available" | "coming-soon" | "dentists-only";
 };
 
+/**
+ * APSleep.com "For dentists": the Airway Bite's own documents. No lecture
+ * slides (Oct 14: "Pankey TMD does not need to be anywhere"), no patient
+ * downloads, and nothing hosted on drdroter.com (no cross-linking between the
+ * two sites). His published literature (tmd.ts `literature`) is self-hosted
+ * under /aps/literature and listed on both sites' library pages.
+ */
 export const library = {
   dentists: [
     {
@@ -415,72 +504,21 @@ export const library = {
       description: "Narrated by Dr. Droter.",
       kind: "Video",
       format: "Video",
+      // The tutorial plays on the Airway Bite page (#tutorial), with its chapters.
       href: "/aps/video/airway-bite-explainer-1080.mp4",
       meta: "2 min 15 s",
       status: "available",
     },
-    {
-      title: "Pankey TMD 2026",
-      description: "Day 4 Version",
-      kind: "Lecture",
-      format: "PDF",
-      href: "https://drdroter.com/wp-content/uploads/2026/06/Pankey-TMD-2026v2.key-sm.pdf",
-      meta: "L.D. Pankey Institute · 2026",
-      status: "available",
-    },
-    {
-      title: "Gill Ortho Ceph Analysis — Extract",
-      description: "Gill Ortho Ceph Analysis Extract",
-      kind: "Lecture",
-      format: "PDF",
-      href: "https://drdroter.com/wp-content/uploads/2026/06/Gill-Ortho-Ceph-Analysis-Extract.key.pdf",
-      meta: "L.D. Pankey Institute · 2026",
-      status: "available",
-    },
-    {
-      title: "An Orthopaedic Approach to the Diagnosis and Treatment of Disorders of the Temporomandibular Joint",
-      description: "John R. Droter, DDS. Dentistry Today, November 2005.",
-      kind: "Article",
-      format: "PDF",
-      href: "https://drdroter.com/wp-content/uploads/2016/11/DroterOrthopedDx.pdf",
-      meta: "Published article",
-      status: "available",
-    },
-    {
-      title: "The worn dentition — pathognomonic patterns of abrasion and erosion",
-      description: "Abrahamsen T C, The worn dentition – pathognomonic patterns of abrasion and erosion. Int Dent J 2005 55: 268-76.",
-      kind: "Reference",
-      format: "PDF",
-      href: "https://drdroter.com/wp-content/uploads/2016/11/AbrahamsenIDJ.pdf",
-      meta: "Recommended reading",
-      status: "available",
-    },
-    {
-      title: "Six common TMDs — diagnosis, pattern and approach",
-      description: "",
-      kind: "Reference",
-      format: "PDF",
-      status: "coming-soon",
-    },
-    {
-      title: "Facial pain diagnosis — clinical protocols",
-      description: "",
-      kind: "Lecture",
-      format: "Library",
-      status: "dentists-only",
-    },
   ] satisfies LibraryItem[],
 
-  patients: [
-    {
-      title: "Do you have a TMJ problem?",
-      description: "",
-      kind: "Brochure",
-      format: "PDF",
-      meta: "2026 edition",
-      status: "coming-soon",
-    },
-  ] satisfies LibraryItem[],
+  /** None: his patient handouts are web pages on drdroter.com now (src/content/resources.ts). */
+  patients: [] as LibraryItem[],
+
+  /** Living Tree Dental Lab, in his words: drdroter.com/seminar-links and his APS products slide. */
+  livingTree: {
+    line: "ArrowPath Sleep Orthotics",
+    detail: "3D Printed Orthotics",
+  },
 };
 
 /** Patient education — headings must avoid "treat". */
